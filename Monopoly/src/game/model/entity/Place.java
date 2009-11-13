@@ -3,15 +3,15 @@
  * and open the template in the editor.
  */
 
-package monopoly.test;
-
-import java.util.ArrayList;
+package game.model.entity;
 
 /**
  *
  * @author UEFS\jmatos
+ * Representa um lugar no tabuleiro
  */
 public class Place {
+    
     private String name;
     private float price;
     private float rentWithoutHouse;
@@ -23,10 +23,10 @@ public class Place {
     private float hipoteca;
     private float housePrice;
     private String colour;
-    private Player owner;
+    private Player owner; 
     private int nHouses;
 
-    public Place(String name, float price, float rentWithoutHouse, float oneHouse, float twoHouse, float treeHouse, float fourHouse, float hotel, float hipoteca, float housePrice, String colour, Player owner, int nHouses) {
+    public Place(String name, float price, float rentWithoutHouse, float oneHouse, float twoHouse, float treeHouse, float fourHouse, float hotel, float hipoteca, float housePrice, String colour) {
         this.name = name;
         this.price = price;
         this.rentWithoutHouse = rentWithoutHouse;
@@ -38,8 +38,6 @@ public class Place {
         this.hipoteca = hipoteca;
         this.housePrice = housePrice;
         this.colour = colour;
-        this.owner = owner;
-        this.nHouses = nHouses;
     }
 
 
@@ -148,7 +146,5 @@ public class Place {
     public void setTwoHouse(float twoHouse) {
         this.twoHouse = twoHouse;
     }
-
-
 
 }
