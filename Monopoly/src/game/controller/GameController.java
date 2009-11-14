@@ -19,8 +19,9 @@ public class GameController {
     private GameModel gameModel;
     private GameView gameView;
 
-    public void startGame(){
-        gameView = new LineComandView();
+    public void initialize(){
+        
+        setGameView( new LineComandView() );
         //início do jogo deve obter a quantidade de jogadores
         gameView.showMessage("Informe o número de jogadores [2 - 8]");
         int numberOfPlayers = gameView.getNumberOfPlayers();
@@ -66,5 +67,14 @@ public class GameController {
 
         gameView.showMessage(" Monopoly iniciado com sucesso!");
     }
+
+    public void startGame(){
+        //permitir que comecem as jogadas
+    }
+
+    public void setGameView(GameView gameView) {
+        this.gameView = gameView;
+    }
+
 
 }
