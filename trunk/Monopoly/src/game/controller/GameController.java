@@ -19,7 +19,7 @@ public class GameController {
     private GameModel gameModel;
     private GameView gameView;
 
-    public void initialize(){
+    public void initializeGame(){
         
         setGameView( new LineComandView() );
         //início do jogo deve obter a quantidade de jogadores
