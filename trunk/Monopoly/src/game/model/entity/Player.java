@@ -11,6 +11,7 @@ package game.model.entity;
  * Representa a entidade jogador
  */
 public class Player {
+    private int id;
     private String name;
     private String color;
     private long amountOfMoney;
@@ -51,6 +52,46 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void credit(long money){
+        this.amountOfMoney +=money;
+    }
+
+    public void debit(long money){
+        this.amountOfMoney -=money;
+    }
+
+    public void buyProperty(Place place){
+        debit( place.getPrice() );
+        place.setOwner(this);
+    }
+
+    public String getStatus(){
+        StringBuilder status = new StringBuilder();
+        status.append( "Status de ");
+        status.append(name);
+        status.append(" - ");
+        status.append(color);
+        status.append("\n");
+        status.append( "Situado na posição \n");
+        status.append( atualPlace.getPosition() );
+        status.append(" - ");
+        status.append( atualPlace.getName() );
+        status.append("\nPossui: ");
+        status.append(amountOfMoney);
+        status.append("\n Títulos: \n");
+        status.append("... falta listar os títulos");
+        //falta listar os títulos
+        return status.toString();
     }
 
     @Override

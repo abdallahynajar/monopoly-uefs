@@ -6,6 +6,7 @@
 package game.view;
 
 import game.model.entity.Colors;
+import game.model.entity.Commands;
 
 /**
  *
@@ -22,14 +23,18 @@ public class LineComandView extends IOController implements GameView{
     }
 
     public String getPlayerName() {
-        String playerName = readInputLine();
-       
+        String playerName = readInputLine();       
         return playerName;
     }
 
     public String getPlayerColor() {
         String color = readInputLine();
         return color;
+    }
+
+     public String getPlayerCommand() {
+        String command = readInputLine();
+        return command;
     }
 
     public void showMessage(String message) {
@@ -44,6 +49,21 @@ public class LineComandView extends IOController implements GameView{
                 colors.append("] ");
             }
             showMessage( colors.toString() );
+    }
+
+    public void showOptionalCommands() {
+       StringBuffer commands = new StringBuffer() ;
+            for (Enum c : Commands.values()) {
+                commands.append("[");
+                commands.append(c);
+                commands.append("] ");
+            }
+            showMessage( commands.toString() );
+    }
+
+    public String getYesOrNoOption() {
+        String option = readInputLine();
+        return option;
     }
 
 }

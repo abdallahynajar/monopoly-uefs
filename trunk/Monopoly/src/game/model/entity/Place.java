@@ -11,22 +11,26 @@ package game.model.entity;
  * Representa um lugar no tabuleiro
  */
 public class Place {
-    
+
+    //TODO refatorar essa classe p jogar umas coisas em Property
+    private Property property;
+
     private String name;
-    private float price;
-    private float rentWithoutHouse;
-    private float oneHouse;
-    private float twoHouse;
-    private float treeHouse;
-    private float fourHouse;
-    private float hotel;
-    private float hipoteca;
-    private float housePrice;
+    private int position;
+    private long price;
+    private long rentWithoutHouse;
+    private long oneHouse;
+    private long twoHouse;
+    private long treeHouse;
+    private long fourHouse;
+    private long hotel;
+    private long hipoteca;
+    private long housePrice;
     private String colour;
     private Player owner; 
-    private int nHouses;
+    private long nHouses;
 
-    public Place(String name, float price, float rentWithoutHouse, float oneHouse, float twoHouse, float treeHouse, float fourHouse, float hotel, float hipoteca, float housePrice, String colour) {
+    public Place(int position, String name, long price, long rentWithoutHouse, long oneHouse, long twoHouse, long treeHouse, long fourHouse, long hotel, long hipoteca, long housePrice, String colour) {
         this.name = name;
         this.price = price;
         this.rentWithoutHouse = rentWithoutHouse;
@@ -38,10 +42,36 @@ public class Place {
         this.hipoteca = hipoteca;
         this.housePrice = housePrice;
         this.colour = colour;
+
+        //temporário TODO RETIRAR isso
+        property = new Property();
+        property.setPurchasable(true);
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
     }
 
 
-    
+    public long getnHouses() {
+        return nHouses;
+    }
+
+    public void setnHouses(long nHouses) {
+        this.nHouses = nHouses;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     public String getColour() {
         return colour;
@@ -51,43 +81,43 @@ public class Place {
         this.colour = colour;
     }
 
-    public float getFourHouse() {
+    public long getFourHouse() {
         return fourHouse;
     }
 
-    public void setFourHouse(float fourHouse) {
+    public void setFourHouse(long fourHouse) {
         this.fourHouse = fourHouse;
     }
 
-    public float getHipoteca() {
+    public long getHipoteca() {
         return hipoteca;
     }
 
-    public void setHipoteca(float hipoteca) {
+    public void setHipoteca(long hipoteca) {
         this.hipoteca = hipoteca;
     }
 
-    public float getHotel() {
+    public long getHotel() {
         return hotel;
     }
 
-    public void setHotel(float hotel) {
+    public void setHotel(long hotel) {
         this.hotel = hotel;
     }
 
-    public float getHousePrice() {
+    public long getHousePrice() {
         return housePrice;
     }
 
-    public void setHousePrice(float housePrice) {
+    public void setHousePrice(long housePrice) {
         this.housePrice = housePrice;
     }
 
-    public int getNHouses() {
+    public long getNHouses() {
         return nHouses;
     }
 
-    public void setNHouses(int nHouses) {
+    public void setNHouses(long nHouses) {
         this.nHouses = nHouses;
     }
 
@@ -99,11 +129,11 @@ public class Place {
         this.name = name;
     }
 
-    public float getOneHouse() {
+    public long getOneHouse() {
         return oneHouse;
     }
 
-    public void setOneHouse(float oneHouse) {
+    public void setOneHouse(long oneHouse) {
         this.oneHouse = oneHouse;
     }
 
@@ -115,36 +145,41 @@ public class Place {
         this.owner = owner;
     }
 
-    public float getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 
-    public float getRentWithoutHouse() {
+    public long getRentWithoutHouse() {
         return rentWithoutHouse;
     }
 
-    public void setRentWithoutHouse(float rentWithoutHouse) {
+    public void setRentWithoutHouse(long rentWithoutHouse) {
         this.rentWithoutHouse = rentWithoutHouse;
     }
 
-    public float getTreeHouse() {
+    public long getTreeHouse() {
         return treeHouse;
     }
 
-    public void setTreeHouse(float treeHouse) {
+    public void setTreeHouse(long treeHouse) {
         this.treeHouse = treeHouse;
     }
 
-    public float getTwoHouse() {
+    public long getTwoHouse() {
         return twoHouse;
     }
 
-    public void setTwoHouse(float twoHouse) {
+    public void setTwoHouse(long twoHouse) {
         this.twoHouse = twoHouse;
+    }
+
+    //TODO
+    public long rentValue(){
+        return 0; //atualizar o valor do aluguel de acordo com o número de casas
     }
 
 }

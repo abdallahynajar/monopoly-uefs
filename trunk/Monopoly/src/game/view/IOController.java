@@ -28,7 +28,7 @@ public abstract class IOController {
     public String readInputLine(){
         String input =  null;
          try {
-            input = br.readLine().toLowerCase();
+            input = br.readLine().toLowerCase().trim();
         } catch (IOException ex) {
           input = null;
           ex.printStackTrace();
