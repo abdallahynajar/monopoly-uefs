@@ -17,10 +17,15 @@ public interface GameView {
 
     public String getPlayerColor();
 
+    public String getYesOrNoOption();
+
+    public String getPlayerCommand();
+
     public void showMessage(String message);
     
     public void showOptionalColors();
 
-
+    public void showOptionalCommands();
+    
 
 }

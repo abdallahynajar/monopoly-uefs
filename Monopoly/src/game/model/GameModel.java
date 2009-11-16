@@ -54,14 +54,27 @@ public class GameModel {
      * Adiciona um jogador à lista de participantes do jogo
      *
      * @author Lidiany
+     * @param id o identificador do jogador
      * @param name o nome do jogador
      * @param color a cor do peão do jogador
      */
-    public void addPlayer(String name, String color) {
+    public void addPlayer(int id, String name, String color) {
         Player p = new Player(name, color);
         p.setAmountOfMoney(1500);
+        p.setAtualPlace( board.getPlaceByName("go") );
         players.add(p);
     }
+
+   /**
+     * Remove um jogador da lista de participantes do jogo
+     *
+     * @author Lidiany
+     * @param id o indice do jogador na lista
+     */
+    public void removePlayer(int id) {
+        players.remove(id);
+    }
+
 
     /**
      * Inicializa o tabuleiro do monopólio
@@ -76,4 +89,6 @@ public class GameModel {
 
         initializeBoardGame();
     }
+
+
 }
