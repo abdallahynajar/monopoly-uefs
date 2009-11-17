@@ -78,16 +78,19 @@ public class GameModel {
 
     /**
      * Inicializa o tabuleiro do monopólio
+     * @author Lidiany
      */
     public void initializeBoardGame() {
     }
 
+     /**
+     * Inicializa as variáveis
+      * @author Lidiany
+     */
     public void init() {
         players = new ArrayList<Player>(numberOfPlayers);
         board = new Board();
         bank = new Bank();
-
-        initializeBoardGame();
     }
 
 
