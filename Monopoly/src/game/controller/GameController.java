@@ -17,11 +17,17 @@ import java.util.HashMap;
 
 /**
  *
- * Controla a execução de uma partida de monopólio
+ * Controla toda a execução de uma partida de monopólio, gerencia a GUI <b> GameView </b> e
+ * sua interação com a camada de negócios, através do <b> GameModel </b>
+ * @see GameModel
+ * @see GameView
  * @author Lidiany 
  */
 public class GameController {
 
+    /**
+     * Gerencia a camada de negócios do jogo
+     */
     private GameModel gameModel;
     private GameView gameView;
     private HashMap<Commands, PlayerCommand> commands;
