@@ -17,8 +17,8 @@ import java.util.HashMap;
 
 /**
  *
- * @author Lidiany
  * Controla a execução de uma partida de monopólio
+ * @author Lidiany 
  */
 public class GameController {
 
@@ -28,6 +28,10 @@ public class GameController {
     private Player currentPlayer;
     private int currentPlayerIndex;
 
+    /***
+     * Inicializa as variáveis necessárias para começar uma partida de monopólio
+     * @author Lidiany
+     */
     public void initializeGame() {
         int numberOfPlayers = getNumberOfPlayers();
 
@@ -52,13 +56,16 @@ public class GameController {
                     " adicionado ");
             currentPlayerIndex++;
         }
-
         initCommands();
         gameView.showMessage(" Monopoly iniciado com sucesso ");
 
 
     }
 
+    /***
+     * Inicializa a lista de comandos disponíveis para os jogadores
+     * @author Lidiany
+     */
     private void initCommands() {
         commands = new HashMap<Commands, PlayerCommand>();
         commands.put(Commands.SAIR, new Exit(this));
@@ -66,22 +73,36 @@ public class GameController {
         commands.put(Commands.STATUS, new GetStatus(this));
     }
 
+     /***
+     * Inicializa a uma partida de monopólio
+     * @author Lidiany
+     */
     public void startGame() {
         currentPlayerIndex = 0;
 
         //permitir que comecem as jogadas'
-        while (!endGame()) {
+        while (!isTheGameOver()) {
             currentPlayer = gameModel.getPlayer(currentPlayerIndex);
             gameView.showMessage(" A jogada de " + currentPlayer.getName() + " começou.");
             this.executePlayerCommand();            
         }
     }
 
+    /***
+     *
+     * @author Lidiany
+     * @param gameView interface gráfica para o jogo
+     */
     public void setGameView(GameView gameView) {
         this.gameView = gameView;
     }
 
-    public boolean endGame() {
+    /***
+     * Verifica se o jogo já terminou
+     * @author Lidiany
+     * @return <b>true</b> se o jogo acabou ou <b>false</b> caso ainda não tenha acabado
+     */
+    public boolean isTheGameOver() {
         //quando que o jogo termina msm?
         if (gameModel.getNumberOfPlayers() == 0) {
             return true;
@@ -89,20 +110,29 @@ public class GameController {
         return false;
     }
 
+    /***
+     * Executa um comando escolhido pelo jogador da vez
+     * @author Lidiany
+     */
     private void executePlayerCommand() {
-        boolean playerTurn = true;
+      //  boolean playerTurn = true;
 
         Commands c = getPlayerCommand();
         commands.get(c).execute(currentPlayer);
 
         if (c.equals(Commands.JOGAR) || currentPlayer == null) {
-            playerTurn = false;
+          //  playerTurn = false;
             updatePlayersIndex();
         }else{
             executePlayerCommand();
         }
     }
 
+    /***
+     * Pega o comando enviado pelo jogador atual
+     * @author Lidiany
+     * @return  o comando escolhido pelo jogador atual
+     */
     public Commands getPlayerCommand() {
         String strCommand = null;
         Commands command = null;
@@ -123,6 +153,11 @@ public class GameController {
 
     }
 
+    /***
+     * Remove um jogador da partida
+     * @author Lidiany
+     * @param player - o jogador a ser removido
+     */
     public void removePlayerOfTheGame(Player player) {
         gameView.showMessage(" Tem certeza de que deseja sair? ");
         gameView.showMessage(" S/N ");
@@ -135,10 +170,20 @@ public class GameController {
         }
     }
 
+    /***
+     * Exibe o status de um jogador
+     * @author Lidiany
+     * @param player - o jogador cujo status será mostrado
+     */
     public void showPlayerStatus(Player player) {
         gameView.showMessage(player.getStatus());
     }
 
+    /***
+     * Obtém uma cor escolhida por um jogador
+     * @author Lidiany
+     * @return a cor escolhida pelo jogador
+     */
     private String getPlayerColor() {
         String pc = null;
         while (pc == null) {
@@ -156,6 +201,11 @@ public class GameController {
         return pc;
     }
 
+     /***
+     * Retorna a quantidade de jogadores
+     * @author Lidiany
+     * @return o número de jogadores
+     */
     private int getNumberOfPlayers() {
         //início do jogo deve obter a quantidade de jogadores
         int numberOfPlayers = 0;
@@ -175,6 +225,12 @@ public class GameController {
         return numberOfPlayers;
     }
 
+     /***
+     * Obtém o nome de um jogador
+     * @author Lidiany
+     * @param o número do jogador
+     * @return o nome informado pelo jogador
+     */
     private String getPlayerName(int currentPlayerIndex) {
         String pn = null;
         while (pn == null || pn.equals("")) {
@@ -185,6 +241,12 @@ public class GameController {
         return pn;
     }
 
+     /***
+     * Atualiza o índice que define o jogador atual
+     * @author Lidiany
+     * @param o número do jogador
+     * @return o nome informado pelo jogador
+     */
     private void updatePlayersIndex() {
         if (currentPlayerIndex + 1 > gameModel.getNumberOfPlayers()) {
             currentPlayerIndex = 0;
@@ -193,6 +255,10 @@ public class GameController {
         }
     }
 
+     /***
+     * Avisa que o jogo acabou
+     * @author Lidiany     
+     */
     public void finishGame() {
         gameView.showMessage("O jogo acabou. ");
     }
