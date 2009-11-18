@@ -9,9 +9,7 @@ package game.model.entity;
  *
  * @author Jneto
  */
-public class Railroad extends Place{
-    private float price;
-    private float hipoteca;
+public class Railroad extends PurchasablePlace{
     private int nRailroad;
 
     public int getnRailroad() {
@@ -23,10 +21,11 @@ public class Railroad extends Place{
     }
 
 
-    public Railroad(String name, float price, float hipoteca) {
+    public Railroad(int position, String name, float price, float hipoteca) {
+        super.position = position;
         super.name = name;
-        this.price = price;
-        this.hipoteca = hipoteca;
+        super.price = price;
+        super.hipoteca = hipoteca;
     }
 
     //pagar $25 por cada ferrovia. no máximo são 4

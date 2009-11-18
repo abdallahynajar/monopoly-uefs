@@ -11,14 +11,15 @@ package game.model.entity;
  */
 public class FreeParking extends Place {
 
-    public FreeParking(String name) {
+    public FreeParking(int position, String name) {
+        super.position = position;
         super.name = name;
     }
 
 
     @Override
     public void action(Player p) {
-        //não faz nada. hehe
+        //não faz nada.
     }
 
 }

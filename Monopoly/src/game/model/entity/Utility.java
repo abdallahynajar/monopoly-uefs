@@ -9,16 +9,13 @@ package game.model.entity;
  *
  * @author Jneto
  */
-public class Utility extends Place{
+public class Utility extends PurchasablePlace{
 
-
-    private long price;
-    private long hipoteca;
-
-    public Utility(String name,long price, long hipoteca) {
+    public Utility(int position, String name,long price, long hipoteca) {
+        super.position = position;
         super.name = name;
-        this.price = price;
-        this.hipoteca = hipoteca;
+        super.price = price;
+        super.hipoteca = hipoteca;
     }
 
 
