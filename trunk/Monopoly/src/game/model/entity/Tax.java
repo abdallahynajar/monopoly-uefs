@@ -12,7 +12,8 @@ package game.model.entity;
 public class Tax extends Place{
     private long tax;
 
-    public Tax(String name, long tax) {
+    public Tax(int position, String name, long tax) {
+        super.position = position;
         super.name = name;
         this.tax = tax;
     }

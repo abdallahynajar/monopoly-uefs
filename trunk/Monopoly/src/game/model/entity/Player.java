@@ -14,7 +14,7 @@ public class Player {
     private int id;
     private String name;
     private String color;
-    private long amountOfMoney;
+    private float amountOfMoney;
     private Place atualPlace; //lugar em que o jogador está
 
     public Player(String name, String color) {
@@ -22,11 +22,11 @@ public class Player {
         this.color = color;
     }
 
-    public long getAmountOfMoney() {
+    public float getAmountOfMoney() {
         return amountOfMoney;
     }
 
-    public void setAmountOfMoney(long amountOfMoney) {
+    public void setAmountOfMoney(float amountOfMoney) {
         this.amountOfMoney = amountOfMoney;
     }
 
@@ -62,18 +62,18 @@ public class Player {
         this.id = id;
     }
 
-    public void credit(long money){
+    public void credit(float money){
         this.amountOfMoney +=money;
     }
 
-    public void debit(long money){
+    public void debit(float money){
         this.amountOfMoney -=money;
         //acho q poderiamos colcocar uma verificação aqui
         //se o montante ainda é positivo, pois se não for
         //GAME OVER - util para o pagamento de impostos
     }
 
-    public void buyProperty(Property place){
+    public void buyProperty(PurchasablePlace place){
         debit( place.getPrice() );
         place.setOwner(this);
     }
