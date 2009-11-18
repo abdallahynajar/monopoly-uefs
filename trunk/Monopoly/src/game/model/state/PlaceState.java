@@ -5,7 +5,7 @@
 
 package game.model.state;
 
-import game.model.entity.Place;
+import game.model.entity.Property;
 import game.model.entity.Player;
 
 /**
@@ -14,6 +14,6 @@ import game.model.entity.Player;
  */
 public interface PlaceState {
 
-    public void landOnBy(Place place, Player player);
+    public void landOnBy(Property place, Player player);
 
 }

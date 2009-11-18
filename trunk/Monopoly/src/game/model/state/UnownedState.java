@@ -5,7 +5,7 @@
 
 package game.model.state;
 
-import game.model.entity.Place;
+import game.model.entity.Property;
 import game.model.entity.Player;
 
 /**
@@ -14,8 +14,8 @@ import game.model.entity.Player;
  */
 public class UnownedState implements PlaceState{
 
-    public void landOnBy(Place place, Player player) {
-        if(player.getAmountOfMoney() >= place.getPrice() && place.getProperty().isPurchasable() ){
+    public void landOnBy(Property place, Player player) {
+        if(player.getAmountOfMoney() >= place.getPrice() && place.isPurchasable() ){
             player.buyProperty(place);
         }
          player.setAtualPlace(place);

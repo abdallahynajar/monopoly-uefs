@@ -68,9 +68,12 @@ public class Player {
 
     public void debit(long money){
         this.amountOfMoney -=money;
+        //acho q poderiamos colcocar uma verificação aqui
+        //se o montante ainda é positivo, pois se não for
+        //GAME OVER - util para o pagamento de impostos
     }
 
-    public void buyProperty(Place place){
+    public void buyProperty(Property place){
         debit( place.getPrice() );
         place.setOwner(this);
     }
@@ -83,7 +86,7 @@ public class Player {
         status.append(color);
         status.append("\n");
         status.append( "Situado na posição \n");
-        status.append( atualPlace.getPosition() );
+        status.append( ((Property)atualPlace).getPosition() ); //vou tirar esse kbrunco desse position
         status.append(" - ");
         status.append( atualPlace.getName() );
         status.append("\nPossui: ");
