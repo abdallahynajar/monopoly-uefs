@@ -165,6 +165,8 @@ public class GameController {
      * @param player - o jogador a ser removido
      */
     public void removePlayerOfTheGame(Player player) {
+        //Quando o penultimo jogador for removido, o jogo acaba, certo?
+        // e o que restou ganha. Isso tá previsto?
         gameView.showMessage(" Tem certeza de que deseja sair? ");
         gameView.showMessage(" S/N ");
         String option = gameView.getYesOrNoOption();
