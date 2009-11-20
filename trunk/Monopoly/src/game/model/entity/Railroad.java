@@ -30,7 +30,13 @@ public class Railroad extends PurchasablePlace{
 
     //pagar $25 por cada ferrovia. no máximo são 4
     public void action(Player p) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (super.owner == null){
+
+        }else if (super.owner == p){
+
+        }else{
+
+        }
     }
 
 }
