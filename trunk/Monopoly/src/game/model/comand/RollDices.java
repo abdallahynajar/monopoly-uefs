@@ -24,15 +24,7 @@ public class RollDices implements PlayerCommand{
     public void execute(Player player) {
         int firstDice = Dice.roll();
         int secondDice = Dice.roll();
-
-        //tem q calcular se o jogador rodou o tabuleiro
-
-        this.board.getPlaces().get( firstDice + secondDice );
-        //se os dados são iguais, ele joga de novo
-       //if(firstDice == secondDice) dados iguais --> do Something ...;
-        //chama o lugar em q o jogador caiu e executa de novo
-
-
+        player.walk( firstDice + secondDice, board);
     }
 
 

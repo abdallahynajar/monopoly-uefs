@@ -19,6 +19,7 @@ public class Player {
     private float amountOfMoney;
     private Place atualPlace; //lugar em que o jogador está
     private ArrayList<PurchasablePlace> itsPropertys;
+    private int atualPosition;
 
     public Player(String name, String color) {
         this.name = name;
@@ -42,8 +43,13 @@ public class Player {
         return atualPlace;
     }
 
+    public int getAtualPosition(){
+        return atualPosition;
+    }
+
     public void setAtualPlace(Place atualPlace) {
         this.atualPlace = atualPlace;
+        this.atualPosition = atualPlace.getPosition();
     }
 
     public String getColor() {
@@ -123,5 +129,29 @@ public class Player {
         }
 
     }
-
+    /**
+     * Método para pagamentos de aluguéis. Considera apossibilidade do player
+     * nao ter dinheiro suficiente para pagar
+     * @author João
+     * @param otherPlayer
+     * @param rent
+     */
+    public void payRent(Player otherPlayer, float rent){
+        if(this.amountOfMoney > rent){
+            this.debit(rent);
+            otherPlayer.credit(rent);
+        }else{
+            otherPlayer.credit(this.amountOfMoney);
+            //quitar
+        }
+    }
+    /**
+     * Faz o usuário andar pelo tabuleiro
+     * @author João
+     * @param nPositions
+     * @param board
+     */
+    public void walk(int nPositions, Board board){
+        atualPlace = board.getPlaceByPosition(atualPosition + nPositions);
+    }
 }
