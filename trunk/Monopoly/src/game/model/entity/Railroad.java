@@ -38,5 +38,9 @@ public class Railroad extends PurchasablePlace{
 
         }
     }
+    //ver se o nome é esse mesmo
+    public float getRunning(){
+        return 0;
+    }
 
 }

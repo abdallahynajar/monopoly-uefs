@@ -12,6 +12,7 @@ import game.model.comand.RollDices;
 import game.model.entity.Colors;
 import game.model.entity.Commands;
 import game.model.entity.Player;
+import game.model.entity.PurchasablePlace;
 import game.view.GameView;
 import java.util.HashMap;
 
@@ -263,11 +264,24 @@ public class GameController {
         }
     }
 
-     /***
+     /**
      * Avisa que o jogo acabou
      * @author Lidiany     
      */
     public void finishGame() {
         gameView.showMessage("O jogo acabou. ");
+    }
+
+    public void buyProperty(PurchasablePlace place, Player player){
+        gameView.showMessage("A título da propriedade "+place.getName()+" está disponível por $"+place.getPrice()+".");
+        gameView.showMessage(player.getName()+", você possui $"+player.getAmountOfMoney()+".");
+        gameView.showMessage("Você deseja comprar "+place.getName()+" (Sim/Não)?");
+
+        String option = gameView.getYesOrNoOption();
+        if (option.equalsIgnoreCase("S")) {
+            player.debit(place.getPrice());
+            player.add(place);
+            place.setOwner(player);
+        }
     }
 }

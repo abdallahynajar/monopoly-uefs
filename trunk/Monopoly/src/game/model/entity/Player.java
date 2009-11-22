@@ -5,6 +5,8 @@
 
 package game.model.entity;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author UEFS\jmatos
@@ -16,10 +18,16 @@ public class Player {
     private String color;
     private float amountOfMoney;
     private Place atualPlace; //lugar em que o jogador está
+    private ArrayList<PurchasablePlace> itsPropertys;
 
     public Player(String name, String color) {
         this.name = name;
         this.color = color;
+        this.itsPropertys = new ArrayList<PurchasablePlace>();
+    }
+
+    public void add(PurchasablePlace place){
+        itsPropertys.add(place);
     }
 
     public float getAmountOfMoney() {
@@ -91,9 +99,8 @@ public class Player {
         status.append( atualPlace.getName() );
         status.append("\nPossui: ");
         status.append(amountOfMoney);
-        status.append("\n Títulos: \n");
-        status.append("... falta listar os títulos");
-        //falta listar os títulos
+        if(!itsPropertys.isEmpty())
+            listTitles(status);
         return status.toString();
     }
 
@@ -102,6 +109,19 @@ public class Player {
         return this.name + " " + this.color +" "+ this.amountOfMoney;
     }
 
+    private void listTitles( StringBuilder status){
+        status.append("\nTítulos \n");
+        for(Place p: itsPropertys){
+            status.append("["+p.getName()+"] - " );
+            if(p instanceof Property){
+                Property property = (Property) p;
+                status.append("propriedade " + property.getColour() + ", aluguel " + property.rentValue() + "\n");
+            }else if(p instanceof Railroad){
+                Railroad railroad = (Railroad) p;
+                status.append("ferrovia, corrida " + railroad.getRunning() + "\n");
+            }
+        }
 
+    }
 
 }
