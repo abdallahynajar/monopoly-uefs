@@ -5,6 +5,8 @@
 
 package game.model.entity;
 
+import game.controller.GameController;
+
 /**
  *
  * @author Jneto
@@ -20,7 +22,12 @@ public class Railroad extends PurchasablePlace{
         this.nRailroad = nRailroad;
     }
 
+    @Override
+    public  void setOwner(Player p){
+        super.owner = owner;
+        nRailroad = 1;
 
+    }
     public Railroad(int position, String name, float price, float hipoteca) {
         super.position = position;
         super.name = name;
@@ -29,18 +36,18 @@ public class Railroad extends PurchasablePlace{
     }
 
     //pagar $25 por cada ferrovia. no máximo são 4
-    public void action(Player p) {
+    public void action(Player p, GameController gc) {
         if (super.owner == null){
-
+            super.buyProperty(p, gc);
         }else if (super.owner == p){
 
         }else{
 
         }
     }
-    //ver se o nome é esse mesmo
+
     public float getRunning(){
-        return 0;
+        return 25*nRailroad;
     }
 
 }

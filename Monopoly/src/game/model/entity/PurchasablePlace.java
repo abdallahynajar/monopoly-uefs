@@ -40,8 +40,7 @@ public abstract class PurchasablePlace extends Place{
     public void setPrice(float price) {
         this.price = price;
     }
-    
-    public abstract void action(Player p);
+
     /**
      * Oferece a propriedade para compra. Deve ser usado quando a propriedade não
      * tiver dono

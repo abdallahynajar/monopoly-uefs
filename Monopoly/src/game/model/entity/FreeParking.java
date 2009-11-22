@@ -5,6 +5,8 @@
 
 package game.model.entity;
 
+import game.controller.GameController;
+
 /**
  *
  * @author jmatos
@@ -18,7 +20,7 @@ public class FreeParking extends Place {
 
 
     @Override
-    public void action(Player p) {
+    public void action(Player p, GameController gc) {
         //não faz nada.
     }
 
