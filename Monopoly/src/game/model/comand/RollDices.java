@@ -17,6 +17,10 @@ public class RollDices implements PlayerCommand{
 
     private Board board;
 
+    public RollDices(Board board) {
+        this.board = board;
+    }
+    
     public void execute(Player player) {
         int firstDice = Dice.roll();
         int secondDice = Dice.roll();

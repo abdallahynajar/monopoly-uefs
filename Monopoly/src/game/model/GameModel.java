@@ -93,5 +93,8 @@ public class GameModel {
         bank = new Bank();
     }
 
+    public Board getBoard() {
+        return board;
+    }
 
 }

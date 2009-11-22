@@ -76,7 +76,7 @@ public class GameController {
     private void initCommands() {
         commands = new HashMap<Commands, PlayerCommand>();
         commands.put(Commands.SAIR, new Exit(this));
-        commands.put(Commands.JOGAR, new RollDices());
+        commands.put(Commands.JOGAR, new RollDices(this.gameModel.getBoard()));
         commands.put(Commands.STATUS, new GetStatus(this));
     }
 
@@ -85,11 +85,10 @@ public class GameController {
      * @author Lidiany
      */
     public void startGame() {
-        currentPlayerIndex = 0;
-
+        currentPlayerIndex = 0;       
         //permitir que comecem as jogadas'
-        while (!isTheGameOver()) {
-            currentPlayer = gameModel.getPlayer(currentPlayerIndex);
+        while (!isTheGameOver()) {        
+            currentPlayer = gameModel.getPlayer( currentPlayerIndex );
             gameView.showMessage(" A jogada de " + currentPlayer.getName() + " começou.");
             this.executePlayerCommand();            
         }
@@ -109,7 +108,7 @@ public class GameController {
      * @author Lidiany
      * @return <b>true</b> se o jogo acabou ou <b>false</b> caso ainda não tenha acabado
      */
-    public boolean isTheGameOver() {
+    public boolean isTheGameOver() {       
         //quando que o jogo termina msm?
         if (gameModel.getNumberOfPlayers() == 0) {
             return true;
@@ -222,7 +221,7 @@ public class GameController {
             try {
                 gameView.showMessage("Informe o número de jogadores [2 - 8]");
                 numberOfPlayers = gameView.getNumberOfPlayers();
-                if (numberOfPlayers < 1 || numberOfPlayers > 8) {
+                if (numberOfPlayers < 2 || numberOfPlayers > 8) {
                     numberOfPlayers = 0;
                     gameView.showMessage("Número de jogadores inválido");
                 }
@@ -256,12 +255,14 @@ public class GameController {
      * @param o número do jogador
      * @return o nome informado pelo jogador
      */
-    private void updatePlayersIndex() {
-        if (currentPlayerIndex + 1 > gameModel.getNumberOfPlayers()) {
+    private void updatePlayersIndex() {         
+        int index = currentPlayerIndex;       
+        if (index + 1 >= gameModel.getNumberOfPlayers()) {
             currentPlayerIndex = 0;
+
         } else {
             currentPlayerIndex++;
-        }
+        }         
     }
 
      /**
