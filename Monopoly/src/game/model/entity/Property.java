@@ -67,8 +67,23 @@ public class Property extends PurchasablePlace {
     public float rentValue(){
         return rent[nHouses];
     }
+
+    /**
+     * IMCOMPLETO. oferece a possibilidade de compra da proprieade ou pagamento
+     * de aluguel, caso esta ainda esteja sem dono.
+     * Falta a compra das casas.
+     * @param p
+     * @param gc
+     */
     @Override
     public void action(Player p, GameController gc) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (super.owner == null){
+            super.buyProperty(p, gc);
+        }else if (super.owner == p){
+
+
+        }else{
+            p.debit(rentValue());
+        }
     }
 }

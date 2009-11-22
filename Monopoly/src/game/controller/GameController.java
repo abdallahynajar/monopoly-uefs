@@ -127,7 +127,7 @@ public class GameController {
         commands.get(c).execute(currentPlayer);
 
         if (c.equals(Commands.JOGAR) || currentPlayer == null) {
-          //  playerTurn = false;
+            currentPlayer.getAtualPlace().action(currentPlayer, this);
             updatePlayersIndex();
         }else{
             executePlayerCommand();
@@ -272,7 +272,12 @@ public class GameController {
     public void finishGame() {
         gameView.showMessage("O jogo acabou. ");
     }
-
+    /**
+     * Interage com o usuário, oferecendo a possibilidade de compra de uma "propriedade comprável"
+     * @author João
+     * @param place
+     * @param player
+     */
     public void buyProperty(PurchasablePlace place, Player player){
         gameView.showMessage("A título da propriedade "+place.getName()+" está disponível por $"+place.getPrice()+".");
         gameView.showMessage(player.getName()+", você possui $"+player.getAmountOfMoney()+".");
