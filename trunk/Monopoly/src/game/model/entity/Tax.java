@@ -5,6 +5,8 @@
 
 package game.model.entity;
 
+import game.controller.GameController;
+
 /**
  *
  * @author jmatos
@@ -27,7 +29,7 @@ public class Tax extends Place{
     }
 
     @Override
-    public void action(Player p) {
+    public void action(Player p, GameController gc) {
         p.debit(tax);
     }
 

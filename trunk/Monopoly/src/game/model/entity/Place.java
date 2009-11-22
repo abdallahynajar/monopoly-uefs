@@ -5,6 +5,8 @@
 
 package game.model.entity;
 
+import game.controller.GameController;
+
 /**
  *
  * @author Jneto
@@ -26,5 +28,5 @@ public abstract class Place {
         return name;
     }
 
-    public abstract void action(Player p);
+    public abstract void action(Player p, GameController gc);
 }

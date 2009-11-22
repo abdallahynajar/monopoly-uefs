@@ -5,6 +5,8 @@
 
 package game.model.entity;
 
+import game.controller.GameController;
+
 /**
  *
  * @author UEFS\jmatos
@@ -65,9 +67,8 @@ public class Property extends PurchasablePlace {
     public float rentValue(){
         return rent[nHouses];
     }
-
-    public void action(Player p) {
+    @Override
+    public void action(Player p, GameController gc) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
 }
