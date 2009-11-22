@@ -5,6 +5,8 @@
 
 package game.model.entity;
 
+import game.controller.GameController;
+
 /**
  *
  * @author UEFS\jmatos
@@ -45,15 +47,9 @@ public abstract class PurchasablePlace extends Place{
      * tiver dono
      * @param p
      */
-    public void buyProperty(Player p){
-        if(p.getAmountOfMoney() >= getPrice()){
-             //corrigir isso aqui pela aquela viadagem de showmessage.
-            System.out.println("A título da propriedade "+super.getName()+" está disponível por $"+getPrice()+".");
-            System.out.println(p.getName()+", você possui $"+p.getAmountOfMoney()+".");
-            System.out.println("Você deseja comprar "+super.getName()+" (Sim/Não)?");
-
-            //falta capturar a resposta, e atribuir, ou não, a proprieade a um dono
-            //e debitar  o dinheiro
+    public void buyProperty(Player player, GameController gc){
+        if(player.getAmountOfMoney() >= getPrice()){
+             gc.buyProperty(this, player);
         }
         
     }
