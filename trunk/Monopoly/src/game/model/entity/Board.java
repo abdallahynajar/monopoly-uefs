@@ -18,7 +18,7 @@ public class Board {
 
     public Board() {
         places = new ArrayList<Place>();
-        int position = 0;
+        int position = 1;
         places.add(new Property( position++, "Mediterranean Avenue" , 60, new float[] {2, 10, 30, 90, 160, 250}, 30, 50, "colour"));
         places.add(new FreeParking( position++, "Community Chest 1"));
         places.add(new Property( position++, "Baltic Avenue"        , 60, new float[] {4, 20, 60, 180, 320, 450}, 30, 50, "colour"));

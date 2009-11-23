@@ -26,6 +26,7 @@ public class Property extends PurchasablePlace {
         this.hipoteca = hipoteca;
         this.housePrice = housePrice;
         this.colour = colour;
+        this.position = position;
     }
     
     public long getnHouses() {
