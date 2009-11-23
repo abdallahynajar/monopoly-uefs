@@ -50,7 +50,7 @@ public class Board {
         places.add(new Property( position++, "Marvin Gardens"       , 280, new float[] {24, 120, 360, 850, 1025, 1200}, 140, 150, "Yellow"));
         places.add(new FreeParking( position++, "Go to Jail"));
         places.add(new Property( position++, "Pacific Avenue"       , 300, new float[] {26, 130, 390, 900, 1100, 1275}, 150, 200, "Green"));
-        places.add(new Property( position++, "North Carolina Avenue", 260, new float[] {22, 110, 330, 800, 975, 1150}, 130, 150, "Green"));
+        places.add(new Property( position++, "North Carolina Avenue", 300, new float[] {26, 130, 390, 900, 1100, 1275}, 150, 200, "Green"));
         places.add(new FreeParking( position++, "Community Chest 3"));
         places.add(new Property( position++, "Pennsylvania Avenue"  , 320, new float[] {28, 150, 450, 1000, 1200, 1400}, 160, 200, "Green"));
         places.add(new Railroad( position++, "Short Line Railroad"  , 200, 100));
