@@ -307,4 +307,9 @@ public class GameController {
             place.setOwner(player);
         }
     }
+
+    public void showPlayerMove(int firstDice, int secondDice){
+        gameView.showMessage("O jogador " + currentPlayer.getName()
+                + " tirou " + firstDice + ", " + secondDice+ " e o peão avançou para " + currentPlayer.getAtualPlace());
+    }
 }

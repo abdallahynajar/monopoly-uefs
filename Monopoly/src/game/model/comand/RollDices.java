@@ -28,6 +28,7 @@ public class RollDices implements PlayerCommand{
 
         Place atualPlace = player.walk( firstDice + secondDice, gameController.getGameBoard() );
         atualPlace.action(player, gameController);
+        gameController.showPlayerMove(firstDice, secondDice);
 
     }
 
