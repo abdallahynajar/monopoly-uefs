@@ -4,6 +4,9 @@
  */
 package game.view;
 
+import game.model.entity.Colors;
+import java.util.List;
+
 /**
  * Responsável pela exibição das informações
  * para o jogador e também pela captura das informações fornecidas pelo mesmo. * 
@@ -57,7 +60,7 @@ public interface GameView {
      * Exibe as opções de cores disponíveis para o peão do jogador
      * @author Lidiany
      */
-    public void showOptionalColors();
+    public void showOptionalColors(List<Colors> availableColors);
 
     /***
      * Exibe os comandos disponíveis para o jogador
