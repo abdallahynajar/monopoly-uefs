@@ -86,13 +86,12 @@ public class Board {
     }
 
     /**
-     * Isso aqui é totalmente desnecessário se a gente não usar o campo position
-     * Isso só podia ser idéia tua lidiany!
      * @param position
      * @return
      */
 
     public Place getPlaceByPosition(int position){
+
         for (Place place : places) {
             if(place.getPosition() == position){
                 return place;
