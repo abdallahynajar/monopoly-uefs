@@ -152,7 +152,14 @@ public class Player {
      * @param board
      */
     public Place walk(int nPositions, Board board){
-        atualPlace = board.getPlaceByPosition(atualPosition + nPositions);
+        int walk = atualPosition + nPositions;
+        if(walk <= 40)
+            atualPlace = board.getPlaceByPosition(atualPosition + nPositions);
+        else{
+            this.credit(200);
+            atualPlace = board.getPlaceByPosition(walk - 40);
+            atualPosition = atualPlace.getPosition();
+        }
         return atualPlace;
     }
 }
