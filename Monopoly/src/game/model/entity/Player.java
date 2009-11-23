@@ -100,7 +100,7 @@ public class Player {
         status.append(color);
         status.append("\n");
         status.append( "Situado na posição \n");
-        status.append( ((Property)atualPlace).getPosition() ); //vou tirar esse kbrunco desse position
+        status.append( atualPlace.getPosition() ); //vou tirar esse kbrunco desse position
         status.append(" - ");
         status.append( atualPlace.getName() );
         status.append("\nPossui: ");
