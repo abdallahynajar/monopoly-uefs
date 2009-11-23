@@ -130,7 +130,7 @@ public class Player {
 
     }
     /**
-     * Método para pagamentos de aluguéis. Considera apossibilidade do player
+     * Método para pagamentos de aluguéis. Considera a possibilidade do player
      * nao ter dinheiro suficiente para pagar
      * @author João
      * @param otherPlayer
@@ -151,7 +151,8 @@ public class Player {
      * @param nPositions
      * @param board
      */
-    public void walk(int nPositions, Board board){
+    public Place walk(int nPositions, Board board){
         atualPlace = board.getPlaceByPosition(atualPosition + nPositions);
+        return atualPlace;
     }
 }

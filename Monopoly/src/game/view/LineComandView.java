@@ -7,6 +7,7 @@ package game.view;
 
 import game.model.entity.Colors;
 import game.model.entity.Commands;
+import java.util.List;
 
 /**
  *
@@ -41,9 +42,9 @@ public class LineComandView extends IOController implements GameView{
         this.writeMessage(message);
     }
 
-    public void showOptionalColors() {
+    public void showOptionalColors( List<Colors> availableColors ) {
         StringBuffer colors = new StringBuffer() ;
-            for (Enum c : Colors.values()) {
+            for (Colors c : availableColors) {
                 colors.append("[");
                 colors.append(c);
                 colors.append("] ");
