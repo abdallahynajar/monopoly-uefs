@@ -312,4 +312,12 @@ public class GameController {
         gameView.showMessage("O jogador " + currentPlayer.getName()
                 + " tirou " + firstDice + ", " + secondDice+ " e o peão avançou para " + currentPlayer.getAtualPlace());
     }
+
+    public void removePlayer(){
+        String msg = "player no longer in the game";
+        currentPlayer = null;       
+        gameModel.setNumberOfPlayers( currentPlayerIndex-- );
+        gameView.showMessage(currentPlayer.getName() + " saiu do jogo. ");
+
+    }
 }
