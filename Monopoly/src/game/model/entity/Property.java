@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package game.model.entity;
 
 import game.controller.GameController;
+import game.model.exceptions.NoEnoughMoneyException;
 
 /**
  *
@@ -28,7 +28,7 @@ public class Property extends PurchasablePlace {
         this.colour = colour;
         this.position = position;
     }
-    
+
     public long getnHouses() {
         return nHouses;
     }
@@ -65,7 +65,7 @@ public class Property extends PurchasablePlace {
         this.name = name;
     }
 
-    public float rentValue(){
+    public float rentValue() {
         return rent[nHouses];
     }
 
@@ -78,13 +78,15 @@ public class Property extends PurchasablePlace {
      */
     @Override
     public void action(Player p, GameController gc) {
-        if (super.owner == null){
+        if (super.owner == null) {
             super.buyProperty(p, gc);
-        }else if (super.owner == p){
-
-
-        }else{
-            p.debit(rentValue());
+        } else if (super.owner == p) {
+        } else {
+            try {
+                p.payRent(this.getOwner(), rentValue());
+            } catch (NoEnoughMoneyException ne) {
+                gc.removePlayer();
+            }
         }
     }
 }
