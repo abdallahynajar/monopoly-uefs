@@ -7,13 +7,14 @@ package game.model.exceptions;
 
 /**
  *
- * @author aluno
+ * @author Lidiany
  */
-public class NotEnoughMoneyException extends Exception{
+public class NonExistentPlaceException extends Exception{
 
-    public NotEnoughMoneyException(String message) {
+    public NonExistentPlaceException(String message) {
         super(message);
     }
+    
 
 
 }
