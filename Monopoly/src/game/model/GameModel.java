@@ -93,6 +93,7 @@ public class GameModel {
             int currentPlayerIndex = 1;
             while (currentPlayerIndex <= numberOfPlayers) {
                 addPlayer(currentPlayerIndex, playerNames.get(currentPlayerIndex - 1), tokenColors.get(currentPlayerIndex - 1));
+                currentPlayerIndex++;
             }
         }
     }
@@ -145,7 +146,8 @@ public class GameModel {
      */
     public void addPlayer(int id, String name, String color) {
         Player p = new Player(name, color);
-        p.setAmountOfMoney(5);
+        p.setAmountOfMoney(1500);
+        p.setId(id);
         p.setAtualPlace(board.getPlaceByName("go"));
         players.add(p);
     }
@@ -199,7 +201,7 @@ public class GameModel {
         if(p == null){
             throw  new NonExistentPlayerException("Player doesn't exist");
         }
-        return p.getColor();
+        return p.getColor().toLowerCase();
         
     }
     
