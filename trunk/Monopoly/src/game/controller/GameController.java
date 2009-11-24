@@ -38,8 +38,7 @@ public class GameController {
     private HashMap<Commands, PlayerCommand> commands;
     private Player currentPlayer;
     private int currentPlayerIndex;
-    private List<Colors> availableColors;
-    private Configuration configuration;
+ 
 
     /***
      * Inicializa as variáveis necessárias para começar uma partida de monopólio
@@ -47,11 +46,9 @@ public class GameController {
      */
     public void initializeGame() {
         int numberOfPlayers = getNumberOfPlayers();
-        configuration = new Configuration();
+        
         gameModel = new GameModel();
-        gameModel.setNumberOfPlayers(numberOfPlayers);
-        gameModel.init();
-        this.initColors();
+        gameModel.setNumberOfPlayers(numberOfPlayers);       
         currentPlayerIndex = 1;
         //deve cadastrar os jogadores
         while (currentPlayerIndex <= numberOfPlayers) {
@@ -73,22 +70,13 @@ public class GameController {
         gameView.showMessage(" Monopoly iniciado com sucesso ");
     }
 
-    /**
-     * Inicializa a lista de cores disponíveis para o usuário
-     */
-    private void initColors(){
-        availableColors = new ArrayList<Colors>();
-            for (Colors c : Colors.values()) {
-                availableColors.add(c);
-            }
-    }
 
     public Configuration getConfiguration() {
-        return configuration;
+        return gameModel.getConfiguration();
     }
 
     public void setConfiguration(Configuration configuration) {
-        this.configuration = configuration;
+        gameModel.setConfiguration( configuration );
     }
 
     /***
@@ -220,13 +208,13 @@ public class GameController {
     private String getPlayerColor() {
         String pc = null;
         while (pc == null) {
-            gameView.showOptionalColors(availableColors);
+            gameView.showOptionalColors(gameModel.getAvailableColors());
             pc = gameView.getPlayerColor();
 
             try {
                 Colors c  = Colors.valueOf(pc.toUpperCase());
                 pc = c.toString();
-                availableColors.remove(c);
+               // availableColors.remove(c);
             } catch (IllegalArgumentException ex) {
                 gameView.showMessage(" Cor inválida ");
                 pc = null;
@@ -312,7 +300,7 @@ public class GameController {
 
         String option = "S";
 
-        if(!configuration.isAutoBuy())
+        if(!gameModel.getConfiguration().isAutoBuy())
             option = gameView.getYesOrNoOption();
 
         if (option.equalsIgnoreCase("S")) {
