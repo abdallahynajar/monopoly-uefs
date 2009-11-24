@@ -27,6 +27,7 @@ public class Property extends PurchasablePlace {
         this.housePrice = housePrice;
         this.colour = colour;
         this.position = position;
+        this.owner = new Player("bank", null);
     }
 
     public long getnHouses() {
@@ -65,7 +66,7 @@ public class Property extends PurchasablePlace {
         this.name = name;
     }
 
-    public float rentValue() {
+    public float getRent() {
         return rent[nHouses];
     }
 
@@ -83,7 +84,7 @@ public class Property extends PurchasablePlace {
         } else if (super.owner == p) {
         } else {
             try {
-                p.payRent(this.getOwner(), rentValue());
+                p.payRent(this.getOwner(), getRent());
             } catch (NotEnoughMoneyException ne) {
                 gc.removePlayer();
             }

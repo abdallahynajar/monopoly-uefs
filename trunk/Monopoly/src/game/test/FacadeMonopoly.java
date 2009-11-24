@@ -9,7 +9,9 @@ import game.model.GameModel;
 import game.model.exceptions.InvalidGameParametersException;
 import game.model.exceptions.InvalidPlayerNameException;
 import game.model.exceptions.InvalidTokenColorException;
+import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NonExistentPlayerException;
+import game.model.exceptions.NonPurchasablePlaceException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -38,6 +40,11 @@ public class FacadeMonopoly {
             gameModel.createGame(numPlayers, nPlayers, tColors);
     }
 
+    public void getCurrentPlayer(){
+        
+    }
+
+
     public void rollDices(int firstDice, int secondDice){
 
     }
@@ -50,9 +57,9 @@ public class FacadeMonopoly {
         return gameModel.getPlayerToken(playerName);
     }
 
-//   public String getPlayerDeeds(){
-//        return 0;
-//    }
+   public String getPlayerDeeds(){
+        return "";
+    }
 
     public int getPlayerPosition(String playerName) throws NonExistentPlayerException{
         return gameModel.getPlayerPosition(playerName);
@@ -63,23 +70,22 @@ public class FacadeMonopoly {
     }
 
     public String getPlaceName(int placeId){
-        return "";
+        return gameModel.getBoard().getPlaceByPosition(placeId).getName();
     }
 
     public String getPlaceGroup(int placeId){
         return "";
     }
 
-    public String getPlaceOwner(int placeId){
-        return "";
+    public String getPlaceOwner(int placeId) throws NonExistentPlaceException, NonPurchasablePlaceException{
+        return gameModel.getBoard().getPlaceOwner(placeId);
     }
 
-
-    public int getPropertyRent (int placeId){
-        return 0;
+    public int getPropertyRent (int placeId) throws NonExistentPlaceException, NonPurchasablePlaceException{
+        return gameModel.getBoard().getPropertyRent(placeId);
     }
-     public int getPlacePrice (int placeId){
-        return 0;
+     public int getPlacePrice (int placeId) throws NonExistentPlaceException, NonPurchasablePlaceException{
+        return gameModel.getBoard().getPlacePrice(placeId);
     }
 
 }

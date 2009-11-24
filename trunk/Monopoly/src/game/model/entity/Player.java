@@ -122,7 +122,7 @@ public class Player {
             status.append("["+p.getName()+"] - " );
             if(p instanceof Property){
                 Property property = (Property) p;
-                status.append("propriedade " + property.getColour() + ", aluguel " + property.rentValue() + "\n");
+                status.append("propriedade " + property.getColour() + ", aluguel " + property.getRent() + "\n");
             }else if(p instanceof Railroad){
                 Railroad railroad = (Railroad) p;
                 status.append("ferrovia, corrida " + railroad.getRunning() + "\n");
