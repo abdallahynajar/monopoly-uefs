@@ -270,7 +270,7 @@ public class GameController {
         String pn = null;
         while (pn == null || pn.equals("")) {
             gameView.showMessage(" Informe o nome do jogador nº" + currentPlayerIndex);
-            pn = gameView.getPlayerName();
+            pn = gameView.getPlayerName(); 
         }
 
         return pn;
