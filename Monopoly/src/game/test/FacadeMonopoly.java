@@ -6,6 +6,9 @@
 package game.test;
 
 import game.model.GameModel;
+import game.model.exceptions.InvalidGameParametersException;
+import game.model.exceptions.InvalidPlayerNameException;
+import game.model.exceptions.InvalidTokenColorException;
 import game.model.exceptions.NonExistentPlayerException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +21,7 @@ import java.util.StringTokenizer;
 public class FacadeMonopoly {
     GameModel gameModel;
 
-    public void createGame(int numPlayers, String playerNames, String tokenColors ) throws Exception{
+    public void createGame(int numPlayers, String playerNames, String tokenColors ) throws InvalidGameParametersException, InvalidPlayerNameException, InvalidTokenColorException{
             gameModel = new GameModel();
 
             List<String> nPlayers = new ArrayList<String>();
@@ -28,7 +31,7 @@ public class FacadeMonopoly {
 
             }
             List<String> tColors = new ArrayList<String>();
-             st = new StringTokenizer(tokenColors, ", }{");
+             st = new StringTokenizer(tokenColors, ",}{");
             while(st.hasMoreTokens()){
                 tColors.add( st.nextToken() );
             }
