@@ -11,6 +11,7 @@ import game.model.entity.Colors;
 import game.model.entity.Player;
 import game.model.exceptions.InvalidPlayerNameException;
 import game.model.exceptions.InvalidTokenColorException;
+import game.model.exceptions.NonExistentPlayerException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +42,12 @@ public class GameModel {
      * Banco
      */
     private Bank bank;
+
     private List<Colors> availableColors;
+
     private Configuration configuration;
+
+
 
     public List<Colors> getAvailableColors() {
         return availableColors;
@@ -70,7 +75,8 @@ public class GameModel {
     public void createGame(int numberOfPlayers, List<String> playerNames, List<String> tokenColors) throws Exception {
         if (numberOfPlayers < 2 || numberOfPlayers > 8) {
             throw new Exception("Invalid number of players");
-        } else if (playerNames.size() > numberOfPlayers) {
+        }
+        else if (playerNames.size() > numberOfPlayers) {
             throw new Exception("Too many player names");
         } else if (playerNames.size() < numberOfPlayers) {
             throw new Exception("Too few player names");
@@ -174,4 +180,45 @@ public class GameModel {
             availableColors.add(c);
         }
     }
+   
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    private Player getPlayerByName(String name){
+        for (Player player : players) {
+            if(player.getName().equals(name)){
+                return player;
+            }
+        }
+        return null;
+    }
+    
+    public String getPlayerToken(String name) throws NonExistentPlayerException{
+        Player p = getPlayerByName(name);
+        if(p == null){
+            throw  new NonExistentPlayerException("Player doesn't exist");
+        }
+        return p.getColor();
+        
+    }
+    
+     public int getPlayerPosition(String name) throws NonExistentPlayerException{
+        Player p = getPlayerByName(name);
+        if(p == null){
+            throw  new NonExistentPlayerException("Player doesn't exist");
+        }
+        return p.getId();
+    }
+     
+      public int getPlayerMoney (String name) throws NonExistentPlayerException{
+          Player p = getPlayerByName(name);
+        if(p == null){
+            throw  new NonExistentPlayerException("Player doesn't exist");
+        }
+        return (int)p.getAmountOfMoney();
+        
+    }
+
+
 }
