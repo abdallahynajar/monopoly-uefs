@@ -18,6 +18,7 @@ public class Tax extends Place{
         super.position = position;
         super.name = name;
         this.tax = tax;
+        this.placeGroup = "tax";
     }
 
     public float getTax() {

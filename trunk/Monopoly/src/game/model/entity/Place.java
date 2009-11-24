@@ -15,6 +15,7 @@ public abstract class Place {
 
     protected String name;
     protected int position;
+    protected String placeGroup;
 
     public int getPosition() {
         return position;
@@ -27,6 +28,15 @@ public abstract class Place {
     public String getName(){
         return name;
     }
+
+    public String getPlaceGroup() {
+        return placeGroup;
+    }
+
+    public void setPlaceGroup(String placeGroup) {
+        this.placeGroup = placeGroup;
+    }
+
 
     public abstract void action(Player p, GameController gc);
 }

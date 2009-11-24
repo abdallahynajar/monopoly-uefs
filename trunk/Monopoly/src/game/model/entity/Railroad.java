@@ -33,6 +33,7 @@ public class Railroad extends PurchasablePlace{
         super.name = name;
         super.price = price;
         super.hipoteca = hipoteca;
+        this.placeGroup = "railRoad";
     }
 
     /**

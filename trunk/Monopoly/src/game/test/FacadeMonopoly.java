@@ -69,12 +69,12 @@ public class FacadeMonopoly {
         return gameModel.getPlayerMoney(playerName);
     }
 
-    public String getPlaceName(int placeId){
-        return gameModel.getBoard().getPlaceByPosition(placeId).getName();
+    public String getPlaceName(int placeId) throws NonExistentPlaceException{
+        return gameModel.getBoard().getPlaceName(placeId);
     }
 
-    public String getPlaceGroup(int placeId){
-        return "";
+    public String getPlaceGroup(int placeId) throws NonExistentPlaceException{
+        return gameModel.getBoard().getPlaceGroup(placeId);
     }
 
     public String getPlaceOwner(int placeId) throws NonExistentPlaceException, NonPurchasablePlaceException{

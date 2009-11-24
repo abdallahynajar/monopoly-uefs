@@ -15,17 +15,17 @@ import game.model.exceptions.NotEnoughMoneyException;
 public class Property extends PurchasablePlace {
 
     private long housePrice;
-    private String colour;
+    
     private int nHouses;
     private float rent[];
 
-    public Property(int position, String name, long price, float rent[], long hipoteca, long housePrice, String colour) {
+    public Property(int position, String name, long price, float rent[], long hipoteca, long housePrice, String placeGroup) {
         super.name = name;
         this.price = price;
         this.rent = rent;
         this.hipoteca = hipoteca;
         this.housePrice = housePrice;
-        this.colour = colour;
+        this.placeGroup = placeGroup;
         this.position = position;
         this.owner = new Player("bank", null);
     }
@@ -37,14 +37,7 @@ public class Property extends PurchasablePlace {
     public void setnHouses(int nHouses) {
         this.nHouses = nHouses;
     }
-
-    public String getColour() {
-        return colour;
-    }
-
-    public void setColour(String colour) {
-        this.colour = colour;
-    }
+  
 
     public long getHousePrice() {
         return housePrice;
