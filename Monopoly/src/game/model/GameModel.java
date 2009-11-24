@@ -80,8 +80,7 @@ public class GameModel {
             throw new InvalidGameParametersException("Too many token colors");
         } else if (tokenColors.size() < numberOfPlayers) {
             throw new InvalidGameParametersException("Too few token colors");
-        } else {
-            
+        } else {            
             validatePlayerNames(playerNames);
             validateTokenColors(tokenColors);
             //inicia o jogo
@@ -102,8 +101,7 @@ public class GameModel {
             }
             for (int j = 1; j < playerNames.size() - 1; j++) {
                 String pb = playerNames.get(j);                
-                if (pa.equalsIgnoreCase(pb)) {
-                    System.out.println("POHAAAAAAAAAAAAA");
+                if (pa.equalsIgnoreCase(pb)) {                    
                     throw new InvalidPlayerNameException("There mustn't be repeated player names");
                 }
             }
@@ -121,8 +119,7 @@ public class GameModel {
             String pa = tokenColors.get(i);
             for (int j = 1; j < tokenColors.size() - 1; j++) {
                 String pb = tokenColors.get(j);                
-                if (pa.equalsIgnoreCase(pb)) {
-                    System.out.println("POHAAAAAAAAAAAAA222222222");
+                if (pa.equalsIgnoreCase(pb)) {                  
                     throw new InvalidTokenColorException("There mustn't be repeated player colors");
                 }
             }
@@ -215,7 +212,7 @@ public class GameModel {
         if (p == null) {
             throw new NonExistentPlayerException("Player doesn't exist");
         }
-        return p.getId();
+        return p.getAtualPosition();
     }
 
     public int getPlayerMoney(String name) throws NonExistentPlayerException {
