@@ -5,7 +5,7 @@
 
 package game.model.entity;
 
-import game.model.exceptions.NoEnoughMoneyException;
+import game.model.exceptions.NotEnoughMoneyException;
 import java.util.ArrayList;
 
 /**
@@ -137,13 +137,13 @@ public class Player {
      * @param otherPlayer
      * @param rent
      */
-    public void payRent(Player otherPlayer, float rent) throws NoEnoughMoneyException{
+    public void payRent(Player otherPlayer, float rent) throws NotEnoughMoneyException{
         if(this.getAmountOfMoney() > rent){
             this.debit(rent);
             otherPlayer.credit(rent);
         }else{
             otherPlayer.credit(this.amountOfMoney);
-            throw new NoEnoughMoneyException();
+            throw new NotEnoughMoneyException();
         }
     }
     /**

@@ -10,5 +10,5 @@ package game.model.entity;
  * @author Lidiany
  */
 public enum Colors {
-    PRETO, BRANCO, VERMELHO, VERDE, AZUL, AMARELO, LARANJA, ROSA;
+    BLACK, WHITE, RED, GREEN, BLUE, ORANGE, YELLOW, PINK, BROWN;    
 }

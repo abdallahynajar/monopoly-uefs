@@ -9,9 +9,9 @@ package game.model.exceptions;
  *
  * @author aluno
  */
-public class NoEnoughMoneyException extends Exception{
+public class NotEnoughMoneyException extends Exception{
 
-    public NoEnoughMoneyException() {
+    public NotEnoughMoneyException() {
         super();
     }
 
