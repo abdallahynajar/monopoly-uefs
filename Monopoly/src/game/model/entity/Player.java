@@ -122,7 +122,7 @@ public class Player {
             status.append("["+p.getName()+"] - " );
             if(p instanceof Property){
                 Property property = (Property) p;
-                status.append("propriedade " + property.getColour() + ", aluguel " + property.getRent() + "\n");
+                status.append("propriedade " + property.placeGroup + ", aluguel " + property.getRent() + "\n");
             }else if(p instanceof Railroad){
                 Railroad railroad = (Railroad) p;
                 status.append("ferrovia, corrida " + railroad.getRunning() + "\n");
@@ -153,14 +153,14 @@ public class Player {
      * @param board
      */
     public Place walk(int nPositions, Board board){
-        int walk = atualPosition + nPositions;
-        if(walk <= 40)
-            atualPlace = board.getPlaceByPosition(atualPosition + nPositions);
-        else{
-            this.credit(200);
-            atualPlace = board.getPlaceByPosition(walk - 40);
-            atualPosition = atualPlace.getPosition();
-        }
+//        int walk = atualPosition + nPositions;
+//        if(walk <= 40)
+//            //atualPlace = board.getPlaceByPosition(atualPosition + nPositions);
+//        else{
+//            this.credit(200);
+//            atualPlace = board.getPlaceByPosition(walk - 40);
+//            atualPosition = atualPlace.getPosition();
+//        }
         return atualPlace;
     }
 }
