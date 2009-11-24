@@ -59,7 +59,7 @@ public class Board {
         places.add(new Tax( position++, "Luxury Tax", 75));
         places.add(new FreeParking( position++, "Luxury Tax"));
         places.add(new Property( position++, "Boardwalk"            , 400, new float[] {50, 200, 600, 1400, 1700, 2000}, 200, 200, "Blue"));
-        places.add(new FreeParking( 0, "Go")); // o go é a posição zero
+        places.add(new FreeParking( position++, "Go")); // o go é a posição 40!
     }
 
     public ArrayList<Place> getPlaces() {

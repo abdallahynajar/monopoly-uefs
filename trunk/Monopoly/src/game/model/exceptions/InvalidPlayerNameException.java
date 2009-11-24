@@ -7,13 +7,12 @@ package game.model.exceptions;
 
 /**
  *
- * @author aluno
+ * @author Lidiany
  */
-public class NotEnoughMoneyException extends Exception{
+public class InvalidPlayerNameException extends Exception{
 
-    public NotEnoughMoneyException(String message) {
+    public InvalidPlayerNameException(String message) {
         super(message);
     }
-
 
 }
