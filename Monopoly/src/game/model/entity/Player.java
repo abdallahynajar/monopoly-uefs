@@ -143,7 +143,7 @@ public class Player {
             otherPlayer.credit(rent);
         }else{
             otherPlayer.credit(this.amountOfMoney);
-            throw new NotEnoughMoneyException();
+            throw new NotEnoughMoneyException("");
         }
     }
     /**
