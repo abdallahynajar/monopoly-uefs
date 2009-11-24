@@ -5,7 +5,7 @@
 package game.model.entity;
 
 import game.controller.GameController;
-import game.model.exceptions.NoEnoughMoneyException;
+import game.model.exceptions.NotEnoughMoneyException;
 
 /**
  *
@@ -84,7 +84,7 @@ public class Property extends PurchasablePlace {
         } else {
             try {
                 p.payRent(this.getOwner(), rentValue());
-            } catch (NoEnoughMoneyException ne) {
+            } catch (NotEnoughMoneyException ne) {
                 gc.removePlayer();
             }
         }
