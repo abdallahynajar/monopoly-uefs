@@ -22,12 +22,13 @@ public class FacadeMonopoly {
             gameModel = new GameModel();
 
             List<String> nPlayers = new ArrayList<String>();
-            StringTokenizer st = new StringTokenizer(playerNames, ", }");
+            StringTokenizer st = new StringTokenizer(playerNames, ",}{");
             while(st.hasMoreTokens()){
-                nPlayers.add( st.nextToken() );
+                nPlayers.add( st.nextToken()  );
+
             }
             List<String> tColors = new ArrayList<String>();
-             st = new StringTokenizer(tokenColors, ", }");
+             st = new StringTokenizer(tokenColors, ", }{");
             while(st.hasMoreTokens()){
                 tColors.add( st.nextToken() );
             }
