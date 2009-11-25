@@ -53,4 +53,8 @@ public abstract class PurchasablePlace extends Place{
              player.buyProperty(this);
         }        
     }
+
+    public void returnToBank(){
+        this.owner = new Player("bank", null);
+    }
 }
