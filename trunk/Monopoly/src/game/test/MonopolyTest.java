@@ -21,6 +21,7 @@ public class MonopolyTest {
 
               //Put the testScript1 file into the "test scripts" list
               files.add("easyTests/us1.txt");
+              files.add("easyTests/us2.txt");
               //Put the testScript2 file into the "test scripts" list
                //files.add("testScript2.txt");
                 //Instantiate your software façade              

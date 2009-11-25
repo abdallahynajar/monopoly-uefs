@@ -6,6 +6,7 @@
 package game.model.entity;
 
 import game.controller.GameController;
+import game.model.exceptions.NotEnoughMoneyException;
 
 /**
  *
@@ -46,15 +47,15 @@ public class Railroad extends PurchasablePlace{
      * @param p
      * @param gc
      */
-    public void action(Player p, GameController gc) {
+    public void action(Player p) throws NotEnoughMoneyException {
         if (super.owner == null){
-            super.buyProperty(p, gc);
+            super.buyProperty(p);
         }else if (super.owner == p){
             if (nRailroad < 4){
                // buyRailroad(p, gc);
             }
         }else{
-            p.debit(getRunning());
+            p.debit( getRunning() );
         }
     }
 
@@ -62,7 +63,7 @@ public class Railroad extends PurchasablePlace{
         return 25*nRailroad;
     }
     /**
-     * Um dia tratarar da compra das ferrovias
+     * Um dia tratara da compra das ferrovias
      * @param p
      * @param gc
      */

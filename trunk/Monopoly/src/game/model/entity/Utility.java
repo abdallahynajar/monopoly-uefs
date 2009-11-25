@@ -5,7 +5,7 @@
 
 package game.model.entity;
 
-import game.controller.GameController;
+import game.model.exceptions.NotEnoughMoneyException;
 
 /**
  *
@@ -25,13 +25,11 @@ public class Utility extends PurchasablePlace{
 
     //Implementar debitando dado*4ou10. 4 quando o jogador só tiver 1, 10 quando
     //Tiver 2. Se não tiver ningém, é claro q há a opçao de comprar.
-    public void action(Player p, GameController gc) {
+    public void action(Player p) throws NotEnoughMoneyException {
         if (super.owner == null){
-            //oferecer possibilidade de compra
-        }else if (super.owner == p){
-
+            p.buyProperty(this);
         }else{
-            
+            p.payRent(owner, price);
         }
     }
 

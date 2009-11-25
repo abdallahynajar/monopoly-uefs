@@ -5,8 +5,6 @@
 
 package game.model.entity;
 
-import game.controller.GameController;
-
 /**
  *
  * @author Jneto
@@ -38,5 +36,5 @@ public abstract class Place {
     }
 
 
-    public abstract void action(Player p, GameController gc);
+    public abstract void action(Player p)throws Exception;
 }

@@ -6,6 +6,7 @@
 package game.model.entity;
 
 import game.controller.GameController;
+import game.model.exceptions.NotEnoughMoneyException;
 
 /**
  *
@@ -30,10 +31,7 @@ public class Tax extends Place{
     }
 
     @Override
-    public void action(Player p, GameController gc) {
+    public void action(Player p) throws NotEnoughMoneyException {
         p.debit(tax);
     }
-
-
-
 }
