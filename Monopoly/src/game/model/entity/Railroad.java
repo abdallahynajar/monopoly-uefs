@@ -34,6 +34,7 @@ public class Railroad extends PurchasablePlace{
         super.price = price;
         super.hipoteca = hipoteca;
         this.placeGroup = "railRoad";
+         this.owner = new Player("bank", null);
     }
 
     /**

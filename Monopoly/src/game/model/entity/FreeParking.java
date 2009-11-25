@@ -13,9 +13,10 @@ import game.controller.GameController;
  */
 public class FreeParking extends Place {
 
-    public FreeParking(int position, String name) {
+    public FreeParking(int position, String name, String placeGroup) {
         super.position = position;
         super.name = name;
+        this.placeGroup = placeGroup;
     }
 
 

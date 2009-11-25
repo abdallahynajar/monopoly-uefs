@@ -30,12 +30,11 @@ public class FacadeMonopoly {
             StringTokenizer st = new StringTokenizer(playerNames, ",}{");
             while(st.hasMoreTokens()){
                 nPlayers.add( st.nextToken()  );
-
             }
             List<String> tColors = new ArrayList<String>();
-             st = new StringTokenizer(tokenColors, ",}{");
-            while(st.hasMoreTokens()){
-                tColors.add( st.nextToken() );
+             StringTokenizer bst = new StringTokenizer(tokenColors, ",}{");
+            while(bst.hasMoreTokens()){
+                tColors.add( bst.nextToken() );
             }
             gameModel.createGame(numPlayers, nPlayers, tColors);
     }
