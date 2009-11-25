@@ -4,7 +4,7 @@
  */
 package game.model.entity;
 
-import game.controller.GameController;
+import game.model.exceptions.NotAvailableForSaleException;
 import game.model.exceptions.NotEnoughMoneyException;
 
 /**
@@ -63,24 +63,17 @@ public class Property extends PurchasablePlace {
         return rent[nHouses];
     }
 
-    /**
-     * IMCOMPLETO. oferece a possibilidade de compra da proprieade ou pagamento
-     * de aluguel, caso esta ainda esteja sem dono.
-     * Falta a compra das casas.
-     * @param p
-     * @param gc
+
+     /**
+    *
      */
     @Override
-    public void action(Player p, GameController gc) {
-        if (super.owner == null) {
-            super.buyProperty(p, gc);
-        } else if (super.owner == p) {
+    public void action(Player p) throws NotEnoughMoneyException, NotAvailableForSaleException{
+        if (owner == null) {
+           p.buyProperty(this);
         } else {
-            try {
-                p.payRent(this.getOwner(), getRent());
-            } catch (NotEnoughMoneyException ne) {
-                gc.removePlayer();
-            }
+                p.payRent( this.getOwner(), this.getRent() );
         }
     }
+  
 }

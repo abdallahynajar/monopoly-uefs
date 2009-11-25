@@ -5,6 +5,7 @@
 
 package game.model.entity;
 
+import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,14 +88,15 @@ public class Player {
         this.amountOfMoney +=money;
     }
 
-    public void debit(float money){
-        this.amountOfMoney -=money;
-        //acho q poderiamos colcocar uma verificação aqui
-        //se o montante ainda é positivo, pois se não for
-        //GAME OVER - util para o pagamento de impostos
+    public void debit(float money) throws NotEnoughMoneyException{
+        if(this.getAmountOfMoney() >= money){
+           this.amountOfMoney -=money;
+        }else{
+            throw new NotEnoughMoneyException("Not enough money");
+        }
     }
 
-    public void buyProperty(PurchasablePlace place){
+    public void buyProperty(PurchasablePlace place)throws NotEnoughMoneyException{
         debit( place.getPrice() );
         place.setOwner(this);
     }
@@ -115,22 +117,8 @@ public class Player {
         this.playerCommands = playerCommands;
     }
 
-    public String getStatus(){
-        StringBuilder status = new StringBuilder();
-        status.append( "Status de ");
-        status.append(name);
-        status.append(" - ");
-        status.append(color);
-        status.append("\n");
-        status.append( "Situado na posição \n");
-        status.append( atualPlace.getPosition() ); //vou tirar esse kbrunco desse position
-        status.append(" - ");
-        status.append( atualPlace.getName() );
-        status.append("\nPossui: ");
-        status.append(amountOfMoney);
-        if(!itsPropertys.isEmpty())
-            listTitles(status);
-        return status.toString();
+    public String getStatus(){     
+        return "";
     }
 
     @Override
@@ -138,36 +126,21 @@ public class Player {
         return this.name + " " + this.color +" "+ this.amountOfMoney;
     }
 
-
-
-    private void listTitles( StringBuilder status){
-        status.append("\nTítulos \n");
-        for(Place p: itsPropertys){
-            status.append("["+p.getName()+"] - " );
-            if(p instanceof Property){
-                Property property = (Property) p;
-                status.append("propriedade " + property.placeGroup + ", aluguel " + property.getRent() + "\n");
-            }else if(p instanceof Railroad){
-                Railroad railroad = (Railroad) p;
-                status.append("ferrovia, corrida " + railroad.getRunning() + "\n");
-            }
-        }
-
-    }
     /**
      * Método para pagamentos de aluguéis. Considera a possibilidade do player
      * nao ter dinheiro suficiente para pagar
      * @author João
-     * @param otherPlayer
-     * @param rent
+     * @param otherPlayer - o jogador pra quem o aluguel será pago
+     * @param rent - o valor do aluguel
+     * @throws NotEnoughMoneyException - caso o jogador não tenha diheiro pra pagar o aluguel
      */
     public void payRent(Player otherPlayer, float rent) throws NotEnoughMoneyException{
-        if(this.getAmountOfMoney() > rent){
+       try{
             this.debit(rent);
             otherPlayer.credit(rent);
-        }else{
-            otherPlayer.credit(this.amountOfMoney);
-            throw new NotEnoughMoneyException("");
+       }catch(NotEnoughMoneyException ex){
+            otherPlayer.credit( amountOfMoney );
+            throw ex;
         }
     }
     /**
@@ -176,15 +149,15 @@ public class Player {
      * @param nPositions
      * @param board
      */
-    public Place walk(int nPositions, Board board){
-//        int walk = atualPosition + nPositions;
-//        if(walk <= 40)
-//            //atualPlace = board.getPlaceByPosition(atualPosition + nPositions);
-//        else{
-//            this.credit(200);
-//            atualPlace = board.getPlaceByPosition(walk - 40);
-//            atualPosition = atualPlace.getPosition();
-//        }
+    public Place walk(int nPositions, Board board) throws NonExistentPlaceException{
+        int walk = atualPosition + nPositions;
+        if(walk <= 40)
+            atualPlace = board.getPlaceByPosition(atualPosition + nPositions);
+        else{
+            this.credit(200);
+            atualPlace = board.getPlaceByPosition(walk - 40);
+            atualPosition = atualPlace.getPosition();
+        }
         return atualPlace;
     }
 }

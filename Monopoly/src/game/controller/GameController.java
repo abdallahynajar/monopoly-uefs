@@ -287,16 +287,7 @@ public class GameController {
         gameView.showMessage(player.getName()+", você possui $"+player.getAmountOfMoney()+".");
         gameView.showMessage("Você deseja comprar "+place.getName()+" (Sim/Não)?");
 
-        String option = "S";
-
-        if(!gameModel.getConfiguration().isAutoBuy())
-            option = gameView.getYesOrNoOption();
-
-        if (option.equalsIgnoreCase("S")) {
-            player.debit(place.getPrice());
-            player.add(place);
-            place.setOwner(player);
-        }
+        
     }
 
     public void showPlayerMove(int firstDice, int secondDice){

@@ -21,7 +21,7 @@ public class FreeParking extends Place {
 
 
     @Override
-    public void action(Player p, GameController gc) {
+    public void action(Player p) {
         //não faz nada.
     }
 

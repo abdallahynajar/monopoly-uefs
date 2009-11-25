@@ -23,12 +23,12 @@ public class RollDices implements PlayerCommand{
     }
     
     public void execute(Player player) {
-        int firstDice = Dice.roll();
-        int secondDice = Dice.roll();
-        System.out.println(" firstDice + secondDice" +  firstDice + secondDice);
-        Place atualPlace = player.walk( firstDice + secondDice, gameController.getGameBoard() );
-        atualPlace.action(player, gameController);
-        gameController.showPlayerMove(firstDice, secondDice);
+//        int firstDice = Dice.roll();
+//        int secondDice = Dice.roll();
+//        System.out.println(" firstDice + secondDice" +  firstDice + secondDice);
+//        Place atualPlace = player.walk( firstDice + secondDice, gameController.getGameBoard() );
+//        atualPlace.action(player, gameController);
+//        gameController.showPlayerMove(firstDice, secondDice);
 
     }
 

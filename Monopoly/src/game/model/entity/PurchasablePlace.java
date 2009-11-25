@@ -6,6 +6,8 @@
 package game.model.entity;
 
 import game.controller.GameController;
+import game.model.exceptions.NotAvailableForSaleException;
+import game.model.exceptions.NotEnoughMoneyException;
 
 /**
  *
@@ -46,11 +48,9 @@ public abstract class PurchasablePlace extends Place{
      * tiver dono
      * @param p
      */
-    public void buyProperty(Player player, GameController gc){
+    public void buyProperty(Player player) throws NotEnoughMoneyException{
         if(player.getAmountOfMoney() >= getPrice()){
-             gc.buyProperty(this, player);
-        }
-        
+             player.buyProperty(this);
+        }        
     }
-
 }

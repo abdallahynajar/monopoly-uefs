@@ -8,6 +8,7 @@ import game.model.GameModel;
 import game.model.entity.Commands;
 import game.model.entity.PurchasablePlace;
 import game.model.exceptions.InvalidCommandException;
+import game.model.exceptions.InvalidDiceResultException;
 import game.model.exceptions.InvalidGameParametersException;
 import game.model.exceptions.InvalidPlayerNameException;
 import game.model.exceptions.InvalidTokenColorException;
@@ -126,6 +127,11 @@ public class FacadeMonopoly {
         return gameModel.getBoard().getPlacePrice(placeId);
     }
 
-    public void rollDices(int firstDice, int secondDice) {
+    public void setAutomaticBuying(boolean auto){
+        gameModel.getConfiguration().setAutoBuy(auto);
+    }
+
+    public void rollDice(int firstDieResult, int secondDieResult) throws InvalidDiceResultException, NonExistentPlaceException {
+        gameModel.rollDices(firstDieResult, secondDieResult);
     }
 }

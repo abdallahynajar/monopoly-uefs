@@ -89,14 +89,17 @@ public class Board {
      * @param position
      * @return
      */
-    private Place getPlaceByPosition(int position) {
-
+    public Place getPlaceByPosition(int position) throws NonExistentPlaceException {
+        Place p = null;
         for (Place place : places) {
             if (place.getPosition() == position) {
-                return place;
+                p = place;
             }
         }
-        return null;
+        if (p == null) {
+            throw new NonExistentPlaceException("Place doesn't exist");
+        }
+        return p;
     }
 
     /**
@@ -115,9 +118,7 @@ public class Board {
     public int getPlacePrice(int position) throws NonExistentPlaceException, NonPurchasablePlaceException {
         try {
             PurchasablePlace p = (PurchasablePlace) getPlaceByPosition(position);
-            if (p == null) {
-                throw new NonExistentPlaceException("Place doesn't exist");
-            }
+           
             return (int) p.getPrice();
 
         } catch (ClassCastException ex) {
@@ -127,10 +128,7 @@ public class Board {
 
     public int getPropertyRent(int position) throws NonExistentPlaceException, NonPurchasablePlaceException{
         try {
-            Property p = (Property) getPlaceByPosition(position);
-            if (p == null) {
-                throw new NonExistentPlaceException("Place doesn't exist");
-            }
+            Property p = (Property) getPlaceByPosition(position);           
             return (int) p.getRent();
 
         } catch (ClassCastException ex) {
@@ -155,7 +153,6 @@ public class Board {
     }
 
       public String getPlaceGroup (int position) throws NonExistentPlaceException{
-
             Place p =  getPlaceByPosition(position);
             if (p == null) {
                 throw new NonExistentPlaceException("Place doesn't exist");

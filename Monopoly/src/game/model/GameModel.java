@@ -10,9 +10,11 @@ import game.model.entity.Board;
 import game.model.entity.Colors;
 import game.model.entity.Player;
 import game.model.exceptions.InvalidCommandException;
+import game.model.exceptions.InvalidDiceResultException;
 import game.model.exceptions.InvalidGameParametersException;
 import game.model.exceptions.InvalidPlayerNameException;
 import game.model.exceptions.InvalidTokenColorException;
+import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NonExistentPlayerException;
 import java.util.ArrayList;
 import java.util.List;
@@ -247,12 +249,28 @@ public class GameModel {
      */
     private void startGame() {
        int currentPlayerIndex = 0;
-        currentPlayer = players.get(currentPlayerIndex);
-        if(currentPlayerIndex == numberOfPlayers){
-            currentPlayerIndex = 0;
+      currentPlayer = players.get(currentPlayerIndex);
+    }
+
+    public void rollDices(int firstDieResult, int secondDieResult) throws InvalidDiceResultException, NonExistentPlaceException{
+        if( !validateRollDices(firstDieResult, secondDieResult) ){
+            throw new InvalidDiceResultException("Invalid die result");
         }else{
-            currentPlayerIndex++;
+            currentPlayer.walk(firstDieResult + secondDieResult, board);
         }
+    }
+
+    private boolean validateRollDices(int firstDieResult, int secondDieResult) {
+        if(firstDieResult<=0 || secondDieResult <=0){
+            return false;
+        }else if(firstDieResult>6 || secondDieResult >6){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isGameOver() {
+        return this.players.isEmpty();
     }
 
 }
