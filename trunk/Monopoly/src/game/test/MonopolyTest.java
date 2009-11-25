@@ -31,7 +31,7 @@ public class MonopolyTest {
               //Execute the tests
               eaFacade.executeTests();
               //Print the tests execution results
-              System.out.println(eaFacade.getCompleteResults());
+              System.out.println(eaFacade.getCompleteResults()); 
     }
 
 }
