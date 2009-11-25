@@ -114,13 +114,14 @@ public class GameModel {
             //inicia o jogo
             players = new ArrayList<Player>(numberOfPlayers);
             this.numberOfPlayers = numberOfPlayers;
-            int currentPlayerIndex = 1;
+            currentPlayerIndex = 1;
             while (currentPlayerIndex <= numberOfPlayers) {
                 addPlayer(currentPlayerIndex, playerNames.get(currentPlayerIndex - 1), tokenColors.get(currentPlayerIndex - 1));
                 currentPlayerIndex++;
             }
             gameStarted = true;
-            currentPlayer = players.get(0);
+            currentPlayerIndex = 0;
+            currentPlayer = players.get(currentPlayerIndex);
         }
     }
 
