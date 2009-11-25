@@ -116,9 +116,9 @@ public class Player {
     }
 
     public void buyProperty(PurchasablePlace place)throws NotEnoughMoneyException{
-        System.out.println("buyProperty");
-        System.out.println("Player" + name);
-        System.out.println(place.getName());
+//        System.out.println("buyProperty");
+//        System.out.println("Player" + name);
+//        System.out.println(place.getName());
 
 
         debit( place.getPrice() );
