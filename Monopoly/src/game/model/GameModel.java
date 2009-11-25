@@ -64,7 +64,7 @@ public class GameModel {
      * @author Lidiany
      */
     public GameModel() {
-        configuration = new Configuration();       
+        configuration = new Configuration();
         board = new Board();
         bank = new Bank();
     }
@@ -164,7 +164,7 @@ public class GameModel {
                 throw new InvalidTokenColorException("Invalid token color");
             }
         }
-         //era p verificar os repetidos aki, mas não funciona!
+        //era p verificar os repetidos aki, mas não funciona!
     }
 
     public int getNumberOfPlayers() {
@@ -231,16 +231,17 @@ public class GameModel {
         }
         return p;
     }
-     /**
+
+    /**
      * Executa um comando de um jogador
      * @author Lidiany
      * @param command o comando a ser executado
      * @throws InvalidCommandException - se não for possível executar o comando
      */
-    public void executePlayerCommand(String command)throws InvalidCommandException{
-            if( currentPlayer == null ){
-               throw new InvalidCommandException("There's no game to quit");
-            }
+    public void executePlayerCommand(String command) throws InvalidCommandException {
+        if (currentPlayer == null) {
+            throw new InvalidCommandException("There's no game to quit");
+        }
     }
 
     /**
@@ -248,22 +249,37 @@ public class GameModel {
      * @author Lidiany
      */
     private void startGame() {
-       int currentPlayerIndex = 0;
-      currentPlayer = players.get(currentPlayerIndex);
+        int currentPlayerIndex = 0;
+        currentPlayer = players.get(currentPlayerIndex);
     }
 
-    public void rollDices(int firstDieResult, int secondDieResult) throws InvalidDiceResultException, NonExistentPlaceException{
-        if( !validateRollDices(firstDieResult, secondDieResult) ){
+    /**
+     * Executa um comando de um jogador
+     * @author Lidiany
+     * @param firstDieResult -  valor do primeiro dado
+     * @param secondDieResult -  valor do segundo dado
+     * @throws InvalidDiceResultException - se não os valores dos dados estiverem incorretos
+     *  @throws NonExistentPlaceException - se o Place não for encontrado
+     */
+    public void rollDices(int firstDieResult, int secondDieResult) throws InvalidDiceResultException, NonExistentPlaceException {
+        if (!validateRollDices(firstDieResult, secondDieResult)) {
             throw new InvalidDiceResultException("Invalid die result");
-        }else{
+        } else {
             currentPlayer.walk(firstDieResult + secondDieResult, board);
         }
     }
 
+    /**
+     * Valida os valores dos Dados
+     * @author Lidiany
+     * @param firstDieResult -  valor do primeiro dado
+     * @param secondDieResult -  valor do segundo dado
+     * @return <b>true </b> se os valores forem corretos, senão <b>false </b>
+     */
     private boolean validateRollDices(int firstDieResult, int secondDieResult) {
-        if(firstDieResult<=0 || secondDieResult <=0){
+        if (firstDieResult <= 0 || secondDieResult <= 0) {
             return false;
-        }else if(firstDieResult>6 || secondDieResult >6){
+        } else if (firstDieResult > 6 || secondDieResult > 6) {
             return false;
         }
         return true;
@@ -272,5 +288,4 @@ public class GameModel {
     private boolean isGameOver() {
         return this.players.isEmpty();
     }
-
 }
