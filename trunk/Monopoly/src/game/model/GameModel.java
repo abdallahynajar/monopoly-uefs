@@ -269,6 +269,9 @@ public class GameModel {
             throw new InvalidDiceResultException("Invalid die result");
         } else {
             currentPlayer.walk(firstDieResult + secondDieResult, board);
+            if( !isGameOver() ){
+                updatePlayerIndex();
+            }
         }
 
     }
@@ -295,5 +298,13 @@ public class GameModel {
 
     private void exitGame() {
         gameStarted = false;
+    }
+
+    private void updatePlayerIndex() {
+        if(currentPlayerIndex <= numberOfPlayers){
+            currentPlayerIndex++;
+        }else{
+           currentPlayerIndex = 0;
+        }
     }
 }
