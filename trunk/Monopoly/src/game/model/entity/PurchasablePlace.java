@@ -48,7 +48,7 @@ public abstract class PurchasablePlace extends Place{
      * tiver dono
      * @param p
      */
-    public void buyProperty(Player player) throws NotEnoughMoneyException{
+    public void buyProperty(Player player) throws NotEnoughMoneyException{    
         if(player.getAmountOfMoney() >= getPrice()){
              player.buyProperty(this);
         }        

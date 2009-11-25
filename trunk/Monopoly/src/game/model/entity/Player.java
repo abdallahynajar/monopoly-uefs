@@ -100,7 +100,7 @@ public class Player {
     }
 
     public void debit(float money) throws NotEnoughMoneyException{
-        if(this.getAmountOfMoney() >= money){
+        if(this.amountOfMoney >= money){
            this.amountOfMoney -=money;
         }else{
             throw new NotEnoughMoneyException("Not enough money");
