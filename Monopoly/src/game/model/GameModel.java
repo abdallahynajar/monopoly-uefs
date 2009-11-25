@@ -272,7 +272,7 @@ public class GameModel {
 
             } catch (Exception ex) {
         
-                ex.printStackTrace();
+                ex.printStackTrace(); 
             }
 
         }
