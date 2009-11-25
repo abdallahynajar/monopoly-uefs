@@ -9,6 +9,7 @@ import game.model.entity.Bank;
 import game.model.entity.Board;
 import game.model.entity.Colors;
 import game.model.entity.Player;
+import game.model.exceptions.InvalidCommandException;
 import game.model.exceptions.InvalidGameParametersException;
 import game.model.exceptions.InvalidPlayerNameException;
 import game.model.exceptions.InvalidTokenColorException;
@@ -43,16 +44,10 @@ public class GameModel {
      * Banco
      */
     private Bank bank;
-    private List<Colors> availableColors;
+    /**
+     * Para configurar os parâmetros de inicialização do jogo
+     */
     private Configuration configuration;
-
-    public List<Colors> getAvailableColors() {
-        return availableColors;
-    }
-
-    public void setAvailableColors(List<Colors> availableColors) {
-        this.availableColors = availableColors;
-    }
 
     public Configuration getConfiguration() {
         return configuration;
@@ -62,13 +57,28 @@ public class GameModel {
         this.configuration = configuration;
     }
 
+    /**
+     * Cria uma nova instância de GameModel
+     * @author Lidiany
+     */
     public GameModel() {
-        configuration = new Configuration();
-        initColors();
+        configuration = new Configuration();       
         board = new Board();
         bank = new Bank();
     }
 
+    /**
+     * Cria uma nova partida de Monopoly
+     *@see Colors
+     * @author Lidiany
+     * @param numberOfPlayers o número de participantes do jogo
+     * deve ser maior que <b>2</b> e menor que <b>8</b>
+     * @param playerNames a lista de nomes dos jogadores
+     * @param tokenColors as cores do peeões dos jogadores
+     * @throws InvalidGameParametersException - se o número de jogadores, ou cores e nomes estiver errado
+     * @throws InvalidPlayerNameException - se for passado um nome inválido como banco ou nomes repetidos
+     * @throws InvalidTokenColorException - se for passada uma cor inválida ou cores repetidas
+     */
     public void createGame(int numberOfPlayers, List<String> playerNames, List<String> tokenColors) throws InvalidGameParametersException, InvalidPlayerNameException, InvalidTokenColorException {
 
         if (numberOfPlayers < 2 || numberOfPlayers > 8) {
@@ -102,15 +112,24 @@ public class GameModel {
                 currentPlayerIndex++;
             }
 
+            startGame();
+
         }
     }
 
+    /**
+     * Valida os nomes de jogadores
+     * @author Lidiany
+     * @param playerNames a lista de nomes dos jogadores
+     * @throws InvalidPlayerNameException - se for passado um nome inválido como banco ou nomes repetidos
+     */
     private void validatePlayerNames(List<String> playerNames) throws InvalidPlayerNameException {
         for (int i = 0; i < playerNames.size(); i++) {
             String pa = playerNames.get(i);
             if (pa.equals("bank")) {
                 throw new InvalidPlayerNameException("Invalid player name");
             }
+            //era p verificar os repetidos aki, mas não funciona!
         }
     }
 
@@ -127,6 +146,13 @@ public class GameModel {
         return false;
     }
 
+    /**
+     * Valida as cores dos jogadores
+     *@see Colors
+     * @author Lidiany
+     * @param tokenColors as cores do peeões dos jogadores
+     * @throws InvalidTokenColorException - se for passada uma cor inválida ou cores repetidas
+     */
     private void validateTokenColors(List<String> tokenColors) throws InvalidTokenColorException {
         for (int i = 0; i < tokenColors.size(); i++) {
             try {
@@ -136,6 +162,7 @@ public class GameModel {
                 throw new InvalidTokenColorException("Invalid token color");
             }
         }
+         //era p verificar os repetidos aki, mas não funciona!
     }
 
     public int getNumberOfPlayers() {
@@ -176,63 +203,56 @@ public class GameModel {
         players.remove(id);
     }
 
-    /**
-     * Inicializa o tabuleiro do monopólio
-     * @author Lidiany
-     */
-    public void initializeBoardGame() {
-    }
-
     public Board getBoard() {
         return board;
-    }
-
-    /**
-     * Inicializa a lista de cores disponíveis para o usuário
-     */
-    private void initColors() {
-        availableColors = new ArrayList<Colors>();
-        for (Colors c : Colors.values()) {
-            availableColors.add(c);
-        }
     }
 
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
-    private Player getPlayerByName(String name) {
+    /**
+     * Busca um jogador pelo nome
+     * @author Lidiany
+     * @param name o nome do jogador a ser pesquisado
+     * @throws NonExistentPlayerException - se o jogadr não for encontrado
+     */
+    public Player getPlayerByName(String name) throws NonExistentPlayerException {
+        Player p = null;
         for (Player player : players) {
             if (player.getName().equals(name)) {
-                return player;
+                p = player;
             }
         }
-        return null;
-    }
-
-    public String getPlayerToken(String name) throws NonExistentPlayerException {
-        Player p = getPlayerByName(name);
         if (p == null) {
             throw new NonExistentPlayerException("Player doesn't exist");
         }
-        return p.getColor().toLowerCase();
-
+        return p;
+    }
+     /**
+     * Executa um comando de um jogador
+     * @author Lidiany
+     * @param command o comando a ser executado
+     * @throws InvalidCommandException - se não for possível executar o comando
+     */
+    public void executePlayerCommand(String command)throws InvalidCommandException{
+            if( currentPlayer == null ){
+               throw new InvalidCommandException("There's no game to quit");
+            }
     }
 
-    public int getPlayerPosition(String name) throws NonExistentPlayerException {
-        Player p = getPlayerByName(name);
-        if (p == null) {
-            throw new NonExistentPlayerException("Player doesn't exist");
+    /**
+     * Inicia a partida de Monopoly
+     * @author Lidiany
+     */
+    private void startGame() {
+       int currentPlayerIndex = 0;
+        currentPlayer = players.get(currentPlayerIndex);
+        if(currentPlayerIndex == numberOfPlayers){
+            currentPlayerIndex = 0;
+        }else{
+            currentPlayerIndex++;
         }
-        return p.getAtualPosition();
     }
 
-    public int getPlayerMoney(String name) throws NonExistentPlayerException {
-        Player p = getPlayerByName(name);
-        if (p == null) {
-            throw new NonExistentPlayerException("Player doesn't exist");
-        }
-        return (int) p.getAmountOfMoney();
-
-    }
 }
