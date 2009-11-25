@@ -70,6 +70,7 @@ public class GameModel {
     }
 
     public void createGame(int numberOfPlayers, List<String> playerNames, List<String> tokenColors) throws InvalidGameParametersException, InvalidPlayerNameException, InvalidTokenColorException {
+
         if (numberOfPlayers < 2 || numberOfPlayers > 8) {
             throw new InvalidGameParametersException("Invalid number of players");
         } else if (playerNames.size() > numberOfPlayers) {
@@ -80,16 +81,27 @@ public class GameModel {
             throw new InvalidGameParametersException("Too many token colors");
         } else if (tokenColors.size() < numberOfPlayers) {
             throw new InvalidGameParametersException("Too few token colors");
-        } else {            
+        } else {
+
             validatePlayerNames(playerNames);
             validateTokenColors(tokenColors);
+
+//            if ( isAnyRepeatedValue(playerNames) ) {
+//                throw new InvalidPlayerNameException("There mustn't be repeated player names");
+//            }
+
+//            if ( isAnyRepeatedValue( tokenColors ) ) {
+//                throw new InvalidTokenColorException("There mustn't be repeated token colors");
+//            }
             //inicia o jogo
             players = new ArrayList<Player>(numberOfPlayers);
+            this.numberOfPlayers = numberOfPlayers;
             int currentPlayerIndex = 1;
             while (currentPlayerIndex <= numberOfPlayers) {
                 addPlayer(currentPlayerIndex, playerNames.get(currentPlayerIndex - 1), tokenColors.get(currentPlayerIndex - 1));
                 currentPlayerIndex++;
             }
+
         }
     }
 
@@ -99,13 +111,20 @@ public class GameModel {
             if (pa.equals("bank")) {
                 throw new InvalidPlayerNameException("Invalid player name");
             }
-            for (int j = 1; j < playerNames.size() - 1; j++) {
-                String pb = playerNames.get(j);                
-                if (pa.equalsIgnoreCase(pb)) {                    
-                    throw new InvalidPlayerNameException("There mustn't be repeated player names");
-                }
-            }
         }
+    }
+
+    private boolean isAnyRepeatedValue(List<String> names) {
+//        ArrayList<String> lista = new ArrayList<String>(names);
+//        for (int i = 0; i < lista.size(); i++)  {
+//            System.out.println("names" + lista.get(i));
+//            for (int j = 1; j < lista.size(); j++) {
+//                if (lista.get(i).equals(lista.get(j))) {
+//                    return true;
+//                }
+//            }
+//        }
+        return false;
     }
 
     private void validateTokenColors(List<String> tokenColors) throws InvalidTokenColorException {
@@ -115,13 +134,6 @@ public class GameModel {
                 tokenColors.set(i, c.toString());
             } catch (IllegalArgumentException ex) {
                 throw new InvalidTokenColorException("Invalid token color");
-            }
-            String pa = tokenColors.get(i);
-            for (int j = 1; j < tokenColors.size() - 1; j++) {
-                String pb = tokenColors.get(j);                
-                if (pa.equalsIgnoreCase(pb)) {                  
-                    throw new InvalidTokenColorException("There mustn't be repeated player colors");
-                }
             }
         }
     }

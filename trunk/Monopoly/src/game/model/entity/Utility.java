@@ -18,6 +18,8 @@ public class Utility extends PurchasablePlace{
         super.name = name;
         super.price = price;
         super.hipoteca = hipoteca;
+        this.placeGroup = "utility";
+        this.owner = new Player("bank", null);
     }
 
 
