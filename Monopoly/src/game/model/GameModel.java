@@ -17,6 +17,8 @@ import game.model.exceptions.InvalidPlayerNameException;
 import game.model.exceptions.InvalidTokenColorException;
 import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NonExistentPlayerException;
+import game.model.exceptions.NotEnoughMoneyException;
+import game.model.exceptions.PlayerNoLongerInTheGameException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -222,7 +224,7 @@ public class GameModel {
      * @param name o nome do jogador a ser pesquisado
      * @throws NonExistentPlayerException - se o jogadr não for encontrado
      */
-    public Player getPlayerByName(String name) throws NonExistentPlayerException {
+    public Player getPlayerByName(String name) throws NonExistentPlayerException, PlayerNoLongerInTheGameException {
         Player p = null;
         for (Player player : players) {
             if (player.getName().equals(name)) {
@@ -231,6 +233,8 @@ public class GameModel {
         }
         if (p == null) {
             throw new NonExistentPlayerException("Player doesn't exist");
+        }else if(!p.isPlaying()){
+            throw new PlayerNoLongerInTheGameException("Player no longer in the game");
         }
         return p;
     }
@@ -260,7 +264,7 @@ public class GameModel {
      * @throws InvalidDiceResultException - se não os valores dos dados estiverem incorretos
      *  @throws NonExistentPlaceException - se o Place não for encontrado
      */
-    public void rollDices(int firstDieResult, int secondDieResult) throws InvalidDiceResultException, NonExistentPlaceException {
+    public void rollDices(int firstDieResult, int secondDieResult) throws InvalidDiceResultException, NonExistentPlaceException, Exception {
         if (!validateRollDices(firstDieResult, secondDieResult)) {
             throw new InvalidDiceResultException("Invalid die result");
         } else {
@@ -269,10 +273,8 @@ public class GameModel {
                 if (!isGameOver()) {
                     updateCurrentPlayer();
                 }
-
-            } catch (Exception ex) {
-        
-                ex.printStackTrace(); 
+            } catch (NotEnoughMoneyException ex) {
+               this.currentPlayer.setPlaying(false);
             }
 
         }

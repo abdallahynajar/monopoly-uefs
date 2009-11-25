@@ -15,6 +15,7 @@ import game.model.exceptions.InvalidTokenColorException;
 import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NonExistentPlayerException;
 import game.model.exceptions.NonPurchasablePlaceException;
+import game.model.exceptions.PlayerNoLongerInTheGameException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -59,7 +60,7 @@ public class FacadeMonopoly {
         return gameModel.getNumberOfPlayers();
     }
 
-    public String getPlayerToken(String playerName) throws NonExistentPlayerException {
+    public String getPlayerToken(String playerName) throws NonExistentPlayerException, PlayerNoLongerInTheGameException {
         return gameModel.getPlayerByName(playerName).getColor().toLowerCase();
         //getPlayerToken(playerName);
     }
@@ -80,7 +81,7 @@ public class FacadeMonopoly {
         return strCommand.toString();
     }
 
-    public String getPlayerDeeds(String playerName) throws NonExistentPlayerException {
+    public String getPlayerDeeds(String playerName) throws NonExistentPlayerException, PlayerNoLongerInTheGameException {
         StringBuilder str = new StringBuilder();
         str.append("{");
         ArrayList<PurchasablePlace> prPlace = gameModel.getPlayerByName(playerName).getItsPropertys();
@@ -97,12 +98,12 @@ public class FacadeMonopoly {
         return str.toString();
     }
 
-    public int getPlayerPosition(String playerName) throws NonExistentPlayerException {
+    public int getPlayerPosition(String playerName) throws NonExistentPlayerException, PlayerNoLongerInTheGameException {
         return gameModel.getPlayerByName(playerName).getAtualPosition();
         //getPlayerPosition(playerName);
     }
 
-    public int getPlayerMoney(String playerName) throws NonExistentPlayerException {
+    public int getPlayerMoney(String playerName) throws NonExistentPlayerException, PlayerNoLongerInTheGameException {
         return (int) gameModel.getPlayerByName(playerName).getAmountOfMoney();
         //getPlayerMoney(playerName);
     }
@@ -131,7 +132,7 @@ public class FacadeMonopoly {
         gameModel.getConfiguration().setAutoBuy(auto);
     }
 
-    public void rollDice(int firstDieResult, int secondDieResult) throws InvalidDiceResultException, NonExistentPlaceException {
+    public void rollDice(int firstDieResult, int secondDieResult) throws InvalidDiceResultException, NonExistentPlaceException, Exception {
         gameModel.rollDices(firstDieResult, secondDieResult);
     }
 }
