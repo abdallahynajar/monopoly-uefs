@@ -116,10 +116,6 @@ public class Player {
     }
 
     public void buyProperty(PurchasablePlace place)throws NotEnoughMoneyException{
-//        System.out.println("buyProperty");
-//        System.out.println("Player" + name);
-//        System.out.println(place.getName());
-
 
         debit( place.getPrice() );
         place.setOwner(this);
@@ -186,29 +182,7 @@ public class Player {
             atualPlace = board.getPlaceByPosition(walk - 40);
             atualPosition = atualPlace.getPosition();
         }
-//        System.out.println("atualPlace " + atualPlace.getName()+ " " + atualPlace.getPosition() );
         atualPlace.action(this);
         return atualPlace;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Player other = (Player) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
     }
 }

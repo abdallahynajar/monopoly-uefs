@@ -24,9 +24,9 @@ public class Utility extends PurchasablePlace {
     //Implementar debitando dado*4ou10. 4 quando o jogador só tiver 1, 10 quando
     //Tiver 2. Se não tiver ningém, é claro q há a opçao de comprar.
     public void action(Player p) throws NotEnoughMoneyException {
-        if (!owner.equals(p)) {
+        if (!owner.equals(p)) {            
             if (owner == null || owner.getName().equals("bank")) {
-                p.buyProperty(this);
+                buyProperty( p );
             } else {
                 p.payRent(owner, price);
             }
