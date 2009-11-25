@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package game.model.entity;
 
 import game.controller.GameController;
@@ -12,7 +11,8 @@ import game.model.exceptions.NotEnoughMoneyException;
  *
  * @author Jneto
  */
-public class Railroad extends PurchasablePlace{
+public class Railroad extends PurchasablePlace {
+
     private int nRailroad;
 
     public int getnRailroad() {
@@ -24,18 +24,19 @@ public class Railroad extends PurchasablePlace{
     }
 
     @Override
-    public  void setOwner(Player p){
+    public void setOwner(Player p) {
         super.owner = owner;
         nRailroad = 1;
 
     }
+
     public Railroad(int position, String name, float price, float hipoteca) {
         super.position = position;
         super.name = name;
         super.price = price;
         super.hipoteca = hipoteca;
         this.placeGroup = "railRoad";
-         this.owner = new Player("bank", null);
+        this.owner = new Player("bank", null);
     }
 
     /**
@@ -48,26 +49,26 @@ public class Railroad extends PurchasablePlace{
      * @param gc
      */
     public void action(Player p) throws NotEnoughMoneyException {
-        if (super.owner == null){
-            super.buyProperty(p);
-        }else if (super.owner == p){
-            if (nRailroad < 4){
-               // buyRailroad(p, gc);
+        if (owner != p) {
+            if (owner == null || owner.getName().equals("bank")) {               
+                buyProperty(p);
+            } else {
+                p.debit(getRunning());
             }
-        }else{
-            p.debit( getRunning() );
+        } else {
         }
     }
 
-    public float getRunning(){
-        return 25*nRailroad;
+    public float getRunning() {
+        return 25 * nRailroad;
     }
+
     /**
      * Um dia tratara da compra das ferrovias
      * @param p
      * @param gc
      */
-    public void buyRailroad(Player p, GameController gc){
+    public void buyRailroad(Player p, GameController gc) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

@@ -42,6 +42,13 @@ public class Player {
         return playing;
     }
 
+    public void fail(){
+        playing = false;
+        for (PurchasablePlace purchasablePlace : itsPropertys) {
+            purchasablePlace.returnToBank();
+        }
+    }
+
     public void setPlaying(boolean playing) {
         this.playing = playing;
     }
@@ -111,6 +118,7 @@ public class Player {
     public void buyProperty(PurchasablePlace place)throws NotEnoughMoneyException{
         debit( place.getPrice() );
         place.setOwner(this);
+        this.itsPropertys.add(place);
     }
 
     public ArrayList<PurchasablePlace> getItsPropertys() {
