@@ -72,7 +72,7 @@ public class Property extends PurchasablePlace {
         if (owner == null) {
            p.buyProperty(this);
         } else {
-                p.payRent( this.getOwner(), this.getRent() );
+           p.payRent( this.getOwner(), this.getRent() );
         }
     }
   

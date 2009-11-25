@@ -276,7 +276,6 @@ public class GameModel {
             } catch (NotEnoughMoneyException ex) {
                this.currentPlayer.setPlaying(false);
             }
-
         }
     }
 
