@@ -4,7 +4,7 @@
  */
 package game.model;
 
-import game.model.configuration.Configuration;
+import game.model.configuration.GameConfiguration;
 import game.model.entity.Bank;
 import game.model.entity.Board;
 import game.model.entity.Colors;
@@ -46,16 +46,17 @@ public class GameModel {
      * Banco
      */
     private Bank bank;
+    
     /**
      * Para configurar os parâmetros de inicialização do jogo
      */
-    private Configuration configuration;
+    private GameConfiguration configuration;
 
-    public Configuration getConfiguration() {
+    public GameConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(Configuration configuration) {
+    public void setConfiguration(GameConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -64,7 +65,7 @@ public class GameModel {
      * @author Lidiany
      */
     public GameModel() {
-        configuration = new Configuration();
+        configuration = GameConfiguration.getConfiguration();
         board = new Board();
         bank = new Bank();
     }
