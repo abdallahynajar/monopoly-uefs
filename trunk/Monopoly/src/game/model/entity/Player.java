@@ -24,16 +24,27 @@ public class Player {
     private ArrayList<PurchasablePlace> itsPropertys;
     private int atualPosition;
     private List<Commands> playerCommands;
+    private boolean playing;
 
     public Player(String name, String color) {
         this.name = name;
         this.color = color;
         this.itsPropertys = new ArrayList<PurchasablePlace>();
+        playing = true;
         playerCommands = new ArrayList<Commands>();
         playerCommands.add(Commands.ROLL);        
         playerCommands.add(Commands.STATUS);
         playerCommands.add(Commands.QUIT);
     }
+
+    public boolean isPlaying() {
+        return playing;
+    }
+
+    public void setPlaying(boolean playing) {
+        this.playing = playing;
+    }
+
 
     public void add(PurchasablePlace place){
         itsPropertys.add(place);
@@ -149,7 +160,11 @@ public class Player {
      * @param nPositions
      * @param board
      */
-    public Place walk(int nPositions, Board board) throws NonExistentPlaceException{
+    public Place walk(int nPositions, Board board) throws NonExistentPlaceException, Exception{
+//        System.out.println("--------------");
+//        System.out.println("atualPosition" + atualPosition);
+//        System.out.println("nPositions" + nPositions);
+
         int walk = atualPosition + nPositions;
         if(walk <= 40)
             atualPlace = board.getPlaceByPosition(atualPosition + nPositions);
@@ -158,6 +173,8 @@ public class Player {
             atualPlace = board.getPlaceByPosition(walk - 40);
             atualPosition = atualPlace.getPosition();
         }
+//        System.out.println("atualPlace " + atualPlace.getName()+ " " + atualPlace.getPosition() );
+        atualPlace.action(this);
         return atualPlace;
     }
 }
