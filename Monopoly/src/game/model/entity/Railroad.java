@@ -49,14 +49,13 @@ public class Railroad extends PurchasablePlace {
      * @param gc
      */
     public void action(Player p) throws NotEnoughMoneyException {
-        if (owner != p) {
+        if (!owner.equals(p)) {
             if (owner == null || owner.getName().equals("bank")) {               
                 buyProperty(p);
             } else {
                 p.debit(getRunning());
             }
-        } else {
-        }
+        } 
     }
 
     public float getRunning() {

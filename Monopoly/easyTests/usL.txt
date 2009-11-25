@@ -1,0 +1,16 @@
+createGame numPlayers=2 playerNames={player1,player2} tokenColors={black,white}
+setAutomaticBuying auto=true
+
+
+# 1st round
+rollDice firstDieResult=1 secondDieResult=2
+expect 1440 getPlayerMoney playerName="player1"
+
+
+rollDice firstDieResult=1 secondDieResult=2
+expect 1496 getPlayerMoney playerName="player2"
+
+expect "player1" getCurrentPlayer
+expect "{Baltic Avenue}" getPlayerDeeds playerName="player1"
+
+expect "{}" getPlayerDeeds playerName="player2"
