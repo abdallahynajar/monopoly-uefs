@@ -5,10 +5,6 @@
 package game.controller;
 
 import game.model.GameModel;
-import game.model.comand.Exit;
-import game.model.comand.GetStatus;
-import game.model.comand.PlayerCommand;
-import game.model.comand.RollDices;
 import game.model.configuration.GameConfiguration;
 import game.model.entity.Board;
 import game.model.entity.Colors;
@@ -16,9 +12,6 @@ import game.model.entity.Commands;
 import game.model.entity.Player;
 import game.model.entity.PurchasablePlace;
 import game.view.GameView;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  *
@@ -35,7 +28,6 @@ public class GameController {
      */
     private GameModel gameModel;
     private GameView gameView;
-    private HashMap<Commands, PlayerCommand> commands;
     private Player currentPlayer;
     private int currentPlayerIndex;
  
