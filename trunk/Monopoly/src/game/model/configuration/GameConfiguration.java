@@ -9,11 +9,24 @@ package game.model.configuration;
  *
  * @author UEFS\jmatos
  */
-public class Configuration {
+public class GameConfiguration {
 
     //habilita compra automática de propriedade;
-    public boolean autoBuy = false;
-    public float initialMoney = 1500;
+    private boolean autoBuy = false;
+    private float initialMoney = 1500;
+    private static GameConfiguration gc;
+
+
+    public static GameConfiguration getConfiguration(){
+        if(gc == null){
+            gc = new GameConfiguration();
+        }
+        return gc;
+    }
+
+    private GameConfiguration() {
+    }
+
 
     public boolean isAutoBuy() {
         return autoBuy;

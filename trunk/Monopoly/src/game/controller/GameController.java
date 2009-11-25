@@ -9,7 +9,7 @@ import game.model.comand.Exit;
 import game.model.comand.GetStatus;
 import game.model.comand.PlayerCommand;
 import game.model.comand.RollDices;
-import game.model.configuration.Configuration;
+import game.model.configuration.GameConfiguration;
 import game.model.entity.Board;
 import game.model.entity.Colors;
 import game.model.entity.Commands;
@@ -71,11 +71,11 @@ public class GameController {
     }
 
 
-    public Configuration getConfiguration() {
+    public GameConfiguration getConfiguration() {
         return gameModel.getConfiguration();
     }
 
-    public void setConfiguration(Configuration configuration) {
+    public void setConfiguration(GameConfiguration configuration) {
         gameModel.setConfiguration( configuration );
     }
 
