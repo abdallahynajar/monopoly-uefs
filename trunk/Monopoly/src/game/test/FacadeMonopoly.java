@@ -48,7 +48,7 @@ public class FacadeMonopoly {
     }
 
     public void quitGame() throws InvalidCommandException {
-        executeCommand("quitGame");
+        executeCommand("quit");
     }
 
     private void executeCommand(String command) throws InvalidCommandException {
