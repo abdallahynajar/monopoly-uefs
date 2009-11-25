@@ -43,18 +43,15 @@ public class GameModel {
      * Tabuleiro do jogo
      */
     private Board board;
-
     private boolean gameStarted = false;
     /**
      * Banco
      */
     private Bank bank;
-    
     /**
      * Para configurar os parâmetros de inicialização do jogo
      */
     private GameConfiguration configuration;
-
     private int currentPlayerIndex = 0;
 
     public GameConfiguration getConfiguration() {
@@ -246,15 +243,14 @@ public class GameModel {
      */
     public void executePlayerCommand(String command) throws InvalidCommandException {
         Commands c = Commands.valueOf(command.toUpperCase());
-        if(c.equals( Commands.QUIT ) ){
-            if( gameStarted ){
+        if (c.equals(Commands.QUIT)) {
+            if (gameStarted) {
                 exitGame();
-            }else{
+            } else {
                 throw new InvalidCommandException("There's no game to quit");
             }
         }
     }
-
 
     /**
      * Executa um comando de um jogador
@@ -268,12 +264,18 @@ public class GameModel {
         if (!validateRollDices(firstDieResult, secondDieResult)) {
             throw new InvalidDiceResultException("Invalid die result");
         } else {
-            currentPlayer.walk(firstDieResult + secondDieResult, board);
-            if( !isGameOver() ){
-                updatePlayerIndex();
-            }
-        }
+            try {
+                currentPlayer.walk(firstDieResult + secondDieResult, board);
+                if (!isGameOver()) {
+                    updateCurrentPlayer();
+                }
 
+            } catch (Exception ex) {
+        
+                ex.printStackTrace();
+            }
+
+        }
     }
 
     /**
@@ -300,11 +302,13 @@ public class GameModel {
         gameStarted = false;
     }
 
-    private void updatePlayerIndex() {
-        if(currentPlayerIndex <= numberOfPlayers){
+    private void updateCurrentPlayer() {
+        int index = currentPlayerIndex;
+        if (index + 1 >= numberOfPlayers) {
+            currentPlayerIndex = 0;
+        } else {
             currentPlayerIndex++;
-        }else{
-           currentPlayerIndex = 0;
         }
+        currentPlayer = players.get(currentPlayerIndex);
     }
 }
