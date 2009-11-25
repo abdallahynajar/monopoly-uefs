@@ -22,7 +22,7 @@ public class MonopolyTest {
               //Put the testScript1 file into the "test scripts" list
               files.add("easyTests/us1.txt");
               files.add("easyTests/us2.txt");
-              //files.add("easyTests/us3.txt");
+              files.add("easyTests/us3.txt");
               //files.add("easyTests/us4.txt");
               //Put the testScript2 file into the "test scripts" list
                //files.add("testScript2.txt");

@@ -47,22 +47,13 @@ public class Railroad extends PurchasablePlace {
      * @param gc
      */
     public void action(Player p) throws NotEnoughMoneyException {
-        System.out.println("Player " + p);
-        System.out.println("Owner " + this.owner);
-        System.out.println("! is owner " + !(owner.getId() == p.getId()));
-        
         if ( !(owner.getId() == p.getId()) ) {
-            if ( owner.getName().equals("bank") ) {
-                  System.out.println("buying"+ this.getName());
+            if ( owner.getName().equals("bank") ) {               
                 buyProperty(p);
-            } else {
-               System.out.println("pagando aluguel"+ this.getOwner().getName());
+            } else {        
                 p.debit(getRunning());
             }
-
-        }else{
-              System.out.println("é do "+ this.getOwner().getName());
-        }
+        }        
             
     }
 
