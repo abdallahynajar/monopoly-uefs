@@ -84,10 +84,7 @@ public class GameController {
      * @author Lidiany
      */
     private void initCommands() {
-        commands = new HashMap<Commands, PlayerCommand>();
-        commands.put(Commands.SAIR, new Exit(this));
-        commands.put(Commands.JOGAR, new RollDices(this));
-        commands.put(Commands.STATUS, new GetStatus(this));
+       
     }
 
     public Board getGameBoard(){
@@ -137,14 +134,6 @@ public class GameController {
     private void executePlayerCommand() {
       //  boolean playerTurn = true;
 
-        Commands c = getPlayerCommand();
-        commands.get(c).execute(currentPlayer);
-
-        if (c.equals(Commands.JOGAR) || currentPlayer == null) {           
-            updatePlayersIndex();
-        }else{
-            executePlayerCommand();
-        }
     }
 
     /***
@@ -208,7 +197,7 @@ public class GameController {
     private String getPlayerColor() {
         String pc = null;
         while (pc == null) {
-            gameView.showOptionalColors(gameModel.getAvailableColors());
+        //    gameView.showOptionalColors(gameModel.getAvailableColors());
             pc = gameView.getPlayerColor();
 
             try {

@@ -10,7 +10,5 @@ package game.model.entity;
  * @author Lidiany
  */
 public enum Commands {
-
-    SAIR, STATUS, JOGAR;
-
+    ROLL, STATUS, QUIT;
 }

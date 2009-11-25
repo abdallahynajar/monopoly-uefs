@@ -7,6 +7,7 @@ package game.model.entity;
 
 import game.model.exceptions.NotEnoughMoneyException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -21,11 +22,16 @@ public class Player {
     private Place atualPlace; //lugar em que o jogador está
     private ArrayList<PurchasablePlace> itsPropertys;
     private int atualPosition;
+    private List<Commands> playerCommands;
 
     public Player(String name, String color) {
         this.name = name;
         this.color = color;
         this.itsPropertys = new ArrayList<PurchasablePlace>();
+        playerCommands = new ArrayList<Commands>();
+        playerCommands.add(Commands.ROLL);        
+        playerCommands.add(Commands.STATUS);
+        playerCommands.add(Commands.QUIT);
     }
 
     public void add(PurchasablePlace place){
@@ -93,6 +99,22 @@ public class Player {
         place.setOwner(this);
     }
 
+    public ArrayList<PurchasablePlace> getItsPropertys() {
+        return itsPropertys;
+    }
+
+    public void setItsPropertys(ArrayList<PurchasablePlace> itsPropertys) {
+        this.itsPropertys = itsPropertys;
+    }
+
+    public List<Commands> getPlayerCommands() {
+        return playerCommands;
+    }
+
+    public void setPlayerCommands(List<Commands> playerCommands) {
+        this.playerCommands = playerCommands;
+    }
+
     public String getStatus(){
         StringBuilder status = new StringBuilder();
         status.append( "Status de ");
@@ -115,6 +137,8 @@ public class Player {
     public String toString() {
         return this.name + " " + this.color +" "+ this.amountOfMoney;
     }
+
+
 
     private void listTitles( StringBuilder status){
         status.append("\nTítulos \n");
