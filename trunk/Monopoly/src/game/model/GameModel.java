@@ -274,7 +274,7 @@ public class GameModel {
                     updateCurrentPlayer();
                 }
             } catch (NotEnoughMoneyException ex) {
-               currentPlayer.fail();
+               //currentPlayer.fail();
             }
         }
     }

@@ -4,7 +4,6 @@
  */
 package game.model.entity;
 
-import game.controller.GameController;
 import game.model.exceptions.NotEnoughMoneyException;
 
 /**
@@ -23,12 +22,11 @@ public class Railroad extends PurchasablePlace {
         this.nRailroad = nRailroad;
     }
 
-    @Override
-    public void setOwner(Player p) {
-        super.owner = owner;
-        nRailroad = 1;
-
-    }
+//    @Override
+//    public void setOwner(Player p) {
+//        super.owner = owner;
+//        nRailroad = 1;
+//    }
 
     public Railroad(int position, String name, float price, float hipoteca) {
         super.position = position;
@@ -49,13 +47,23 @@ public class Railroad extends PurchasablePlace {
      * @param gc
      */
     public void action(Player p) throws NotEnoughMoneyException {
-        if (!owner.equals(p)) {
-            if (owner == null || owner.getName().equals("bank")) {               
+        System.out.println("Player " + p);
+        System.out.println("Owner " + this.owner);
+        System.out.println("! is owner " + !(owner.getId() == p.getId()));
+        
+        if ( !(owner.getId() == p.getId()) ) {
+            if ( owner.getName().equals("bank") ) {
+                  System.out.println("buying"+ this.getName());
                 buyProperty(p);
             } else {
+               System.out.println("pagando aluguel"+ this.getOwner().getName());
                 p.debit(getRunning());
             }
-        } 
+
+        }else{
+              System.out.println("é do "+ this.getOwner().getName());
+        }
+            
     }
 
     public float getRunning() {
@@ -67,7 +75,7 @@ public class Railroad extends PurchasablePlace {
      * @param p
      * @param gc
      */
-    public void buyRailroad(Player p, GameController gc) {
+    public void buyRailroad(Player p) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

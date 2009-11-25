@@ -69,8 +69,9 @@ public class Property extends PurchasablePlace {
      */
     @Override
     public void action(Player p) throws NotEnoughMoneyException, NotAvailableForSaleException{
-        if(!owner.equals(p)){
-            if ( (owner == null || owner.getName().equals("bank"))) {
+
+        if(!(owner.getId() == p.getId())){
+            if ( owner.getName().equals("bank")) {                
                p.buyProperty(this);
             } else {
                p.payRent( this.getOwner(), this.getRent() );
