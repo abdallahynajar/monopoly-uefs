@@ -8,6 +8,7 @@ import game.model.configuration.GameConfiguration;
 import game.model.entity.Bank;
 import game.model.entity.Board;
 import game.model.entity.Colors;
+import game.model.entity.Commands;
 import game.model.entity.Player;
 import game.model.exceptions.InvalidCommandException;
 import game.model.exceptions.InvalidDiceResultException;
@@ -42,6 +43,8 @@ public class GameModel {
      * Tabuleiro do jogo
      */
     private Board board;
+
+    private boolean gameStarted = false;
     /**
      * Banco
      */
@@ -51,6 +54,8 @@ public class GameModel {
      * Para configurar os parâmetros de inicialização do jogo
      */
     private GameConfiguration configuration;
+
+    private int currentPlayerIndex = 0;
 
     public GameConfiguration getConfiguration() {
         return configuration;
@@ -114,9 +119,8 @@ public class GameModel {
                 addPlayer(currentPlayerIndex, playerNames.get(currentPlayerIndex - 1), tokenColors.get(currentPlayerIndex - 1));
                 currentPlayerIndex++;
             }
-
-            startGame();
-
+            gameStarted = true;
+            currentPlayer = players.get(0);
         }
     }
 
@@ -240,19 +244,16 @@ public class GameModel {
      * @throws InvalidCommandException - se não for possível executar o comando
      */
     public void executePlayerCommand(String command) throws InvalidCommandException {
-        if (currentPlayer == null) {
-            throw new InvalidCommandException("There's no game to quit");
+        Commands c = Commands.valueOf(command.toUpperCase());
+        if(c.equals( Commands.QUIT ) ){
+            if( gameStarted ){
+                exitGame();
+            }else{
+                throw new InvalidCommandException("There's no game to quit");
+            }
         }
     }
 
-    /**
-     * Inicia a partida de Monopoly
-     * @author Lidiany
-     */
-    private void startGame() {
-        int currentPlayerIndex = 0;
-        currentPlayer = players.get(currentPlayerIndex);
-    }
 
     /**
      * Executa um comando de um jogador
@@ -268,6 +269,7 @@ public class GameModel {
         } else {
             currentPlayer.walk(firstDieResult + secondDieResult, board);
         }
+
     }
 
     /**
@@ -287,6 +289,10 @@ public class GameModel {
     }
 
     private boolean isGameOver() {
-        return this.players.isEmpty();
+        return gameStarted ? false : true;
+    }
+
+    private void exitGame() {
+        gameStarted = false;
     }
 }
