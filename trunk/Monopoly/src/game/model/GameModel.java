@@ -101,13 +101,13 @@ public class GameModel {
             validatePlayerNames(playerNames);
             validateTokenColors(tokenColors);
 
-//            if ( isAnyRepeatedValue(playerNames) ) {
-//                throw new InvalidPlayerNameException("There mustn't be repeated player names");
-//            }
+            if ( isAnyRepeatedValue(playerNames) ) {
+               throw new InvalidPlayerNameException("There mustn't be repeated player names");
+            }
 
-//            if ( isAnyRepeatedValue( tokenColors ) ) {
-//                throw new InvalidTokenColorException("There mustn't be repeated token colors");
-//            }
+            if ( isAnyRepeatedValue( tokenColors ) ) {
+                throw new InvalidTokenColorException("There mustn't be repeated token colors");
+            }
             //inicia o jogo
             players = new ArrayList<Player>(numberOfPlayers);
             this.numberOfPlayers = numberOfPlayers;
@@ -139,15 +139,15 @@ public class GameModel {
     }
 
     private boolean isAnyRepeatedValue(List<String> names) {
-//        ArrayList<String> lista = new ArrayList<String>(names);
-//        for (int i = 0; i < lista.size(); i++)  {
-//            System.out.println("names" + lista.get(i));
-//            for (int j = 1; j < lista.size(); j++) {
-//                if (lista.get(i).equals(lista.get(j))) {
-//                    return true;
-//                }
-//            }
-//        }
+        ArrayList<String> lista = new ArrayList<String>(names);
+        for (int i = 0; i < lista.size(); i++)  {
+            //System.out.println("names" + lista.get(i));
+            for (int j = i + 1; j < lista.size(); j++) {
+                if (lista.get(i).equals(lista.get(j))) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
