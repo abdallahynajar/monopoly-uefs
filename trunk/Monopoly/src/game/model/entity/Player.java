@@ -25,6 +25,7 @@ public class Player {
     private int atualPosition;
     private List<Commands> playerCommands;
     private boolean playing;
+    private boolean first = true;
 
     public Player(String name, String color) {
         this.name = name;
@@ -161,15 +162,14 @@ public class Player {
      * @param board
      */
     public Place walk(int nPositions, Board board) throws NonExistentPlaceException, Exception{
-//        System.out.println("--------------");
-//        System.out.println("atualPosition" + atualPosition);
-//        System.out.println("nPositions" + nPositions);
 
         int walk = atualPosition + nPositions;
         if(walk <= 40)
             atualPlace = board.getPlaceByPosition(atualPosition + nPositions);
         else{
-            this.credit(200);
+            if (!first)
+                this.credit(200);
+            first = false;
             atualPlace = board.getPlaceByPosition(walk - 40);
             atualPosition = atualPlace.getPosition();
         }
