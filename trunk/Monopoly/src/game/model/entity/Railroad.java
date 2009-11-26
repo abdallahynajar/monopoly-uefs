@@ -67,7 +67,8 @@ public class Railroad extends PurchasablePlace {
             } else {
 //                  System.out.println("-----------------");
 //                System.out.println(" Pagando aluguel "+p.getName() + " : "+ p.getAmountOfMoney() +" valor " + price);
-                p.debit( getRunning() );
+                //p.debit(  );
+                p.payRent(owner, getRunning());
 //                System.out.println(" AMoney "+ p.getAmountOfMoney());
             }
             
