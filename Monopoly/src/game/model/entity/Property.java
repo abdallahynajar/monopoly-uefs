@@ -4,8 +4,10 @@
  */
 package game.model.entity;
 
+import game.model.exceptions.ItAlreadyHasAnOnwerException;
 import game.model.exceptions.NotAvailableForSaleException;
 import game.model.exceptions.NotEnoughMoneyException;
+import game.model.exceptions.NotInSaleException;
 
 /**
  *
@@ -68,7 +70,7 @@ public class Property extends PurchasablePlace {
     *
      */
     @Override
-    public void action(Player p) throws NotEnoughMoneyException, NotAvailableForSaleException{
+    public void action(Player p) throws NotEnoughMoneyException, NotAvailableForSaleException, NotInSaleException, ItAlreadyHasAnOnwerException{
              if ( owner.getName().equals("bank") ) {
                 buyProperty(p);
             } else {

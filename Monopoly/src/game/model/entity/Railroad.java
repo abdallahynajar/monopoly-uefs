@@ -4,7 +4,9 @@
  */
 package game.model.entity;
 
+import game.model.exceptions.ItAlreadyHasAnOnwerException;
 import game.model.exceptions.NotEnoughMoneyException;
+import game.model.exceptions.NotInSaleException;
 
 /**
  *
@@ -27,11 +29,11 @@ public class Railroad extends PurchasablePlace {
      * tiver dono
      * @param p
      */
-    @Override
+  /*  @Override
     public void buyProperty(Player player) throws NotEnoughMoneyException{    
         player.buyProperty(this);
         this.setOwner(player);
-    }
+    }*/
 
 
 //    @Override
@@ -58,20 +60,12 @@ public class Railroad extends PurchasablePlace {
      * @param p
      * @param gc
      */
-    public void action(Player p) throws NotEnoughMoneyException {
-            if ( owner.getName().equals("bank") ) {
-//                  System.out.println("-----------------");
-//               System.out.println("Comprando railroad" + p.getName() + " : "+ p.getAmountOfMoney() +" valor " +price);
+    public void action(Player p) throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException {
+            if ( owner.getName().equals("bank") ) {              
                 buyProperty(p);
-//                System.out.println(" AMoney "+ p.getAmountOfMoney());
             } else {
-//                  System.out.println("-----------------");
-//                System.out.println(" Pagando aluguel "+p.getName() + " : "+ p.getAmountOfMoney() +" valor " + price);
-                //p.debit(  );
                 p.payRent(owner, getRunning());
-//                System.out.println(" AMoney "+ p.getAmountOfMoney());
             }
-            
     }
 
     public float getRunning() {

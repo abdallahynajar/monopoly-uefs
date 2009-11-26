@@ -15,9 +15,11 @@ import game.model.exceptions.InvalidDiceResultException;
 import game.model.exceptions.InvalidGameParametersException;
 import game.model.exceptions.InvalidPlayerNameException;
 import game.model.exceptions.InvalidTokenColorException;
+import game.model.exceptions.ItAlreadyHasAnOnwerException;
 import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NonExistentPlayerException;
 import game.model.exceptions.NotEnoughMoneyException;
+import game.model.exceptions.NotInSaleException;
 import game.model.exceptions.PlayerNoLongerInTheGameException;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +72,7 @@ public class GameModel {
      */
     public GameModel() {
         configuration = GameConfiguration.getConfiguration();
+        configuration.setAutoBuy(false);
         board = new Board();
         bank = new Bank();
     }
@@ -313,7 +316,7 @@ public class GameModel {
         return true;
     }
 
-    private boolean isGameOver() {
+    public boolean isGameOver() {
         return gameStarted ? false : true;
     }
 
@@ -339,8 +342,12 @@ public class GameModel {
         for(Player p : players)
             if(p.isPlaying())
                 n++;
-
-
         return n;
     }
+
+    public void buy() throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException{
+        currentPlayer.buyProperty(currentPlayer.getAtualPlace());
+    }
+
+
 }

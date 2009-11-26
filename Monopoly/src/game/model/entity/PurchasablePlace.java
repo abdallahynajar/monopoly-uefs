@@ -5,7 +5,10 @@
 
 package game.model.entity;
 
+import game.model.configuration.GameConfiguration;
+import game.model.exceptions.ItAlreadyHasAnOnwerException;
 import game.model.exceptions.NotEnoughMoneyException;
+import game.model.exceptions.NotInSaleException;
 
 /**
  *
@@ -46,11 +49,11 @@ public abstract class PurchasablePlace extends Place{
      * tiver dono
      * @param p
      */
-    public void buyProperty(Player player) throws NotEnoughMoneyException{
- 
-             player.buyProperty(this);          
-        this.setOwner(player);
-
+    public void buyProperty(Player player) throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException{
+        GameConfiguration gc = GameConfiguration.getConfiguration();
+        if(gc.isAutoBuy()){
+            player.buyProperty(this);
+        }
     }
 
     public void returnToBank(){
