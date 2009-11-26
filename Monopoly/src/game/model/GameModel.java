@@ -346,7 +346,7 @@ public class GameModel {
     }
 
     public void buy() throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException{
-        currentPlayer.buyProperty(currentPlayer.getAtualPlace());
+        currentPlayer.buyProperty();
     }
 
 
