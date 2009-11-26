@@ -120,11 +120,16 @@ public class Player {
         }
     }
 
-    public void buyProperty(Place place)throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException{
-        if(!(place instanceof PurchasablePlace)){
+    public void buyProperty()throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException{
+        if(atualPlace instanceof Tax){
+            System.out.println("Tentou comprar Tax : " + atualPlace.getPosition());
+            throw new NotInSaleException("Place doesn't have a deed to be bought");
+            
+        }else if(atualPlace instanceof FreeParking){
+            System.out.println("Tentou comprar FreeParking: " + atualPlace.getPosition());
             throw new NotInSaleException("Place doesn't have a deed to be bought");
         }else{
-            PurchasablePlace p = (PurchasablePlace) place;
+            PurchasablePlace p = (PurchasablePlace) atualPlace;
             if(p.getOwner().getName().equals("bank")){
                 debit( p.getPrice() );
                 p.setOwner(this);
@@ -210,7 +215,6 @@ public class Player {
                 n++;
             }
         }
-        System.out.println("NRail"+n);
         return n;
     }
     private void updateRailroadsRunning(){

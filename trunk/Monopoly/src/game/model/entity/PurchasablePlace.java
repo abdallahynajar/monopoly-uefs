@@ -52,7 +52,7 @@ public abstract class PurchasablePlace extends Place{
     public void buyProperty(Player player) throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException{
         GameConfiguration gc = GameConfiguration.getConfiguration();
         if(gc.isAutoBuy()){
-            player.buyProperty(this);
+            player.buyProperty();
         }
     }
 
