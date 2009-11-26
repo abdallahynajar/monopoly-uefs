@@ -269,13 +269,27 @@ public class GameModel {
             throw new InvalidDiceResultException("Invalid die result");
         } else {
             try {
-                currentPlayer.walk(firstDieResult + secondDieResult, board);
+                if(currentPlayer.isPlaying()){
+                    currentPlayer.walk(firstDieResult + secondDieResult, board);
+                }else{
+                    updateCurrentPlayer(); 
+                }
                 if (!isGameOver()) {
-                    updateCurrentPlayer();
+                    updateCurrentPlayer(); 
                 }
             } catch (NotEnoughMoneyException ex) {
+              //  ex.printStackTrace();              
                currentPlayer.fail();
+               currentPlayer.setPlaying(false);
+               players.set(currentPlayerIndex, currentPlayer);
+               System.out.println("currentPlayer playing" + players.get(currentPlayerIndex).isPlaying());
             }
+        }
+    }
+
+    private void validateCurrentPlayer() {
+        if (!currentPlayer.isPlaying()) {
+            updateCurrentPlayer();
         }
     }
 
@@ -311,5 +325,6 @@ public class GameModel {
             currentPlayerIndex++;
         }
         currentPlayer = players.get(currentPlayerIndex);
+       
     }
 }
