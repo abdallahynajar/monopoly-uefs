@@ -282,9 +282,11 @@ public class GameModel {
             } catch (NotEnoughMoneyException ex) {
               //  ex.printStackTrace();              
                currentPlayer.fail();
-               currentPlayer.setPlaying(false);
+               //currentPlayer.setPlaying(false);
                players.set(currentPlayerIndex, currentPlayer);
+               //removePlayer(currentPlayer.getId());
                System.out.println("currentPlayer playing" + players.get(currentPlayerIndex).isPlaying());
+               updateCurrentPlayer();
             }
         }
     }
@@ -326,6 +328,9 @@ public class GameModel {
         } else {
             currentPlayerIndex++;
         }
+        if(!players.get(currentPlayerIndex).isPlaying())
+            updateCurrentPlayer();
+
         currentPlayer = players.get(currentPlayerIndex);
        
     }
