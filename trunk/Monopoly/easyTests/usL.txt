@@ -14,3 +14,11 @@ expect "player1" getCurrentPlayer
 expect "{Baltic Avenue}" getPlayerDeeds playerName="player1"
 
 expect "{}" getPlayerDeeds playerName="player2"
+
+#2nd round
+
+rollDice firstDieResult=1 secondDieResult=1
+rollDice firstDieResult=1 secondDieResult=1
+
+expect 1240 getPlayerMoney playerName="player1"
+expect 1471 getPlayerMoney playerName="player2"
