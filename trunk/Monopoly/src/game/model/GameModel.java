@@ -197,6 +197,8 @@ public class GameModel {
         p.setAmountOfMoney(1500);
         p.setId(id);
         p.setAtualPlace(board.getPlaceByName("go"));
+        p.setAtualPosition(0); //o player começa em go, mas a posiçao é 0, para
+                                //evitar o credito dos 200 no início
         players.add(p);
     }
 

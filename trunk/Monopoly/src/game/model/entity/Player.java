@@ -71,6 +71,10 @@ public class Player {
         return atualPlace;
     }
 
+    public void setAtualPosition(int atualPosition) {
+        this.atualPosition = atualPosition;
+    }
+
     public int getAtualPosition(){
         return atualPosition;
     }
@@ -175,8 +179,6 @@ public class Player {
      * @param board
      */
     public void walk(int nPositions, Board board) throws NonExistentPlaceException, Exception{
-//        System.out.println(" Player " + name);
-//        System.out.println("Saldo" + amountOfMoney);
 
         int walk = atualPosition + nPositions;
         System.out.println("-----------------");
@@ -187,16 +189,9 @@ public class Player {
             atualPlace = board.getPlaceByPosition(atualPosition + nPositions);
 
         }
-        else if(walk == 40){
-             atualPlace = board.getPlaceByPosition(atualPosition + nPositions);
-             this.credit(200); 
-        }
         else{
-//            if (!first){
-//                this.credit(200);
-//            }
-//            first = false;
-            atualPlace = board.getPlaceByPosition(walk - 40);            
+             atualPlace = board.getPlaceByPosition(walk - 40);
+             this.credit(200); 
         }
         atualPosition = atualPlace.getPosition();
         System.out.println("Atual Place " + atualPlace.getName() );
