@@ -47,8 +47,9 @@ public abstract class PurchasablePlace extends Place{
      * @param p
      */
     public void buyProperty(Player player) throws NotEnoughMoneyException{
-             player.buyProperty(this);
-             this.setOwner(player);
+ 
+             player.buyProperty(this);          
+        this.setOwner(player);
 
     }
 

@@ -22,6 +22,18 @@ public class Railroad extends PurchasablePlace {
         this.nRailroad = nRailroad;
     }
 
+    /**
+     * Oferece a propriedade para compra. Deve ser usado quando a propriedade não
+     * tiver dono
+     * @param p
+     */
+    @Override
+    public void buyProperty(Player player) throws NotEnoughMoneyException{    
+        player.buyProperty(this);
+        this.setOwner(player);
+    }
+
+
 //    @Override
 //    public void setOwner(Player p) {
 //        super.owner = owner;
@@ -47,13 +59,17 @@ public class Railroad extends PurchasablePlace {
      * @param gc
      */
     public void action(Player p) throws NotEnoughMoneyException {
-        if ( !(owner.getId() == p.getId()) ) {
-            if ( owner.getName().equals("bank") ) {               
+            if ( owner.getName().equals("bank") ) {
+//                  System.out.println("-----------------");
+//               System.out.println("Comprando railroad" + p.getName() + " : "+ p.getAmountOfMoney() +" valor " +price);
                 buyProperty(p);
-            } else {        
-                p.debit(getRunning());
+//                System.out.println(" AMoney "+ p.getAmountOfMoney());
+            } else {
+//                  System.out.println("-----------------");
+//                System.out.println(" Pagando aluguel "+p.getName() + " : "+ p.getAmountOfMoney() +" valor " + price);
+                p.debit( getRunning() );
+//                System.out.println(" AMoney "+ p.getAmountOfMoney());
             }
-        }        
             
     }
 

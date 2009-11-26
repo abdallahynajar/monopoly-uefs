@@ -36,6 +36,7 @@ public class Player {
         playerCommands.add(Commands.ROLL);        
         playerCommands.add(Commands.STATUS);
         playerCommands.add(Commands.QUIT);
+        first = true;
     }
 
     public boolean isPlaying() {
@@ -120,6 +121,9 @@ public class Player {
         debit( place.getPrice() );
         place.setOwner(this);
         this.itsPropertys.add(place);
+        if(place instanceof Railroad){
+            updateRailroadsRunning();
+        }
     }
 
     public ArrayList<PurchasablePlace> getItsPropertys() {
@@ -170,19 +174,51 @@ public class Player {
      * @param nPositions
      * @param board
      */
-    public Place walk(int nPositions, Board board) throws NonExistentPlaceException, Exception{
+    public void walk(int nPositions, Board board) throws NonExistentPlaceException, Exception{
+//        System.out.println(" Player " + name);
+//        System.out.println("Saldo" + amountOfMoney);
 
         int walk = atualPosition + nPositions;
-        if(walk <= 40)
+        System.out.println("-----------------");
+        System.out.println(" WALK "+ name +" : "+playing);
+        System.out.println(" Atual Money " + amountOfMoney);
+        //System.out.println(" Dados " + nPositions);
+        if(walk <= 40){
             atualPlace = board.getPlaceByPosition(atualPosition + nPositions);
-        else{
-            if (!first)
-                this.credit(200);
-            first = false;
-            atualPlace = board.getPlaceByPosition(walk - 40);
-            atualPosition = atualPlace.getPosition();
+
         }
+        else if(walk == 40){
+             atualPlace = board.getPlaceByPosition(atualPosition + nPositions);
+             this.credit(200); 
+        }
+        else{
+//            if (!first){
+//                this.credit(200);
+//            }
+//            first = false;
+            atualPlace = board.getPlaceByPosition(walk - 40);            
+        }
+        atualPosition = atualPlace.getPosition();
+        System.out.println("Atual Place " + atualPlace.getName() );
         atualPlace.action(this);
-        return atualPlace;
+        System.out.println(" Atual Money " + amountOfMoney);
+    }
+
+    private int getNumberOfRailRoads(){
+        int n = 0;
+        for (PurchasablePlace purchasablePlace : itsPropertys) {
+            if(purchasablePlace instanceof Railroad){
+                n++;
+            }
+        }
+        System.out.println("NRail"+n);
+        return n;
+    }
+    private void updateRailroadsRunning(){
+        for (PurchasablePlace purchasablePlace : itsPropertys) {
+            if(purchasablePlace instanceof Railroad){
+                ((Railroad)purchasablePlace).setnRailroad( getNumberOfRailRoads() );
+            }
+        }
     }
 }

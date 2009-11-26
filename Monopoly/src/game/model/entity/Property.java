@@ -69,13 +69,17 @@ public class Property extends PurchasablePlace {
      */
     @Override
     public void action(Player p) throws NotEnoughMoneyException, NotAvailableForSaleException{
-         if ( !(owner.getId() == p.getId()) ) {
-            if ( owner.getName().equals("bank") ) {                
+             if ( owner.getName().equals("bank") ) {
+//                 System.out.println("-----------------");
+//               System.out.println("Comprando propriedade" + p.getName() + " : "+ p.getAmountOfMoney() +" valor " +price);
                 buyProperty(p);
-            } else {             
-                p.payRent(owner, price);
+//                System.out.println(" AMoney "+ p.getAmountOfMoney());
+            } else {
+//                   System.out.println("-----------------");
+//                System.out.println(" Pagando aluguel "+p.getName() + " : "+ p.getAmountOfMoney() +" valor " + price);
+                p.debit( price );
+//                System.out.println(" AMoney "+ p.getAmountOfMoney());
             }
-        }
     }
   
 }

@@ -13,10 +13,10 @@ import game.model.exceptions.NotEnoughMoneyException;
 public class Utility extends PurchasablePlace {
 
     public Utility(int position, String name, long price, long hipoteca) {
-        super.position = position;
-        super.name = name;
-        super.price = price;
-        super.hipoteca = hipoteca;
+        this.position = position;
+        this.name = name;
+        this.price = price;
+        this.hipoteca = hipoteca;
         this.placeGroup = "utility";
         this.owner = new Player("bank", null);
     }
@@ -24,13 +24,18 @@ public class Utility extends PurchasablePlace {
     //Implementar debitando dado*4ou10. 4 quando o jogador só tiver 1, 10 quando
     //Tiver 2. Se não tiver ningém, é claro q há a opçao de comprar.
     public void action(Player p) throws NotEnoughMoneyException {
-         if ( !(owner.getId() == p.getId()) ) {
-            if ( owner.getName().equals("bank") ) {
-                  System.out.println("buying"+ this.getName());
-                buyProperty(p);
-            } else {
-                p.debit( price );
-            }
-        }
+//         if ( !(owner.getId() == p.getId()) ) {
+//            if ( owner.getName().equals("bank") ) {
+//                  System.out.println("-----------------");
+//               System.out.println("Comprando utility" + p.getName() + " : "+ p.getAmountOfMoney() +" valor " +price);
+//                buyProperty(p);
+//                System.out.println(" AMoney "+ p.getAmountOfMoney());
+//            } else {
+//                  System.out.println("-----------------");
+//                System.out.println(" Pagando aluguel "+ p.getName() + " : "+ p.getAmountOfMoney() +" valor " + price);
+//                p.debit( price );
+////                System.out.println(" AMoney "+ p.getAmountOfMoney());
+//            }
+//        }
     }
 }
