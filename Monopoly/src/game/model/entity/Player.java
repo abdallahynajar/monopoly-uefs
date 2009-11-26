@@ -76,7 +76,7 @@ public class Player {
     }
 
     public int getAtualPosition(){
-        return atualPosition;
+        return atualPlace.getPosition();
     }
 
     public void setAtualPlace(Place atualPlace) {
