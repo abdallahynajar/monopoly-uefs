@@ -169,6 +169,7 @@ public class Player {
             otherPlayer.credit(rent);
        }catch(NotEnoughMoneyException ex){
             otherPlayer.credit( amountOfMoney );
+            System.out.println("####################################################################################");
             throw ex;
         }
     }
