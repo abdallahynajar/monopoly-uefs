@@ -57,7 +57,7 @@ public class FacadeMonopoly {
     }
 
     public int getNumberOfPlayers() {
-        return gameModel.getNumberOfPlayers();
+        return gameModel.getNumberOfRealPlayers();
     }
 
     public String getPlayerToken(String playerName) throws NonExistentPlayerException, PlayerNoLongerInTheGameException {
