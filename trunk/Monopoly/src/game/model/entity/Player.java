@@ -180,21 +180,23 @@ public class Player {
      */
     public void walk(int nPositions, Board board) throws NonExistentPlaceException, Exception{
 
-        int walk = atualPosition + nPositions;
+        int goTo = atualPosition + nPositions;
         System.out.println("-----------------");
         System.out.println(" WALK "+ name +" : "+playing);
         System.out.println(" Atual Money " + amountOfMoney);
         //System.out.println(" Dados " + nPositions);
-        if(walk <= 40){
-            atualPlace = board.getPlaceByPosition(atualPosition + nPositions);
+        if(goTo < 40){
+            setAtualPlace(board.getPlaceByPosition(goTo));
+        }else{
+             this.credit(200);
+             if(goTo == 40){
+                 setAtualPlace(board.getPlaceByPosition(goTo));
+                 setAtualPosition(0);
+             }else
+                 setAtualPlace(board.getPlaceByPosition(goTo - 40));
+        }
 
-        }
-        else{
-             atualPlace = board.getPlaceByPosition(walk - 40);
-             this.credit(200); 
-        }
-        atualPosition = atualPlace.getPosition();
-        System.out.println("Atual Place " + atualPlace.getName() );
+        System.out.println("Atual Place " + atualPlace.getName() + " numero: " + atualPlace.getPosition());
         atualPlace.action(this);
         System.out.println(" Atual Money " + amountOfMoney);
     }
