@@ -332,6 +332,15 @@ public class GameModel {
             updateCurrentPlayer();
 
         currentPlayer = players.get(currentPlayerIndex);
-       
+    }
+
+    public int getNumberOfRealPlayers(){
+        int n = 0;
+        for(Player p : players)
+            if(p.isPlaying())
+                n++;
+
+
+        return n;
     }
 }
