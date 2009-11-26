@@ -5,8 +5,10 @@
 
 package game.model.entity;
 
+import game.model.exceptions.ItAlreadyHasAnOnwerException;
 import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
+import game.model.exceptions.NotInSaleException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,6 @@ public class Player {
     private int atualPosition;
     private List<Commands> playerCommands;
     private boolean playing;
-    private boolean first = true;
 
     public Player(String name, String color) {
         this.name = name;
@@ -36,7 +37,6 @@ public class Player {
         playerCommands.add(Commands.ROLL);        
         playerCommands.add(Commands.STATUS);
         playerCommands.add(Commands.QUIT);
-        first = true;
     }
 
     public boolean isPlaying() {
@@ -120,13 +120,22 @@ public class Player {
         }
     }
 
-    public void buyProperty(PurchasablePlace place)throws NotEnoughMoneyException{
-
-        debit( place.getPrice() );
-        place.setOwner(this);
-        this.itsPropertys.add(place);
-        if(place instanceof Railroad){
-            updateRailroadsRunning();
+    public void buyProperty(Place place)throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException{
+        if(!(place instanceof PurchasablePlace)){
+            throw new NotInSaleException("Place doesn't have a deed to be bought");
+        }else{
+            PurchasablePlace p = (PurchasablePlace) place;
+            if(p.getOwner().getName().equals("bank")){
+                debit( p.getPrice() );
+                p.setOwner(this);
+                this.itsPropertys.add(p);
+                if(p instanceof Railroad){
+                    updateRailroadsRunning();
+                }
+            }else{
+                throw new ItAlreadyHasAnOnwerException("Deed for this place is not for sale");
+            }
+        
         }
     }
 
@@ -169,7 +178,6 @@ public class Player {
             otherPlayer.credit(rent);
        }catch(NotEnoughMoneyException ex){
             otherPlayer.credit( amountOfMoney );
-            System.out.println("####################################################################################");
             throw ex;
         }
     }
@@ -182,10 +190,6 @@ public class Player {
     public void walk(int nPositions, Board board) throws NonExistentPlaceException, Exception{
 
         int goTo = atualPosition + nPositions;
-        System.out.println("-----------------");
-        System.out.println(" WALK "+ name +" : "+playing);
-        System.out.println(" Atual Money " + amountOfMoney);
-        //System.out.println(" Dados " + nPositions);
         if(goTo < 40){
             setAtualPlace(board.getPlaceByPosition(goTo));
         }else{
@@ -195,11 +199,8 @@ public class Player {
                  setAtualPosition(0);
              }else
                  setAtualPlace(board.getPlaceByPosition(goTo - 40));
-        }
-
-        System.out.println("Atual Place " + atualPlace.getName() + " numero: " + atualPlace.getPosition());
+        }     
         atualPlace.action(this);
-        System.out.println(" Atual Money " + amountOfMoney);
     }
 
     private int getNumberOfRailRoads(){

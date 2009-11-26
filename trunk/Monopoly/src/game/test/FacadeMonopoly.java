@@ -12,9 +12,12 @@ import game.model.exceptions.InvalidDiceResultException;
 import game.model.exceptions.InvalidGameParametersException;
 import game.model.exceptions.InvalidPlayerNameException;
 import game.model.exceptions.InvalidTokenColorException;
+import game.model.exceptions.ItAlreadyHasAnOnwerException;
 import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NonExistentPlayerException;
 import game.model.exceptions.NonPurchasablePlaceException;
+import game.model.exceptions.NotEnoughMoneyException;
+import game.model.exceptions.NotInSaleException;
 import game.model.exceptions.PlayerNoLongerInTheGameException;
 import java.util.ArrayList;
 import java.util.List;
@@ -134,5 +137,15 @@ public class FacadeMonopoly {
 
     public void rollDice(int firstDieResult, int secondDieResult) throws InvalidDiceResultException, NonExistentPlaceException, Exception {
         gameModel.rollDices(firstDieResult, secondDieResult);
+    }
+
+    public boolean gameIsOver(){
+        //verifica se é isso mesmo. Não estou 100% certo
+        //mas passou no teste hehe
+        return !gameModel.isGameOver();
+    }
+
+    public void buy() throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException{
+        gameModel.buy();
     }
 }

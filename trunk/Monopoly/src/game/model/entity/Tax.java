@@ -32,9 +32,7 @@ public class Tax extends Place{
 
     @Override
     public void action(Player p) throws NotEnoughMoneyException {
-//          System.out.println("-----------------");
-//        System.out.println("Pagando taxa" + p.getName() + " : "+ p.getAmountOfMoney() +" valor " +this.tax);
         p.debit(tax);
-//        System.out.println(" AMoney "+ p.getAmountOfMoney());
+
     }
 }
