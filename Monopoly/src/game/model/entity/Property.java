@@ -77,7 +77,7 @@ public class Property extends PurchasablePlace {
             } else {
 //                   System.out.println("-----------------");
 //                System.out.println(" Pagando aluguel "+p.getName() + " : "+ p.getAmountOfMoney() +" valor " + price);
-                p.debit( price );
+                p.debit( getRent() );
 //                System.out.println(" AMoney "+ p.getAmountOfMoney());
             }
     }
