@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package game.model.entity;
 
 import game.model.exceptions.ItAlreadyHasAnOnwerException;
@@ -18,6 +17,7 @@ import java.util.List;
  * Representa a entidade jogador
  */
 public class Player {
+
     private int id;
     private String name;
     private String color;
@@ -34,7 +34,7 @@ public class Player {
         this.itsPropertys = new ArrayList<PurchasablePlace>();
         playing = true;
         playerCommands = new ArrayList<Commands>();
-        playerCommands.add(Commands.ROLL);        
+        playerCommands.add(Commands.ROLL);
         playerCommands.add(Commands.STATUS);
         playerCommands.add(Commands.QUIT);
     }
@@ -43,7 +43,7 @@ public class Player {
         return playing;
     }
 
-    public void fail(){
+    public void fail() {
         playing = false;
         for (PurchasablePlace purchasablePlace : itsPropertys) {
             purchasablePlace.returnToBank();
@@ -54,8 +54,7 @@ public class Player {
         this.playing = playing;
     }
 
-
-    public void add(PurchasablePlace place){
+    public void add(PurchasablePlace place) {
         itsPropertys.add(place);
     }
 
@@ -75,7 +74,7 @@ public class Player {
         this.atualPosition = atualPosition;
     }
 
-    public int getAtualPosition(){
+    public int getAtualPosition() {
         return atualPlace.getPosition();
     }
 
@@ -108,39 +107,43 @@ public class Player {
         this.id = id;
     }
 
-    public void credit(float money){
-        this.amountOfMoney +=money;
+    public void credit(float money) {
+        this.amountOfMoney += money;
     }
 
-    public void debit(float money) throws NotEnoughMoneyException{
-        if(this.amountOfMoney >= money){
-           this.amountOfMoney -=money;
-        }else{
+    public void debit(float money) throws NotEnoughMoneyException {
+        if (this.amountOfMoney >= money) {
+            this.amountOfMoney -= money;
+        } else {
             throw new NotEnoughMoneyException("Not enough money");
         }
     }
 
-    public void buyProperty()throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException{
-        if(atualPlace instanceof Tax){
-            System.out.println("Tentou comprar Tax : " + atualPlace.getPosition());
+    public void buyProperty() throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException {
+//        if(atualPlace instanceof Tax){
+//            System.out.println("Tentou comprar Tax : " + atualPlace.getPosition());
+//            throw new NotInSaleException("Place doesn't have a deed to be bought");
+//
+//        }else if(atualPlace instanceof FreeParking){
+//            System.out.println("Tentou comprar FreeParking: " + atualPlace.getPosition());
+//            throw new NotInSaleException("Place doesn't have a deed to be bought");
+        if (!(atualPlace instanceof PurchasablePlace)) {
+            //System.out.println(atualPlace.getName()+ " " + atualPlace.getPosition() + " " + atualPlace.placeGroup);
             throw new NotInSaleException("Place doesn't have a deed to be bought");
-            
-        }else if(atualPlace instanceof FreeParking){
-            System.out.println("Tentou comprar FreeParking: " + atualPlace.getPosition());
-            throw new NotInSaleException("Place doesn't have a deed to be bought");
-        }else{
+        } else if ((atualPlace instanceof Utility)) {
+            throw new NotInSaleException("Deed for this place is not for sale");
+        } else {
             PurchasablePlace p = (PurchasablePlace) atualPlace;
-            if(p.getOwner().getName().equals("bank")){
-                debit( p.getPrice() );
+            if (p.getOwner().getName().equals("bank")) {
+                debit(p.getPrice());
                 p.setOwner(this);
                 this.itsPropertys.add(p);
-                if(p instanceof Railroad){
+                if (p instanceof Railroad) {
                     updateRailroadsRunning();
                 }
-            }else{
+            } else {
                 throw new ItAlreadyHasAnOnwerException("Deed for this place is not for sale");
             }
-        
         }
     }
 
@@ -160,13 +163,13 @@ public class Player {
         this.playerCommands = playerCommands;
     }
 
-    public String getStatus(){     
+    public String getStatus() {
         return "";
     }
 
     @Override
     public String toString() {
-        return this.name + " " + this.color +" "+ this.amountOfMoney;
+        return this.name + " " + this.color + " " + this.amountOfMoney;
     }
 
     /**
@@ -177,50 +180,53 @@ public class Player {
      * @param rent - o valor do aluguel
      * @throws NotEnoughMoneyException - caso o jogador não tenha diheiro pra pagar o aluguel
      */
-    public void payRent(Player otherPlayer, float rent) throws NotEnoughMoneyException{
-       try{
+    public void payRent(Player otherPlayer, float rent) throws NotEnoughMoneyException {
+        try {
             this.debit(rent);
             otherPlayer.credit(rent);
-       }catch(NotEnoughMoneyException ex){
-            otherPlayer.credit( amountOfMoney );
+        } catch (NotEnoughMoneyException ex) {
+            otherPlayer.credit(amountOfMoney);
             throw ex;
         }
     }
+
     /**
      * Faz o usuário andar pelo tabuleiro
      * @author João
      * @param nPositions
      * @param board
      */
-    public void walk(int nPositions, Board board) throws NonExistentPlaceException, Exception{
+    public void walk(int nPositions, Board board) throws NonExistentPlaceException, Exception {
 
         int goTo = atualPosition + nPositions;
-        if(goTo < 40){
+        if (goTo < 40) {
             setAtualPlace(board.getPlaceByPosition(goTo));
-        }else{
-             this.credit(200);
-             if(goTo == 40){
-                 setAtualPlace(board.getPlaceByPosition(goTo));
-                 setAtualPosition(0);
-             }else
-                 setAtualPlace(board.getPlaceByPosition(goTo - 40));
-        }     
+        } else {
+            this.credit(200);
+            if (goTo == 40) {
+                setAtualPlace(board.getPlaceByPosition(goTo));
+                setAtualPosition(0);
+            } else {
+                setAtualPlace(board.getPlaceByPosition(goTo - 40));
+            }
+        }
         atualPlace.action(this);
     }
 
-    private int getNumberOfRailRoads(){
+    private int getNumberOfRailRoads() {
         int n = 0;
         for (PurchasablePlace purchasablePlace : itsPropertys) {
-            if(purchasablePlace instanceof Railroad){
+            if (purchasablePlace instanceof Railroad) {
                 n++;
             }
         }
         return n;
     }
-    private void updateRailroadsRunning(){
+
+    private void updateRailroadsRunning() {
         for (PurchasablePlace purchasablePlace : itsPropertys) {
-            if(purchasablePlace instanceof Railroad){
-                ((Railroad)purchasablePlace).setnRailroad( getNumberOfRailRoads() );
+            if (purchasablePlace instanceof Railroad) {
+                ((Railroad) purchasablePlace).setnRailroad(getNumberOfRailRoads());
             }
         }
     }

@@ -10,6 +10,7 @@ import game.model.entity.Board;
 import game.model.entity.Colors;
 import game.model.entity.Commands;
 import game.model.entity.Player;
+import game.model.entity.PurchasablePlace;
 import game.model.exceptions.InvalidCommandException;
 import game.model.exceptions.InvalidDiceResultException;
 import game.model.exceptions.InvalidGameParametersException;
@@ -106,11 +107,11 @@ public class GameModel {
             validatePlayerNames(playerNames);
             validateTokenColors(tokenColors);
 
-            if ( isAnyRepeatedValue(playerNames) ) {
-               throw new InvalidPlayerNameException("There mustn't be repeated player names");
+            if (isAnyRepeatedValue(playerNames)) {
+                throw new InvalidPlayerNameException("There mustn't be repeated player names");
             }
 
-            if ( isAnyRepeatedValue( tokenColors ) ) {
+            if (isAnyRepeatedValue(tokenColors)) {
                 throw new InvalidTokenColorException("There mustn't be repeated token colors");
             }
             //inicia o jogo
@@ -145,7 +146,7 @@ public class GameModel {
 
     private boolean isAnyRepeatedValue(List<String> names) {
         ArrayList<String> lista = new ArrayList<String>(names);
-        for (int i = 0; i < lista.size(); i++)  {
+        for (int i = 0; i < lista.size(); i++) {
             //System.out.println("names" + lista.get(i));
             for (int j = i + 1; j < lista.size(); j++) {
                 if (lista.get(i).equals(lista.get(j))) {
@@ -201,7 +202,7 @@ public class GameModel {
         p.setId(id);
         p.setAtualPlace(board.getPlaceByName("go"));
         p.setAtualPosition(0); //o player começa em go, mas a posiçao é 0, para
-                                //evitar o credito dos 200 no início
+        //evitar o credito dos 200 no início
         players.add(p);
     }
 
@@ -238,7 +239,7 @@ public class GameModel {
         }
         if (p == null) {
             throw new NonExistentPlayerException("Player doesn't exist");
-        }else if(!p.isPlaying()){
+        } else if (!p.isPlaying()) {
             throw new PlayerNoLongerInTheGameException("Player no longer in the game");
         }
         return p;
@@ -274,30 +275,31 @@ public class GameModel {
             throw new InvalidDiceResultException("Invalid die result");
         } else {
             try {
-                if(currentPlayer.isPlaying()){
-                    currentPlayer.walk(firstDieResult + secondDieResult, board);
-                }else{
-                    updateCurrentPlayer(); 
+                if (currentPlayer.isPlaying()) {                  
+                    currentPlayer.walk(firstDieResult + secondDieResult, board);                    
+                } else {
+                    updateCurrentPlayer();
                 }
-                if (!isGameOver()) {
-                    updateCurrentPlayer(); 
+                if ( !isGameOver() && mustGetNextPlayer() ) {
+                    updateCurrentPlayer();
                 }
             } catch (NotEnoughMoneyException ex) {
-              //  ex.printStackTrace();              
-               currentPlayer.fail();
-               //currentPlayer.setPlaying(false);
-               players.set(currentPlayerIndex, currentPlayer);
-               //removePlayer(currentPlayer.getId());
-               System.out.println("currentPlayer playing" + players.get(currentPlayerIndex).isPlaying());
-               updateCurrentPlayer();
+                //  ex.printStackTrace();
+                currentPlayer.fail();
+                //currentPlayer.setPlaying(false);
+                players.set(currentPlayerIndex, currentPlayer);
+                //removePlayer(currentPlayer.getId());
+                updateCurrentPlayer();
             }
         }
     }
 
-    private void validateCurrentPlayer() {
-        if (!currentPlayer.isPlaying()) {
-            updateCurrentPlayer();
-        }
+    private boolean mustGetNextPlayer(){
+        if( this.configuration.isAutoBuy() ){
+            return true;
+        }else {
+            return false;
+        }      
     }
 
     /**
@@ -317,11 +319,21 @@ public class GameModel {
     }
 
     public boolean isGameOver() {
-        return gameStarted ? false : true;
+        if( !gameStarted ){
+            return true;
+        }else{
+          int nPlaying = 0;
+           for (Player player : players) {             
+                if(player.isPlaying()){
+                    nPlaying++;
+                }
+            }
+           return ( nPlaying > 1 ) ? false : true;
+        }     
     }
 
     private void exitGame() {
-        gameStarted = false;
+        currentPlayer.setPlaying(false);
     }
 
     private void updateCurrentPlayer() {
@@ -331,23 +343,31 @@ public class GameModel {
         } else {
             currentPlayerIndex++;
         }
-        if(!players.get(currentPlayerIndex).isPlaying())
+        if (!players.get(currentPlayerIndex).isPlaying()) {
             updateCurrentPlayer();
+        }
 
         currentPlayer = players.get(currentPlayerIndex);
     }
 
-    public int getNumberOfRealPlayers(){
+    public int getNumberOfRealPlayers() {
         int n = 0;
-        for(Player p : players)
-            if(p.isPlaying())
+        for (Player p : players) {
+            if (p.isPlaying()) {
                 n++;
+            }
+        }
         return n;
     }
 
-    public void buy() throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException{
-        currentPlayer.buyProperty();
+    public void buy() throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException, Exception {
+        try {
+            currentPlayer.buyProperty();
+            
+        } catch (Exception e) {
+            throw e;
+        }finally{
+            updateCurrentPlayer();
+        }
     }
-
-
 }
