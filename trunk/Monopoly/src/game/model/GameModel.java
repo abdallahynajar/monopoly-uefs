@@ -125,6 +125,7 @@ public class GameModel {
             gameStarted = true;
             currentPlayerIndex = 0;
             currentPlayer = players.get(currentPlayerIndex);
+            currentPlayerIndex = -1;
         }
     }
 
@@ -274,14 +275,15 @@ public class GameModel {
         if (!validateRollDices(firstDieResult, secondDieResult)) {
             throw new InvalidDiceResultException("Invalid die result");
         } else {
+            updateCurrentPlayer();
             try {
                 if (currentPlayer.isPlaying()) {                  
                     currentPlayer.walk(firstDieResult + secondDieResult, board);                    
                 } else {
-                    updateCurrentPlayer();
+                    //updateCurrentPlayer();
                 }
                 if ( !isGameOver() && mustGetNextPlayer() ) {
-                    updateCurrentPlayer();
+                    //updateCurrentPlayer();
                 }
             } catch (NotEnoughMoneyException ex) {
                 //  ex.printStackTrace();
@@ -289,17 +291,13 @@ public class GameModel {
                 //currentPlayer.setPlaying(false);
                 players.set(currentPlayerIndex, currentPlayer);
                 //removePlayer(currentPlayer.getId());
-                updateCurrentPlayer();
+                //updateCurrentPlayer();
             }
         }
     }
 
     private boolean mustGetNextPlayer(){
-        if( this.configuration.isAutoBuy() ){
-            return true;
-        }else {
-            return false;
-        }      
+        return this.configuration.isAutoBuy();
     }
 
     /**
@@ -322,12 +320,7 @@ public class GameModel {
         if( !gameStarted ){
             return true;
         }else{
-          int nPlaying = 0;
-           for (Player player : players) {             
-                if(player.isPlaying()){
-                    nPlaying++;
-                }
-            }
+          int nPlaying = getNumberOfRealPlayers();
            return ( nPlaying > 1 ) ? false : true;
         }     
     }
@@ -362,12 +355,11 @@ public class GameModel {
 
     public void buy() throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException, Exception {
         try {
-            currentPlayer.buyProperty();
-            
+            currentPlayer.buyProperty();         
         } catch (Exception e) {
             throw e;
         }finally{
-            updateCurrentPlayer();
+            //updateCurrentPlayer();
         }
     }
 }
