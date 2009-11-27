@@ -142,10 +142,10 @@ public class FacadeMonopoly {
     public boolean gameIsOver(){
         //verifica se é isso mesmo. Não estou 100% certo
         //mas passou no teste hehe
-        return !gameModel.isGameOver();
+        return gameModel.isGameOver();
     }
 
-    public void buy() throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException{
+    public void buy() throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException, Exception{
         gameModel.buy();
     }
 }

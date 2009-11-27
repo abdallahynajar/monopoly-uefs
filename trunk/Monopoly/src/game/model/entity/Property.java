@@ -74,7 +74,6 @@ public class Property extends PurchasablePlace {
              if ( owner.getName().equals("bank") ) {
                 buyProperty(p);
             } else {
-
                 p.payRent(owner, getRent());
 
             }
