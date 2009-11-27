@@ -58,6 +58,7 @@ public class GameModel {
      */
     private GameConfiguration configuration;
     private int currentPlayerIndex = 0;
+    private int nextPlayerIndex = 0;
 
     public GameConfiguration getConfiguration() {
         return configuration;
@@ -225,6 +226,14 @@ public class GameModel {
         return currentPlayer;
     }
 
+    public Player getCurrentPlayerFacade(){
+        if(!this.configuration.isAutoBuy())
+            return getCurrentPlayer();
+        else{
+            return seeNextPlayer();
+        }
+    }
+
     /**
      * Busca um jogador pelo nome
      * @author Lidiany
@@ -276,28 +285,13 @@ public class GameModel {
             throw new InvalidDiceResultException("Invalid die result");
         } else {
             updateCurrentPlayer();
-            try {
-                if (currentPlayer.isPlaying()) {                  
+            try {                
                     currentPlayer.walk(firstDieResult + secondDieResult, board);                    
-                } else {
-                    //updateCurrentPlayer();
-                }
-                if ( !isGameOver() && mustGetNextPlayer() ) {
-                    //updateCurrentPlayer();
-                }
             } catch (NotEnoughMoneyException ex) {
-                //  ex.printStackTrace();
                 currentPlayer.fail();
-                //currentPlayer.setPlaying(false);
                 players.set(currentPlayerIndex, currentPlayer);
-                //removePlayer(currentPlayer.getId());
-                //updateCurrentPlayer();
             }
         }
-    }
-
-    private boolean mustGetNextPlayer(){
-        return this.configuration.isAutoBuy();
     }
 
     /**
@@ -341,6 +335,21 @@ public class GameModel {
         }
 
         currentPlayer = players.get(currentPlayerIndex);
+        nextPlayerIndex = currentPlayerIndex;
+    }
+
+    private Player seeNextPlayer(){
+        int index = nextPlayerIndex;
+        if (index + 1 >= numberOfPlayers) {
+            nextPlayerIndex = 0;
+        } else {
+            nextPlayerIndex++;
+        }
+        if (!players.get(nextPlayerIndex).isPlaying()) {
+            seeNextPlayer();
+        }
+
+        return players.get(nextPlayerIndex);
     }
 
     public int getNumberOfRealPlayers() {
