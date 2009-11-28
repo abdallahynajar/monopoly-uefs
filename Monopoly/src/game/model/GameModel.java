@@ -225,7 +225,7 @@ public class GameModel {
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
-
+//quero saber o que esse método faz com esse nome?//essa classe nao tem nada a ver com a Facade, Facede
     public Player getCurrentPlayerFacade(){
         if(!this.configuration.isAutoBuy())
             return getCurrentPlayer();
