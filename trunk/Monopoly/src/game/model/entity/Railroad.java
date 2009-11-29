@@ -24,24 +24,6 @@ public class Railroad extends PurchasablePlace {
         this.nRailroad = nRailroad;
     }
 
-    /**
-     * Oferece a propriedade para compra. Deve ser usado quando a propriedade não
-     * tiver dono
-     * @param p
-     */
-  /*  @Override
-    public void buyProperty(Player player) throws NotEnoughMoneyException{    
-        player.buyProperty(this);
-        this.setOwner(player);
-    }*/
-
-
-//    @Override
-//    public void setOwner(Player p) {
-//        super.owner = owner;
-//        nRailroad = 1;
-//    }
-
     public Railroad(int position, String name, float price, float hipoteca) {
         super.position = position;
         super.name = name;
@@ -52,13 +34,11 @@ public class Railroad extends PurchasablePlace {
     }
 
     /**
-     * IMCOMPLETO. Esse método não precisa estar completo para atender os requisitos
+     * Esse método não precisa estar completo para atender os requisitos
      * até a user history 4
-     * Oferece a propriedade para compra, não esta não tenha dono ou paga um aluguel
+     * Oferece a propriedade para compra, caso esta não tenha dono ou paga um aluguel
      * caso esta tenha.
-     * Ainda falta oferecer a possibilidade pra compra de ferrovias
      * @param p
-     * @param gc
      */
     public void action(Player p) throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException {
             if ( owner.getName().equals("bank") ) {              
