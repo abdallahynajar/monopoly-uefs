@@ -14,6 +14,8 @@ public class GameConfiguration {
     //habilita compra automática de propriedade;
     private boolean autoBuy = false;
     private float initialMoney = 1500;
+    private float salaryBonus = 200;
+
     private static GameConfiguration gc;
 
 
@@ -27,6 +29,13 @@ public class GameConfiguration {
     private GameConfiguration() {
     }
 
+    public float getSalaryBonus() {
+        return salaryBonus;
+    }
+
+    public void setSalaryBonus(float salaryBonus) {
+        this.salaryBonus = salaryBonus;
+    }
 
     public boolean isAutoBuy() {
         return autoBuy;

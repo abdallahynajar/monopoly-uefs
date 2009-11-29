@@ -197,7 +197,7 @@ public class GameModel {
      */
     public void addPlayer(int id, String name, String color) {
         Player p = new Player(name, color);
-        p.setAmountOfMoney(1500);
+        p.setAmountOfMoney(configuration.getInitialMoney());
         p.setId(id);
         p.setAtualPlace(board.getPlaceByName("go"));
         p.setAtualPosition(0); //o player começa em go, mas a posiçao é 0, para
