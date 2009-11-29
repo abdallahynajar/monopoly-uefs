@@ -109,23 +109,31 @@ public class Board {
      */
     public String getPlaceName(int position) throws NonExistentPlaceException {
         Place p = getPlaceByPosition(position);   
-        if (p == null) {
-            throw new NonExistentPlaceException("Place doesn't exist");
-        }
         return p.getName();        
     }
-
+    /**
+     * Retorna o preço de uma propriedade, caso esta seja compravel
+     * @param position
+     * @return
+     * @throws game.model.exceptions.NonExistentPlaceException
+     * @throws game.model.exceptions.NonPurchasablePlaceException
+     */
     public int getPlacePrice(int position) throws NonExistentPlaceException, NonPurchasablePlaceException {
         try {
             PurchasablePlace p = (PurchasablePlace) getPlaceByPosition(position);
-           
             return (int) p.getPrice();
-
         } catch (ClassCastException ex) {
             throw new NonPurchasablePlaceException("This place can't be sold");
         }
     }
 
+    /**
+     * Retorna o atual preço do aluguel de uma proprieade, quando este existe.
+     * @param position
+     * @return rent
+     * @throws game.model.exceptions.NonExistentPlaceException
+     * @throws game.model.exceptions.NonPurchasablePlaceException
+     */
     public int getPropertyRent(int position) throws NonExistentPlaceException, NonPurchasablePlaceException{
         try {
             Property p = (Property) getPlaceByPosition(position);           
@@ -136,7 +144,13 @@ public class Board {
         }
 
     }
-
+    /**
+     * Retorna o dono de um determinado lugar, caso este possa ser comprado
+     * @param position
+     * @return
+     * @throws game.model.exceptions.NonExistentPlaceException
+     * @throws game.model.exceptions.NonPurchasablePlaceException
+     */
      public String getPlaceOwner (int position) throws NonExistentPlaceException, NonPurchasablePlaceException{
         try {
             PurchasablePlace p = (PurchasablePlace) getPlaceByPosition(position);
@@ -152,6 +166,12 @@ public class Board {
         }
     }
 
+     /**
+      * retorna o grupo de um lugar.
+      * @param position
+      * @return
+      * @throws game.model.exceptions.NonExistentPlaceException
+      */
       public String getPlaceGroup (int position) throws NonExistentPlaceException{
             Place p =  getPlaceByPosition(position);
             if (p == null) {

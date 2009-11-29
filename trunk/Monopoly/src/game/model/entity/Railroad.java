@@ -34,11 +34,12 @@ public class Railroad extends PurchasablePlace {
     }
 
     /**
-     * Esse método não precisa estar completo para atender os requisitos
-     * até a user history 4
-     * Oferece a propriedade para compra, caso esta não tenha dono ou paga um aluguel
-     * caso esta tenha.
+     * Tenta fazer o jogador comprar essa ferrovia, caso autobuy=true
+     * ou, se a proprieade já possuir um dono, faz o jogador pagar o aluguel
      * @param p
+     * @throws game.model.exceptions.NotEnoughMoneyException
+     * @throws game.model.exceptions.NotInSaleException
+     * @throws game.model.exceptions.ItAlreadyHasAnOnwerException
      */
     public void action(Player p) throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException {
             if ( owner.getName().equals("bank") ) {              

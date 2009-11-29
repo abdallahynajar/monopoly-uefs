@@ -45,8 +45,8 @@ public abstract class PurchasablePlace extends Place{
     }
 
     /**
-     * Oferece a propriedade para compra. Deve ser usado quando a propriedade não
-     * tiver dono
+     * Usado para comprar automaticamente uma propriedade, caso o jogo seja configurado
+     * para isso
      * @param p
      */
     public void buyProperty(Player player) throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException{
