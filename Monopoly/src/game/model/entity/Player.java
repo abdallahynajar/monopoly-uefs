@@ -22,10 +22,23 @@ public class Player {
     private String name;
     private String color;
     private float amountOfMoney;
-    private Place atualPlace; //lugar em que o jogador está
-    private ArrayList<PurchasablePlace> itsPropertys;
+    
+    /**
+     * Lugar onde o jogador se encontra
+     */
+    private Place atualPlace;
+
     private int atualPosition;
+    /**
+     * Lista de proprieades que o jodador possui.
+     */
+    private ArrayList<PurchasablePlace> itsPropertys;
+
+    /**
+     * Comandos que o jogador pode executar
+     */
     private List<Commands> playerCommands;
+
     private boolean playing;
 
     public Player(String name, String color) {
@@ -42,7 +55,9 @@ public class Player {
     public boolean isPlaying() {
         return playing;
     }
-
+    /**
+     * Tira o jogador do jogo e devolve todas as suas propriedades ao banco.
+     */
     public void fail() {
         playing = false;
         for (PurchasablePlace purchasablePlace : itsPropertys) {
@@ -110,7 +125,11 @@ public class Player {
     public void credit(float money) {
         this.amountOfMoney += money;
     }
-
+    /**
+     * Faz o jogador pagar alguma coisa, caso tenha dinheiro.
+     * @param money
+     * @throws game.model.exceptions.NotEnoughMoneyException
+     */
     public void debit(float money) throws NotEnoughMoneyException {
         if (this.amountOfMoney >= money) {
             this.amountOfMoney -= money;
@@ -119,6 +138,13 @@ public class Player {
         }
     }
 
+    /**
+     * Faz o jogador comprar a propriedade em que se encontra, caso tenha dinheiro
+     * e aquela esteja a venda.
+     * @throws game.model.exceptions.NotEnoughMoneyException
+     * @throws game.model.exceptions.NotInSaleException
+     * @throws game.model.exceptions.ItAlreadyHasAnOnwerException
+     */
     public void buyProperty() throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException {
         if (!(atualPlace instanceof PurchasablePlace)) {
             throw new NotInSaleException("Place doesn't have a deed to be bought");
@@ -183,7 +209,8 @@ public class Player {
     }
 
     /**
-     * Faz o usuário andar pelo tabuleiro
+     * Faz o usuário andar pelo tabuleiro. Deposita $200 caso passe pelo ponto
+     * de partida.
      * @author João
      * @param nPositions
      * @param board
@@ -197,7 +224,7 @@ public class Player {
             this.credit(200);
             if (goTo == 40) {
                 setAtualPlace(board.getPlaceByPosition(goTo));
-                setAtualPosition(0);
+                setAtualPosition(0); //não ganha os 200 na proxima
             } else {
                 setAtualPlace(board.getPlaceByPosition(goTo - 40));
             }
