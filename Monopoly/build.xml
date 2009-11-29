@@ -10,6 +10,7 @@
 <project name="Monopoly" default="default" basedir=".">
     <description>Builds, tests, and runs the project Monopoly.</description>
     <import file="nbproject/build-impl.xml"/>
+    <import file="ant/meubuild.xml"/>
     <!--
 
     There exist several targets which are by default empty and which can be 

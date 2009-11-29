@@ -1,0 +1,29 @@
+<project name="teste" basedir="." default="compila">
+         
+         
+    <target name="limpa">
+        <delete dir="ant2" />
+    </target>
+
+    <target name="dir">
+        <mkdir dir="ant2" />
+    </target>
+
+    <target name="compila" depends="dir">
+
+        <javac srcdir="./src" destdir="ant2">
+          <classpath>
+                     <pathelement path="./lib/easyaccept.jar"/>
+          </classpath>
+        </javac>
+    </target>
+
+  <target name="testa">
+          <java classname="game.test.MonopolyTest" >
+              <classpath>
+                  <pathelement path="./ant2" />
+                  <pathelement path="./lib/easyaccept.jar"/>
+              </classpath>
+          </java>
+  </target>
+</project>
