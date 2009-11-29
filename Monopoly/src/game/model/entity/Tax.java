@@ -29,7 +29,11 @@ public class Tax extends Place{
     public void setTax(long tax) {
         this.tax = tax;
     }
-
+    /**
+     * Faz o usuário pagar a taxa.
+     * @param p
+     * @throws game.model.exceptions.NotEnoughMoneyException
+     */
     @Override
     public void action(Player p) throws NotEnoughMoneyException {
         p.debit(tax);

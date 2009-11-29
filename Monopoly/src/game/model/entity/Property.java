@@ -29,7 +29,7 @@ public class Property extends PurchasablePlace {
         this.housePrice = housePrice;
         this.placeGroup = placeGroup;
         this.position = position;
-        this.owner = new Player("bank", null);
+        this.owner = new Player("bank", null); //a principio, todas a propriedades são do banco
     }
 
     public long getnHouses() {
@@ -67,15 +67,20 @@ public class Property extends PurchasablePlace {
 
 
      /**
-    *
-     */
+      * Tenta fazer o jogador comprar essa propriedade, caso autobuy=true
+      * ou, se a proprieade já possuir um dono, faz o jogador pagar o aluguel
+      * @param p
+      * @throws game.model.exceptions.NotEnoughMoneyException
+      * @throws game.model.exceptions.NotAvailableForSaleException
+      * @throws game.model.exceptions.NotInSaleException
+      * @throws game.model.exceptions.ItAlreadyHasAnOnwerException
+      */
     @Override
     public void action(Player p) throws NotEnoughMoneyException, NotAvailableForSaleException, NotInSaleException, ItAlreadyHasAnOnwerException{
              if ( owner.getName().equals("bank") ) {
                 buyProperty(p);
             } else {
                 p.payRent(owner, getRent());
-
             }
     }
   
