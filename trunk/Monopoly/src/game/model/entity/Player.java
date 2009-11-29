@@ -120,15 +120,7 @@ public class Player {
     }
 
     public void buyProperty() throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException {
-//        if(atualPlace instanceof Tax){
-//            System.out.println("Tentou comprar Tax : " + atualPlace.getPosition());
-//            throw new NotInSaleException("Place doesn't have a deed to be bought");
-//
-//        }else if(atualPlace instanceof FreeParking){
-//            System.out.println("Tentou comprar FreeParking: " + atualPlace.getPosition());
-//            throw new NotInSaleException("Place doesn't have a deed to be bought");
         if (!(atualPlace instanceof PurchasablePlace)) {
-            //System.out.println(atualPlace.getName()+ " " + atualPlace.getPosition() + " " + atualPlace.placeGroup);
             throw new NotInSaleException("Place doesn't have a deed to be bought");
         } else if ((atualPlace instanceof Utility)) {
             throw new NotInSaleException("Deed for this place is not for sale");

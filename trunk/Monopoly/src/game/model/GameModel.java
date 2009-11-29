@@ -86,7 +86,7 @@ public class GameModel {
      * @param numberOfPlayers o número de participantes do jogo
      * deve ser maior que <b>2</b> e menor que <b>8</b>
      * @param playerNames a lista de nomes dos jogadores
-     * @param tokenColors as cores do peeões dos jogadores
+     * @param tokenColors as cores do peões dos jogadores
      * @throws InvalidGameParametersException - se o número de jogadores, ou cores e nomes estiver errado
      * @throws InvalidPlayerNameException - se for passado um nome inválido como banco ou nomes repetidos
      * @throws InvalidTokenColorException - se for passada uma cor inválida ou cores repetidas
@@ -142,14 +142,12 @@ public class GameModel {
             if (pa.equals("bank")) {
                 throw new InvalidPlayerNameException("Invalid player name");
             }
-            //era p verificar os repetidos aki, mas não funciona!
         }
     }
 
     private boolean isAnyRepeatedValue(List<String> names) {
         ArrayList<String> lista = new ArrayList<String>(names);
         for (int i = 0; i < lista.size(); i++) {
-            //System.out.println("names" + lista.get(i));
             for (int j = i + 1; j < lista.size(); j++) {
                 if (lista.get(i).equals(lista.get(j))) {
                     return true;
@@ -175,7 +173,6 @@ public class GameModel {
                 throw new InvalidTokenColorException("Invalid token color");
             }
         }
-        //era p verificar os repetidos aki, mas não funciona!
     }
 
     public int getNumberOfPlayers() {
@@ -225,8 +222,7 @@ public class GameModel {
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
-//quero saber o que esse método faz com esse nome?
-    //essa classe nao deve ter nada a ver com a Facade!!!
+    //gancho
     public Player getCurrentPlayerFacade(){
         if(!this.configuration.isAutoBuy())
             return getCurrentPlayer();
@@ -287,10 +283,9 @@ public class GameModel {
         } else {
             updateCurrentPlayer();
             try {                
-                    currentPlayer.walk(firstDieResult + secondDieResult, board);                    
+                currentPlayer.walk(firstDieResult + secondDieResult, board);                    
             } catch (NotEnoughMoneyException ex) {
                 currentPlayer.fail();
-                players.set(currentPlayerIndex, currentPlayer);
             }
         }
     }
@@ -323,7 +318,10 @@ public class GameModel {
     private void exitGame() {
         currentPlayer.setPlaying(false);
     }
-
+    /**
+     * Passa a jogada para o proximo jogador. Deve ser usado imediatamente antes
+     * de "rolarem os dados"
+     */
     private void updateCurrentPlayer() {
         int index = currentPlayerIndex;
         if (index + 1 >= numberOfPlayers) {
@@ -339,6 +337,7 @@ public class GameModel {
         nextPlayerIndex = currentPlayerIndex;
     }
 
+   //Cópia do método anterior para um gancho supremo
     private Player seeNextPlayer(){
         int index = nextPlayerIndex;
         if (index + 1 >= numberOfPlayers) {
@@ -349,10 +348,14 @@ public class GameModel {
         if (!players.get(nextPlayerIndex).isPlaying()) {
             seeNextPlayer();
         }
-
         return players.get(nextPlayerIndex);
     }
 
+    /**
+     * Retorna o número de jogadores que ainda estão jogando
+     * @author João
+     * @return
+     */
     public int getNumberOfRealPlayers() {
         int n = 0;
         for (Player p : players) {
@@ -363,13 +366,15 @@ public class GameModel {
         return n;
     }
 
+    /**
+     * Faz o atual jogador tentar comprar a propriedade em que se encontra.
+     * @author João
+     * @throws game.model.exceptions.NotEnoughMoneyException
+     * @throws game.model.exceptions.NotInSaleException
+     * @throws game.model.exceptions.ItAlreadyHasAnOnwerException
+     * @throws java.lang.Exception
+     */
     public void buy() throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException, Exception {
-        try {
             currentPlayer.buyProperty();         
-        } catch (Exception e) {
-            throw e;
-        }finally{
-            //updateCurrentPlayer();
-        }
     }
 }
