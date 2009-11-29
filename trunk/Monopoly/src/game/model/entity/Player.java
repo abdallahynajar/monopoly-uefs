@@ -4,6 +4,7 @@
  */
 package game.model.entity;
 
+import game.model.configuration.GameConfiguration;
 import game.model.exceptions.ItAlreadyHasAnOnwerException;
 import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
@@ -221,7 +222,8 @@ public class Player {
         if (goTo < 40) {
             setAtualPlace(board.getPlaceByPosition(goTo));
         } else {
-            this.credit(200);
+            GameConfiguration gc = GameConfiguration.getConfiguration();
+            this.credit( gc.getSalaryBonus() );
             if (goTo == 40) {
                 setAtualPlace(board.getPlaceByPosition(goTo));
                 setAtualPosition(0); //não ganha os 200 na proxima
