@@ -6,10 +6,11 @@
 package game.model.exceptions;
 
 /**
- *
+ * É lançada quando se tenta comprar um lugar que não esta à venda.
  * @author UEFS\jmatos
  */
-public class NotInSaleException extends Exception {
+public class NotInSaleException extends GamePlaceException {
+    
     public NotInSaleException(String msg){
         super(msg);
     }

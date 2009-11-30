@@ -9,7 +9,7 @@ package game.model.exceptions;
  *
  * @author Lidiany
  */
-public class InvalidGameParametersException extends Exception{
+public class InvalidGameParametersException extends GameException{
 
     public InvalidGameParametersException(String message) {
         super(message);

@@ -6,12 +6,12 @@
 package game.model.exceptions;
 
 /**
- *
+ * Signals that an Game exception of some sort has occurred.
  * @author Lidiany
  */
-public class NonPurchasablePlaceException extends GamePlaceException{
+public class GameException extends Exception{
 
-    public NonPurchasablePlaceException(String message) {
+    public GameException(String message) {
         super(message);
     }
 

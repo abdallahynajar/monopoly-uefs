@@ -7,18 +7,7 @@ package game.test;
 import game.model.GameModel;
 import game.model.entity.Commands;
 import game.model.entity.PurchasablePlace;
-import game.model.exceptions.InvalidCommandException;
-import game.model.exceptions.InvalidDiceResultException;
-import game.model.exceptions.InvalidGameParametersException;
-import game.model.exceptions.InvalidPlayerNameException;
-import game.model.exceptions.InvalidTokenColorException;
-import game.model.exceptions.ItAlreadyHasAnOnwerException;
-import game.model.exceptions.NonExistentPlaceException;
-import game.model.exceptions.NonExistentPlayerException;
-import game.model.exceptions.NonPurchasablePlaceException;
-import game.model.exceptions.NotEnoughMoneyException;
-import game.model.exceptions.NotInSaleException;
-import game.model.exceptions.PlayerNoLongerInTheGameException;
+import game.model.exceptions.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -63,7 +52,7 @@ public class FacadeMonopoly {
         return gameModel.getNumberOfRealPlayers();
     }
 
-    public String getPlayerToken(String playerName) throws NonExistentPlayerException, PlayerNoLongerInTheGameException {
+    public String getPlayerToken(String playerName) throws NonExistentPlayerException, GamePlayerException {
         return gameModel.getPlayerByName(playerName).getColor().toLowerCase();
         //getPlayerToken(playerName);
     }
@@ -84,7 +73,7 @@ public class FacadeMonopoly {
         return strCommand.toString();
     }
 
-    public String getPlayerDeeds(String playerName) throws NonExistentPlayerException, PlayerNoLongerInTheGameException {
+    public String getPlayerDeeds(String playerName) throws NonExistentPlayerException, GamePlayerException {
         StringBuilder str = new StringBuilder();
         str.append("{");
         ArrayList<PurchasablePlace> prPlace = gameModel.getPlayerByName(playerName).getItsPropertys();
@@ -101,12 +90,12 @@ public class FacadeMonopoly {
         return str.toString();
     }
 
-    public int getPlayerPosition(String playerName) throws NonExistentPlayerException, PlayerNoLongerInTheGameException {
+    public int getPlayerPosition(String playerName) throws NonExistentPlayerException, GamePlayerException {
         return gameModel.getPlayerByName(playerName).getAtualPosition();
         //getPlayerPosition(playerName);
     }
 
-    public int getPlayerMoney(String playerName) throws NonExistentPlayerException, PlayerNoLongerInTheGameException {
+    public int getPlayerMoney(String playerName) throws NonExistentPlayerException, GamePlayerException {
         return (int) gameModel.getPlayerByName(playerName).getAmountOfMoney();
         //getPlayerMoney(playerName);
     }
@@ -145,7 +134,7 @@ public class FacadeMonopoly {
         return gameModel.isGameOver();
     }
 
-    public void buy() throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException, Exception{
+    public void buy() throws NotEnoughMoneyException, NotInSaleException, GamePlaceException, Exception{
         gameModel.buy();
     }
 }

@@ -6,7 +6,7 @@
 package game.model.entity;
 
 import game.model.configuration.GameConfiguration;
-import game.model.exceptions.ItAlreadyHasAnOnwerException;
+import game.model.exceptions.GamePlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
 import game.model.exceptions.NotInSaleException;
 
@@ -50,7 +50,7 @@ public abstract class PurchasablePlace extends Place{
      * para isso
      * @param player
      */
-    public void buyProperty(Player player) throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException{
+    public void buyProperty(Player player) throws NotEnoughMoneyException, NotInSaleException, GamePlaceException{
         GameConfiguration gc = GameConfiguration.getConfiguration();
         if(gc.isAutoBuy()){
             player.buyProperty();
