@@ -3,14 +3,15 @@
          
     <target name="limpa">
         <delete dir="ant2" />
+        <delete dir="docs" />
     </target>
 
     <target name="dir">
         <mkdir dir="ant2" />
+        <mkdir dir="docs" />
     </target>
 
     <target name="compila" depends="dir">
-
         <javac srcdir="./src" destdir="ant2">
           <classpath>
                      <pathelement path="./lib/easyaccept.jar"/>
@@ -28,6 +29,22 @@
           <exec dir="." executable="cmd" os="Windows XP">
             <arg line="/c testa.bat"/>
           </exec>
-
   </target>
+  
+  <target name="doc" depends="dir">
+    <javadoc
+           access="public"
+           destdir="docs"
+           author="true"
+           version="true"
+           use="true"
+           windowtitle="Monopoly-uefs"
+       >
+
+        <fileset dir="src" defaultexcludes="yes">
+            <include name="**/*.java"/>
+        </fileset>
+    </javadoc>
+</target>
+
 </project>
