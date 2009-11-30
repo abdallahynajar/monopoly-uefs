@@ -6,7 +6,7 @@
 package game.model.exceptions;
 
 /**
- *
+ * É lançada quando é passado algum parâmetro errado no jogo.
  * @author Lidiany
  */
 public class InvalidGameParametersException extends GameException{

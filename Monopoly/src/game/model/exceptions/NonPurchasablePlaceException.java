@@ -7,6 +7,7 @@ package game.model.exceptions;
 
 /**
  *
+ * É lançada quando é se tenta comprar um lugar não comprável.
  * @author Lidiany
  */
 public class NonPurchasablePlaceException extends GamePlaceException{
