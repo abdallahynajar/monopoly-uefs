@@ -5,7 +5,7 @@
 package game.model.entity;
 
 import game.model.configuration.GameConfiguration;
-import game.model.exceptions.ItAlreadyHasAnOnwerException;
+import game.model.exceptions.GamePlaceException;
 import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
 import game.model.exceptions.NotInSaleException;
@@ -145,7 +145,7 @@ public class Player {
      * @throws game.model.exceptions.NotInSaleException
      * @throws game.model.exceptions.ItAlreadyHasAnOnwerException
      */
-    public void buyProperty() throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException {
+    public void buyProperty() throws NotEnoughMoneyException, NotInSaleException, GamePlaceException {
         if (!(atualPlace instanceof PurchasablePlace)) {
             throw new NotInSaleException("Place doesn't have a deed to be bought");
         } else if ((atualPlace instanceof Utility)) {
@@ -160,7 +160,7 @@ public class Player {
                     updateRailroadsRunning();
                 }
             } else {
-                throw new ItAlreadyHasAnOnwerException("Deed for this place is not for sale");
+                throw new GamePlaceException("Deed for this place is not for sale");
             }
         }
     }

@@ -9,9 +9,10 @@ package game.model.exceptions;
  *
  * @author Lidiany
  */
-public class NotAvailableForSaleException extends Exception{
+public class GamePlayerException extends GameException{
 
-    public NotAvailableForSaleException(String message) {
+    public GamePlayerException(String message) {
         super(message);
     }
+
 }

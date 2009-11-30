@@ -9,7 +9,7 @@ package game.model.exceptions;
  *
  * @author Lidiany
  */
-public class InvalidPlayerNameException extends Exception{
+public class InvalidPlayerNameException extends GamePlayerException{
 
     public InvalidPlayerNameException(String message) {
         super(message);

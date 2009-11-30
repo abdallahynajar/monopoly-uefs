@@ -9,7 +9,7 @@ package game.model.exceptions;
  *
  * @author Lidiany
  */
-public class NonExistentPlaceException extends Exception{
+public class NonExistentPlaceException extends GamePlaceException{
 
     public NonExistentPlaceException(String message) {
         super(message);

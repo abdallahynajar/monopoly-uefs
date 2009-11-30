@@ -1,6 +1,6 @@
 package game.model.entity;
 
-import game.model.exceptions.ItAlreadyHasAnOnwerException;
+import game.model.exceptions.GamePlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
 import game.model.exceptions.NotInSaleException;
 
@@ -37,7 +37,7 @@ public class Railroad extends PurchasablePlace {
      * @throws game.model.exceptions.NotInSaleException
      * @throws game.model.exceptions.ItAlreadyHasAnOnwerException
      */
-    public void action(Player p) throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException {
+    public void action(Player p) throws NotEnoughMoneyException, NotInSaleException, GamePlaceException {
             if ( owner.getName().equals("bank") ) {              
                 buyProperty(p);
             } else {

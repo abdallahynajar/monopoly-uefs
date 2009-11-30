@@ -9,9 +9,9 @@ package game.model.exceptions;
  *
  * @author Lidiany
  */
-public class PlayerNoLongerInTheGameException extends Exception{
+public class GamePlaceException extends GameException{
 
-    public PlayerNoLongerInTheGameException(String message) {
+    public GamePlaceException(String message) {
         super(message);
     }
 

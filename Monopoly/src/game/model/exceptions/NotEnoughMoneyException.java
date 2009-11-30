@@ -6,10 +6,10 @@
 package game.model.exceptions;
 
 /**
- *
+ * É lançada quando um jogador não tem dinheiro suficiente para uma determinada ação.
  * @author aluno
  */
-public class NotEnoughMoneyException extends Exception{
+public class NotEnoughMoneyException extends GamePlayerException{
 
     public NotEnoughMoneyException(String message) {
         super(message);

@@ -9,7 +9,7 @@ package game.model.exceptions;
  *
  * @author Lidiany
  */
-public class InvalidTokenColorException extends Exception{
+public class InvalidTokenColorException extends GameException{
 
     public InvalidTokenColorException(String message) {
         super(message);

@@ -9,7 +9,7 @@ package game.model.exceptions;
  *
  * @author Lidiany
  */
-public class InvalidCommandException extends Exception{
+public class InvalidCommandException extends GameException{
 
     public InvalidCommandException(String message) {
         super(message);

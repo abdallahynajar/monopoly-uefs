@@ -10,17 +10,7 @@ import game.model.entity.Board;
 import game.model.entity.Colors;
 import game.model.entity.Commands;
 import game.model.entity.Player;
-import game.model.exceptions.InvalidCommandException;
-import game.model.exceptions.InvalidDiceResultException;
-import game.model.exceptions.InvalidGameParametersException;
-import game.model.exceptions.InvalidPlayerNameException;
-import game.model.exceptions.InvalidTokenColorException;
-import game.model.exceptions.ItAlreadyHasAnOnwerException;
-import game.model.exceptions.NonExistentPlaceException;
-import game.model.exceptions.NonExistentPlayerException;
-import game.model.exceptions.NotEnoughMoneyException;
-import game.model.exceptions.NotInSaleException;
-import game.model.exceptions.PlayerNoLongerInTheGameException;
+import game.model.exceptions.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -228,7 +218,7 @@ public class GameModel {
      * @param name o nome do jogador a ser pesquisado
      * @throws NonExistentPlayerException - se o jogadr não for encontrado
      */
-    public Player getPlayerByName(String name) throws NonExistentPlayerException, PlayerNoLongerInTheGameException {
+    public Player getPlayerByName(String name) throws NonExistentPlayerException, GamePlayerException {
         Player p = null;
         for (Player player : players) {
             if (player.getName().equals(name)) {
@@ -238,7 +228,7 @@ public class GameModel {
         if (p == null) {
             throw new NonExistentPlayerException("Player doesn't exist");
         } else if (!p.isPlaying()) {
-            throw new PlayerNoLongerInTheGameException("Player no longer in the game");
+            throw new GamePlayerException("Player no longer in the game");
         }
         return p;
     }
@@ -359,7 +349,7 @@ public class GameModel {
      * @throws game.model.exceptions.ItAlreadyHasAnOnwerException
      * @throws java.lang.Exception
      */
-    public void buy() throws NotEnoughMoneyException, NotInSaleException, ItAlreadyHasAnOnwerException, Exception {
+    public void buy() throws NotEnoughMoneyException, NotInSaleException, GamePlaceException, Exception {
             currentPlayer.buyProperty();         
     }
 }

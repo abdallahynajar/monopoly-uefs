@@ -9,7 +9,7 @@ package game.model.exceptions;
  *
  * @author Lidiany
  */
-public class InvalidDiceResultException extends Exception{
+public class InvalidDiceResultException extends GameException{
 
     public InvalidDiceResultException(String message) {
         super(message);
