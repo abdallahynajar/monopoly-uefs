@@ -9,9 +9,9 @@ import game.model.exceptions.NonPurchasablePlaceException;
 import java.util.ArrayList;
 
 /**
- *
+ * Representa o tabuleiro do monopoly
  * @author UEFS\jmatos
- * Representa o tabuleiro
+ * 
  */
 public class Board {
 
@@ -72,7 +72,6 @@ public class Board {
 
     /***
      * Busca um lugar no tabuleiro pelo nome
-     * @author Lidiany
      * @param name  O nome do lugar a ser pesquisado
      * @return  a entidade Possession encontrada pela busca
      */
@@ -87,7 +86,7 @@ public class Board {
 
     /**
      * @param position
-     * @return
+     * @return lugar determinado pela posição no tabuleiro
      */
     public Place getPlaceByPosition(int position) throws NonExistentPlaceException {
         Place p = null;
@@ -103,9 +102,8 @@ public class Board {
     }
 
     /**
-     * @author Lidiany
      * @param position
-     * @return
+     * @return nome do lugar determinado pela posição
      */
     public String getPlaceName(int position) throws NonExistentPlaceException {
         Place p = getPlaceByPosition(position);   
@@ -114,7 +112,7 @@ public class Board {
     /**
      * Retorna o preço de uma propriedade, caso esta seja compravel
      * @param position
-     * @return
+     * @return lugar determiado pela posição
      * @throws game.model.exceptions.NonExistentPlaceException
      * @throws game.model.exceptions.NonPurchasablePlaceException
      */
@@ -130,7 +128,7 @@ public class Board {
     /**
      * Retorna o atual preço do aluguel de uma proprieade, quando este existe.
      * @param position
-     * @return rent
+     * @return rent - aluguel da posicao
      * @throws game.model.exceptions.NonExistentPlaceException
      * @throws game.model.exceptions.NonPurchasablePlaceException
      */
@@ -147,7 +145,7 @@ public class Board {
     /**
      * Retorna o dono de um determinado lugar, caso este possa ser comprado
      * @param position
-     * @return
+     * @return owner
      * @throws game.model.exceptions.NonExistentPlaceException
      * @throws game.model.exceptions.NonPurchasablePlaceException
      */
@@ -169,7 +167,7 @@ public class Board {
      /**
       * retorna o grupo de um lugar.
       * @param position
-      * @return
+      * @return placeGroup
       * @throws game.model.exceptions.NonExistentPlaceException
       */
       public String getPlaceGroup (int position) throws NonExistentPlaceException{

@@ -6,7 +6,7 @@
 package game.model.configuration;
 
 /**
- *
+ *  Parametros de configuração do jogo.
  * @author UEFS\jmatos
  */
 public class GameConfiguration {

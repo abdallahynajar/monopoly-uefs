@@ -13,9 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author UEFS\jmatos
  * Representa a entidade jogador
+ * @author UEFS\jmatos
  */
 public class Player {
 
@@ -129,7 +128,7 @@ public class Player {
     /**
      * Faz o jogador pagar alguma coisa, caso tenha dinheiro.
      * @param money
-     * @throws game.model.exceptions.NotEnoughMoneyException
+     * @throws NotEnoughMoneyException caso não tenha dinheiro
      */
     public void debit(float money) throws NotEnoughMoneyException {
         if (this.amountOfMoney >= money) {
@@ -194,7 +193,6 @@ public class Player {
     /**
      * Método para pagamentos de aluguéis. Considera a possibilidade do player
      * nao ter dinheiro suficiente para pagar
-     * @author João
      * @param otherPlayer - o jogador pra quem o aluguel será pago
      * @param rent - o valor do aluguel
      * @throws NotEnoughMoneyException - caso o jogador não tenha diheiro pra pagar o aluguel
@@ -212,7 +210,6 @@ public class Player {
     /**
      * Faz o usuário andar pelo tabuleiro. Deposita $200 caso passe pelo ponto
      * de partida.
-     * @author João
      * @param nPositions
      * @param board
      */
@@ -233,7 +230,7 @@ public class Player {
         }
         atualPlace.action(this);
     }
-
+    
     private int getNumberOfRailRoads() {
         int n = 0;
         for (PurchasablePlace purchasablePlace : itsPropertys) {

@@ -6,7 +6,7 @@
 package game.model.entity;
 
 /**
- *
+ * Os possíveis comandos para os jogadores
  * @author Lidiany
  */
 public enum Commands {

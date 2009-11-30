@@ -5,11 +5,10 @@
 
 package game.model.entity;
 
-import game.controller.GameController;
 import game.model.exceptions.NotEnoughMoneyException;
 
 /**
- *
+ *  Representas as taxas no tabuleiro do monopoly
  * @author jmatos
  */
 public class Tax extends Place{

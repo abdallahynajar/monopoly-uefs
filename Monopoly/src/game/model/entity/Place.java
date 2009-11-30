@@ -6,7 +6,9 @@
 package game.model.entity;
 
 /**
- *
+ * Representa uma casa no tabuleiro do monopoly. Possui metodos e atributos
+ * comuns a todas as casas, porém, ações mais específicas são implementadas em
+ * outras classes, que estendem esta.
  * @author Jneto
  */
 public abstract class Place {
@@ -34,7 +36,6 @@ public abstract class Place {
     public void setPlaceGroup(String placeGroup) {
         this.placeGroup = placeGroup;
     }
-
 
     public abstract void action(Player p)throws Exception;
 }
