@@ -39,8 +39,8 @@
            version="true"
            use="true"
            windowtitle="Monopoly-uefs"
+           charset="UFT-8"
        >
-
         <fileset dir="src">
             <include name="**/*.java"/>
         </fileset>
