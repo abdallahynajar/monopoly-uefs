@@ -6,7 +6,7 @@
 package game.model.entity;
 
 /**
- *
+ *  Representa o Banco
  * @author Lidiany
  */
 public class Bank {

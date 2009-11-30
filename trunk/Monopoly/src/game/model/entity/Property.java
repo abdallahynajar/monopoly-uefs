@@ -10,9 +10,8 @@ import game.model.exceptions.NotEnoughMoneyException;
 import game.model.exceptions.NotInSaleException;
 
 /**
- *
- * @author UEFS\jmatos
- * Representa um lugar no tabuleiro
+ * Representa uma propriedade no tabuleiro.
+ * @author jmatos
  */
 public class Property extends PurchasablePlace {
 
@@ -69,8 +68,8 @@ public class Property extends PurchasablePlace {
      /**
       * Tenta fazer o jogador comprar essa propriedade, caso autobuy=true
       * ou, se a proprieade já possuir um dono, faz o jogador pagar o aluguel
-      * @param p
-      * @throws game.model.exceptions.NotEnoughMoneyException
+      * @param p jogador que vai comprar ou pagar o aluguel, ou não vai fazer nada
+      * @throws game.model.exceptions.NotEnoughMoneyException 
       * @throws game.model.exceptions.NotAvailableForSaleException
       * @throws game.model.exceptions.NotInSaleException
       * @throws game.model.exceptions.ItAlreadyHasAnOnwerException

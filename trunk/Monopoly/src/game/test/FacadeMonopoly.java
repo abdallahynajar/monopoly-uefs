@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /**
- *
+ * Fachada para que os testes acessem os metodos do jogo
  * @author Lidiany
  */
 public class FacadeMonopoly {

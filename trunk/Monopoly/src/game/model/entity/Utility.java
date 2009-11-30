@@ -7,7 +7,7 @@ package game.model.entity;
 import game.model.exceptions.NotEnoughMoneyException;
 
 /**
- *
+ *  Representa serviços públicos no tabuleiro do monopoly
  * @author Jneto
  */
 public class Utility extends PurchasablePlace {
@@ -21,6 +21,11 @@ public class Utility extends PurchasablePlace {
         this.owner = new Player("bank", null);
     }
 
+    /**
+     * Por enquanto não faz nada
+     * @param p
+     * @throws NotEnoughMoneyException
+     */
     public void action(Player p) throws NotEnoughMoneyException {
 //         if ( !(owner.getId() == p.getId()) ) {
 //            if ( owner.getName().equals("bank") ) {

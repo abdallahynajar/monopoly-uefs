@@ -10,7 +10,6 @@ import game.model.entity.Board;
 import game.model.entity.Colors;
 import game.model.entity.Commands;
 import game.model.entity.Player;
-import game.model.entity.PurchasablePlace;
 import game.model.exceptions.InvalidCommandException;
 import game.model.exceptions.InvalidDiceResultException;
 import game.model.exceptions.InvalidGameParametersException;
@@ -26,9 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Lidiany
  * Cria e gerencia as entidades relacionadas ao jogo
+ * @author Lidiany
  */
 public class GameModel {
 
@@ -70,7 +68,6 @@ public class GameModel {
 
     /**
      * Cria uma nova instância de GameModel
-     * @author Lidiany
      */
     public GameModel() {
         configuration = GameConfiguration.getConfiguration();
@@ -82,7 +79,6 @@ public class GameModel {
     /**
      * Cria uma nova partida de Monopoly
      *@see Colors
-     * @author Lidiany
      * @param numberOfPlayers o número de participantes do jogo
      * deve ser maior que <b>2</b> e menor que <b>8</b>
      * @param playerNames a lista de nomes dos jogadores
@@ -132,7 +128,6 @@ public class GameModel {
 
     /**
      * Valida os nomes de jogadores
-     * @author Lidiany
      * @param playerNames a lista de nomes dos jogadores
      * @throws InvalidPlayerNameException - se for passado um nome inválido como banco ou nomes repetidos
      */
@@ -160,7 +155,6 @@ public class GameModel {
     /**
      * Valida as cores dos jogadores
      *@see Colors
-     * @author Lidiany
      * @param tokenColors as cores do peeões dos jogadores
      * @throws InvalidTokenColorException - se for passada uma cor inválida ou cores repetidas
      */
@@ -190,7 +184,6 @@ public class GameModel {
     /**
      * Adiciona um jogador à lista de participantes do jogo
      *
-     * @author Lidiany
      * @param id o identificador do jogador
      * @param name o nome do jogador
      * @param color a cor do peão do jogador
@@ -208,7 +201,6 @@ public class GameModel {
     /**
      * Remove um jogador da lista de participantes do jogo
      *
-     * @author Lidiany
      * @param id o indice do jogador na lista
      */
     public void removePlayer(int id) {
@@ -233,7 +225,6 @@ public class GameModel {
 
     /**
      * Busca um jogador pelo nome
-     * @author Lidiany
      * @param name o nome do jogador a ser pesquisado
      * @throws NonExistentPlayerException - se o jogadr não for encontrado
      */
@@ -254,7 +245,6 @@ public class GameModel {
 
     /**
      * Executa um comando de um jogador
-     * @author Lidiany
      * @param command o comando a ser executado
      * @throws InvalidCommandException - se não for possível executar o comando
      */
@@ -271,7 +261,6 @@ public class GameModel {
 
     /**
      * Executa um comando de um jogador
-     * @author Lidiany
      * @param firstDieResult -  valor do primeiro dado
      * @param secondDieResult -  valor do segundo dado
      * @throws InvalidDiceResultException - se não os valores dos dados estiverem incorretos
@@ -292,7 +281,6 @@ public class GameModel {
 
     /**
      * Valida os valores dos Dados
-     * @author Lidiany
      * @param firstDieResult -  valor do primeiro dado
      * @param secondDieResult -  valor do segundo dado
      * @return <b>true </b> se os valores forem corretos, senão <b>false </b>
@@ -352,9 +340,7 @@ public class GameModel {
     }
 
     /**
-     * Retorna o número de jogadores que ainda estão jogando
-     * @author João
-     * @return
+     * @return Retorna o número de jogadores que ainda estão jogando
      */
     public int getNumberOfRealPlayers() {
         int n = 0;
@@ -368,7 +354,6 @@ public class GameModel {
 
     /**
      * Faz o atual jogador tentar comprar a propriedade em que se encontra.
-     * @author João
      * @throws game.model.exceptions.NotEnoughMoneyException
      * @throws game.model.exceptions.NotInSaleException
      * @throws game.model.exceptions.ItAlreadyHasAnOnwerException

@@ -34,7 +34,6 @@ public class GameController {
 
     /***
      * Inicializa as variáveis necessárias para começar uma partida de monopólio
-     * @author Lidiany
      */
     public void initializeGame() {
         int numberOfPlayers = getNumberOfPlayers();
@@ -73,7 +72,6 @@ public class GameController {
 
     /***
      * Inicializa a lista de comandos disponíveis para os jogadores
-     * @author Lidiany
      */
     private void initCommands() {
        
@@ -85,7 +83,6 @@ public class GameController {
 
      /***
      * Inicializa a uma partida de monopólio
-     * @author Lidiany
      */
     public void startGame() {
         currentPlayerIndex = 0;       
@@ -99,7 +96,6 @@ public class GameController {
 
     /***
      *
-     * @author Lidiany
      * @param gameView interface gráfica para o jogo
      */
     public void setGameView(GameView gameView) {
@@ -108,7 +104,6 @@ public class GameController {
 
     /***
      * Verifica se o jogo já terminou
-     * @author Lidiany
      * @return <b>true</b> se o jogo acabou ou <b>false</b> caso ainda não tenha acabado
      */
     public boolean isTheGameOver() {       
@@ -121,7 +116,6 @@ public class GameController {
 
     /***
      * Executa um comando escolhido pelo jogador da vez
-     * @author Lidiany
      */
     private void executePlayerCommand() {
       //  boolean playerTurn = true;
@@ -130,7 +124,6 @@ public class GameController {
 
     /***
      * Pega o comando enviado pelo jogador atual
-     * @author Lidiany
      * @return  o comando escolhido pelo jogador atual
      */
     public Commands getPlayerCommand() {
@@ -155,7 +148,6 @@ public class GameController {
 
     /***
      * Remove um jogador da partida
-     * @author Lidiany
      * @param player - o jogador a ser removido
      */
     public void removePlayerOfTheGame(Player player) {
@@ -174,7 +166,6 @@ public class GameController {
 
     /***
      * Exibe o status de um jogador
-     * @author Lidiany
      * @param player - o jogador cujo status será mostrado
      */
     public void showPlayerStatus(Player player) {
@@ -183,7 +174,6 @@ public class GameController {
 
     /***
      * Obtém uma cor escolhida por um jogador
-     * @author Lidiany
      * @return a cor escolhida pelo jogador
      */
     private String getPlayerColor() {
@@ -207,7 +197,6 @@ public class GameController {
 
      /***
      * Retorna a quantidade de jogadores
-     * @author Lidiany
      * @return o número de jogadores
      */
     private int getNumberOfPlayers() {
@@ -231,7 +220,6 @@ public class GameController {
 
      /***
      * Obtém o nome de um jogador
-     * @author Lidiany
      * @param o número do jogador
      * @return o nome informado pelo jogador
      */
@@ -247,7 +235,6 @@ public class GameController {
 
      /***
      * Atualiza o índice que define o jogador atual
-     * @author Lidiany
      * @param o número do jogador
      * @return o nome informado pelo jogador
      */
@@ -262,15 +249,13 @@ public class GameController {
     }
 
      /**
-     * Avisa que o jogo acabou
-     * @author Lidiany     
+     * Avisa que o jogo acabou     
      */
     public void finishGame() {
         gameView.showMessage("O jogo acabou. ");
     }
     /**
      * Interage com o usuário, oferecendo a possibilidade de compra de uma "propriedade comprável"
-     * @author João
      * @param place
      * @param player
      */

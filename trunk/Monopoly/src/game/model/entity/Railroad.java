@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package game.model.entity;
 
 import game.model.exceptions.ItAlreadyHasAnOnwerException;
@@ -9,7 +5,7 @@ import game.model.exceptions.NotEnoughMoneyException;
 import game.model.exceptions.NotInSaleException;
 
 /**
- *
+ * Representa as ferrovias no tabuleiro do monopoly
  * @author Jneto
  */
 public class Railroad extends PurchasablePlace {
@@ -53,12 +49,4 @@ public class Railroad extends PurchasablePlace {
         return 25 * nRailroad;
     }
 
-    /**
-     * Um dia tratara da compra das ferrovias
-     * @param p
-     * @param gc
-     */
-    public void buyRailroad(Player p) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 }

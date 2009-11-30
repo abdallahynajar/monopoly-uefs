@@ -5,10 +5,8 @@
 
 package game.model.entity;
 
-import game.controller.GameController;
-
 /**
- *
+ *  Representa a parada livre no tabuleiro do Monopoly
  * @author jmatos
  */
 public class FreeParking extends Place {
@@ -19,7 +17,10 @@ public class FreeParking extends Place {
         this.placeGroup = placeGroup;
     }
 
-
+    /**
+     *
+     * @param p
+     */
     @Override
     public void action(Player p) {
         //não faz nada.

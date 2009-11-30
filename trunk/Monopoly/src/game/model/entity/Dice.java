@@ -7,7 +7,7 @@ package game.model.entity;
 import java.util.Random;
 
 /**
- *
+ *  Classe com um método estático para rolagem dos dados.
  * @author Lidiany
  */
 public  class Dice {
