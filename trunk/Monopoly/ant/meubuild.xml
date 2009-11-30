@@ -19,11 +19,15 @@
     </target>
 
   <target name="testa">
-          <java classname="game.test.MonopolyTest" >
+       <!--   <java classname="game.test.MonopolyTest" >
               <classpath>
                   <pathelement path="./ant2" />
                   <pathelement path="./lib/easyaccept.jar"/>
               </classpath>
-          </java>
+          </java>      -->
+          <exec dir="." executable="cmd" os="Windows XP">
+            <arg line="/c testa.bat"/>
+          </exec>
+
   </target>
 </project>
