@@ -41,7 +41,7 @@
            windowtitle="Monopoly-uefs"
        >
 
-        <fileset dir="src" defaultexcludes="yes">
+        <fileset dir="src">
             <include name="**/*.java"/>
         </fileset>
     </javadoc>
