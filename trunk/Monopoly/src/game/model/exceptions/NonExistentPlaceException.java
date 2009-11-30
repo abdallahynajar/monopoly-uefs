@@ -6,7 +6,7 @@
 package game.model.exceptions;
 
 /**
- *
+ * É lançada quando é se tenta acessar um lugar que não existe.
  * @author Lidiany
  */
 public class NonExistentPlaceException extends GamePlaceException{

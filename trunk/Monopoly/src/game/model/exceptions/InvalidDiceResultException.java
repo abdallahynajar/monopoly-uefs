@@ -6,7 +6,7 @@
 package game.model.exceptions;
 
 /**
- *
+ * É lançada quando é passado um valor de dado inválido (valor <1 ou > 6). 
  * @author Lidiany
  */
 public class InvalidDiceResultException extends GameException{

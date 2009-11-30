@@ -6,7 +6,7 @@
 package game.model.exceptions;
 
 /**
- *
+ * É lançada quando é passada uma cor de peão inválida no jogo.
  * @author Lidiany
  */
 public class InvalidTokenColorException extends GameException{

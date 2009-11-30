@@ -6,7 +6,7 @@
 package game.model.exceptions;
 
 /**
- *
+ * É lançada quando se tenta acessar um jogador não existente.
  * @author Lidiany
  */
 public class NonExistentPlayerException extends GamePlayerException{
