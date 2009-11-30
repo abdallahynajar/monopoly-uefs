@@ -5,5 +5,3 @@ set JAVA=java -cp lib\easyaccept.jar;ant2 easyaccept.EasyAccept game.test.Facade
 %JAVA% easyTests/us2.txt
 %JAVA% easyTests/us3.txt
 %JAVA% easyTests/us4.txt
-
-pause
