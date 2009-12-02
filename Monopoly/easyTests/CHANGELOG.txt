@@ -1,0 +1,19 @@
+#### @LIDIANY ####
+- 10/12 - Criei o arquivo de propriedades com as configurações do jogo e fiz o load na classe GameConfiguration
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### @JOÃO ####
