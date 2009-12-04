@@ -61,13 +61,13 @@ public class FacadeMonopoly {
         StringBuilder strCommand = new StringBuilder();
         strCommand.append("{");
         List<Commands> commands = gameModel.getCurrentPlayer().getPlayerCommands();
-        
+
         for (int i = 0; i < commands.size(); i++) {
             Commands c = commands.get(i);
             strCommand.append(c.toString().toLowerCase());
-            if( (i+ 1) != commands.size() ){
+            if ((i + 1) != commands.size()) {
                 strCommand.append(",");
-            }            
+            }
         }
         strCommand.append("}");
         return strCommand.toString();
@@ -78,13 +78,13 @@ public class FacadeMonopoly {
         str.append("{");
         ArrayList<PurchasablePlace> prPlace = gameModel.getPlayerByName(playerName).getItsPropertys();
 
-          for (int i = 0; i < prPlace.size(); i++) {
+        for (int i = 0; i < prPlace.size(); i++) {
             PurchasablePlace purchasablePlace = prPlace.get(i);
             str.append(purchasablePlace.getName());
-            if( (i+ 1) != prPlace.size() ){
+            if ((i + 1) != prPlace.size()) {
                 str.append(",");
-            } 
-            
+            }
+
         }
         str.append("}");
         return str.toString();
@@ -120,7 +120,7 @@ public class FacadeMonopoly {
         return gameModel.getBoard().getPlacePrice(placeId);
     }
 
-    public void setAutomaticBuying(boolean auto){
+    public void setAutomaticBuying(boolean auto) {
         gameModel.getConfiguration().setAutoBuy(auto);
     }
 
@@ -128,13 +128,36 @@ public class FacadeMonopoly {
         gameModel.rollDices(firstDieResult, secondDieResult);
     }
 
-    public boolean gameIsOver(){
-        //verifica se é isso mesmo. Não estou 100% certo
-        //mas passou no teste hehe
+    public boolean gameIsOver() {     
         return gameModel.isGameOver();
     }
 
-    public void buy() throws NotEnoughMoneyException, NotInSaleException, GamePlaceException, Exception{
+    public void buy() throws NotEnoughMoneyException, NotInSaleException, GamePlaceException, Exception {
         gameModel.buy();
+    }
+
+    public int getCurrentChanceCardNumber() {
+        return 0;
+    }
+
+    public int getCurrentChestCardNumber() {
+        return 0;
+    }
+
+    public String getCurrentChanceCardDescription() {
+        return "";
+    }
+
+    public String getCurrentChestCardDescription() {
+        return "";
+    }
+
+    public void activateChestPlaces(boolean cardShuffle) {
+    }
+
+    public void activateChancePlaces(boolean cardShuffle) {
+    }
+
+    public void forceNextChanceCard(int chanceCardID) {
     }
 }

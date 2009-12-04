@@ -1,5 +1,13 @@
 #### @LIDIANY ####
-- 10/12 - Criei o arquivo de propriedades com as configurações do jogo e fiz o load na classe GameConfiguration
+- 1/12 - Criei o arquivo de propriedades com as configurações do jogo e fiz o load na classe GameConfiguration
+- 2/12 - Criei as classes Card, Chance, CommunityChest, CardBoard
+- 2/12 - Apaguei Bank
+- 2/12 - Criei os métodos da us5 na Fachada
+- 2/12 - Criei as classe FinancialCard e WalkerCard
+- 2/12 - Falta decidir os tipos de cartas, me parece que ao todo são 6 =(
+
+
+-
 
 
 

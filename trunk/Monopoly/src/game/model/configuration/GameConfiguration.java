@@ -29,11 +29,14 @@ public class GameConfiguration {
     private int prisonBail;
     private int mortgageTax;
     private int distributedTitles;
+    private boolean activateChancePlaces;
+    private boolean cardShuffle;
+    private boolean activateChestPlaces;
 
     private static GameConfiguration gc;
     
     /**Arquivo de configuração do jogo */
-    private static ResourceBundle rc = ResourceBundle.getBundle("game.resources.gameConfig");
+    private static ResourceBundle rc = ResourceBundle.getBundle("game.model.configuration.gameConfig");
 
     public static GameConfiguration getConfiguration() {
         if (gc == null) {
@@ -58,8 +61,27 @@ public class GameConfiguration {
         this.maxPrisonTurns = Integer.parseInt( rc.getString("maxPrisonTurns") );
         this.prisonBail = Integer.parseInt( rc.getString("prisonBail") );
         this.mortgageTax = Integer.parseInt( rc.getString("mortgageTax") );
-        this.distributedTitles = Integer.parseInt( rc.getString("distributedTitles") );     
+        this.distributedTitles = Integer.parseInt( rc.getString("distributedTitles") );
+        this.activateChancePlaces = Boolean.parseBoolean( rc.getString("activateChancePlaces") );
+        this.cardShuffle = Boolean.parseBoolean( rc.getString("cardShuffle") );
+        activateChestPlaces = Boolean.parseBoolean( rc.getString("activateChestPlaces") );
     }
+
+    public boolean isActivateChancePlaces() {
+        return activateChancePlaces;
+    }
+
+    public void setActivateChancePlaces(boolean activateChancePlaces) {
+        this.activateChancePlaces = activateChancePlaces;
+    }
+
+    public boolean isCardShuffle() {
+        return cardShuffle;
+    }
+
+    public void setCardShuffle(boolean cardShuffle) {
+        this.cardShuffle = cardShuffle;
+    }    
 
     public float getSalaryBonus() {
         return salaryBonus;
