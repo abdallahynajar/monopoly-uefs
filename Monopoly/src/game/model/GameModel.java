@@ -5,7 +5,6 @@
 package game.model;
 
 import game.model.configuration.GameConfiguration;
-import game.model.entity.Bank;
 import game.model.entity.Board;
 import game.model.entity.Colors;
 import game.model.entity.Commands;
@@ -37,10 +36,7 @@ public class GameModel {
      */
     private Board board;
     private boolean gameStarted = false;
-    /**
-     * Banco
-     */
-    private Bank bank;
+
     /**
      * Para configurar os parâmetros de inicialização do jogo
      */
@@ -63,7 +59,6 @@ public class GameModel {
         configuration = GameConfiguration.getConfiguration();
         configuration.setAutoBuy(false);
         board = new Board();
-        bank = new Bank();
     }
 
     /**
