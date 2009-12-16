@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.model.entity;
+package game.util;
 
 import java.util.Random;
 

@@ -4,7 +4,7 @@
  */
 package game.view;
 
-import game.model.entity.Colors;
+import game.util.Colors;
 import java.util.List;
 
 /**

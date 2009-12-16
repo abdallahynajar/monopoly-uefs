@@ -1,5 +1,6 @@
-package game.model.entity;
+package game.model.entity.board;
 
+import game.model.entity.*;
 import game.model.exceptions.GamePlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
 import game.model.exceptions.NotInSaleException;

@@ -6,11 +6,11 @@ package game.controller;
 
 import game.model.GameModel;
 import game.model.configuration.GameConfiguration;
-import game.model.entity.Board;
-import game.model.entity.Colors;
-import game.model.entity.Commands;
+import game.model.entity.board.Board;
+import game.util.Colors;
+import game.util.Commands;
 import game.model.entity.Player;
-import game.model.entity.PurchasablePlace;
+import game.model.entity.board.PurchasablePlace;
 import game.view.GameView;
 
 /**

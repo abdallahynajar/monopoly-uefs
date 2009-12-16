@@ -5,8 +5,8 @@
 package game.test;
 
 import game.model.GameModel;
-import game.model.entity.Commands;
-import game.model.entity.PurchasablePlace;
+import game.util.Commands;
+import game.model.entity.board.PurchasablePlace;
 import game.model.exceptions.*;
 import java.util.ArrayList;
 import java.util.List;

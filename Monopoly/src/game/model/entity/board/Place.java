@@ -3,7 +3,9 @@
  * and open the template in the editor.
  */
 
-package game.model.entity;
+package game.model.entity.board;
+
+import game.model.entity.*;
 
 /**
  * Representa uma casa no tabuleiro do monopoly. Possui metodos e atributos
