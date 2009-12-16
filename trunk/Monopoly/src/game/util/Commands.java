@@ -3,12 +3,12 @@
  * and open the template in the editor.
  */
 
-package game.model.entity;
+package game.util;
 
 /**
- *
+ * Os possíveis comandos para os jogadores
  * @author Lidiany
  */
-public class WalkerCard {
-
+public enum Commands {
+    ROLL, STATUS, QUIT;
 }

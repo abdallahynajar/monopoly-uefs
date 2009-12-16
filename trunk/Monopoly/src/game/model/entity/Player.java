@@ -4,6 +4,12 @@
  */
 package game.model.entity;
 
+import game.util.Commands;
+import game.model.entity.board.Place;
+import game.model.entity.board.Board;
+import game.model.entity.board.Railroad;
+import game.model.entity.board.PurchasablePlace;
+import game.model.entity.board.Utility;
 import game.model.configuration.GameConfiguration;
 import game.model.exceptions.GamePlaceException;
 import game.model.exceptions.NonExistentPlaceException;

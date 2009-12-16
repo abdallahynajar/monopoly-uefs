@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package game.model.entity;
+package game.util;
 
 /**
  * Opções de cores para os peões dos jogadores

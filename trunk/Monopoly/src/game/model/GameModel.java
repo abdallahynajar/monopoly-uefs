@@ -5,9 +5,9 @@
 package game.model;
 
 import game.model.configuration.GameConfiguration;
-import game.model.entity.Board;
-import game.model.entity.Colors;
-import game.model.entity.Commands;
+import game.model.entity.board.Board;
+import game.util.Colors;
+import game.util.Commands;
 import game.model.entity.Player;
 import game.model.exceptions.*;
 import java.util.ArrayList;
@@ -58,7 +58,7 @@ public class GameModel {
     public GameModel() {
         configuration = GameConfiguration.getConfiguration();
         configuration.setAutoBuy(false);
-        board = new Board();
+        board = Board.getBoard();
     }
 
     /**

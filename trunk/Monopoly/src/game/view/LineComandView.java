@@ -5,8 +5,8 @@
 
 package game.view;
 
-import game.model.entity.Colors;
-import game.model.entity.Commands;
+import game.util.Colors;
+import game.util.Commands;
 import java.util.List;
 
 /**
