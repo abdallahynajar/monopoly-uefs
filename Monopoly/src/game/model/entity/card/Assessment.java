@@ -19,13 +19,14 @@ public class Assessment extends Card{
     private int feePerHouse;
     private int feePerPlayer;
 
-
-
-    public Assessment(int cardNumber, String description, int cardValue) {
+    public Assessment(int cardNumber, String description, int cardValue, int feePerHotel, int feePerHouse, int feePerPlayer) {
         super(cardNumber, description);
         this.cardValue = cardValue;
+        this.feePerHotel = feePerHotel;
+        this.feePerHouse = feePerHouse;
+        this.feePerPlayer = feePerPlayer;
     }
-
+    
     @Override
     public void action(Player p) {
         throw new UnsupportedOperationException("Not supported yet.");

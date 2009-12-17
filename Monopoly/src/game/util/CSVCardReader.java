@@ -7,6 +7,8 @@ package game.util;
 
 import game.model.entity.card.*;
 import com.csvreader.CsvReader;
+import game.model.entity.board.Board;
+import game.model.entity.board.Place;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -16,54 +18,46 @@ import java.util.ArrayList;
  */
 public class CSVCardReader {
 
-    private CsvReader reader;
+    private static CsvReader reader;
 
-
-    public void readFile( String csvFile) throws IOException{
+    public static ArrayList<Card> loadCards(String csvFile) throws IOException{
         reader = new CsvReader(csvFile);
         reader.readHeaders();
-    }
-
-    public ArrayList<Card> loadCard() throws IOException{
-
-        ArrayList<Card> cardGames = new ArrayList<Card>();
+        
+        ArrayList<Card> gameCards = new ArrayList<Card>();
 
                 reader.readHeaders();
-
+         int cardNumber = 0;
         while (reader.readRecord())
         {
             String cardType = reader.get("TYPE");
             if( cardType.equalsIgnoreCase("MOVE") ){
-
-                Movement mv = new Movement(0, null, null, true);
-                cardGames.add(mv);
+                 String description = reader.get("DESCRIPTION");
+                 Board board = Board.getBoard();
+                 Place place =  board.getPlaceByName( reader.get("PLACE") );
+                 boolean paysBonus = Boolean.parseBoolean (reader.get("PAYSBONUS") );
+                 
+                Movement mv = new Movement(cardNumber, description, 
+                                            place, paysBonus);
+                gameCards.add(mv);
 
             }else if(cardType.equalsIgnoreCase("ASS") ){
+                 String description = reader.get("DESCRIPTION");
+                 int cardValue = Integer.parseInt( reader.get("VALUE") );
+                 int feePerHouse = Integer.parseInt( reader.get("FEEPERHOUSE") );
+                 int feePerHotel = Integer.parseInt( reader.get("FEEPERHOTEL") );
+                 int feePerPlayer = Integer.parseInt( reader.get("FEEPERPLAYER") );
 
-                Assessment ass = new Assessment(0, null, 0);
-                 cardGames.add(ass);
+                Assessment ass = new Assessment(cardNumber, description,
+                                                cardValue, feePerHotel,
+                                                feePerHouse, feePerPlayer);
+                 gameCards.add(ass);
             }
-
-//                        String productID = reader.get("ProductID");
-//                        String productName = reader.get("ProductName");
-//                        String supplierID = reader.get("SupplierID");
-//                        String categoryID = reader.get("CategoryID");
-//                        String quantityPerUnit = reader.get("QuantityPerUnit");
-//                        String unitPrice = reader.get("UnitPrice");
-//                        String unitsInStock = reader.get("UnitsInStock");
-//                        String unitsOnOrder = reader.get("UnitsOnOrder");
-//                        String reorderLevel = reader.get("ReorderLevel");
-//                        String discontinued = reader.get("Discontinued");
-
-            //carrega a lista de cartas do arquivo
-            //deve ser chamado pelo board card pra pegar as cartas do chance ou do cchest :P
-
-                // perform program logic here
-
+            System.out.println("CARD" + gameCards.get(cardNumber).getDescription());
+            cardNumber++;
         }
-                return cardGames;
-
+                return gameCards;
     }
 
-
+    
 }
