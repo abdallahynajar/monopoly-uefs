@@ -3,8 +3,9 @@
  * and open the template in the editor.
  */
 
-package game.model.entity.card;
+package game.util;
 
+import game.model.entity.card.*;
 import com.csvreader.CsvReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,10 +26,24 @@ public class CSVCardReader {
 
     public ArrayList<Card> loadCard() throws IOException{
 
+        ArrayList<Card> cardGames = new ArrayList<Card>();
+
                 reader.readHeaders();
 
         while (reader.readRecord())
         {
+            String cardType = reader.get("TYPE");
+            if( cardType.equalsIgnoreCase("MOVE") ){
+
+                Movement mv = new Movement(0, null, null, true);
+                cardGames.add(mv);
+
+            }else if(cardType.equalsIgnoreCase("ASS") ){
+
+                Assessment ass = new Assessment(0, null, 0);
+                 cardGames.add(ass);
+            }
+
 //                        String productID = reader.get("ProductID");
 //                        String productName = reader.get("ProductName");
 //                        String supplierID = reader.get("SupplierID");
@@ -46,7 +61,7 @@ public class CSVCardReader {
                 // perform program logic here
 
         }
-                return new ArrayList<Card>();
+                return cardGames;
 
     }
 
