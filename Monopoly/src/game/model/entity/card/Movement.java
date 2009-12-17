@@ -6,13 +6,15 @@
 package game.model.entity.card;
 
 import game.model.entity.board.Place;
-import game.model.entity.*;
 
 /**
  *
  * @author Lidiany
+ *
+ * Carta para movimentar o jogador pelo tabuleiro
+ * 
  */
-public class WalkerCard {
+public class Movement {
 
     private Place placeToGo;
 
