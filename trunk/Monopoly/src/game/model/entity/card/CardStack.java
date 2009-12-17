@@ -49,22 +49,22 @@ public class CardStack  {
 
     private void initChanceCards(){
 
-        chanceCards.add( new FinancialCard(1, "", 200) );
-        chanceCards.add( new FinancialCard(2, "Bank Pays You Dividend Of", 200) );
-        chanceCards.add( new FinancialCard(3, "Taxa do médico", -50) );
-        chanceCards.add( new FinancialCard(4, "", 200) );
-        chanceCards.add( new FinancialCard(5, "Da liquidação fora de estoque", 45) );
-        chanceCards.add( new FinancialCard(6, "", 200) );
-        chanceCards.add( new FinancialCard(7, "", 200) );
-        chanceCards.add( new FinancialCard(8, "Restituição do Imposto de Renda", 20) );
-        chanceCards.add( new FinancialCard(9, "", 200) );
-        chanceCards.add( new FinancialCard(10, "", 200) );
-        chanceCards.add( new FinancialCard(11, "", 200) );
-        chanceCards.add( new FinancialCard(12, "", 200) );
-        chanceCards.add( new FinancialCard(13, "", 200) );
-        chanceCards.add( new FinancialCard(14, "", 200) );
-        chanceCards.add( new FinancialCard(15, "", 200) );
-        chanceCards.add( new FinancialCard(16, "", 200) ); 
+        chanceCards.add( new Assessment(1, "", 200) );
+        chanceCards.add( new Assessment(2, "Bank Pays You Dividend Of", 200) );
+        chanceCards.add( new Assessment(3, "Taxa do médico", -50) );
+        chanceCards.add( new Assessment(4, "", 200) );
+        chanceCards.add( new Assessment(5, "Da liquidação fora de estoque", 45) );
+        chanceCards.add( new Assessment(6, "", 200) );
+        chanceCards.add( new Assessment(7, "", 200) );
+        chanceCards.add( new Assessment(8, "Restituição do Imposto de Renda", 20) );
+        chanceCards.add( new Assessment(9, "", 200) );
+        chanceCards.add( new Assessment(10, "", 200) );
+        chanceCards.add( new Assessment(11, "", 200) );
+        chanceCards.add( new Assessment(12, "", 200) );
+        chanceCards.add( new Assessment(13, "", 200) );
+        chanceCards.add( new Assessment(14, "", 200) );
+        chanceCards.add( new Assessment(15, "", 200) );
+        chanceCards.add( new Assessment(16, "", 200) );
 
 
     }
