@@ -1,6 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Universidade Estadual de Feira de Santana
+ * Padrões e Frameworks 2009.1
+ * João de Matos
+ * Lidiany C Santos
  */
 
 package game.test;
