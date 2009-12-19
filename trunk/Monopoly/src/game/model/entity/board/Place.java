@@ -15,8 +15,17 @@ import game.model.entity.*;
  */
 public abstract class Place {
 
+    /**
+     * Nome do lugar
+     */
     protected String name;
+    /**
+     * Posição do lugar no tabuleiro
+     */
     protected int position;
+    /**
+     * Grupo do qual o lugar faz parte
+     */
     protected String placeGroup;
 
     public int getPosition() {

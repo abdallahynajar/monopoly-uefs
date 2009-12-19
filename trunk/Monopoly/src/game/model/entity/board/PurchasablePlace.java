@@ -18,9 +18,18 @@ import game.model.exceptions.NotInSaleException;
  */
 public abstract class PurchasablePlace extends Place{
 
+    /**
+     * Preço do lugar
+     */
     protected float price;
+    /**
+     * Hipoeca do lugar
+     */
     protected float hipoteca;
-    protected Player owner;
+    /**
+     * Proprietário do lugar, no ínicio do jogo, todas a propriedades pertencem ao banco
+     */
+    protected Player owner = new Player("bank", null); 
 
     public Player getOwner() {
         return owner;

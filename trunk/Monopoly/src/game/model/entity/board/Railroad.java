@@ -6,7 +6,7 @@ import game.model.exceptions.NotEnoughMoneyException;
 import game.model.exceptions.NotInSaleException;
 
 /**
- * Representa as ferrovias no tabuleiro do monopoly
+ * Representa uma ferrovia no tabuleiro do monopoly
  * @author Jneto
  */
 public class Railroad extends PurchasablePlace {
@@ -26,8 +26,7 @@ public class Railroad extends PurchasablePlace {
         super.name = name;
         super.price = price;
         super.hipoteca = hipoteca;
-        this.placeGroup = "railRoad";
-        this.owner = new Player("bank", null);
+        this.placeGroup = "railRoad";       
     }
 
     /**

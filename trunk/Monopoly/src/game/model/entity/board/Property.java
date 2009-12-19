@@ -10,14 +10,23 @@ import game.model.exceptions.NotEnoughMoneyException;
 import game.model.exceptions.NotInSaleException;
 
 /**
- * Representa uma propriedade no tabuleiro.
+ * Representa uma propriedade no tabuleiro do monopoly.
  * @author jmatos
  */
 public class Property extends PurchasablePlace {
 
+    /**
+     * Preço da casa
+     */
     private long housePrice;
-    
+
+    /**
+     * Quantidade de casas na propriedade
+     */
     private int nHouses;
+    /**
+     * Contém os valores do aluguel, o índice do array corresponde a quantidade de casas na propriedade
+     */
     private float rent[];
 
     public Property(int position, String name, long price, float rent[], long hipoteca, long housePrice, String placeGroup) {
@@ -28,7 +37,7 @@ public class Property extends PurchasablePlace {
         this.housePrice = housePrice;
         this.placeGroup = placeGroup;
         this.position = position;
-        this.owner = new Player("bank", null); //a principio, todas a propriedades são do banco
+        //this.owner = new Player("bank", null); //a principio, todas a propriedades são do banco
     }
 
     public long getnHouses() {

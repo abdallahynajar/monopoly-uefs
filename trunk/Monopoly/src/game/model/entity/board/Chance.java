@@ -9,7 +9,7 @@ import game.model.entity.*;
 import game.model.configuration.GameConfiguration;
 
 /**
- *
+ * Representa um lugar do tipo Sorte/Revés no tabuleiro do monopoly.
  * @author Lidiany
  */
 public class Chance extends Place{
