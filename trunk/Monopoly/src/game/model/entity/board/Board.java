@@ -10,18 +10,33 @@ import java.util.ArrayList;
 
 /**
  * Representa o tabuleiro do monopoly
- * @author UEFS\jmatos
- * 
+ * Utiliza o padrão singleton, pois utiliza-se somente um
+ * tabuleiro por partida de Monopoly
+ * @author UEFS\jmatos 
  */
 public class Board {
 
+    /**
+     * Lugares do tabuleiro
+     */
     private ArrayList<Place> places;
+    /**
+     * Instância estática do tabuleiro
+     */
     private static Board board;
 
+    /**
+     * Construtor privado, só pode ser acessado dentro da classe
+     */
     private Board() {
         buildBoardPlaces();
 
     }
+
+    /**
+     * Cria uma única instância do tabuleiro, caso esta ainda não tenha sido criada
+     * Retorna o tabuleiro, caso este já tenha sido criado.
+     */
     public static Board getBoard(){
         return (board == null ? new Board() : board);
     }
@@ -49,6 +64,7 @@ public class Board {
     }
 
     /**
+     * Busca um lugar pela posição
      * @param position
      * @return lugar determinado pela posição no tabuleiro
      */
@@ -66,6 +82,7 @@ public class Board {
     }
 
     /**
+     * Busca o nome de um lugar pela posição
      * @param position
      * @return nome do lugar determinado pela posição
      */
@@ -143,6 +160,9 @@ public class Board {
 
     }
 
+      /**
+       * Constrói o tabuleiro com seus lugares
+       */
     private void buildBoardPlaces() {
         places = new ArrayList<Place>();
         places.add(new Property(1, "Mediterranean Avenue", 60, new float[]{2, 10, 30, 90, 160, 250}, 30, 50, "purple"));
