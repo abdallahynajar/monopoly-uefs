@@ -24,9 +24,21 @@ import java.util.List;
  */
 public class Player {
 
+    /** 
+     * Id do jogador no jogo
+     */
     private int id;
+    /**
+     * Nome do jogador
+     */
     private String name;
+    /** 
+     * Cor do peão do jogador
+     */
     private String color;
+    /** 
+     * Quantia em dinheiro que o jogador recebe
+     */
     private float amountOfMoney;
     
     /**
@@ -34,6 +46,9 @@ public class Player {
      */
     private Place atualPlace;
 
+    /**
+     * Posição do jogador no tabuleiro
+     */
     private int atualPosition;
     /**
      * Lista de proprieades que o jodador possui.
@@ -45,8 +60,15 @@ public class Player {
      */
     private List<Commands> playerCommands;
 
+    /**
+     * <b>true</b> se o jogador está no jogo ou <b>false</b> se já perdeu
+     */
     private boolean playing;
 
+    /** Cria uma nova instância de um jogador
+     * @param color cor do peão
+     * @param name nome do jogador
+     */
     public Player(String name, String color) {
         this.name = name;
         this.color = color;
@@ -236,7 +258,10 @@ public class Player {
         }
         atualPlace.action(this);
     }
-    
+    /**
+     * Retorna o número de ferrovias do jogador
+     * @return o número de ferrovias do jogador     *
+     */
     private int getNumberOfRailRoads() {
         int n = 0;
         for (PurchasablePlace purchasablePlace : itsPropertys) {
@@ -246,7 +271,9 @@ public class Player {
         }
         return n;
     }
-
+    /**
+     * Atualiza o valor da corrida para as ferrovias do jogador
+     */
     private void updateRailroadsRunning() {
         for (PurchasablePlace purchasablePlace : itsPropertys) {
             if (purchasablePlace instanceof Railroad) {
