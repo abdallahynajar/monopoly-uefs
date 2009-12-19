@@ -8,7 +8,7 @@ package game.model.entity.board;
 import game.model.entity.*;
 
 /**
- *
+ * Representa um lugar do tipo Cofre comunitário no tabuleiro do monopoly.
  * @author Lidiany
  */
 public class CommunityChest extends Place{

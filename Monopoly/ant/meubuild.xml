@@ -1,4 +1,4 @@
-<project name="teste" basedir="." default="compila">
+<project name="teste" basedir="." default="compila" >
          
          
     <target name="limpa">
@@ -12,7 +12,7 @@
     </target>
 
     <target name="compila" depends="dir">
-        <javac srcdir="./src" destdir="ant2">
+        <javac srcdir="./src" destdir="ant2" encoding="iso-8859-1">
           <classpath>
                      <pathelement path="./lib/easyaccept.jar"/>
           </classpath>

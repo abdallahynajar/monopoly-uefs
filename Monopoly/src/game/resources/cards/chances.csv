@@ -1,16 +1,16 @@
 TYPE;DESCRIPTION;PAYSBONUS;PLACE;VALUE;FEEPERHOUSE;FEEPERHOTEL;FEEPERPLAYER;WALK
-MOVE;Advance To Go - Collect $200;true;go;;;;;
-MOVE;Advance To - Illinois Avenue;false;Illinois Avenue;;;;;
-MOVE;Advance To St. Charles Place;true;St. Charles Place;;;;;
-MOVE;Advance Token To Nearest Utility;false;Utility;;;;;
-MOVE;Advance Token To The Nearest Railroad - Pay Owner Twice The Rental To Which He Is Otherwise entitled. If Railroad Is Unowned, You May Buy It From The Bank.;false;Railroad;;;;;
-ASS;Bank Pays You Dividend Of - $50;;;50;;;;
-MOVE;Go Back 3 Spaces;false;;;;;;-3
-MOVE;Go Directly To Jail - Do Not Pass Go, Do Not Collect $200;false;jail;;;;;
-ASS;Make General Repairs On All Your Property - For Each House Pay $25, For Each Hotel $100;;;150;;;;
-ASS;Pay Poor Tax Of - $15;;-15;;;;;
-JAIL;This Card May Be Kept Until Needed Or Sold - Get Out Of Jail Free;;;;;;;
-MOVE;Take A Ride On The Reading - If You Pass Go Collect $200;true;Reading;;;;;
-MOVE;Take A Walk On The Board Walk - Advance Token To Board Walk;false;Board Walk;;;;;
-ASS;You Have Been Elected Chairman Of The Board - Pay Each Player $50;;;;;;-50;
-ASS;Your Building And Loan Matures - Collect $150;;;150;;;;
+MOVE;Advance To Go - Collect $200;true;go;0;;;;
+MOVE;Advance To - Illinois Avenue;false;Illinois Avenue;0;;;;
+MOVE;Advance To St. Charles Place;true;St. Charles Place;0;;;;
+MOVE;Advance Token To Nearest Utility;false;Utility;0;;;;
+MOVE;Advance Token To The Nearest Railroad - Pay Owner Twice The Rental To Which He Is Otherwise entitled. If Railroad Is Unowned, You May Buy It From The Bank.;false;Railroad;0;;;;
+ASS;Bank Pays You Dividend Of - $50;;;50;0;0;0;
+MOVE;Go Back 3 Spaces;false;null;0;0;;;-3
+MOVE;Go Directly To Jail - Do Not Pass Go, Do Not Collect $200;false;jail;0;0;;;
+ASS;Make General Repairs On All Your Property - For Each House Pay $25, For Each Hotel $100;;;150;0;0;0;
+ASS;Pay Poor Tax Of - $15;;-15;0;0;0;0;
+JAIL;This Card May Be Kept Until Needed Or Sold - Get Out Of Jail Free;;;0;0;;;
+MOVE;Take A Ride On The Reading - If You Pass Go Collect $200;true;Reading;0;0;;;
+MOVE;Take A Walk On The Board Walk - Advance Token To Board Walk;false;Board Walk;0;;;;
+ASS;You Have Been Elected Chairman Of The Board - Pay Each Player $50;;;0;0;0;-50;
+ASS;Your Building And Loan Matures - Collect $150;;;150;0;0;0;
