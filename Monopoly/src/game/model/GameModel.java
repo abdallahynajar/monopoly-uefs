@@ -11,6 +11,7 @@ import game.model.entity.board.Board;
 import game.util.Colors;
 import game.util.Commands;
 import game.model.entity.Player;
+import game.model.entity.card.CardStack;
 import game.model.exceptions.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,14 +38,29 @@ public class GameModel {
      * Tabuleiro do jogo
      */
     private Board board;
+
+    /**
+     * <b> true </b> se o jogo começou ou <b> false </b> se não começou ainda
+     */
     private boolean gameStarted = false;
 
     /**
      * Para configurar os parâmetros de inicialização do jogo
      */
     private GameConfiguration configuration;
+    /** 
+     * Índice do jogador atual
+     */
     private int currentPlayerIndex = 0;
+    /** 
+     * Índice do proximo jogador
+     */
     private int nextPlayerIndex = 0;
+    /**
+     * Pilha de cartas
+     */
+    private CardStack cardStack;
+
 
     public GameConfiguration getConfiguration() {
         return configuration;
@@ -61,6 +77,7 @@ public class GameModel {
         configuration = GameConfiguration.getConfiguration();
         configuration.setAutoBuy(false);
         board = Board.getBoard();
+        this.cardStack = cardStack.getCardStack();
     }
 
     /**
@@ -110,6 +127,7 @@ public class GameModel {
             currentPlayerIndex = 0;
             currentPlayer = players.get(currentPlayerIndex);
             currentPlayerIndex = -1;
+           // loadCardBoard();
         }
     }
 
@@ -349,4 +367,23 @@ public class GameModel {
     public void buy() throws NotEnoughMoneyException, NotInSaleException, GamePlaceException, Exception {
             currentPlayer.buyProperty();         
     }
+
+    private void loadCardBoard() {
+         cardStack = CardStack.getCardStack();
+        if(this.configuration.isActivateChancePlaces() ){
+                cardStack.loadChanceCards();
+        }
+        if(this.configuration.isActivateChestPlaces() ){
+                cardStack.loadChestCards();
+        }
+    }
+    
+    public CardStack getCardStack() {
+        return cardStack;
+    }
+
+    public void setCardStack(CardStack cardStack) {
+        this.cardStack = cardStack;
+    }
+
 }

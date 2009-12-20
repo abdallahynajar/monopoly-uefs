@@ -4,18 +4,20 @@
  * João de Matos
  * Lidiany C Santos
  */
-
 package game.model.entity.card;
 
 import game.model.entity.*;
+import game.model.exceptions.NotEnoughMoneyException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Lidiany
  * Carta para recebimento de bônus ou pagamento de multas
  */
-public class Assessment extends Card{
-    
+public class Assessment extends Card {
+
     private int cardValue;
     private int feePerHotel;
     private int feePerHouse;
@@ -28,10 +30,14 @@ public class Assessment extends Card{
         this.feePerHouse = feePerHouse;
         this.feePerPlayer = feePerPlayer;
     }
-    
+
     @Override
-    public void action(Player p) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void action(Player p) throws NotEnoughMoneyException  {
+        if (cardValue > 0) {
+            p.credit(cardValue);
+        } else {
+            p.debit(cardValue);
+        }
     }
 
     public int getCardValue() {
@@ -65,6 +71,4 @@ public class Assessment extends Card{
     public void setFeePerPlayer(int feePerPlayer) {
         this.feePerPlayer = feePerPlayer;
     }
-
-
 }

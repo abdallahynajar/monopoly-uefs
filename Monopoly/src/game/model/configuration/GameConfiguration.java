@@ -226,5 +226,14 @@ public class GameConfiguration {
     public void setTaxValue(int taxValue) {
         this.taxValue = taxValue;
     }
+
+    public boolean isActivateChestPlaces() {
+        return activateChestPlaces;
+    }
+
+    public void setActivateChestPlaces(boolean activateChestPlaces) {
+        this.activateChestPlaces = activateChestPlaces;
+    }
+
     
 }

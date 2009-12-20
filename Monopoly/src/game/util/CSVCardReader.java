@@ -48,7 +48,7 @@ public class CSVCardReader {
 
                 Movement mv = new Movement(cardNumber, description,
                         place, paysBonus);
-                gameCards.add(mv);
+                gameCards.add(mv);               
 
             } else if (cardType.equalsIgnoreCase("ASS")) {
                 String description = reader.get("DESCRIPTION");
@@ -68,14 +68,15 @@ public class CSVCardReader {
         return gameCards;
     }
 
-  /*  public static void main(String[] args) {
+   public static void main(String[] args) {
         try {
             CSVCardReader.loadCards("chances.csv");
             CSVCardReader.loadCards("communityChests.csv");
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }*/
+    }
 }
     
 

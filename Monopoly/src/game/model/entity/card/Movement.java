@@ -30,7 +30,7 @@ public class Movement extends Card{
 
     @Override
     public void action(Player p) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        p.setAtualPlace(placeToGo);
     }
 
 
