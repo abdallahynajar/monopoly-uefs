@@ -21,7 +21,7 @@ public class OutOfJail extends Card{
 
     @Override
     public void action(Player p) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 
 }

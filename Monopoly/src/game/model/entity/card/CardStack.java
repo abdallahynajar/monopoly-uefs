@@ -34,30 +34,22 @@ public class CardStack {
 
     public void loadChanceCards() {
         try {
-            this.chanceCards = CSVCardReader.loadCards("chances.csv");
-            currentChanceCard = chanceCards.size() - 1;
+            this.chanceCards = CSVCardReader.loadCards("chances.csv");         
         } catch (IOException ex) {
         }
     }
 
     public void loadChestCards() {
         try {
-            this.chestCards = CSVCardReader.loadCards("communityChests.csv");
-            currentChestCard = chestCards.size() - 1;
+            this.chestCards = CSVCardReader.loadCards("communityChests.csv"); 
         } catch (IOException ex) {
         }
 
     }
 
-    public Card getChanceCard() throws NonExistentCardException{
-        
-        if(currentChanceCard == chanceCards.size() ){            
-            currentChanceCard = 1;
-        }else{
-            currentChanceCard++;
-        }
+    public Card getCurrentChanceCard() throws NonExistentCardException{
         Card card = null;
-        try{
+        try{           
             card = chanceCards.get(currentChanceCard - 1);
         }catch(Exception ex){
             throw new NonExistentCardException("Card doesn't exist");
@@ -65,19 +57,39 @@ public class CardStack {
         return card;
     }
 
-    public Card getChestCard()throws NonExistentCardException{
-            if(currentChestCard == chestCards.size() ){
-                //vai pro fim da lista
-                currentChestCard = 1;
-            }else{
-                currentChestCard++;
-            }
-             Card card = null;
-        try{
+    public Card getCurrentChestCard()throws NonExistentCardException{
+           Card card = null;
+        try{            
             card = chestCards.get( currentChestCard -1);
         }catch(Exception ex){
             throw new NonExistentCardException("Card doesn't exist");
         }
+
+             return card;
+    }
+
+    public Card getChanceCard() throws NonExistentCardException{
+        Card card = null;
+        try{            
+            card = chanceCards.get(currentChanceCard - 1);
+        }catch(Exception ex){
+            throw new NonExistentCardException("Card doesn't exist");
+        }          
+        updateCurrentChanceCard();  
+        return card;
+    }
+
+    public Card getChestCard()throws NonExistentCardException{
+           Card card = null;
+        try{
+           
+            card = chestCards.get( currentChestCard -1);
+        }catch(Exception ex){
+            throw new NonExistentCardException("Card doesn't exist");
+        }
+      
+        updateCurrentChestCard();      
+          
              return card;
     }
 
@@ -96,6 +108,22 @@ public class CardStack {
              throw new NonExistentCardException("Card doesn't exist");
         }else{
              currentChestCard = cardID;
+        }
+    }
+
+    private void updateCurrentChanceCard() {
+        if (currentChanceCard == chanceCards.size()) {
+            currentChanceCard = 1;
+        } else {
+            currentChanceCard++;
+        }
+    }
+
+    private void updateCurrentChestCard() {
+        if (currentChestCard == chestCards.size()) {           
+            currentChestCard = 1;
+        } else {
+            currentChestCard++;
         }
     }
 }
