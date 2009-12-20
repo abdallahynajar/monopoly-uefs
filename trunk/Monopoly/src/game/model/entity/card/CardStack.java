@@ -6,71 +6,96 @@
  */
 package game.model.entity.card;
 
-import java.util.Stack;
+import game.model.exceptions.NonExistentCardException;
+import java.io.IOException;
+import java.util.ArrayList;
+import game.util.CSVCardReader;
 
 /**
  *
  * @author Lidiany
  */
-public class CardStack  {
+public class CardStack {
 
-
-    private Stack<Card> chanceCards;
-    private Stack<Card> comunityChestCards;
+    private ArrayList<Card> chanceCards;
+    private ArrayList<Card> chestCards;
+    private int currentChanceCard = 1; // range 1 .. 15
+    private int currentChestCard = 1; //range 1 .. 16
     private static CardStack cardBoard;
 
     private CardStack() {
-        this.chanceCards = new Stack<Card>();
-        this.comunityChestCards = new Stack<Card>();
-        initChanceCards();
-        initCommunityChestCards();
+        currentChanceCard = 1;
+        currentChestCard = 1;
     }
 
-    public static CardStack getCardBoard(){
-        return (cardBoard == null ) ? new CardStack(): cardBoard;
+    public static CardStack getCardStack() {
+        return (cardBoard == null) ? new CardStack() : cardBoard;
     }
 
-
-
-    public Stack<Card> getChanceCards() {
-        return chanceCards;
+    public void loadChanceCards() {
+        try {
+            this.chanceCards = CSVCardReader.loadCards("chances.csv");
+            currentChanceCard = chanceCards.size() - 1;
+        } catch (IOException ex) {
+        }
     }
 
-    public void setChanceCards(Stack<Card> chanceCards) {
-        this.chanceCards = chanceCards;
-    }
-
-    public Stack<Card> getComunityChestCards() {
-        return comunityChestCards;
-    }
-
-    public void setComunityChestCards(Stack<Card> comunityChestCards) {
-        this.comunityChestCards = comunityChestCards;
-    }
-
-    private void initChanceCards(){
-
-//        chanceCards.add( new Assessment(1, "", 200) );
-//        chanceCards.add( new Assessment(2, "Bank Pays You Dividend Of", 200) );
-//        chanceCards.add( new Assessment(3, "Taxa do médico", -50) );
-//        chanceCards.add( new Assessment(4, "", 200) );
-//        chanceCards.add( new Assessment(5, "Da liquidação fora de estoque", 45) );
-//        chanceCards.add( new Assessment(6, "", 200) );
-//        chanceCards.add( new Assessment(7, "", 200) );
-//        chanceCards.add( new Assessment(8, "Restituição do Imposto de Renda", 20) );
-//        chanceCards.add( new Assessment(9, "", 200) );
-//        chanceCards.add( new Assessment(10, "", 200) );
-//        chanceCards.add( new Assessment(11, "", 200) );
-//        chanceCards.add( new Assessment(12, "", 200) );
-//        chanceCards.add( new Assessment(13, "", 200) );
-//        chanceCards.add( new Assessment(14, "", 200) );
-//        chanceCards.add( new Assessment(15, "", 200) );
-//        chanceCards.add( new Assessment(16, "", 200) );
-
+    public void loadChestCards() {
+        try {
+            this.chestCards = CSVCardReader.loadCards("communityChests.csv");
+            currentChestCard = chestCards.size() - 1;
+        } catch (IOException ex) {
+        }
 
     }
 
-    private void initCommunityChestCards(){
+    public Card getChanceCard() throws NonExistentCardException{
+        
+        if(currentChanceCard == chanceCards.size() ){            
+            currentChanceCard = 1;
+        }else{
+            currentChanceCard++;
+        }
+        Card card = null;
+        try{
+            card = chanceCards.get(currentChanceCard - 1);
+        }catch(Exception ex){
+            throw new NonExistentCardException("Card doesn't exist");
+        }
+        return card;
+    }
 
+    public Card getChestCard()throws NonExistentCardException{
+            if(currentChestCard == chestCards.size() ){
+                //vai pro fim da lista
+                currentChestCard = 1;
+            }else{
+                currentChestCard++;
+            }
+             Card card = null;
+        try{
+            card = chestCards.get( currentChestCard -1);
+        }catch(Exception ex){
+            throw new NonExistentCardException("Card doesn't exist");
+        }
+             return card;
+    }
+
+    public void forceNextChanceCard(int cardID) throws NonExistentCardException{
+       
+        if(cardID <=0 || cardID >15){
+             throw new NonExistentCardException("Card doesn't exist");
+        }else{
+             currentChanceCard = cardID;
+        }
+    }
+
+    public void forceNextChestCard(int cardID) throws NonExistentCardException{
+       
+        if(cardID <=0 || cardID >16){
+             throw new NonExistentCardException("Card doesn't exist");
+        }else{
+             currentChestCard = cardID;
+        }
     }
 }

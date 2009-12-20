@@ -21,7 +21,7 @@ public abstract class Card {
         this.cardNumber = cardNumber;
     }
 
-    public abstract void action(Player p);
+    public abstract void action(Player p) throws Exception;
 
     public int getCardNumber() {
         return cardNumber;

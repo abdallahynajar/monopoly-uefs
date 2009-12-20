@@ -128,7 +128,7 @@ public class FacadeMonopoly {
         gameModel.rollDices(firstDieResult, secondDieResult);
     }
 
-    public boolean gameIsOver() {     
+    public boolean gameIsOver() {
         return gameModel.isGameOver();
     }
 
@@ -136,28 +136,37 @@ public class FacadeMonopoly {
         gameModel.buy();
     }
 
-    public int getCurrentChanceCardNumber() {
-        return 0;
+    public int getCurrentChanceCardNumber() throws NonExistentCardException {
+        return gameModel.getCardStack().getChanceCard().getCardNumber();
     }
 
-    public int getCurrentChestCardNumber() {
-        return 0;
+    public int getCurrentChestCardNumber() throws NonExistentCardException {
+        return gameModel.getCardStack().getChestCard().getCardNumber();
     }
 
-    public String getCurrentChanceCardDescription() {
-        return "";
+    public String getCurrentChanceCardDescription() throws NonExistentCardException {
+        return gameModel.getCardStack().getChanceCard().getDescription();
     }
 
-    public String getCurrentChestCardDescription() {
-        return "";
+    public String getCurrentChestCardDescription() throws NonExistentCardException {
+        return gameModel.getCardStack().getChestCard().getDescription();
     }
 
     public void activateChestPlaces(boolean cardShuffle) {
+        gameModel.getConfiguration().setActivateChancePlaces(true);
+        gameModel.getCardStack().loadChestCards();
     }
 
     public void activateChancePlaces(boolean cardShuffle) {
+        gameModel.getConfiguration().setActivateChestPlaces(true);
+        gameModel.getCardStack().loadChanceCards();
     }
 
-    public void forceNextChanceCard(int chanceCardID) {
+    public void forceNextChanceCard(int cardId) throws NonExistentCardException {
+        gameModel.getCardStack().forceNextChanceCard(cardId);
+    }
+
+    public void forceNextChestCard(int cardId) throws NonExistentCardException {
+        gameModel.getCardStack().forceNextChestCard(cardId);
     }
 }

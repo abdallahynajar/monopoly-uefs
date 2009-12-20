@@ -8,6 +8,8 @@ package game.model.entity.board;
 
 import game.model.entity.*;
 import game.model.configuration.GameConfiguration;
+import game.model.entity.card.Card;
+import game.model.entity.card.CardStack;
 
 /**
  * Representa um lugar do tipo Sorte/Revés no tabuleiro do monopoly.
@@ -21,7 +23,8 @@ public class Chance extends Place{
         boolean isChanceActive = GameConfiguration.
                 getConfiguration().isActivateChancePlaces();
         if(isChanceActive){
-            //get a card
+            Card card = CardStack.getCardStack().getChanceCard();
+            card.action(p);
         }
     }
 
