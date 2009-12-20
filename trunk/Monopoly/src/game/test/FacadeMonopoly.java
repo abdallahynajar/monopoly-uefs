@@ -137,11 +137,11 @@ public class FacadeMonopoly {
     }
 
     public int getCurrentChanceCardNumber() throws NonExistentCardException {
-        return gameModel.getCardStack().getChanceCard().getCardNumber();
+        return gameModel.getCardStack().getCurrentChanceCard().getCardNumber() +1;
     }
 
     public int getCurrentChestCardNumber() throws NonExistentCardException {
-        return gameModel.getCardStack().getChestCard().getCardNumber();
+        return gameModel.getCardStack().getCurrentChestCard().getCardNumber() +1;
     }
 
     public String getCurrentChanceCardDescription() throws NonExistentCardException {
