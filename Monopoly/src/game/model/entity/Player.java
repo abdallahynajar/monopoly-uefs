@@ -282,7 +282,7 @@ public class Player {
         goTo(positionToGo, salaryBonus);
     }
 
-    public void goTo(int goTo, boolean salaryBonus) throws NonExistentPlaceException, Exception{
+    private void goTo(int goTo, boolean salaryBonus) throws NonExistentPlaceException, Exception{
 
         if (goTo < 40) {
             setAtualPlace(board.getPlaceByPosition(goTo));
@@ -300,6 +300,8 @@ public class Player {
                 setAtualPlace(board.getPlaceByPosition(goTo - 40));
             }
         }
+        System.out.println("                        GoTo: "+this.getName()+" está indo p place.action() place: " + atualPlace.getPosition());
+        System.out.println("                        GoTo: "+this.getName()+" player.getPlace() place: " + this.getAtualPlace().getPosition());
         atualPlace.action(this);
 
     }
