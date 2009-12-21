@@ -19,9 +19,9 @@ import game.model.exceptions.NonExistentPlaceException;
  */
 public class Movement extends Card{
 
-    private Place placeToGo;
+    protected Place placeToGo;
 
-    private boolean collectBonus;
+    protected boolean collectBonus;
 
     public Movement(int cardNumber, String description, Place placeToGo, boolean collectBonus) {
         super(cardNumber, description);
