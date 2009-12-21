@@ -16,7 +16,7 @@ import game.model.exceptions.NonExistentPlaceException;
  */
 public class RailroadCard extends Movement{
     public RailroadCard(int cardNumber, String description, boolean collectBonus) {
-        super(cardNumber, description, null, collectBonus);
+        super(cardNumber, description, null, collectBonus,0);
 
     }
 
@@ -24,7 +24,7 @@ public class RailroadCard extends Movement{
     public void action(Player p) throws NonExistentPlaceException, Exception{
 
         placeToGo = findNextRailroad(p);
-        p.walk(placeToGo, this.collectBonus);
+        p.walk(placeToGo.getPosition(), this.collectBonus);
     }
 
     private Place findNextRailroad(Player p) throws NonExistentPlaceException{

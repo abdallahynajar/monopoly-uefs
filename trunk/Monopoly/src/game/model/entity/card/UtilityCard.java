@@ -15,7 +15,7 @@ import game.model.exceptions.NonExistentPlaceException;
 public class UtilityCard extends Movement{
 
     public UtilityCard(int cardNumber, String description, boolean collectBonus) {
-        super(cardNumber, description, null, collectBonus);
+        super(cardNumber, description, null, collectBonus,0);
 
     }
 
@@ -24,7 +24,7 @@ public class UtilityCard extends Movement{
         System.out.println("                action de Utility:");
         placeToGo = findNextUtility(p);
         System.out.println("                action de Utility: place position: " + placeToGo.getPosition() + " card: "+ this.getDescription() );
-        p.walk(placeToGo, this.collectBonus);
+        p.walk(placeToGo.getPosition(), this.collectBonus);
     }
 
     private Place findNextUtility(Player p) throws NonExistentPlaceException{

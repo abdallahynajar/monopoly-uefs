@@ -66,7 +66,8 @@ public class CSVCardReader {
                 //Board board = Board.getBoard();
                 Place place = board.getPlaceByName(reader.get("PLACE"));
                 boolean paysBonus = Boolean.parseBoolean(reader.get("PAYSBONUS"));
-                Movement mv = new Movement(cardNumber, description, place, paysBonus);
+                int walk = Integer.parseInt(reader.get("WALK"));
+                Movement mv = new Movement(cardNumber, description, place, paysBonus, walk);
                 gameCards.add(mv);
             } else if (cardType.equalsIgnoreCase("ASS")) {
                 //String description = reader.get("DESCRIPTION");
