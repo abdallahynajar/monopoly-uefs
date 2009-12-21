@@ -78,6 +78,7 @@ public class GameModel {
         configuration.setAutoBuy(false);
         board = Board.getBoard();
         this.cardStack = cardStack.getCardStack();
+        cardStack.setBoard(board);
     }
 
     /**
@@ -200,6 +201,7 @@ public class GameModel {
         p.setAtualPlace(board.getPlaceByName("go"));
         p.setAtualPosition(0); //o player começa em go, mas a posiçao é 0, para
         //evitar o credito dos 200 no início
+        p.setBoard(board);
         players.add(p);
     }
 
@@ -277,7 +279,7 @@ public class GameModel {
         } else {
             updateCurrentPlayer();
             try {                
-                currentPlayer.walk(firstDieResult + secondDieResult, board);                    
+                currentPlayer.walk(firstDieResult + secondDieResult);                    
             } catch (NotEnoughMoneyException ex) {
                 currentPlayer.fail();
             }

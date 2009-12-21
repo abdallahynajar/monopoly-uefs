@@ -6,6 +6,7 @@
  */
 package game.model.entity.card;
 
+import game.model.entity.board.Board;
 import game.model.exceptions.NonExistentCardException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,6 +23,18 @@ public class CardStack {
     private int currentChanceCard = 1; // range 1 .. 15
     private int currentChestCard = 1; //range 1 .. 16
     private static CardStack cardBoard;
+    private Board board;
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+
+
 
     private CardStack() {
         currentChanceCard = 1;
@@ -29,19 +42,24 @@ public class CardStack {
     }
 
     public static CardStack getCardStack() {
-        return (cardBoard == null) ? new CardStack() : cardBoard;
+
+        if(cardBoard == null)
+            cardBoard = new CardStack();
+
+        return cardBoard;
+        //return (cardBoard == null) ? new CardStack() : cardBoard;
     }
 
     public void loadChanceCards() {
         try {
-            this.chanceCards = CSVCardReader.loadCards("chances.csv");         
+            this.chanceCards = CSVCardReader.loadCards("chances.csv", board);
         } catch (IOException ex) {
         }
     }
 
     public void loadChestCards() {
         try {
-            this.chestCards = CSVCardReader.loadCards("communityChests.csv"); 
+            this.chestCards = CSVCardReader.loadCards("communityChests.csv", board);
         } catch (IOException ex) {
         }
 
@@ -69,28 +87,28 @@ public class CardStack {
     }
 
     public Card getChanceCard() throws NonExistentCardException{
-        Card card = null;
-        try{            
+        Card card = getCurrentChanceCard();
+       /* try{
             card = chanceCards.get(currentChanceCard - 1);
         }catch(Exception ex){
             throw new NonExistentCardException("Card doesn't exist");
-        }          
+        }      */
         updateCurrentChanceCard();  
         return card;
     }
 
     public Card getChestCard()throws NonExistentCardException{
-           Card card = null;
-        try{
+        Card card = getCurrentChestCard();
+        /*try{
            
             card = chestCards.get( currentChestCard -1);
         }catch(Exception ex){
             throw new NonExistentCardException("Card doesn't exist");
-        }
+        }*/
       
         updateCurrentChestCard();      
           
-             return card;
+        return card;
     }
 
     public void forceNextChanceCard(int cardID) throws NonExistentCardException{

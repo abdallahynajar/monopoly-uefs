@@ -67,6 +67,20 @@ public class Player {
      */
     private boolean playing;
 
+    /**
+     * Tabuleiro. Essa variavel deve desaparecer quando o Board.getBoard() funcionar
+     * como deveria
+     */
+    private Board board;
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
     /** Cria uma nova instância de um jogador
      * @param color cor do peão
      * @param name nome do jogador
@@ -243,14 +257,42 @@ public class Player {
      * @param nPositions
      * @param board
      */
-    public void walk(int nPositions, Board board) throws NonExistentPlaceException, Exception {
+    public void walk(int nPositions) throws NonExistentPlaceException, Exception {
 
         int goTo = atualPosition + nPositions;
+
+        /*
+         * Adoraria poder refatorar esse método pra pegar o board do getBoard()
+         * mas, por mais ilogico q isso seja, não esta dando  certo!!
+         */
+        goTo(goTo, true);
+
+    }
+
+    public void walk(Place place, boolean salaryBonus) throws NonExistentPlaceException, Exception{
+        int positionToGo = place.getPosition();
+
+        //caso precise arrudeiar o tabuleiro
+        if(positionToGo < atualPosition){
+            positionToGo = 40 + positionToGo;
+        }
+
+        System.out.println("                    positionToGo: " + positionToGo);
+
+        goTo(positionToGo, salaryBonus);
+    }
+
+    public void goTo(int goTo, boolean salaryBonus) throws NonExistentPlaceException, Exception{
+
         if (goTo < 40) {
             setAtualPlace(board.getPlaceByPosition(goTo));
         } else {
-            GameConfiguration gc = GameConfiguration.getConfiguration();
-            this.credit( gc.getSalaryBonus() );
+            //usado nas cartas, para credito ou nao do salaryBonus
+            if(salaryBonus){
+                GameConfiguration gc = GameConfiguration.getConfiguration();
+                this.credit(gc.getSalaryBonus());
+            }
+
             if (goTo == 40) {
                 setAtualPlace(board.getPlaceByPosition(goTo));
                 setAtualPosition(0); //não ganha os 200 na proxima
@@ -259,7 +301,9 @@ public class Player {
             }
         }
         atualPlace.action(this);
+
     }
+
     /**
      * Retorna o número de ferrovias do jogador
      * @return o número de ferrovias do jogador     *

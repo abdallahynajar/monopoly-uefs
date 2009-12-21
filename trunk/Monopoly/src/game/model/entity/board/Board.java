@@ -173,7 +173,7 @@ public class Board {
         places.add(new Tax(4, "Income Tax", 200));
         places.add(new Railroad(5, "Reading Railroad", 200, 100));
         places.add(new Property(6, "Oriental Avenue", 100, new float[]{6, 30, 90, 270, 400, 550}, 50, 50, "Light Blue"));
-        places.add(new FreeParking(7, "Chance 1", "chance"));
+        places.add(new Chance(7, "Chance 1", "chance"));
         places.add(new Property(8, "Vermont Avenue", 100, new float[]{6, 30, 90, 270, 400, 550}, 50, 50, "Light Blue"));
         places.add(new Property(9, "Connecticut Avenue", 120, new float[]{8, 40, 100, 300, 450, 600}, 60, 50, "Light Blue"));
         places.add(new FreeParking(10, "Jail - Just Visiting", "corner"));
@@ -188,7 +188,7 @@ public class Board {
         places.add(new Property(19, "New York Avenue", 200, new float[]{16, 80, 220, 600, 800, 1000}, 100, 100, "Orange"));
         places.add(new FreeParking(20, "Free Parking", "corner"));
         places.add(new Property(21, "Kentucky Avenue", 220, new float[]{18, 90, 250, 700, 875, 1050}, 110, 150, "Red"));
-        places.add(new FreeParking(22, "Chance 2", "chance"));
+        places.add(new Chance(22, "Chance 2", "chance"));
         places.add(new Property(23, "Indiana Avenue", 220, new float[]{18, 90, 250, 700, 875, 1050}, 110, 150, "Red"));
         places.add(new Property(24, "Illinois Avenue", 240, new float[]{20, 100, 300, 750, 925, 1100}, 110, 150, "Red"));
         places.add(new Railroad(25, "B & O Railroad", 200, 100));
@@ -202,7 +202,7 @@ public class Board {
         places.add(new FreeParking(33, "Community Chest 3", "chest"));
         places.add(new Property(34, "Pennsylvania Avenue", 320, new float[]{28, 150, 450, 1000, 1200, 1400}, 160, 200, "Green"));
         places.add(new Railroad(35, "Short Line Railroad", 200, 100));
-        places.add(new FreeParking(36, "Chance 3", "chance"));
+        places.add(new Chance(36, "Chance 3", "chance"));
         places.add(new Property(37, "Park Place", 350, new float[]{35, 175, 500, 1100, 1300, 1500}, 175, 200, "Indigo"));
         places.add(new Tax(38, "Luxury Tax", 75));
         places.add(new Property(39, "Boardwalk", 400, new float[]{50, 200, 600, 1400, 1700, 2000}, 200, 200, "Indigo"));
