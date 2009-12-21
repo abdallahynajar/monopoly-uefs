@@ -82,32 +82,18 @@ public class CardStack {
         }catch(Exception ex){
             throw new NonExistentCardException("Card doesn't exist");
         }
-
              return card;
     }
 
     public Card getChanceCard() throws NonExistentCardException{
         Card card = getCurrentChanceCard();
-       /* try{
-            card = chanceCards.get(currentChanceCard - 1);
-        }catch(Exception ex){
-            throw new NonExistentCardException("Card doesn't exist");
-        }      */
         updateCurrentChanceCard();  
         return card;
     }
 
     public Card getChestCard()throws NonExistentCardException{
         Card card = getCurrentChestCard();
-        /*try{
-           
-            card = chestCards.get( currentChestCard -1);
-        }catch(Exception ex){
-            throw new NonExistentCardException("Card doesn't exist");
-        }*/
-      
         updateCurrentChestCard();      
-          
         return card;
     }
 
