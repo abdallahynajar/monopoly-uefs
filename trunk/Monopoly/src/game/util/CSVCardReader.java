@@ -59,15 +59,17 @@ public class CSVCardReader {
     private static void loadCard(int cardNumber, ArrayList<Card> gameCards, Board board) throws IOException, NumberFormatException {
            
             String cardType = reader.get("TYPE");
+            String description = reader.get("DESCRIPTION");
+
             if (cardType.equalsIgnoreCase("MOVE")) {
-                String description = reader.get("DESCRIPTION");
+                
                 //Board board = Board.getBoard();
                 Place place = board.getPlaceByName(reader.get("PLACE"));
                 boolean paysBonus = Boolean.parseBoolean(reader.get("PAYSBONUS"));
                 Movement mv = new Movement(cardNumber, description, place, paysBonus);
                 gameCards.add(mv);
             } else if (cardType.equalsIgnoreCase("ASS")) {
-                String description = reader.get("DESCRIPTION");
+                //String description = reader.get("DESCRIPTION");
                 int cardValue = Integer.parseInt(reader.get("VALUE"));
                 int feePerHouse = Integer.parseInt(reader.get("FEEPERHOUSE"));
                 int feePerHotel = Integer.parseInt(reader.get("FEEPERHOTEL"));
@@ -75,9 +77,18 @@ public class CSVCardReader {
                 Assessment ass = new Assessment(cardNumber, description, cardValue, feePerHotel, feePerHouse, feePerPlayer);
                 gameCards.add(ass);
             } else if (cardType.equalsIgnoreCase("JAIL")) {
-                String description = reader.get("DESCRIPTION");
+                //String description = reader.get("DESCRIPTION");
                 OutOfJail ofJail = new OutOfJail(cardNumber, description);
                 gameCards.add(ofJail);
+            } else if (cardType.equalsIgnoreCase("MOVEUTILITY")){
+                boolean collectSalary = Boolean.parseBoolean(reader.get("PAYSBONUS"));
+                UtilityCard uc = new UtilityCard(cardNumber, description, collectSalary);
+                gameCards.add(uc);
+
+            } else if (cardType.equalsIgnoreCase("MOVERAILROAD")){
+                boolean collectSalary = Boolean.parseBoolean(reader.get("PAYSBONUS"));
+                UtilityCard uc = new UtilityCard(cardNumber, description, collectSalary);
+                gameCards.add(uc);
             }
             
          }
