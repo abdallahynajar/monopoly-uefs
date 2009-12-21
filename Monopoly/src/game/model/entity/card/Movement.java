@@ -8,6 +8,7 @@ package game.model.entity.card;
 
 import game.model.entity.Player;
 import game.model.entity.board.Place;
+import game.model.exceptions.NonExistentPlaceException;
 
 /**
  *
@@ -29,10 +30,9 @@ public class Movement extends Card{
     }
 
     @Override
-    public void action(Player p) {
-        p.setAtualPlace(placeToGo);
+    public void action(Player p) throws NonExistentPlaceException, Exception {
+        System.out.println("                action de Movment: place position: " + placeToGo.getPosition() + " card: "+ this.getDescription() );
+        p.walk(placeToGo, collectBonus);
     }
-
-
 
 }

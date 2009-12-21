@@ -36,7 +36,7 @@ public class Assessment extends Card {
         if (cardValue > 0) {
             p.credit(cardValue);
         } else {
-            p.debit(cardValue);
+            p.debit(-cardValue);
         }
     }
 

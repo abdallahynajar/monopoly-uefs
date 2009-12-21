@@ -136,6 +136,9 @@ public class FacadeMonopoly {
         gameModel.buy();
     }
 
+/*********************************************
+ user story 5
+ *********************************************/
     public int getCurrentChanceCardNumber() throws NonExistentCardException {
         return gameModel.getCardStack().getCurrentChanceCard().getCardNumber() +1;
     }
@@ -145,11 +148,11 @@ public class FacadeMonopoly {
     }
 
     public String getCurrentChanceCardDescription() throws NonExistentCardException {
-        return gameModel.getCardStack().getChanceCard().getDescription();
+        return gameModel.getCardStack().getCurrentChanceCard().getDescription();
     }
 
     public String getCurrentChestCardDescription() throws NonExistentCardException {
-        return gameModel.getCardStack().getChestCard().getDescription();
+        return gameModel.getCardStack().getCurrentChestCard().getDescription();
     }
 
     public void activateChestPlaces(boolean cardShuffle) {
