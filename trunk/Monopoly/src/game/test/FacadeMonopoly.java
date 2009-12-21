@@ -156,12 +156,12 @@ public class FacadeMonopoly {
     }
 
     public void activateChestPlaces(boolean cardShuffle) {
-        gameModel.getConfiguration().setActivateChancePlaces(true);
+        gameModel.getConfiguration().setActivateChestPlaces(true);
         gameModel.getCardStack().loadChestCards();
     }
 
     public void activateChancePlaces(boolean cardShuffle) {
-        gameModel.getConfiguration().setActivateChestPlaces(true);
+        gameModel.getConfiguration().setActivateChancePlaces(true);
         gameModel.getCardStack().loadChanceCards();
     }
 
