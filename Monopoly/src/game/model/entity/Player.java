@@ -269,8 +269,7 @@ public class Player {
 
     }
 
-    public void walk(Place place, boolean salaryBonus) throws NonExistentPlaceException, Exception{
-        int positionToGo = place.getPosition();
+    public void walk(int positionToGo, boolean salaryBonus) throws NonExistentPlaceException, Exception{
 
         //caso precise arrudeiar o tabuleiro
         if(positionToGo < atualPosition){
