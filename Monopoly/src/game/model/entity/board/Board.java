@@ -83,6 +83,30 @@ public class Board {
         return p;
     }
 
+    public Place findNextUtility(Place place) throws NonExistentPlaceException{
+        int atualposition = place.getPosition();
+
+        for(int i = atualposition;;i++){
+            Place p = getPlaceByPosition(i);
+            if(p instanceof Utility)
+                return p;
+
+            i %= 40;
+        }
+    }
+
+    public Place findNextRailroad(Place place) throws NonExistentPlaceException{
+        int atualposition = place.getPosition();
+
+        for(int i = atualposition;;i++){
+            Place p = getPlaceByPosition(i);
+            if(p instanceof Railroad)
+                return p;
+
+            i %= 40;
+        }
+    }
+
     /**
      * Busca o nome de um lugar pela posição
      * @param position

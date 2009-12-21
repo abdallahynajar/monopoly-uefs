@@ -87,8 +87,8 @@ public class CSVCardReader {
 
             } else if (cardType.equalsIgnoreCase("MOVERAILROAD")){
                 boolean collectSalary = Boolean.parseBoolean(reader.get("PAYSBONUS"));
-                UtilityCard uc = new UtilityCard(cardNumber, description, collectSalary);
-                gameCards.add(uc);
+                RailroadCard rc = new RailroadCard(cardNumber, description, collectSalary);
+                gameCards.add(rc);
             }
             
          }

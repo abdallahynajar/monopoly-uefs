@@ -4,32 +4,31 @@
  */
 
 package game.model.entity.card;
+
 import game.model.entity.board.Board;
 import game.model.entity.Player;
 import game.model.entity.board.Place;
 import game.model.exceptions.NonExistentPlaceException;
+
 /**
  *
  * @author shaka
  */
-public class UtilityCard extends Movement{
-
-    public UtilityCard(int cardNumber, String description, boolean collectBonus) {
+public class RailroadCard extends Movement{
+    public RailroadCard(int cardNumber, String description, boolean collectBonus) {
         super(cardNumber, description, null, collectBonus);
 
     }
 
     @Override
     public void action(Player p) throws NonExistentPlaceException, Exception{
-        System.out.println("                action de Utility:");
-        placeToGo = findNextUtility(p);
-        System.out.println("                action de Utility: place position: " + placeToGo.getPosition() + " card: "+ this.getDescription() );
+
+        placeToGo = findNextRailroad(p);
         p.walk(placeToGo, this.collectBonus);
     }
 
-    private Place findNextUtility(Player p) throws NonExistentPlaceException{
+    private Place findNextRailroad(Player p) throws NonExistentPlaceException{
         Board board = p.getBoard();
-        return board.findNextUtility(p.getAtualPlace());
+        return board.findNextRailroad(p.getAtualPlace());
     }
-
 }
