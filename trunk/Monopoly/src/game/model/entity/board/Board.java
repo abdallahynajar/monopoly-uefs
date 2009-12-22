@@ -192,7 +192,7 @@ public class Board {
     private void buildBoardPlaces() {
         places = new ArrayList<Place>();
         places.add(new Property(1, "Mediterranean Avenue", 60, new float[]{2, 10, 30, 90, 160, 250}, 30, 50, "purple"));
-        places.add(new FreeParking(2, "Community Chest 1", "chest"));
+        places.add(new Chest(2, "Community Chest 1", "chest"));
         places.add(new Property(3, "Baltic Avenue", 60, new float[]{4, 20, 60, 180, 320, 450}, 30, 50, "purple"));
         places.add(new Tax(4, "Income Tax", 200));
         places.add(new Railroad(5, "Reading Railroad", 200, 100));
@@ -207,7 +207,7 @@ public class Board {
         places.add(new Property(14, "Virginia Avenue", 160, new float[]{12, 60, 180, 500, 700, 900}, 80, 100, "pink"));
         places.add(new Railroad(15, "Pennsylvania Railroad", 200, 100));
         places.add(new Property(16, "St. James Place", 180, new float[]{14, 70, 200, 550, 750, 950}, 90, 100, "Orange"));
-        places.add(new FreeParking(17, "Community Chest 2", "chest"));
+        places.add(new Chest(17, "Community Chest 2", "chest"));
         places.add(new Property(18, "Tennessee Avenue", 180, new float[]{14, 70, 200, 550, 750, 950}, 90, 100, "Orange"));
         places.add(new Property(19, "New York Avenue", 200, new float[]{16, 80, 220, 600, 800, 1000}, 100, 100, "Orange"));
         places.add(new FreeParking(20, "Free Parking", "corner"));
@@ -223,7 +223,7 @@ public class Board {
         places.add(new FreeParking(30, "Go To Jail", "corner"));
         places.add(new Property(31, "Pacific Avenue", 300, new float[]{26, 130, 390, 900, 1100, 1275}, 150, 200, "Green"));
         places.add(new Property(32, "North Carolina Avenue", 300, new float[]{26, 130, 390, 900, 1100, 1275}, 150, 200, "Green"));
-        places.add(new FreeParking(33, "Community Chest 3", "chest"));
+        places.add(new Chest(33, "Community Chest 3", "chest"));
         places.add(new Property(34, "Pennsylvania Avenue", 320, new float[]{28, 150, 450, 1000, 1200, 1400}, 160, 200, "Green"));
         places.add(new Railroad(35, "Short Line Railroad", 200, 100));
         places.add(new Chance(36, "Chance 3", "chance"));
