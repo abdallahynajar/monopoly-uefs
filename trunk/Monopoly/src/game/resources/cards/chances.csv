@@ -12,6 +12,6 @@ ASS;Pay Poor Tax Of - $15;;;-15;0;0;0;
 JAIL;This Card May Be Kept Until Needed Or Sold - Get Out Of Jail Free;;;0;0;;;
 MOVE;Take A Ride On The Reading - If You Pass Go Collect $200;true;Reading Railroad;0;0;;;0
 MOVE;Take A Walk On The Board Walk - Advance Token To Board Walk;false;Boardwalk;0;;;;0
-ASS;You Have Been Elected Chairman Of The Board - Pay Each Player $50;;;0;0;0;-50;
+PAYPLAYERS;You Have Been Elected Chairman Of The Board - Pay Each Player $50;;;50;0;0;0;
 ASS;Your Building And Loan Matures - Collect $150;;;150;0;0;0;
 

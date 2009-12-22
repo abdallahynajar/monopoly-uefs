@@ -90,7 +90,14 @@ public class CSVCardReader {
                 boolean collectSalary = Boolean.parseBoolean(reader.get("PAYSBONUS"));
                 RailroadCard rc = new RailroadCard(cardNumber, description, collectSalary);
                 gameCards.add(rc);
+            }else if (cardType.equalsIgnoreCase("PAYPLAYERS")){
+                int cardValue = Integer.parseInt(reader.get("VALUE"));
+                PayPlayersCard ppc = new PayPlayersCard(cardNumber, description, cardValue);
+                gameCards.add(ppc);
             }
+
+
+
             
          }
     }

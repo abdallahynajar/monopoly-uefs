@@ -22,6 +22,14 @@ import java.util.List;
  */
 public class GameModel {
 
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+
     /**
      * Quantidade de jogadores
      */
@@ -61,6 +69,17 @@ public class GameModel {
      */
     private CardStack cardStack;
 
+    private static GameModel gameModel;
+
+    public static GameModel getGameModel() {
+
+        if(gameModel == null){
+            gameModel = new GameModel();
+        }
+
+        return gameModel;
+    }
+
 
     public GameConfiguration getConfiguration() {
         return configuration;
@@ -79,6 +98,7 @@ public class GameModel {
         board = Board.getBoard();
         this.cardStack = cardStack.getCardStack();
         cardStack.setBoard(board);
+        this.gameModel = this;
     }
 
     /**
