@@ -61,6 +61,7 @@ public class CardStack {
         try {
             this.chestCards = CSVCardReader.loadCards("communityChests.csv", board);
         } catch (IOException ex) {
+            ex.printStackTrace();
         }
 
     }
