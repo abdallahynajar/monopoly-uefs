@@ -14,4 +14,4 @@ MOVE;Take A Ride On The Reading - If You Pass Go Collect $200;true;Reading Railr
 MOVE;Take A Walk On The Board Walk - Advance Token To Board Walk;false;Boardwalk;0;;;;0
 PAYPLAYERS;You Have Been Elected Chairman Of The Board - Pay Each Player $50;;;50;0;0;0;
 ASS;Your Building And Loan Matures - Collect $150;;;150;0;0;0;
-
+MOVERAILROAD;Advance Token To The Nearest Railroad - Pay Owner Twice The Rental To Which He Is Otherwise entitled. If Railroad Is Unowned, You May Buy It From The Bank.;false;;0;;;;
