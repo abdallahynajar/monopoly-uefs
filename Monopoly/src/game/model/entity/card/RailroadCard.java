@@ -25,6 +25,8 @@ public class RailroadCard extends Movement{
 
         placeToGo = findNextRailroad(p);
         p.walk(placeToGo.getPosition(), this.collectBonus);
+         //já que tem q pagar o dobro, vai lá 2 vezes hehe
+        p.walk(placeToGo.getPosition(), this.collectBonus);
     }
 
     private Place findNextRailroad(Player p) throws NonExistentPlaceException{

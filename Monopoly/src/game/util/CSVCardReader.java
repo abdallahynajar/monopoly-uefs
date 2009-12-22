@@ -36,13 +36,13 @@ public class CSVCardReader {
         reader = new CsvReader(in, ';', Charset.forName("ISO-8859-1"));        
         ArrayList<Card> gameCards = new ArrayList<Card>();
         reader.readHeaders();
-         int cardNumber = 0;        
+        int cardNumber = 0;        
         while (reader.readRecord()) {
             
             loadCard(cardNumber, gameCards, board);
             cardNumber++;
         }         
-         reader.close();
+        reader.close();
         return gameCards;
     }
 

@@ -1,11 +1,11 @@
-TYPE;DESCRIPTION;PAYSBONUS;PLACE;VALUE;FEEPERHOUSE;FEEPERHOTEL;FEEPERPLAYER
-MOVE;Advance To Go - Collect $200;true;go;;;;
+TYPE;DESCRIPTION;PAYSBONUS;PLACE;VALUE;FEEPERHOUSE;FEEPERHOTEL;FEEPERPLAYER;WALK
+MOVE;Advance To Go - Collect $200;true;go;;;;0
 ASS;Bank Error In Your Favor - Collect $200;;;200;0;0;0
 ASS;Doctor's Fee - Pay $50;;;-50;0;0;0
 ASS;Grand Opera Opening - Collect $50 from every player for opening night seats;;;0;0;0;50
 ASS;From Sale Out Of Stock - You Get $45;;;45;0;0;0
 JAIL;Get Out Of Jail, Free - This card may be kept until needed or sold;;;;;;
-MOVE;Go To Jail - Go directly to jail - Do not pass go - Do not collect $200;false;jail;;;;
+MOVE;Go To Jail - Go directly to jail - Do not pass go - Do not collect $200;false;Jail - Just Visiting;;;;0
 ASS;Income Tax Refund - Collect $20;;;20;0;0;0
 ASS;Life Insurance Matures - Collect $100;;;100;0;0;0
 ASS;Pay Hospital - $100;;;-100;0;0;0
@@ -15,4 +15,3 @@ ASS;XMAS Fund Matures - Collect $100;;;100;0;0;0
 ASS;You Have Won Second Prize In A Beauty Contest - Collect $10;;;10;0;0;0
 ASS;You Inherit - $100;;;100;0;0;0
 ASS;You Are Assessed For Street Repairs - $40 Per House, $115 Per Hotel;;;0;40;115;0
-
