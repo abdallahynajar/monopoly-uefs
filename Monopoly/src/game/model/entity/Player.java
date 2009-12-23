@@ -162,8 +162,24 @@ public class Player {
         if(!(p instanceof Property))
             throw new InvalidCommandException("Can only build on properties");
 
+        p = (Property)p;
+
+        if(!has(p))
+            throw new InvalidCommandException("Player is not the owner of this property");
+
         throw new InvalidCommandException("Unavailable command");
         
+    }
+
+    private boolean has(Place p){
+
+        for(Place pCurrent : itsPropertys){
+            if(pCurrent == p)
+                return true;
+        }
+
+        return false;
+
     }
 
     public void setPlaying(boolean playing) {
