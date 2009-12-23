@@ -9,7 +9,7 @@ import game.model.configuration.GameConfiguration;
 import game.model.entity.board.Board;
 import game.util.Colors;
 import game.util.Command;
-import game.model.entity.Player;
+import game.model.entity.player.Player;
 import game.model.entity.board.PurchasablePlace;
 import game.view.GameView;
 

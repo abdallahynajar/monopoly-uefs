@@ -5,7 +5,7 @@
 
 package game.model.entity.card;
 import game.model.entity.board.Board;
-import game.model.entity.Player;
+import game.model.entity.player.Player;
 import game.model.entity.board.Place;
 import game.model.exceptions.NonExistentPlaceException;
 /**
