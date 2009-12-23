@@ -193,4 +193,17 @@ public class FacadeMonopoly {
     }
 
 
+    //us8
+    public void activateBuild(){
+
+    }
+
+    public void build (int propertyID){
+        
+    }
+
+    public void giveCashToPlayer (String playerName, int cash){
+        
+    }
+
 }
