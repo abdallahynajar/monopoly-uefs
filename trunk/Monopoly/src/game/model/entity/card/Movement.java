@@ -41,7 +41,7 @@ public class Movement extends Card{
 
             int goTo = p.getAtualPosition() + walk;
             System.out.println("                action de Movment: place position: " +goTo+ " card: "+ this.getDescription() );
-            p.walk(goTo, collectBonus);
+            p.goTo(goTo, collectBonus);
         }
 
     }
