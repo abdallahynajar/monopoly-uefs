@@ -35,12 +35,12 @@ public class Movement extends Card{
     public void action(Player p) throws NonExistentPlaceException, Exception {
         
         if(walk==0){
-            System.out.println("                action de Movment: place position: " + placeToGo.getPosition() + " card: "+ this.getDescription() );
+            //System.out.println("                action de Movment: place position: " + placeToGo.getPosition() + " card: "+ this.getDescription() );
             p.walk(placeToGo.getPosition(), collectBonus);
         }else{
 
             int goTo = p.getAtualPosition() + walk;
-            System.out.println("                action de Movment: place position: " +goTo+ " card: "+ this.getDescription() );
+            //System.out.println("                action de Movment: place position: " +goTo+ " card: "+ this.getDescription() );
             p.goTo(goTo, collectBonus);
         }
 

@@ -26,13 +26,13 @@ public class Chest extends Place{
     public void action(Player p) throws Exception {
         //pega a porra da carta
 
-        System.out.println("chegou no action de Chest");
+        //System.out.println("chegou no action de Chest");
         boolean isChestActive = GameConfiguration.
                 getConfiguration().isActivateChestPlaces();
         if(isChestActive){
-            System.out.println("    O jogo está configurado pra chest funcionar");
+           // System.out.println("    O jogo está configurado pra chest funcionar");
             Card card = CardStack.getCardStack().getChestCard();
-            System.out.println("        Card da vez: " + card.getDescription() + " numero: " + card.getCardNumber());
+            //System.out.println("        Card da vez: " + card.getDescription() + " numero: " + card.getCardNumber());
             card.action(p);
         }
     }
