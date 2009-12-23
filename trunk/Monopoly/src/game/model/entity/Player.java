@@ -113,9 +113,9 @@ public class Player {
             if(c.getType() == CommandType.BUILD){
                 c.setActive(false);
                 if(atualPlace instanceof PurchasablePlace){
-                    System.out.println("Atual place é Purchasable");
+                   
                     if(this.isMonopoly((PurchasablePlace) atualPlace)){
-                        System.out.println("    Agora ele pode construir");
+                       
                         c.setActive(true);
                     }
                 }
