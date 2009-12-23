@@ -6,7 +6,8 @@
  */
 package game.model.entity;
 
-import game.util.Commands;
+import game.util.Command;
+import game.util.CommandType;
 import game.model.entity.board.Place;
 import game.model.entity.board.Board;
 import game.model.entity.board.Railroad;
@@ -67,7 +68,7 @@ public class Player {
     /**
      * Comandos que o jogador pode executar
      */
-    private List<Commands> playerCommands;
+    private List<Command> playerCommands = null;
 
     /**
      * <b>true</b> se o jogador está no jogo ou <b>false</b> se já perdeu
@@ -87,16 +88,25 @@ public class Player {
         this.color = color;
         this.itsPropertys = new ArrayList<PurchasablePlace>();
         this.monopolys = new ArrayList<CheckMonopoly>();
+        updateCommands();
         playing = true;
-        playerCommands = new ArrayList<Commands>();
-        playerCommands.add(Commands.ROLL);
-        playerCommands.add(Commands.STATUS);
-        playerCommands.add(Commands.QUIT);
+        
         playerCards = new ArrayList<Card>();
     }
 
     public boolean isPlaying() {
         return playing;
+    }
+
+    private void updateCommands(){
+        if(playerCommands == null){
+            playerCommands = new ArrayList<Command>();
+            playerCommands.add(new Command(CommandType.ROLL, true));
+            playerCommands.add(new Command(CommandType.STATUS, true));
+            playerCommands.add(new Command(CommandType.QUIT, true));
+            playerCommands.add(new Command(CommandType.BUILD, false));
+        }
+
     }
     /**
      * Tira o jogador do jogo e devolve todas as suas propriedades ao banco.
@@ -246,11 +256,11 @@ public class Player {
         this.itsPropertys = itsPropertys;
     }
 
-    public List<Commands> getPlayerCommands() {
+    public List<Command> getPlayerCommands() {
         return playerCommands;
     }
 
-    public void setPlayerCommands(List<Commands> playerCommands) {
+    public void setPlayerCommands(List<Command> playerCommands) {
         this.playerCommands = playerCommands;
     }
 
@@ -365,7 +375,7 @@ public class Player {
      */
     public void addCard(Card card){
         this.playerCards.add(card);
-        this.playerCommands.add(Commands.USECARD);
+        this.playerCommands.add(new Command(CommandType.USECARD, true));
     }
 
     /**

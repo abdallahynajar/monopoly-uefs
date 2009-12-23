@@ -8,7 +8,7 @@ import game.model.GameModel;
 import game.model.configuration.GameConfiguration;
 import game.model.entity.board.Board;
 import game.util.Colors;
-import game.util.Commands;
+import game.util.Command;
 import game.model.entity.Player;
 import game.model.entity.board.PurchasablePlace;
 import game.view.GameView;
@@ -126,9 +126,9 @@ public class GameController {
      * Pega o comando enviado pelo jogador atual
      * @return  o comando escolhido pelo jogador atual
      */
-    public Commands getPlayerCommand() {
+    /*public Command getPlayerCommand() {
         String strCommand = null;
-        Commands command = null;
+        Command command = null;
         while (strCommand == null) {
 
              gameView.showMessage(" Comandos disponíveis: ");
@@ -144,7 +144,7 @@ public class GameController {
         }
         return command;
 
-    }
+    }*/
 
     /***
      * Remove um jogador da partida

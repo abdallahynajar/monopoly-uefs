@@ -10,6 +10,6 @@ package game.util;
  * Os possíveis comandos para os jogadores
  * @author Lidiany
  */
-public enum Commands {
+public enum CommandType {
     ROLL, STATUS, QUIT, USECARD, PAY, BUILD;
 }
