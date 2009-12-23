@@ -63,13 +63,17 @@ public class FacadeMonopoly {
         strCommand.append("{");
         List<Command> commands = gameModel.getCurrentPlayer().getPlayerCommands();
 
+         ArrayList<String> commandNames = new ArrayList<String>();
+
         for (int i = 0; i < commands.size(); i++) {
             Command c = commands.get(i);
-
             if(c.isActive())
-                strCommand.append(c.getType().toString().toLowerCase());
+                commandNames.add(c.getType().toString().toLowerCase());
+        }
 
-            if ((i + 1) != commands.size()) {
+        for ( int i = 0; i < commandNames.size(); i++){
+            strCommand.append(commandNames.get(i));
+            if ((i + 1) != commandNames.size()) {
                 strCommand.append(",");
             }
         }
