@@ -32,8 +32,7 @@ public class CheckMonopoly {
     public void oneMore(){
         count++;
         inMonopoly = updateInMonopoly();
-        if(inMonopoly)
-            System.out.println("  Monopoly:" + monopoly);
+
 
     }
 
