@@ -111,15 +111,22 @@ public class Player {
     public void addMonopoly(PurchasablePlace p){
         String monopoly = p.getPlaceGroup();
         for(CheckMonopoly c : monopolys){
-            if(c.getMonopoly().equals(name)){
+            if(c.getMonopoly().equals(monopoly)){
                 c.oneMore();
                 return;
             }
         }
-
         monopolys.add(new CheckMonopoly(monopoly));
-        
     }
+
+
+    public boolean isMonopoly(PurchasablePlace p){
+         for(CheckMonopoly c : monopolys)
+            if(c.getMonopoly().equals(p.getPlaceGroup()) && c.isInMonopoly())
+                return true;
+        return false;
+    }
+
 
     public void build() throws InvalidCommandException{
         throw new InvalidCommandException("Unavailable command");
@@ -201,6 +208,7 @@ public class Player {
 
     private void addPropertys(PurchasablePlace p){
         this.itsPropertys.add(p);
+        addMonopoly(p);
     }
 
     /**
