@@ -25,14 +25,13 @@ public class Board {
     /**
      * Instância estática do tabuleiro
      */
-    private static Board board;
+    private static Board board = null;
 
     /**
      * Construtor privado, só pode ser acessado dentro da classe
      */
     private Board() {
         buildBoardPlaces();
-
     }
 
     /**
@@ -40,7 +39,10 @@ public class Board {
      * Retorna o tabuleiro, caso este já tenha sido criado.
      */
     public static Board getBoard(){
-        return (board == null ? new Board() : board);
+        if(board == null){          
+            board = new Board();
+        }
+        return board;        
     }
 
     public ArrayList<Place> getPlaces() {
@@ -189,7 +191,7 @@ public class Board {
       /**
        * Constrói o tabuleiro com seus lugares
        */
-    private void buildBoardPlaces() {
+    private void buildBoardPlaces() {      
         places = new ArrayList<Place>();
         places.add(new Property(1, "Mediterranean Avenue", 60, new float[]{2, 10, 30, 90, 160, 250}, 30, 50, "purple"));
         places.add(new Chest(2, "Community Chest 1", "chest"));
@@ -231,5 +233,9 @@ public class Board {
         places.add(new Tax(38, "Luxury Tax", 75));
         places.add(new Property(39, "Boardwalk", 400, new float[]{50, 200, 600, 1400, 1700, 2000}, 200, 200, "Indigo"));
         places.add(new FreeParking(40, "Go", "corner")); // o go é a posição 40!
+    }
+
+    public static void cleanUpBoard(){
+        board=null;        
     }
 }

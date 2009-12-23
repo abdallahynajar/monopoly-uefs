@@ -30,7 +30,7 @@ public class CSVCardReader {
      * @param csvFile o nome do arquivo com as cartas a serem lidas
      * @return a lista de cartas carregada do arquivo .csv
      */
-    public static ArrayList<Card> loadCards(String csvFile,Board board) throws IOException {
+    public static ArrayList<Card> loadCards(String csvFile) throws IOException {
 
         InputStream in = ClassLoader.class.getResourceAsStream("/game/resources/cards/" + csvFile);      
         reader = new CsvReader(in, ';', Charset.forName("ISO-8859-1"));        
@@ -39,7 +39,7 @@ public class CSVCardReader {
         int cardNumber = 0;        
         while (reader.readRecord()) {
             
-            loadCard(cardNumber, gameCards, board);
+            loadCard(cardNumber, gameCards);
             cardNumber++;
         }         
         reader.close();
@@ -56,14 +56,14 @@ public class CSVCardReader {
         }
     }*/
 
-    private static void loadCard(int cardNumber, ArrayList<Card> gameCards, Board board) throws IOException, NumberFormatException {
+    private static void loadCard(int cardNumber, ArrayList<Card> gameCards) throws IOException, NumberFormatException {
            
             String cardType = reader.get("TYPE");
             String description = reader.get("DESCRIPTION");
 
             if (cardType.equalsIgnoreCase("MOVE")) {
                 
-                //Board board = Board.getBoard();
+                Board board = Board.getBoard();
                 Place place = board.getPlaceByName(reader.get("PLACE"));
                 boolean paysBonus = Boolean.parseBoolean(reader.get("PAYSBONUS"));
                 int walk = Integer.parseInt(reader.get("WALK"));

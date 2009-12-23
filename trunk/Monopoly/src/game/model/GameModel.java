@@ -95,10 +95,11 @@ public class GameModel {
     public GameModel() {
         configuration = GameConfiguration.getConfiguration();
         configuration.setAutoBuy(false);
+        Board.cleanUpBoard();
         board = Board.getBoard();
-        this.cardStack = cardStack.getCardStack();
-        cardStack.setBoard(board);
-        this.gameModel = this;
+        this.cardStack = CardStack.getCardStack();
+      
+        gameModel = this;
     }
 
     /**
@@ -221,7 +222,7 @@ public class GameModel {
         p.setAtualPlace(board.getPlaceByName("go"));
         p.setAtualPosition(0); //o player começa em go, mas a posiçao é 0, para
         //evitar o credito dos 200 no início
-        p.setBoard(board);
+        //p.setBoard(board);
         players.add(p);
     }
 
