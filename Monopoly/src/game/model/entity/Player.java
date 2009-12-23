@@ -15,7 +15,7 @@ import game.model.entity.board.Utility;
 import game.model.configuration.GameConfiguration;
 import game.model.entity.card.Card;
 import game.model.exceptions.GamePlaceException;
-import game.model.exceptions.GamePlayerException;
+import game.model.exceptions.InvalidCommandException;
 import game.model.exceptions.InvalidPlayerPositionException;
 import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
@@ -118,6 +118,11 @@ public class Player {
         }
 
         monopolys.add(new CheckMonopoly(monopoly));
+        
+    }
+
+    public void build() throws InvalidCommandException{
+        throw new InvalidCommandException("Unavailable command");
         
     }
 
