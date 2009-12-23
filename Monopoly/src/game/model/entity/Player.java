@@ -105,7 +105,17 @@ public class Player {
             playerCommands.add(new Command(CommandType.STATUS, true));
             playerCommands.add(new Command(CommandType.QUIT, true));
             playerCommands.add(new Command(CommandType.BUILD, false));
+            return;
         }
+        
+        for (Command c : playerCommands)
+            if(c.getType() == CommandType.BUILD){
+                c.setActive(false);
+                if(atualPlace instanceof PurchasablePlace){
+                    if(isMonopoly((PurchasablePlace) atualPlace))
+                        c.setActive(true);
+                }
+            }
 
     }
     /**
@@ -341,7 +351,9 @@ public class Player {
         }
         //System.out.println("                        GoTo: "+this.getName()+" está indo p place.action() place: " + atualPlace.getPosition());
         //System.out.println("                        GoTo: "+this.getName()+" player.getPlace() place: " + this.getAtualPlace().getPosition());
+
         atualPlace.action(this);
+        updateCommands();
 
     }
 
