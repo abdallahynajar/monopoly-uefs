@@ -5,7 +5,8 @@
 package game.test;
 
 import game.model.GameModel;
-import game.util.Commands;
+import game.util.Command;
+import game.util.CommandType;
 import game.model.entity.board.PurchasablePlace;
 import game.model.exceptions.*;
 import java.util.ArrayList;
@@ -60,11 +61,14 @@ public class FacadeMonopoly {
     public String getCommands() {
         StringBuilder strCommand = new StringBuilder();
         strCommand.append("{");
-        List<Commands> commands = gameModel.getCurrentPlayer().getPlayerCommands();
+        List<Command> commands = gameModel.getCurrentPlayer().getPlayerCommands();
 
         for (int i = 0; i < commands.size(); i++) {
-            Commands c = commands.get(i);
-            strCommand.append(c.toString().toLowerCase());
+            Command c = commands.get(i);
+
+            if(c.isActive())
+                strCommand.append(c.getType().toString().toLowerCase());
+
             if ((i + 1) != commands.size()) {
                 strCommand.append(",");
             }

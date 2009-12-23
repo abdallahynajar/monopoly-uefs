@@ -6,7 +6,7 @@
 package game.view;
 
 import game.util.Colors;
-import game.util.Commands;
+import game.util.CommandType;
 import java.util.List;
 
 /**
@@ -54,7 +54,7 @@ public class LineComandView extends IOController implements GameView{
 
     public void showOptionalCommands() {
        StringBuffer commands = new StringBuffer() ;
-            for (Enum c : Commands.values()) {
+            for (Enum c : CommandType.values()) {
                 commands.append("[");
                 commands.append(c);
                 commands.append("] ");

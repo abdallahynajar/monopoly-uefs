@@ -9,7 +9,7 @@ package game.model;
 import game.model.configuration.GameConfiguration;
 import game.model.entity.board.Board;
 import game.util.Colors;
-import game.util.Commands;
+import game.util.CommandType;
 import game.model.entity.Player;
 import game.model.entity.card.CardStack;
 import game.model.exceptions.*;
@@ -277,8 +277,8 @@ public class GameModel {
      * @throws InvalidCommandException - se não for possível executar o comando
      */
     public void executePlayerCommand(String command) throws InvalidCommandException {
-        Commands c = Commands.valueOf(command.toUpperCase());
-        if (c.equals(Commands.QUIT)) {
+        CommandType c = CommandType.valueOf(command.toUpperCase());
+        if (c.equals(CommandType.QUIT)) {
             if (gameStarted) {
                 exitGame();
             } else {
