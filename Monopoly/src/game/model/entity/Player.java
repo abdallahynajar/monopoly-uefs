@@ -13,7 +13,10 @@ import game.model.entity.board.Railroad;
 import game.model.entity.board.PurchasablePlace;
 import game.model.entity.board.Utility;
 import game.model.configuration.GameConfiguration;
+import game.model.entity.card.Card;
 import game.model.exceptions.GamePlaceException;
+import game.model.exceptions.GamePlayerException;
+import game.model.exceptions.InvalidPlayerPositionException;
 import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
 import game.model.exceptions.NotInSaleException;
@@ -48,6 +51,9 @@ public class Player {
      */
     private Place atualPlace;
 
+    /** Cartas do jogador */
+    private ArrayList<Card> playerCards;
+
     /**
      * Posição do jogador no tabuleiro
      */
@@ -67,6 +73,8 @@ public class Player {
      */
     private boolean playing;
 
+
+
     /** Cria uma nova instância de um jogador
      * @param color cor do peão
      * @param name nome do jogador
@@ -80,6 +88,7 @@ public class Player {
         playerCommands.add(Commands.ROLL);
         playerCommands.add(Commands.STATUS);
         playerCommands.add(Commands.QUIT);
+        playerCards = new ArrayList<Card>();
     }
 
     public boolean isPlaying() {
@@ -314,5 +323,24 @@ public class Player {
                 ((Railroad) purchasablePlace).setnRailroad(getNumberOfRailRoads());
             }
         }
+    }
+
+    /**
+     * Adiciona uma carta à lista de cartas do jogador
+     * @param card a carta que o jogador pegou
+     */
+    public void addCard(Card card){
+        this.playerCards.add(card);
+        this.playerCommands.add(Commands.USECARD);
+    }
+
+    /**
+     * Usa uma carta caso o jogador a possua, ou esteja na cadeia, senão lança exceção
+     * @param cardType o tipo de carta a ser usada
+     * @throws InvalidPlayerPositionException caso o jogador não esteja na cadeia
+     * @throws
+     */
+    public void useCard(String cardType)throws InvalidPlayerPositionException{
+        
     }
 }
