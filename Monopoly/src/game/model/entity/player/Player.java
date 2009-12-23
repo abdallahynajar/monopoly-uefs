@@ -4,7 +4,7 @@
  * João de Matos
  * Lidiany C Santos
  */
-package game.model.entity;
+package game.model.entity.player;
 
 import game.util.Command;
 import game.util.CommandType;

@@ -7,7 +7,7 @@
 package game.model.entity.board;
 
 import game.model.configuration.GameConfiguration;
-import game.model.entity.Player;
+import game.model.entity.player.Player;
 
 /**
  * Representa um lugar do tipo cadeia no tabuleiro

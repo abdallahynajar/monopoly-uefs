@@ -6,7 +6,7 @@
  */
 package game.model.entity.card;
 
-import game.model.entity.Player;
+import game.model.entity.player.Player;
 
 /**
  *

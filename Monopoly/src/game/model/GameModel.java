@@ -10,7 +10,7 @@ import game.model.configuration.GameConfiguration;
 import game.model.entity.board.Board;
 import game.util.Colors;
 import game.util.CommandType;
-import game.model.entity.Player;
+import game.model.entity.player.Player;
 import game.model.entity.card.CardStack;
 import game.model.exceptions.*;
 import java.util.ArrayList;

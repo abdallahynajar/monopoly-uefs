@@ -5,7 +5,7 @@
 
 package game.model.entity.board;
 
-import game.model.entity.Player;
+import game.model.entity.player.Player;
 import game.model.configuration.GameConfiguration;
 import game.model.entity.card.Card;
 import game.model.entity.card.CardStack;

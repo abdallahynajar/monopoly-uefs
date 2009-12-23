@@ -5,7 +5,7 @@
 
 package game.model.entity.card;
 
-import game.model.entity.Player;
+import game.model.entity.player.Player;
 import java.util.ArrayList;
 import game.model.GameModel;
 
