@@ -11,5 +11,5 @@ package game.util;
  * @author Lidiany
  */
 public enum Commands {
-    ROLL, STATUS, QUIT, USECARD, PAY;
+    ROLL, STATUS, QUIT, USECARD, PAY, BUILD;
 }
