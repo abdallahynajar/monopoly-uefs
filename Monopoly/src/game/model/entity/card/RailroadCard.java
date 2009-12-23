@@ -30,7 +30,7 @@ public class RailroadCard extends Movement{
     }
 
     private Place findNextRailroad(Player p) throws NonExistentPlaceException{
-        Board board = p.getBoard();
+        Board board = Board.getBoard();
         return board.findNextRailroad(p.getAtualPlace());
     }
 }

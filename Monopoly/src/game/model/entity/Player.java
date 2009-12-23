@@ -67,20 +67,6 @@ public class Player {
      */
     private boolean playing;
 
-    /**
-     * Tabuleiro. Essa variavel deve desaparecer quando o Board.getBoard() funcionar
-     * como deveria
-     */
-    private Board board;
-
-    public Board getBoard() {
-        return board;
-    }
-
-    public void setBoard(Board board) {
-        this.board = board;
-    }
-
     /** Cria uma nova instância de um jogador
      * @param color cor do peão
      * @param name nome do jogador
@@ -282,6 +268,7 @@ public class Player {
     }
 
     public void goTo(int goTo, boolean salaryBonus) throws NonExistentPlaceException, Exception{
+        Board board = Board.getBoard();
 
         if (goTo < 40) {
             setAtualPlace(board.getPlaceByPosition(goTo));

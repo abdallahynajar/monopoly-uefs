@@ -23,17 +23,7 @@ public class CardStack {
     private int currentChanceCard = 1; // range 1 .. 15
     private int currentChestCard = 1; //range 1 .. 16
     private static CardStack cardBoard;
-    private Board board;
-
-    public Board getBoard() {
-        return board;
-    }
-
-    public void setBoard(Board board) {
-        this.board = board;
-    }
-
-
+ 
 
 
     private CardStack() {
@@ -52,14 +42,14 @@ public class CardStack {
 
     public void loadChanceCards() {
         try {
-            this.chanceCards = CSVCardReader.loadCards("chances.csv", board);
+            this.chanceCards = CSVCardReader.loadCards("chances.csv");
         } catch (IOException ex) {
         }
     }
 
     public void loadChestCards() {
         try {
-            this.chestCards = CSVCardReader.loadCards("communityChests.csv", board);
+            this.chestCards = CSVCardReader.loadCards("communityChests.csv");
         } catch (IOException ex) {
             ex.printStackTrace();
         }

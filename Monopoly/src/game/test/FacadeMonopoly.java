@@ -20,9 +20,9 @@ public class FacadeMonopoly {
 
     GameModel gameModel;
 
-    public void createGame(int numPlayers, String playerNames, String tokenColors) throws InvalidGameParametersException, InvalidPlayerNameException, InvalidTokenColorException {
-        gameModel = new GameModel();
-
+    public void createGame(int numPlayers, String playerNames, String tokenColors) throws InvalidGameParametersException, InvalidPlayerNameException, InvalidTokenColorException {       
+     
+        gameModel = new GameModel();       
         List<String> nPlayers = new ArrayList<String>();
         StringTokenizer st = new StringTokenizer(playerNames, ",}{");
         while (st.hasMoreTokens()) {
@@ -136,15 +136,15 @@ public class FacadeMonopoly {
         gameModel.buy();
     }
 
-/*********************************************
- user story 5
- *********************************************/
+    /*********************************************
+    user story 5
+     *********************************************/
     public int getCurrentChanceCardNumber() throws NonExistentCardException {
-        return gameModel.getCardStack().getCurrentChanceCard().getCardNumber() +1;
+        return gameModel.getCardStack().getCurrentChanceCard().getCardNumber() + 1;
     }
 
     public int getCurrentChestCardNumber() throws NonExistentCardException {
-        return gameModel.getCardStack().getCurrentChestCard().getCardNumber() +1;
+        return gameModel.getCardStack().getCurrentChestCard().getCardNumber() + 1;
     }
 
     public String getCurrentChanceCardDescription() throws NonExistentCardException {
@@ -172,4 +172,25 @@ public class FacadeMonopoly {
     public void forceNextChestCard(int cardId) throws NonExistentCardException {
         gameModel.getCardStack().forceNextChestCard(cardId);
     }
+
+    //us6
+    public void activateJail() {
+    }
+
+    public void activateDoublesRule() {
+    }
+
+    public boolean playerIsOnJail (String playerName){
+        return true;
+    }
+
+    public void useCard(String  cardType){
+        
+    }
+
+    public void pay(){
+        
+    }
+
+
 }

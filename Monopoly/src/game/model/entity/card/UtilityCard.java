@@ -28,7 +28,7 @@ public class UtilityCard extends Movement{
     }
 
     private Place findNextUtility(Player p) throws NonExistentPlaceException{
-        Board board = p.getBoard();
+        Board board = Board.getBoard();
         return board.findNextUtility(p.getAtualPlace());
     }
 
