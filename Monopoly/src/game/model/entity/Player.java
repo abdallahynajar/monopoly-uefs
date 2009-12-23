@@ -20,6 +20,7 @@ import game.model.exceptions.InvalidPlayerPositionException;
 import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
 import game.model.exceptions.NotInSaleException;
+import game.util.CheckMonopoly;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +74,7 @@ public class Player {
      */
     private boolean playing;
 
-    private ArrayList<String> monopoly;
+    private ArrayList<CheckMonopoly> monopolys;
 
 
 
@@ -85,6 +86,7 @@ public class Player {
         this.name = name;
         this.color = color;
         this.itsPropertys = new ArrayList<PurchasablePlace>();
+        this.monopolys = new ArrayList<CheckMonopoly>();
         playing = true;
         playerCommands = new ArrayList<Commands>();
         playerCommands.add(Commands.ROLL);
@@ -106,8 +108,16 @@ public class Player {
         }
     }
 
-    public void updateMonopoly(){
-        
+    public void addMonopoly(PurchasablePlace p){
+        String monopoly = p.getPlaceGroup();
+        for(CheckMonopoly c : monopolys){
+            if(c.getMonopoly().equals(name)){
+                c.oneMore();
+                return;
+            }
+        }
+
+        monopolys.add(new CheckMonopoly(monopoly));
         
     }
 
@@ -184,6 +194,10 @@ public class Player {
         }
     }
 
+    private void addPropertys(PurchasablePlace p){
+        this.itsPropertys.add(p);
+    }
+
     /**
      * Faz o jogador comprar a propriedade em que se encontra, caso tenha dinheiro
      * e aquela esteja a venda.
@@ -201,7 +215,7 @@ public class Player {
             if (p.getOwner().getName().equals("bank")) {
                 debit(p.getPrice());
                 p.setOwner(this);
-                this.itsPropertys.add(p);
+                addPropertys(p);
                 if (p instanceof Railroad) {
                     updateRailroadsRunning();
                 }
