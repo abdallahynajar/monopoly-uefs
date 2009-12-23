@@ -39,6 +39,7 @@ public class Property extends PurchasablePlace {
         this.housePrice = housePrice;
         this.placeGroup = placeGroup;
         this.position = position;
+        nHouses = 0;
         //this.owner = new Player("bank", null); //a principio, todas a propriedades são do banco
     }
 
@@ -72,6 +73,10 @@ public class Property extends PurchasablePlace {
     }
 
     public float getRent() {
+
+        if(owner.isMonopoly(this) && nHouses == 0)
+            return rent[nHouses]*2;
+
         return rent[nHouses];
     }
 

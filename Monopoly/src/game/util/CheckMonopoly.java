@@ -18,6 +18,7 @@ public class CheckMonopoly {
     public CheckMonopoly(String monopoly) {
         this.monopoly = monopoly;
         count = 1;
+        inMonopoly = false;
     }
 
     public boolean isInMonopoly() {
@@ -30,25 +31,25 @@ public class CheckMonopoly {
 
     public void oneMore(){
         count++;
-        updateInMonopoly();
+        inMonopoly = updateInMonopoly();
 
     }
 
     public void oneLess(){
         count--;
-        updateInMonopoly();
+        inMonopoly = updateInMonopoly();
 
     }
 
-    private void updateInMonopoly(){
+    private boolean updateInMonopoly(){
         if (count == 3)
-            inMonopoly = true;
+            return true;
         if (count == 2){
             //não é a melhor solução, mas funciona assim =P
             if(monopoly.equals("purple") || monopoly.equals("Indigo"))
-                inMonopoly = true;
+                return true;
         }
-        inMonopoly = false;
+        return false;
 
     }
 }
