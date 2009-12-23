@@ -73,6 +73,8 @@ public class Player {
      */
     private boolean playing;
 
+    private ArrayList<String> monopoly;
+
 
 
     /** Cria uma nova instância de um jogador
@@ -102,6 +104,10 @@ public class Player {
         for (PurchasablePlace purchasablePlace : itsPropertys) {
             purchasablePlace.returnToBank();
         }
+    }
+
+    public void updateMonopoly(){
+        
     }
 
     public void setPlaying(boolean playing) {
