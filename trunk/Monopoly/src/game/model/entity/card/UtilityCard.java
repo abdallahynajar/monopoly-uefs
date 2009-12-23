@@ -21,9 +21,9 @@ public class UtilityCard extends Movement{
 
     @Override
     public void action(Player p) throws NonExistentPlaceException, Exception{
-        System.out.println("                action de Utility:");
+        //System.out.println("                action de Utility:");
         placeToGo = findNextUtility(p);
-        System.out.println("                action de Utility: place position: " + placeToGo.getPosition() + " card: "+ this.getDescription() );
+        //System.out.println("                action de Utility: place position: " + placeToGo.getPosition() + " card: "+ this.getDescription() );
         p.walk(placeToGo.getPosition(), this.collectBonus);
     }
 

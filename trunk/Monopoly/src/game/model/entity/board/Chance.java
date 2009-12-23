@@ -27,13 +27,13 @@ public class Chance extends Place{
     public void action(Player p) throws Exception {
         //pega a porra da carta
 
-        System.out.println("chegou no action de Chance");
+        //System.out.println("chegou no action de Chance");
         boolean isChanceActive = GameConfiguration.
                 getConfiguration().isActivateChancePlaces();
         if(isChanceActive){
-            System.out.println("    O jogo está configurado pra change funcionar");
+            //System.out.println("    O jogo está configurado pra change funcionar");
             Card card = CardStack.getCardStack().getChanceCard();
-            System.out.println("        Card da vez: " + card.getDescription() + " numero: " + card.getCardNumber());
+            //System.out.println("        Card da vez: " + card.getDescription() + " numero: " + card.getCardNumber());
             card.action(p);
         }
     }
