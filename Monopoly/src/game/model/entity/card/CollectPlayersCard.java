@@ -8,16 +8,16 @@ package game.model.entity.card;
 import game.model.entity.Player;
 import java.util.ArrayList;
 import game.model.GameModel;
+
 /**
- * Representa todas as cartas em que um player tem que pagar alguma taxa a todos
- * os outros
+ *
  * @author shaka
  */
-public class PayPlayersCard extends Card {
+public class CollectPlayersCard extends Card {
 
     private int amountToPay;
 
-    public PayPlayersCard(int cardNumber, String description, int amountToPay) {
+    public CollectPlayersCard(int cardNumber, String description, int amountToPay) {
         super(cardNumber, description);
         this.amountToPay = amountToPay;
     }
@@ -29,7 +29,7 @@ public class PayPlayersCard extends Card {
 
         for(Player player : players){
             if(player != p && player.isPlaying()){
-                p.payRent(player, amountToPay);
+                player.payRent(p, amountToPay);
             }
         }
 

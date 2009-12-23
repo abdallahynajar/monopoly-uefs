@@ -2,7 +2,7 @@ TYPE;DESCRIPTION;PAYSBONUS;PLACE;VALUE;FEEPERHOUSE;FEEPERHOTEL;FEEPERPLAYER;WALK
 MOVE;Advance To Go - Collect $200;true;go;;;;;0
 ASS;Bank Error In Your Favor - Collect $200;;;200;0;0;0;
 ASS;Doctor's Fee - Pay $50;;;-50;0;0;0;
-ASS;Grand Opera Opening - Collect $50 from every player for opening night seats;;;0;0;0;50;
+COLLECT;Grand Opera Opening - Collect $50 from every player for opening night seats;;;50;0;0;0;
 ASS;From Sale Out Of Stock - You Get $45;;;45;0;0;0;
 JAIL;Get Out Of Jail, Free - This card may be kept until needed or sold;;;;;;;
 MOVE;Go To Jail - Go directly to jail - Do not pass go - Do not collect $200;false;Jail - Just Visiting;;;;;0

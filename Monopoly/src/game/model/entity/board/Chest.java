@@ -28,7 +28,7 @@ public class Chest extends Place{
 
         System.out.println("chegou no action de Chest");
         boolean isChestActive = GameConfiguration.
-                getConfiguration().isActivateChancePlaces();
+                getConfiguration().isActivateChestPlaces();
         if(isChestActive){
             System.out.println("    O jogo está configurado pra chest funcionar");
             Card card = CardStack.getCardStack().getChestCard();
