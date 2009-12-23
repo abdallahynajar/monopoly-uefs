@@ -202,7 +202,7 @@ public class Board {
         places.add(new Chance(7, "Chance 1", "chance"));
         places.add(new Property(8, "Vermont Avenue", 100, new float[]{6, 30, 90, 270, 400, 550}, 50, 50, "Light Blue"));
         places.add(new Property(9, "Connecticut Avenue", 120, new float[]{8, 40, 100, 300, 450, 600}, 60, 50, "Light Blue"));
-        places.add(new FreeParking(10, "Jail - Just Visiting", "corner"));
+        places.add(new Jail(10, "Jail - Just Visiting", "corner", true));
         places.add(new Property(11, "St. Charles Place", 140, new float[]{10, 50, 150, 450, 625, 750}, 70, 100, "pink"));
         places.add(new Utility(12, "Electric Company", 150, 75));
         places.add(new Property(13, "States Avenue", 140, new float[]{10, 50, 150, 450, 625, 750}, 70, 100, "pink"));
@@ -222,7 +222,7 @@ public class Board {
         places.add(new Property(27, "Ventnor Avenue", 260, new float[]{22, 110, 330, 800, 975, 1150}, 130, 150, "Yellow"));
         places.add(new Utility(28, "Water Works", 150, 75));
         places.add(new Property(29, "Marvin Gardens", 280, new float[]{24, 120, 360, 850, 1025, 1200}, 140, 150, "Yellow"));
-        places.add(new FreeParking(30, "Go To Jail", "corner"));
+        places.add(new Jail(30, "Go To Jail", "corner", true));
         places.add(new Property(31, "Pacific Avenue", 300, new float[]{26, 130, 390, 900, 1100, 1275}, 150, 200, "Green"));
         places.add(new Property(32, "North Carolina Avenue", 300, new float[]{26, 130, 390, 900, 1100, 1275}, 150, 200, "Green"));
         places.add(new Chest(33, "Community Chest 3", "chest"));

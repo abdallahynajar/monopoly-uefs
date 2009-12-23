@@ -14,24 +14,41 @@ public class GameConfiguration {
 
     //habilita compra automática de propriedade;
     private boolean autoBuy;
+    /** Valor em dinheiro para cada jogador no ínicio do jogo*/
     private float initialMoney;
+    /** Bonus ao passar pelo Go*/
     private float salaryBonus;
+    /** Habilita construção igualitária*/
     private boolean equalityBuilding;
+    /* Habilita dobro de bonus ao passar pelo Go*/
     private boolean doubleBonusMoney;
+    /** HAbilita regra do freeParking*/
     private boolean freeParkingRule;
+    /** Determina a quantidade de casas necessária para construir um hotel*/
     private int housesToHotel;
+
     private int amountOfHouses;
     private int amountOfHotels;
+    /** Valor por estacionamento*/
     private int freeParkingValue;
+    /** Valor das taxas*/
     private int taxValue;
+    /**Valor das taxas especiais*/
     private int especialTaxValue;
+    /** Máximo de turnos que o jogador fica na prisão*/
     private int maxPrisonTurns;
+
     private int prisonBail;
     private int mortgageTax;
     private int distributedTitles;
+    /** Habilita os lugares do tipo Sorte/revés*/
     private boolean activateChancePlaces;
+    /**Habilita embaralhamento das cartas*/
     private boolean cardShuffle;
+    /**Habilita lugares do tipo cofres comunitários*/
     private boolean activateChestPlaces;
+    /**Habilita cadeia**/
+    private boolean activateJail;
 
     private static GameConfiguration gc;
     
@@ -64,7 +81,8 @@ public class GameConfiguration {
         this.distributedTitles = Integer.parseInt( rc.getString("distributedTitles") );
         this.activateChancePlaces = Boolean.parseBoolean( rc.getString("activateChancePlaces") );
         this.cardShuffle = Boolean.parseBoolean( rc.getString("cardShuffle") );
-        activateChestPlaces = Boolean.parseBoolean( rc.getString("activateChestPlaces") );
+        this.activateChestPlaces = Boolean.parseBoolean( rc.getString("activateChestPlaces") );
+        this.activateJail = Boolean.parseBoolean( rc.getString("activateJailPlaces") );
     }
 
     public boolean isActivateChancePlaces() {
@@ -235,5 +253,11 @@ public class GameConfiguration {
         this.activateChestPlaces = activateChestPlaces;
     }
 
-    
+    public boolean isActivateJail() {
+        return activateJail;
+    }
+
+    public void setActivateJail(boolean activateJail) {
+        this.activateJail = activateJail;
+    }
 }
