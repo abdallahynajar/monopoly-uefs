@@ -13,6 +13,7 @@ import game.model.entity.board.Board;
 import game.model.entity.board.Railroad;
 import game.model.entity.board.PurchasablePlace;
 import game.model.entity.board.Utility;
+import game.model.entity.board.Property;
 import game.model.configuration.GameConfiguration;
 import game.model.entity.card.Card;
 import game.model.exceptions.GamePlaceException;
@@ -112,11 +113,13 @@ public class Player {
             if(c.getType() == CommandType.BUILD){
                 c.setActive(false);
                 if(atualPlace instanceof PurchasablePlace){
-                    if(isMonopoly((PurchasablePlace) atualPlace))
+                    System.out.println("Atual place é Purchasable");
+                    if(this.isMonopoly((PurchasablePlace) atualPlace)){
+                        System.out.println("    Agora ele pode construir");
                         c.setActive(true);
+                    }
                 }
             }
-
     }
     /**
      * Tira o jogador do jogo e devolve todas as suas propriedades ao banco.
@@ -148,7 +151,17 @@ public class Player {
     }
 
 
-    public void build() throws InvalidCommandException{
+    public void build(int propertyID) throws InvalidCommandException, NonExistentPlaceException{
+
+        /*if(propertyID < 1 || propertyID > 40)
+            throw new InvalidCommandException("Place doesn't exist");*/
+
+        Board board = Board.getBoard();
+        Place p = board.getPlaceByPosition(propertyID);
+
+        if(!(p instanceof Property))
+            throw new InvalidCommandException("Can only build on properties");
+
         throw new InvalidCommandException("Unavailable command");
         
     }
