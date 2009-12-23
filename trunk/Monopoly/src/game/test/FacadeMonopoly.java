@@ -206,8 +206,8 @@ public class FacadeMonopoly {
 
     }
 
-    public void build (int propertyID) throws InvalidCommandException{
-        gameModel.getCurrentPlayer().build();
+    public void build (int propertyID) throws InvalidCommandException, NonExistentPlaceException{
+        gameModel.getCurrentPlayer().build(propertyID);
         
     }
 
