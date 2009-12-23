@@ -100,7 +100,7 @@ public class CardStack {
 
     public void forceNextChanceCard(int cardID) throws NonExistentCardException{
        
-        if(cardID <=0 || cardID >15){
+        if(cardID <=0 || cardID >16){
              throw new NonExistentCardException("Card doesn't exist");
         }else{
              currentChanceCard = cardID;

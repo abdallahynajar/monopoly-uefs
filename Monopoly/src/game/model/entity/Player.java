@@ -281,7 +281,7 @@ public class Player {
         goTo(positionToGo, salaryBonus);
     }
 
-    private void goTo(int goTo, boolean salaryBonus) throws NonExistentPlaceException, Exception{
+    public void goTo(int goTo, boolean salaryBonus) throws NonExistentPlaceException, Exception{
 
         if (goTo < 40) {
             setAtualPlace(board.getPlaceByPosition(goTo));
