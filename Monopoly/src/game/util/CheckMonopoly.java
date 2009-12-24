@@ -47,7 +47,7 @@ public class CheckMonopoly {
             return true;
         if (count == 2){
             //não é a melhor solução, mas funciona assim =P
-            if(monopoly.equals("purple") || monopoly.equals("Indigo"))
+            if(monopoly.equalsIgnoreCase("purple") || monopoly.equalsIgnoreCase("Indigo"))
                 return true;
         }
         return false;
