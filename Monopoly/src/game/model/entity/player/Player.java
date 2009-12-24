@@ -112,12 +112,17 @@ public class Player {
         for (Command c : playerCommands)
             if(c.getType() == CommandType.BUILD){
                 c.setActive(false);
+                System.out.println("Comanodo Build");
                 if(atualPlace instanceof PurchasablePlace){
-                   
-                    if(this.isMonopoly((PurchasablePlace) atualPlace)){
-                       
+                    PurchasablePlace pp = (PurchasablePlace) atualPlace;
+                    System.out.println("    " +name + " está em um lugar compável");
+                    System.out.println("    Dono do lugar: " + pp.getOwner().getName() + "mono poly:" + pp.getPlaceGroup() );
+                    if(this.isMonopoly(pp)){
                         c.setActive(true);
+                        System.out.println("        " +name + " Tem o monopolio de: " + pp.getPlaceGroup());
                     }
+                }else{
+                    //System.out.println("    " + name + " Não tem o monopolio de: " + atualPlace.getName());
                 }
             }
     }
@@ -150,15 +155,25 @@ public class Player {
         return false;
     }
 
+    private boolean isBuildAvaliable(Place p){
+       /* updateCommands();
+        for(Command c : playerCommands){
+            if(c.getType() == CommandType.BUILD)
+                return c.isActive();
+        }*/
+        if (atualPlace.getPlaceGroup().equalsIgnoreCase(p.getPlaceGroup()))
+            return true;
+
+
+
+        return false;
+    }
 
     public void build(int propertyID) throws InvalidCommandException, NonExistentPlaceException{
 
-        /*if(propertyID < 1 || propertyID > 40)
-            throw new InvalidCommandException("Place doesn't exist");*/
-
         Board board = Board.getBoard();
         Place p = board.getPlaceByPosition(propertyID);
-
+            
         if(!(p instanceof Property))
             throw new InvalidCommandException("Can only build on properties");
 
@@ -166,7 +181,11 @@ public class Player {
 
         if(!has(p))
             throw new InvalidCommandException("Player is not the owner of this property");
-
+        else if(!isMonopoly((PurchasablePlace) p))
+            throw new InvalidCommandException("Doesn't hold monopoly for this group");
+        else{
+            //é aqui q player constroi
+        }
         throw new InvalidCommandException("Unavailable command");
         
     }
@@ -258,6 +277,7 @@ public class Player {
     private void addPropertys(PurchasablePlace p){
         this.itsPropertys.add(p);
         addMonopoly(p);
+        updateCommands();
     }
 
     /**
