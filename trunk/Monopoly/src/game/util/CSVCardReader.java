@@ -30,16 +30,16 @@ public class CSVCardReader {
      * @param csvFile o nome do arquivo com as cartas a serem lidas
      * @return a lista de cartas carregada do arquivo .csv
      */
-    public static ArrayList<Card> loadCards(String csvFile) throws IOException {
+    public static ArrayList<Card> loadCards(String type) throws IOException {
 
-        InputStream in = ClassLoader.class.getResourceAsStream("/game/resources/cards/" + csvFile);      
+        InputStream in = ClassLoader.class.getResourceAsStream("/game/resources/cards/" + type+ ".csv");
         reader = new CsvReader(in, ';', Charset.forName("ISO-8859-1"));        
         ArrayList<Card> gameCards = new ArrayList<Card>();
         reader.readHeaders();
         int cardNumber = 0;        
         while (reader.readRecord()) {
             
-            loadCard(cardNumber, gameCards);
+            loadCard(cardNumber, gameCards, type);
             cardNumber++;
         }         
         reader.close();
@@ -56,7 +56,7 @@ public class CSVCardReader {
         }
     }*/
 
-    private static void loadCard(int cardNumber, ArrayList<Card> gameCards) throws IOException, NumberFormatException {
+    private static void loadCard(int cardNumber, ArrayList<Card> gameCards, String type) throws IOException, NumberFormatException {
            
             String cardType = reader.get("TYPE");
             String description = reader.get("DESCRIPTION");
@@ -67,7 +67,7 @@ public class CSVCardReader {
                 Place place = board.getPlaceByName(reader.get("PLACE"));
                 boolean paysBonus = Boolean.parseBoolean(reader.get("PAYSBONUS"));
                 int walk = Integer.parseInt(reader.get("WALK"));
-                Movement mv = new Movement(cardNumber, description, place, paysBonus, walk);
+                Movement mv = new Movement(cardNumber, description, place, paysBonus, walk, type);
                 gameCards.add(mv);
             } else if (cardType.equalsIgnoreCase("ASS")) {
                 //String description = reader.get("DESCRIPTION");
@@ -75,28 +75,28 @@ public class CSVCardReader {
                 int feePerHouse = Integer.parseInt(reader.get("FEEPERHOUSE"));
                 int feePerHotel = Integer.parseInt(reader.get("FEEPERHOTEL"));
                 int feePerPlayer = Integer.parseInt(reader.get("FEEPERPLAYER"));
-                Assessment ass = new Assessment(cardNumber, description, cardValue, feePerHotel, feePerHouse, feePerPlayer);
+                Assessment ass = new Assessment(cardNumber, description, cardValue, feePerHotel, feePerHouse, feePerPlayer, type);
                 gameCards.add(ass);
             } else if (cardType.equalsIgnoreCase("JAIL")) {
                 //String description = reader.get("DESCRIPTION");
-                OutOfJail ofJail = new OutOfJail(cardNumber, description);
+                OutOfJail ofJail = new OutOfJail(cardNumber, description, type);
                 gameCards.add(ofJail);
             } else if (cardType.equalsIgnoreCase("MOVEUTILITY")){
                 boolean collectSalary = Boolean.parseBoolean(reader.get("PAYSBONUS"));
-                UtilityCard uc = new UtilityCard(cardNumber, description, collectSalary);
+                UtilityCard uc = new UtilityCard(cardNumber, description, collectSalary, type);
                 gameCards.add(uc);
 
             } else if (cardType.equalsIgnoreCase("MOVERAILROAD")){
                 boolean collectSalary = Boolean.parseBoolean(reader.get("PAYSBONUS"));
-                RailroadCard rc = new RailroadCard(cardNumber, description, collectSalary);
+                RailroadCard rc = new RailroadCard(cardNumber, description, collectSalary, type);
                 gameCards.add(rc);
             }   else if (cardType.equalsIgnoreCase("PAYPLAYERS")){
                 int cardValue = Integer.parseInt(reader.get("VALUE"));
-                PayPlayersCard ppc = new PayPlayersCard(cardNumber, description, cardValue);
+                PayPlayersCard ppc = new PayPlayersCard(cardNumber, description, cardValue, type);
                 gameCards.add(ppc);
             } else if (cardType.equalsIgnoreCase("COLLECT")){
                 int cardValue = Integer.parseInt(reader.get("VALUE"));
-                CollectPlayersCard cpc = new CollectPlayersCard(cardNumber, description, cardValue);
+                CollectPlayersCard cpc = new CollectPlayersCard(cardNumber, description, cardValue, type);
                 gameCards.add(cpc);
             }
          }

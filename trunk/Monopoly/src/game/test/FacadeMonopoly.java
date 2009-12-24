@@ -183,21 +183,22 @@ public class FacadeMonopoly {
 
     //us6
     public void activateJail() {
+        gameModel.getConfiguration().setActivateJail(true);
     }
 
     public void activateDoublesRule() {
     }
 
-    public boolean playerIsOnJail (String playerName){
-        return true;
+    public boolean playerIsOnJail (String playerName) throws NonExistentPlayerException, GamePlayerException{
+        return gameModel.getPlayerByName(playerName).isInJail();
     }
 
-    public void useCard(String  cardType){
-        
+    public void useCard(String  cardType) throws IllegalPlayerStateException, NonExistentCardException{
+        gameModel.getCurrentPlayer().useCard( cardType);
     }
 
-    public void pay(){
-        
+    public void pay() throws IllegalPlayerStateException{
+        gameModel.getCurrentPlayer().paysBail();
     }
 
 

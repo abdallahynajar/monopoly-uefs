@@ -16,9 +16,12 @@ import game.model.entity.board.Utility;
 import game.model.entity.board.Property;
 import game.model.configuration.GameConfiguration;
 import game.model.entity.card.Card;
+import game.model.entity.card.OutOfJail;
+import game.model.exceptions.GameException;
 import game.model.exceptions.GamePlaceException;
 import game.model.exceptions.IllegalPlayerStateException;
 import game.model.exceptions.InvalidCommandException;
+import game.model.exceptions.NonExistentCardException;
 import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
 import game.model.exceptions.NotInSaleException;
@@ -55,7 +58,7 @@ public class Player {
     private Place atualPlace;
 
     /** Cartas do jogador */
-    private ArrayList<Card> playerCards;
+    private ArrayList<OutOfJail> playerCards;
 
     /**
      * Posição do jogador no tabuleiro
@@ -103,10 +106,10 @@ public class Player {
         updateCommands();
         playing = true;
         
-        playerCards = new ArrayList<Card>();
-
+        playerCards = new ArrayList<OutOfJail>();
         arrestedState = new ArrestedState(this);
         playingState = new PlayingState(this);
+        atualState = playingState;
     }
 
     public boolean isPlaying() {
@@ -448,7 +451,7 @@ public class Player {
      * Adiciona uma carta à lista de cartas do jogador
      * @param card a carta que o jogador pegou
      */
-    public void addCard(Card card){
+    public void addCard(OutOfJail card){
         this.playerCards.add(card);
         this.playerCommands.add(new Command(CommandType.USECARD, true));
     }
@@ -467,12 +470,36 @@ public class Player {
     }
 
     public void paysBail() throws IllegalPlayerStateException{
+        System.out.println("" + isInJail());
         if( isInJail() ){
             arrestedState.paysBail();
         }else{
             throw new IllegalPlayerStateException("player is not on jail");
         }
     }
+
+    public void useCard(String  cardType) throws IllegalPlayerStateException, NonExistentCardException{
+        System.out.println("" + isInJail());
+        if( isInJail() ){
+            if(hasCard(cardType)){
+                arrestedState.useCard();
+            }else{
+              throw new NonExistentCardException("Player doesn't have this card to use");
+            }
+        }else{
+            throw new IllegalPlayerStateException("player is not on jail");
+        }
+    }
+
+    public boolean hasCard(String  cardType){
+        for (OutOfJail outOfJail : playerCards) {
+            if( outOfJail.getType().equalsIgnoreCase(cardType) ){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
  
 

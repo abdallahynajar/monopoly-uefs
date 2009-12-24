@@ -24,8 +24,8 @@ public class Movement extends Card{
     protected boolean collectBonus;
     protected int walk;
 
-    public Movement(int cardNumber, String description, Place placeToGo, boolean collectBonus, int walk) {
-        super(cardNumber, description);
+    public Movement(int cardNumber, String description, Place placeToGo, boolean collectBonus, int walk, String type) {
+        super(cardNumber, description, type);
         this.placeToGo = placeToGo;
         this.collectBonus = collectBonus;
         this.walk = walk;

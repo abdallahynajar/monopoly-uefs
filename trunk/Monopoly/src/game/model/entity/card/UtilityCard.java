@@ -14,8 +14,8 @@ import game.model.exceptions.NonExistentPlaceException;
  */
 public class UtilityCard extends Movement{
 
-    public UtilityCard(int cardNumber, String description, boolean collectBonus) {
-        super(cardNumber, description, null, collectBonus,0);
+    public UtilityCard(int cardNumber, String description, boolean collectBonus, String type) {
+        super(cardNumber, description, null, collectBonus,0, type);
 
     }
 
