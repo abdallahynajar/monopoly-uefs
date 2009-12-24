@@ -24,6 +24,10 @@ public class Command {
 
     public void setActive(boolean active) {
         this.active = active;
+        //if(active)
+            //System.out.println("            Comando Build Agora está ativo!!!! " + this.hashCode());
+        //else
+            //System.out.println("            Comando Build Agora foi desativado, porra!!!!!! " + this.hashCode());
     }
 
     public CommandType getType() {

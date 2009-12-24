@@ -137,6 +137,7 @@ public class Player {
                     if(this.isMonopoly(pp)){
                         c.setActive(true);
                         //System.out.println("        " +name + " Tem o monopolio de: " + pp.getPlaceGroup());
+                        return;
                     }
                 }else{
                     //System.out.println("    " + name + " Não tem o monopolio de: " + atualPlace.getName());
@@ -305,6 +306,8 @@ public class Player {
      * @throws game.model.exceptions.ItAlreadyHasAnOnwerException
      */
     public void buyProperty() throws NotEnoughMoneyException, NotInSaleException, GamePlaceException {
+
+
         if (!(atualPlace instanceof PurchasablePlace)) {
             throw new NotInSaleException("Place doesn't have a deed to be bought");
         } else if ((atualPlace instanceof Utility)) {
