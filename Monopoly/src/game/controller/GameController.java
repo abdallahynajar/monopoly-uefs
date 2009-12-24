@@ -169,7 +169,7 @@ public class GameController {
      * @param player - o jogador cujo status será mostrado
      */
     public void showPlayerStatus(Player player) {
-        gameView.showMessage(player.getStatus());
+        //gameView.showMessage(player.getStatus());
     }
 
     /***

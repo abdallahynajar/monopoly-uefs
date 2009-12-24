@@ -17,8 +17,8 @@ import game.model.entity.board.Property;
 import game.model.configuration.GameConfiguration;
 import game.model.entity.card.Card;
 import game.model.exceptions.GamePlaceException;
+import game.model.exceptions.IllegalPlayerStateException;
 import game.model.exceptions.InvalidCommandException;
-import game.model.exceptions.InvalidPlayerPositionException;
 import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
 import game.model.exceptions.NotInSaleException;
@@ -78,7 +78,18 @@ public class Player {
 
     private ArrayList<CheckMonopoly> monopolys;
 
+    /**
+     * Estado atual do jogador
+     */
+    private PlayerState atualState;
 
+    /**
+     * Jogador está na cadeia
+     */
+    private ArrestedState arrestedState;
+
+
+    private PlayerState playingState;
 
     /** Cria uma nova instância de um jogador
      * @param color cor do peão
@@ -93,6 +104,9 @@ public class Player {
         playing = true;
         
         playerCards = new ArrayList<Card>();
+
+        arrestedState = new ArrestedState(this);
+        playingState = new PlayingState(this);
     }
 
     public boolean isPlaying() {
@@ -129,7 +143,7 @@ public class Player {
     /**
      * Tira o jogador do jogo e devolve todas as suas propriedades ao banco.
      */
-    public void fail() {
+    public void leavesGame() {
         playing = false;
         for (PurchasablePlace purchasablePlace : itsPropertys) {
             purchasablePlace.returnToBank();
@@ -439,13 +453,27 @@ public class Player {
         this.playerCommands.add(new Command(CommandType.USECARD, true));
     }
 
-    /**
-     * Usa uma carta caso o jogador a possua, ou esteja na cadeia, senão lança exceção
-     * @param cardType o tipo de carta a ser usada
-     * @throws InvalidPlayerPositionException caso o jogador não esteja na cadeia
-     * @throws
-     */
-    public void useCard(String cardType)throws InvalidPlayerPositionException{
-        
+    public void goesToJail(){
+            this.atualState = arrestedState;
+            arrestedState.play();
     }
+
+    public void leavesJail(){
+        this.atualState = playingState;
+    }
+
+    public boolean isInJail(){
+        return atualState.getPlayerStatus().equalsIgnoreCase("arrested");
+    }
+
+    public void paysBail() throws IllegalPlayerStateException{
+        if( isInJail() ){
+            arrestedState.paysBail();
+        }else{
+            throw new IllegalPlayerStateException("player is not on jail");
+        }
+    }
+
+ 
+
 }

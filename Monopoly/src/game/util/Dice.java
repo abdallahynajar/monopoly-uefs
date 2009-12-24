@@ -6,19 +6,12 @@
  */
 package game.util;
 
-import java.util.Random;
-
 /**
- *  Classe com um método estático para rolagem dos dados.
+ *  Classe que contém os valores obtidos nos dados
  * @author Lidiany
  */
 public  class Dice {
+    public static int FIRSTDICERESULT;
 
-    /**
-     * Returno um número inteiro entre 1 e 6
-     */
-    public static int roll() {
-        Random randGen = new Random();
-        return randGen.nextInt(6) + 1;
-    }
+    public static int SECONDDICERESULT;
 }
