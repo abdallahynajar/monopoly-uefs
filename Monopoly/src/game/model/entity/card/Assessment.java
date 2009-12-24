@@ -24,8 +24,8 @@ public class Assessment extends Card {
     private int feePerHouse;
     private int feePerPlayer;
 
-    public Assessment(int cardNumber, String description, int cardValue, int feePerHotel, int feePerHouse, int feePerPlayer) {
-        super(cardNumber, description);
+    public Assessment(int cardNumber, String description, int cardValue, int feePerHotel, int feePerHouse, int feePerPlayer, String type) {
+        super(cardNumber, description, type);
         this.cardValue = cardValue;
         this.feePerHotel = feePerHotel;
         this.feePerHouse = feePerHouse;

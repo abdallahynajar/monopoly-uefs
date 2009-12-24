@@ -70,4 +70,8 @@ public class ArrestedState extends PlayerState{
 
     }
 
+    public void useCard() {
+        
+    }
+
 }

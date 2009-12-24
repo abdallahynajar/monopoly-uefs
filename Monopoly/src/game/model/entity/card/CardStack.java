@@ -42,14 +42,14 @@ public class CardStack {
 
     public void loadChanceCards() {
         try {
-            this.chanceCards = CSVCardReader.loadCards("chances.csv");
+            this.chanceCards = CSVCardReader.loadCards("chances");
         } catch (IOException ex) {
         }
     }
 
     public void loadChestCards() {
         try {
-            this.chestCards = CSVCardReader.loadCards("communityChests.csv");
+            this.chestCards = CSVCardReader.loadCards("communityChests");
         } catch (IOException ex) {
             ex.printStackTrace();
         }

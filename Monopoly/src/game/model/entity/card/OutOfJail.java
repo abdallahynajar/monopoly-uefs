@@ -7,6 +7,7 @@
 package game.model.entity.card;
 
 import game.model.entity.player.Player;
+import game.model.exceptions.GameException;
 
 /**
  *  Carta do tipo que permite ao jogador sair da prisão
@@ -19,14 +20,19 @@ public class OutOfJail extends Card{
      */
     private Player owner;
 
-    public OutOfJail(int cardNumber, String description) {
-        super(cardNumber, description);
+    public OutOfJail(int cardNumber, String description, String type) {
+        super(cardNumber, description, type);
     }
 
 
     @Override
-    public void action(Player p) {
-        
+    public void action(Player p) throws GameException {
+        if(owner == null){
+            p.addCard(this);
+            owner = p;
+        }else{
+            throw new GameException("This card is already possessed by a player");
+        }
     }
 
 }

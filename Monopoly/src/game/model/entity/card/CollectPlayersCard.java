@@ -17,8 +17,8 @@ public class CollectPlayersCard extends Card {
 
     private int amountToPay;
 
-    public CollectPlayersCard(int cardNumber, String description, int amountToPay) {
-        super(cardNumber, description);
+    public CollectPlayersCard(int cardNumber, String description, int amountToPay, String type) {
+        super(cardNumber, description, type);
         this.amountToPay = amountToPay;
     }
 

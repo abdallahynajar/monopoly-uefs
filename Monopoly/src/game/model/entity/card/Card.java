@@ -16,10 +16,12 @@ import game.model.entity.*;
 public abstract class Card {
     private String description;
     private int cardNumber ;
+    private String type;
 
-    public Card(int cardNumber, String description) {
+    public Card(int cardNumber, String description, String type) {
         this.description = description;
         this.cardNumber = cardNumber;
+        this.type = type;
     }
 
     public abstract void action(Player p) throws Exception;
@@ -39,4 +41,14 @@ public abstract class Card {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    
 }
