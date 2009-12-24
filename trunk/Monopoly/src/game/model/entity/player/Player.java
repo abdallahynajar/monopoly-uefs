@@ -112,14 +112,14 @@ public class Player {
         for (Command c : playerCommands)
             if(c.getType() == CommandType.BUILD){
                 c.setActive(false);
-                System.out.println("Comanodo Build");
+                //System.out.println("Comanodo Build");
                 if(atualPlace instanceof PurchasablePlace){
                     PurchasablePlace pp = (PurchasablePlace) atualPlace;
-                    System.out.println("    " +name + " está em um lugar compável");
-                    System.out.println("    Dono do lugar: " + pp.getOwner().getName() + "mono poly:" + pp.getPlaceGroup() );
+                    //System.out.println("    " +name + " está em um lugar compável");
+                    //System.out.println("    Dono do lugar: " + pp.getOwner().getName() + "mono poly:" + pp.getPlaceGroup() );
                     if(this.isMonopoly(pp)){
                         c.setActive(true);
-                        System.out.println("        " +name + " Tem o monopolio de: " + pp.getPlaceGroup());
+                        //System.out.println("        " +name + " Tem o monopolio de: " + pp.getPlaceGroup());
                     }
                 }else{
                     //System.out.println("    " + name + " Não tem o monopolio de: " + atualPlace.getName());
