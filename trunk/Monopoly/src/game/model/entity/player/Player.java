@@ -479,7 +479,7 @@ public class Player {
     }
 
     public void useCard(String  cardType) throws IllegalPlayerStateException, NonExistentCardException{
-        System.out.println("" + isInJail());
+        
         if( isInJail() ){
             if(hasCard(cardType)){
                 arrestedState.useCard();
