@@ -38,6 +38,7 @@ public class GameConfiguration {
     /** Máximo de turnos que o jogador fica na prisão*/
     private int maxPrisonTurns;
 
+    /** Valor da fiança */
     private int prisonBail;
     private int mortgageTax;
     private int distributedTitles;

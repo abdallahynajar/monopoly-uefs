@@ -9,10 +9,15 @@ package game.model.entity.card;
 import game.model.entity.player.Player;
 
 /**
- *
+ *  Carta do tipo que permite ao jogador sair da prisão
  * @author Lidiany
  */
 public class OutOfJail extends Card{
+
+    /**
+     * Jogador dono da Carta 
+     */
+    private Player owner;
 
     public OutOfJail(int cardNumber, String description) {
         super(cardNumber, description);

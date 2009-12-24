@@ -302,7 +302,7 @@ public class GameModel {
             try {                
                 currentPlayer.walk(firstDieResult + secondDieResult);                    
             } catch (NotEnoughMoneyException ex) {
-                currentPlayer.fail();
+                currentPlayer.leavesGame();
             }
         }
     }
