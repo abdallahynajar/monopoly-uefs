@@ -22,6 +22,8 @@ public class CheckMonopoly {
     }
 
     public boolean isInMonopoly() {
+       // if(this.inMonopoly)
+            //System.out.println(monopoly + " já é um monopoly");
         return inMonopoly;
     }
 

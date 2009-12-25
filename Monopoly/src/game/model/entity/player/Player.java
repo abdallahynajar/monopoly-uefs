@@ -103,7 +103,7 @@ public class Player {
         this.color = color;
         this.itsPropertys = new ArrayList<PurchasablePlace>();
         this.monopolys = new ArrayList<CheckMonopoly>();
-        updateCommands();
+        this.startCommands();
         playing = true;
         
         playerCards = new ArrayList<OutOfJail>();
@@ -116,33 +116,46 @@ public class Player {
         return playing;
     }
 
+    private void startCommands(){
+        //System.out.println("Se vc ver essa mensagem mais de uma vez vc realmetne tá fudido");
+        this.playerCommands = new ArrayList<Command>();
+        this.playerCommands.add(new Command(CommandType.ROLL, true));
+        this.playerCommands.add(new Command(CommandType.STATUS, true));
+        this.playerCommands.add(new Command(CommandType.QUIT, true));
+        this.playerCommands.add(new Command(CommandType.BUILD, false));
+    }
+
     private void updateCommands(){
-        if(playerCommands == null){
-            playerCommands = new ArrayList<Command>();
-            playerCommands.add(new Command(CommandType.ROLL, true));
-            playerCommands.add(new Command(CommandType.STATUS, true));
-            playerCommands.add(new Command(CommandType.QUIT, true));
-            playerCommands.add(new Command(CommandType.BUILD, false));
-            return;
-        }
-        
         for (Command c : playerCommands)
             if(c.getType() == CommandType.BUILD){
-                c.setActive(false);
-                //System.out.println("Comanodo Build");
+                c.setActive(this.hasAnyMonopoly());
+
+
+                /*System.out.println("Comanodo Build");
                 if(atualPlace instanceof PurchasablePlace){
                     PurchasablePlace pp = (PurchasablePlace) atualPlace;
-                    //System.out.println("    " +name + " está em um lugar compável");
-                    //System.out.println("    Dono do lugar: " + pp.getOwner().getName() + "mono poly:" + pp.getPlaceGroup() );
+                    System.out.println("    " +name + " está em um lugar compável");
+                    System.out.println("    Dono do lugar: " + pp.getOwner().getName() + " monopoly: " + pp.getPlaceGroup() );
                     if(this.isMonopoly(pp)){
                         c.setActive(true);
-                        //System.out.println("        " +name + " Tem o monopolio de: " + pp.getPlaceGroup());
+                        System.out.println("        " +name + " Tem o monopolio de: " + pp.getPlaceGroup());
                         return;
+                    }else{
+                        System.out.println("    " + name + " Não tem o monopolio de: " + atualPlace.getName());
                     }
-                }else{
-                    //System.out.println("    " + name + " Não tem o monopolio de: " + atualPlace.getName());
-                }
+                }*/
             }
+    }
+
+    private boolean hasAnyMonopoly(){
+        for(CheckMonopoly c : monopolys){
+            if(c.isInMonopoly()){
+                //System.out.println("    " + name + " tem o monopolio de pelo menos: " + c.getMonopoly());
+                return true;
+            }
+                
+        }
+        return false;
     }
     /**
      * Tira o jogador do jogo e devolve todas as suas propriedades ao banco.
@@ -295,7 +308,7 @@ public class Player {
     private void addPropertys(PurchasablePlace p){
         this.itsPropertys.add(p);
         addMonopoly(p);
-        updateCommands();
+        this.updateCommands();
     }
 
     /**
@@ -336,6 +349,7 @@ public class Player {
     }
 
     public List<Command> getPlayerCommands() {
+        //System.out.println("getPlayerCommands : Build = " + this.playerCommands.get(3).isActive()+" - "+this.playerCommands.get(3).getType());
         return playerCommands;
     }
 
