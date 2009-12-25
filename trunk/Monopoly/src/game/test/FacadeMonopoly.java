@@ -6,7 +6,6 @@ package game.test;
 
 import game.model.GameModel;
 import game.util.Command;
-import game.util.CommandType;
 import game.model.entity.board.PurchasablePlace;
 import game.model.exceptions.*;
 import java.util.ArrayList;
@@ -67,11 +66,14 @@ public class FacadeMonopoly {
 
         for (int i = 0; i < commands.size(); i++) {
             Command c = commands.get(i);
-            if(c.isActive())
+            if(c.isActive()){
+                //System.out.println(c.getType());
                 commandNames.add(c.getType().toString().toLowerCase());
+            }
         }
 
         for ( int i = 0; i < commandNames.size(); i++){
+            //System.out.println(commandNames.get(i));
             strCommand.append(commandNames.get(i));
             if ((i + 1) != commandNames.size()) {
                 strCommand.append(",");
@@ -208,7 +210,7 @@ public class FacadeMonopoly {
     }
 
     public void build (int propertyID) throws InvalidCommandException, NonExistentPlaceException{
-        gameModel.getCurrentPlayer().build(propertyID);
+        gameModel.build(propertyID);
         
     }
 

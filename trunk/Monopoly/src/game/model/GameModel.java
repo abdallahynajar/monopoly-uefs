@@ -350,6 +350,7 @@ public class GameModel {
         }
 
         currentPlayer = players.get(currentPlayerIndex);
+        //System.out.println("======Player: " + currentPlayer.getName() + " está jogando agora =====");
         nextPlayerIndex = currentPlayerIndex;
     }
 
@@ -407,6 +408,13 @@ public class GameModel {
 
     public void setCardStack(CardStack cardStack) {
         this.cardStack = cardStack;
+    }
+
+    public void build(int propertyID) throws InvalidCommandException, NonExistentPlaceException{
+        int a = this.nextPlayerIndex;
+        Player next = this.seeNextPlayer();
+        this.nextPlayerIndex = a;
+        next.build(propertyID);
     }
 
 }
