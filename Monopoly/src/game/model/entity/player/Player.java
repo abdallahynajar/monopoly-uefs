@@ -124,28 +124,20 @@ public class Player {
         this.playerCommands.add(new Command(CommandType.STATUS, true));
         this.playerCommands.add(new Command(CommandType.QUIT, true));
         this.playerCommands.add(new Command(CommandType.BUILD, false));
+        this.playerCommands.add(new Command(CommandType.SELL, false));
+
     }
 
     private void updateCommands(){
-        for (Command c : playerCommands)
+        for (Command c : playerCommands){
             if(c.getType() == CommandType.BUILD){
                 c.setActive(this.isBuiltActive());
-
-
-                /*System.out.println("Comanodo Build");
-                if(atualPlace instanceof PurchasablePlace){
-                    PurchasablePlace pp = (PurchasablePlace) atualPlace;
-                    System.out.println("    " +name + " está em um lugar compável");
-                    System.out.println("    Dono do lugar: " + pp.getOwner().getName() + " monopoly: " + pp.getPlaceGroup() );
-                    if(this.isMonopoly(pp)){
-                        c.setActive(true);
-                        System.out.println("        " +name + " Tem o monopolio de: " + pp.getPlaceGroup());
-                        return;
-                    }else{
-                        System.out.println("    " + name + " Não tem o monopolio de: " + atualPlace.getName());
-                    }
-                }*/
             }
+            if(c.getType() == CommandType.SELL){
+                c.setActive(this.wasAnyHouseBuild());
+            }
+        }
+
     }
 
     private boolean isBuiltActive(){
@@ -157,6 +149,23 @@ public class Player {
         }
         return false;
     }
+
+    private boolean wasAnyHouseBuild(){
+
+        for(PurchasablePlace pp: itsPropertys){
+            if(pp instanceof Property){
+                Property p = (Property)pp;
+                if(p.getNHouses() > 0){
+                    return true;
+                }
+            }
+
+        }
+
+        return false;
+
+    }
+
     /**
      * Tira o jogador do jogo e devolve todas as suas propriedades ao banco.
      */
