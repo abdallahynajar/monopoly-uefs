@@ -8,6 +8,7 @@ package game.model.entity.board;
 
 import game.model.entity.player.Player;
 import game.model.entity.*;
+import game.model.entity.player.Bank;
 import game.model.exceptions.BuildException;
 import game.model.exceptions.GamePlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
@@ -105,17 +106,37 @@ public class Property extends PurchasablePlace {
     }
 
     public void build() throws NotEnoughMoneyException, BuildException{
+        verifyBuildingPossibility();
         verifyDistributionOfHouses();
+        doesBankHaveHouse();
         this.owner.debit(this.housePrice);
         nHouses++;
     }
 
+
+    private void verifyBuildingPossibility() throws BuildException{
+        if(nHouses > 4)
+            throw new BuildException("No further buildings on this property");
+    }
+
+    /**
+     * verifica se a vizinhaça tem um número compatível de casas
+     * @throws BuildException
+     */
     private void verifyDistributionOfHouses() throws BuildException{
         for(PurchasablePlace pp : neighbors){
             Property p = (Property)pp;
                 if((this.getnHouses() - p.getnHouses())> 0)
                     throw new BuildException("Uneven distribution of houses");
         }
+    }
+
+    private void doesBankHaveHouse() throws BuildException{
+        Bank bank = Bank.getBank();
+        if(nHouses < 4)
+            bank.getHouse();
+        else
+            bank.getHotels();
     }
   
 }

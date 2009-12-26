@@ -98,9 +98,15 @@ public class CSVCardReader {
                 int cardValue = Integer.parseInt(reader.get("VALUE"));
                 CollectPlayersCard cpc = new CollectPlayersCard(cardNumber, description, cardValue, type);
                 gameCards.add(cpc);
+            } else if (cardType.equalsIgnoreCase("REPAIR")){
+
+                int feePerHouse = Integer.parseInt(reader.get("FEEPERHOUSE"));
+                int feePerHotel = Integer.parseInt(reader.get("FEEPERHOTEL"));
+                Repair r = new Repair(cardNumber, description, type, feePerHouse,feePerHotel);
+                gameCards.add(r);
             }
-         }
     }
+}
 
     
 
