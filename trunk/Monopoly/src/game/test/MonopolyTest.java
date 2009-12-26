@@ -29,6 +29,7 @@ public class MonopolyTest {
               files.add("easyTests/us5.txt");
               //files.add("easyTests/us6.txt");
               files.add("easyTests/us8.txt");
+              files.add("easyTests/us9.txt");
               //Put the testScript2 file into the "test scripts" list
                //files.add("testScript2.txt");
                 //Instantiate your software façade              

@@ -434,4 +434,8 @@ public class GameModel {
         //currentPlayer.build(propertyID);
     }
 
+    public void sell(int propertyID){
+        
+    }
+
 }
