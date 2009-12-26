@@ -5,6 +5,7 @@
 
 package game.util;
 
+import game.model.entity.board.Property;
 import game.model.entity.board.PurchasablePlace;
 import java.util.ArrayList;
 
@@ -65,6 +66,17 @@ public class CheckMonopoly {
                 return true;
         }
         return false;
-
     }
+
+    public boolean wereAllHousesBuild(){
+        for (PurchasablePlace pp : this.neighbors)
+            if(pp instanceof Property){
+                Property p = (Property)pp;
+                if(p.getnHouses() != 5)
+                    return false;
+            }
+
+        return true;
+    }
+
 }
