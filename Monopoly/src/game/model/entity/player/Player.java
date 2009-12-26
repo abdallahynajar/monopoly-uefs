@@ -129,7 +129,7 @@ public class Player {
     private void updateCommands(){
         for (Command c : playerCommands)
             if(c.getType() == CommandType.BUILD){
-                c.setActive(this.hasAnyMonopoly());
+                c.setActive(this.isBuiltActive());
 
 
                 /*System.out.println("Comanodo Build");
@@ -148,10 +148,9 @@ public class Player {
             }
     }
 
-    private boolean hasAnyMonopoly(){
+    private boolean isBuiltActive(){
         for(CheckMonopoly c : monopolys){
-            if(c.isInMonopoly()){
-                //System.out.println("    " + name + " tem o monopolio de pelo menos: " + c.getMonopoly());
+            if(c.isInMonopoly() && !c.wereAllHousesBuild()){
                 return true;
             }
                 
@@ -203,7 +202,7 @@ public class Player {
 
     public void build(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, BuildException{
 
-        if(this.hasAnyMonopoly()){
+        if(this.isBuiltActive()){
             Board board = Board.getBoard();
             Place p = board.getPlaceByPosition(propertyID);
 
