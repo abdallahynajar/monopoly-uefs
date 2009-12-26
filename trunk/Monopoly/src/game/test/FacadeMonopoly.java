@@ -21,8 +21,8 @@ public class FacadeMonopoly {
     GameModel gameModel;
 
     public void createGame(int numPlayers, String playerNames, String tokenColors) throws InvalidGameParametersException, InvalidPlayerNameException, InvalidTokenColorException {       
-     
-        gameModel = new GameModel();       
+        GameModel.cleanUp();
+        gameModel = GameModel.getGameModel();
         List<String> nPlayers = new ArrayList<String>();
         StringTokenizer st = new StringTokenizer(playerNames, ",}{");
         while (st.hasMoreTokens()) {

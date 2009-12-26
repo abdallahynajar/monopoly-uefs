@@ -86,6 +86,10 @@ public class GameConfiguration {
         this.activateJail = Boolean.parseBoolean( rc.getString("activateJailPlaces") );
     }
 
+    public static void cleanUp(){
+        GameConfiguration.gc = null;
+    }
+
     public boolean isActivateChancePlaces() {
         return activateChancePlaces;
     }
