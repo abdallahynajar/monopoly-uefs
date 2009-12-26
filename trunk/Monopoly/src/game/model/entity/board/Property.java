@@ -8,9 +8,11 @@ package game.model.entity.board;
 
 import game.model.entity.player.Player;
 import game.model.entity.*;
+import game.model.exceptions.BuildException;
 import game.model.exceptions.GamePlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
 import game.model.exceptions.NotInSaleException;
+import java.util.ArrayList;
 
 /**
  * Representa uma propriedade no tabuleiro do monopoly.
@@ -22,6 +24,8 @@ public class Property extends PurchasablePlace {
      * Preço da casa
      */
     private long housePrice;
+    
+    
 
     /**
      * Quantidade de casas na propriedade
@@ -100,9 +104,18 @@ public class Property extends PurchasablePlace {
             }
     }
 
-    public void build() throws NotEnoughMoneyException{
+    public void build() throws NotEnoughMoneyException, BuildException{
+        verifyDistributionOfHouses();
         this.owner.debit(this.housePrice);
         nHouses++;
+    }
+
+    private void verifyDistributionOfHouses() throws BuildException{
+        for(PurchasablePlace pp : neighbors){
+            Property p = (Property)pp;
+                if((this.getnHouses() - p.getnHouses())> 0)
+                    throw new BuildException("Uneven distribution of houses");
+        }
     }
   
 }

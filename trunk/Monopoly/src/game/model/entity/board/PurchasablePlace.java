@@ -12,6 +12,7 @@ import game.model.configuration.GameConfiguration;
 import game.model.exceptions.GamePlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
 import game.model.exceptions.NotInSaleException;
+import java.util.ArrayList;
 
 /**
  *  Representa um lugar no tabuleiro que pode ser comprado. Acrescenta alguns métodos
@@ -32,6 +33,20 @@ public abstract class PurchasablePlace extends Place{
      * Proprietário do lugar, no ínicio do jogo, todas a propriedades pertencem ao banco
      */
     protected Player owner = new Player("bank", null); 
+
+    /**
+     * Terá os lugares que pertencem ao mesmo grupo, para poder comparar o número
+     * de casas com as outras, para autotizar ou não a construção
+     */
+    protected ArrayList<PurchasablePlace> neighbors;
+
+    public ArrayList<PurchasablePlace> getNeighbor() {
+        return neighbors;
+    }
+
+    public void setNeighbor(ArrayList<PurchasablePlace> neighbors) {
+        this.neighbors = neighbors;
+    }
 
     public Player getOwner() {
         return owner;

@@ -209,7 +209,7 @@ public class FacadeMonopoly {
 
     }
 
-    public void build (int propertyID) throws InvalidCommandException, NonExistentPlaceException, NotEnoughMoneyException{
+    public void build (int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, BuildException{
         gameModel.build(propertyID);
         
     }

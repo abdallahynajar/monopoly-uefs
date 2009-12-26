@@ -410,7 +410,7 @@ public class GameModel {
         this.cardStack = cardStack;
     }
 
-    public void build(int propertyID) throws InvalidCommandException, NonExistentPlaceException, NotEnoughMoneyException{
+    public void build(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, BuildException{
         int a = this.nextPlayerIndex;
         Player next = this.seeNextPlayer();
         this.nextPlayerIndex = a;
