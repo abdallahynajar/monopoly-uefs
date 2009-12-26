@@ -214,7 +214,8 @@ public class FacadeMonopoly {
         
     }
 
-    public void giveCashToPlayer (String playerName, int cash){
+    public void giveCashToPlayer (String playerName, int cash) throws NonExistentPlayerException, GamePlayerException{
+        gameModel.getPlayerByName(playerName).credit(cash);
         
     }
 

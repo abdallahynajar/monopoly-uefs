@@ -1,0 +1,47 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package game.model.entity.card;
+
+import game.model.entity.board.Property;
+import game.model.entity.board.PurchasablePlace;
+import game.model.entity.player.Player;
+
+/**
+ *
+ * @author Luis Eduardo
+ */
+public class Repair extends Card{
+
+
+    private int feePerHouse;
+    private int feePerHotel;
+
+    public Repair(int cardNumber, String description, String type, int feePerHouse, int feePerHotel) {
+        super(cardNumber, description, type);
+        this.feePerHouse = feePerHouse;
+        this.feePerHotel = feePerHotel;
+    }
+
+
+    @Override
+    public void action(Player p) throws Exception {
+        for(PurchasablePlace pp: p.getItsPropertys()){
+            if(pp instanceof Property){
+                Property property = (Property)pp;
+                p.debit(getRepairValue(property));
+            }
+        }
+    }
+
+    private int getRepairValue(Property p){
+
+        if(p.getnHouses()> 4)
+            return feePerHotel;
+        else
+            return (int) (p.getNHouses() * feePerHouse);
+    }
+
+}
