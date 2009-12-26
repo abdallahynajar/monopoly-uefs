@@ -12,6 +12,7 @@ import game.util.Colors;
 import game.util.CommandType;
 import game.model.entity.player.Player;
 import game.model.entity.card.CardStack;
+import game.model.entity.player.Bank;
 import game.model.exceptions.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,11 +96,24 @@ public class GameModel {
     public GameModel() {
         configuration = GameConfiguration.getConfiguration();
         configuration.setAutoBuy(false);
-        Board.cleanUpBoard();
         board = Board.getBoard();
         this.cardStack = CardStack.getCardStack();
       
         gameModel = this;
+    }
+
+    /**
+     * limpar todos os singletons
+     */
+    private static void clean(){
+        Board.cleanUpBoard();
+        Bank.cleanUp();
+        GameConfiguration.cleanUp();
+    }
+
+    public static void cleanUp(){
+        clean();
+        GameModel.gameModel = null;
     }
 
     /**
@@ -114,6 +128,7 @@ public class GameModel {
      * @throws InvalidTokenColorException - se for passada uma cor inválida ou cores repetidas
      */
     public void createGame(int numberOfPlayers, List<String> playerNames, List<String> tokenColors) throws InvalidGameParametersException, InvalidPlayerNameException, InvalidTokenColorException {
+
 
         if (numberOfPlayers < 2 || numberOfPlayers > 8) {
             throw new InvalidGameParametersException("Invalid number of players");
@@ -138,6 +153,7 @@ public class GameModel {
                 throw new InvalidTokenColorException("There mustn't be repeated token colors");
             }
             //inicia o jogo
+            //clean();
             players = new ArrayList<Player>(numberOfPlayers);
             this.numberOfPlayers = numberOfPlayers;
             currentPlayerIndex = 1;

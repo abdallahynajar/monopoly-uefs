@@ -10,15 +10,15 @@ package game.model.entity.player;
 import game.model.exceptions.BuildException;
 
 /**
- *
- * @author Luis Eduardo
+ * Contabiliza o que o banco possui, quanto a casas e hoteis
+ * @author João Matos
  */
 public class Bank {
 
     private static Bank bank = null;
 
     private int nHouses = 32;
-    private int nHotels = 34;
+    private int nHotels = 12;
 
     public Bank() {
     }
@@ -28,6 +28,10 @@ public class Bank {
             bank = new Bank();
         }
         return bank;
+    }
+
+    public static void cleanUp(){
+        bank = null;
     }
 
     public void getHouse() throws BuildException{
