@@ -26,6 +26,7 @@ import game.model.exceptions.NonExistentCardException;
 import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
 import game.model.exceptions.NotInSaleException;
+import game.model.exceptions.SellException;
 import game.util.CheckMonopoly;
 import java.util.ArrayList;
 import java.util.List;
@@ -230,6 +231,31 @@ public class Player {
         }else
             throw new BuildException("Unavailable command");
         
+    }
+
+    public void sell(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, SellException{
+
+        if(this.isBuiltActive()){
+            Board board = Board.getBoard();
+            Place p = board.getPlaceByPosition(propertyID);
+
+            if(!(p instanceof Property))
+                throw new SellException("Can only sell houses built on properties");
+
+            Property property = (Property)p;
+
+            /*if(property.getNHouses() == 0)
+                throw new SellException("No house is built on this property");*/
+            if(!has(property))
+                throw new SellException("Player is not the owner of this property");
+            /*else if(!isMonopoly(property))
+                throw new SellException("Doesn't hold monopoly for this group");*/
+            else{
+                property.sellHouse();
+            }
+        }else
+            throw new SellException("Unavailable command");
+
     }
 
     private boolean has(Place p){

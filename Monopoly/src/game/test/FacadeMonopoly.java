@@ -221,7 +221,7 @@ public class FacadeMonopoly {
 
     //us9
 
-    public void sell (int propertyID){
+    public void sell (int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, SellException{
         gameModel.sell(propertyID);
     }
 

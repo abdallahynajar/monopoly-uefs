@@ -13,6 +13,7 @@ import game.model.exceptions.BuildException;
 import game.model.exceptions.GamePlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
 import game.model.exceptions.NotInSaleException;
+import game.model.exceptions.SellException;
 import java.util.ArrayList;
 
 /**
@@ -119,10 +120,20 @@ public class Property extends PurchasablePlace {
         nHouses++;
     }
 
+    public void sellHouse() throws SellException{
+        verifySellPossibility();
+
+    }
+
 
     private void verifyBuildingPossibility() throws BuildException{
         if(nHouses > 4)
             throw new BuildException("No further buildings on this property");
+    }
+
+    private void verifySellPossibility() throws SellException{
+        if(nHouses == 0)
+            throw new SellException("No house is built on this property");
     }
 
     /**
