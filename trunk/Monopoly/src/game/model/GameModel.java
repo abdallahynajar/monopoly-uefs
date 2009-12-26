@@ -434,8 +434,11 @@ public class GameModel {
         //currentPlayer.build(propertyID);
     }
 
-    public void sell(int propertyID){
-        
+    public void sell(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, SellException{
+        int a = this.nextPlayerIndex;
+        Player next = this.seeNextPlayer();
+        this.nextPlayerIndex = a;
+        next.sell(propertyID);
     }
 
 }
