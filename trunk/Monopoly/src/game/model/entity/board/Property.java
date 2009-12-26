@@ -99,5 +99,10 @@ public class Property extends PurchasablePlace {
                 p.payRent(owner, getRent());
             }
     }
+
+    public void build() throws NotEnoughMoneyException{
+        this.owner.debit(this.housePrice);
+        nHouses++;
+    }
   
 }

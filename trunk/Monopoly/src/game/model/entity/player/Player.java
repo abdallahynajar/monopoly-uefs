@@ -200,24 +200,26 @@ public class Player {
         return false;
     }
 
-    public void build(int propertyID) throws InvalidCommandException, NonExistentPlaceException{
+    public void build(int propertyID) throws InvalidCommandException, NonExistentPlaceException, NotEnoughMoneyException{
 
-        Board board = Board.getBoard();
-        Place p = board.getPlaceByPosition(propertyID);
-            
-        if(!(p instanceof Property))
-            throw new InvalidCommandException("Can only build on properties");
+        if(this.hasAnyMonopoly()){
+            Board board = Board.getBoard();
+            Place p = board.getPlaceByPosition(propertyID);
 
-        p = (Property)p;
+            if(!(p instanceof Property))
+                throw new InvalidCommandException("Can only build on properties");
 
-        if(!has(p))
-            throw new InvalidCommandException("Player is not the owner of this property");
-        else if(!isMonopoly((PurchasablePlace) p))
-            throw new InvalidCommandException("Doesn't hold monopoly for this group");
-        else{
-            //é aqui q player constroi
-        }
-        throw new InvalidCommandException("Unavailable command");
+            Property property = (Property)p;
+
+            if(!has(property))
+                throw new InvalidCommandException("Player is not the owner of this property");
+            else if(!isMonopoly(property))
+                throw new InvalidCommandException("Doesn't hold monopoly for this group");
+            else{
+                property.build();
+            }
+        }else
+            throw new InvalidCommandException("Unavailable command");
         
     }
 
