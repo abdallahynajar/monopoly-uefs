@@ -219,4 +219,13 @@ public class FacadeMonopoly {
         
     }
 
+    //us9
+
+    public void sell (int propertyID){
+        gameModel.sell(propertyID);
+    }
+
+    public void activateSell(){
+        
+    }
 }
