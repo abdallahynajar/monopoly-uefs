@@ -104,7 +104,13 @@ public class Property extends PurchasablePlace {
                 p.payRent(owner, getRent());
             }
     }
-
+    /**
+     * Constroi casas e hoteis
+     * @throws NotEnoughMoneyException ,
+     * @throws BuildException caso o jogador já tenha um hotel no lugar, caso as
+     * casas ainda nao estejam distribuídas entre as propriedades,ou caso o banco
+     * não tenha mais casas ou hoteis
+     */
     public void build() throws NotEnoughMoneyException, BuildException{
         verifyBuildingPossibility();
         verifyDistributionOfHouses();
