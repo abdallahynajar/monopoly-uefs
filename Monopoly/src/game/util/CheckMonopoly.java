@@ -5,6 +5,9 @@
 
 package game.util;
 
+import game.model.entity.board.PurchasablePlace;
+import java.util.ArrayList;
+
 /**
  *
  * @author shaka
@@ -14,11 +17,20 @@ public class CheckMonopoly {
     private String monopoly;
     private boolean inMonopoly;
     private int count;
+    
+    /**
+     * Poderia ser qualquer um, é o primerio 
+     */
+    ArrayList<PurchasablePlace> neighbors;
 
-    public CheckMonopoly(String monopoly) {
-        this.monopoly = monopoly;
+    public CheckMonopoly(PurchasablePlace pp) {
+        this.monopoly = pp.getPlaceGroup();
         count = 1;
         inMonopoly = false;
+        this.neighbors = new ArrayList<PurchasablePlace>();
+        this.neighbors.add(pp);
+        pp.setNeighbor(this.neighbors);
+
     }
 
     public boolean isInMonopoly() {
@@ -31,11 +43,11 @@ public class CheckMonopoly {
         return monopoly;
     }
 
-    public void oneMore(){
+    public void oneMore(PurchasablePlace pp){
         count++;
+        neighbors.add(pp);
+        pp.setNeighbor(this.neighbors);
         inMonopoly = updateInMonopoly();
-
-
     }
 
     public void oneLess(){

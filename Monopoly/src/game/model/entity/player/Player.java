@@ -17,6 +17,7 @@ import game.model.entity.board.Property;
 import game.model.configuration.GameConfiguration;
 import game.model.entity.card.Card;
 import game.model.entity.card.OutOfJail;
+import game.model.exceptions.BuildException;
 import game.model.exceptions.GameException;
 import game.model.exceptions.GamePlaceException;
 import game.model.exceptions.IllegalPlayerStateException;
@@ -171,11 +172,11 @@ public class Player {
         String monopoly = p.getPlaceGroup();
         for(CheckMonopoly c : monopolys){
             if(c.getMonopoly().equals(monopoly)){
-                c.oneMore();
+                c.oneMore(p);
                 return;
             }
         }
-        monopolys.add(new CheckMonopoly(monopoly));
+        monopolys.add(new CheckMonopoly(p));
     }
 
 
@@ -200,26 +201,26 @@ public class Player {
         return false;
     }
 
-    public void build(int propertyID) throws InvalidCommandException, NonExistentPlaceException, NotEnoughMoneyException{
+    public void build(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, BuildException{
 
         if(this.hasAnyMonopoly()){
             Board board = Board.getBoard();
             Place p = board.getPlaceByPosition(propertyID);
 
             if(!(p instanceof Property))
-                throw new InvalidCommandException("Can only build on properties");
+                throw new BuildException("Can only build on properties");
 
             Property property = (Property)p;
 
             if(!has(property))
-                throw new InvalidCommandException("Player is not the owner of this property");
+                throw new BuildException("Player is not the owner of this property");
             else if(!isMonopoly(property))
-                throw new InvalidCommandException("Doesn't hold monopoly for this group");
+                throw new BuildException("Doesn't hold monopoly for this group");
             else{
                 property.build();
             }
         }else
-            throw new InvalidCommandException("Unavailable command");
+            throw new BuildException("Unavailable command");
         
     }
 
