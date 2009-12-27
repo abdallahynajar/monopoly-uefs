@@ -133,6 +133,7 @@ public class Player {
         for (Command c : playerCommands){
             if(c.getType() == CommandType.BUILD){
                 c.setActive(this.isBuiltActive());
+
             }
             if(c.getType() == CommandType.SELL){
                 c.setActive(this.wasAnyHouseBuild());
