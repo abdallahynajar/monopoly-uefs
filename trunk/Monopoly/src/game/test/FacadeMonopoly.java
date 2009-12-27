@@ -37,7 +37,7 @@ public class FacadeMonopoly {
     }
 
     public String getCurrentPlayer() {
-        return gameModel.getCurrentPlayerFacade().getName();
+        return gameModel.getCurrentPlayer().getName();
     }
 
     public void quitGame() throws InvalidCommandException {
