@@ -216,7 +216,7 @@ public class Player {
     }
 
     public void build(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, BuildException{
-        updateCommands();
+        
         if(this.isBuiltActive()){
             Board board = Board.getBoard();
             Place p = board.getPlaceByPosition(propertyID);
@@ -232,6 +232,7 @@ public class Player {
                 throw new BuildException("Doesn't hold monopoly for this group");
             else{
                 property.build();
+                updateCommands();
             }
         }else
             throw new BuildException("Unavailable command");
