@@ -136,20 +136,24 @@ public class Player {
 
             }
             if(c.getType() == CommandType.SELL){
-                c.setActive(this.wasAnyHouseBuild());
+                c.setActive(isSellActive());
             }
         }
 
     }
 
     private boolean isBuiltActive(){
-        for(CheckMonopoly c : monopolys){
-            if(c.isInMonopoly() && !c.wereAllHousesBuild()){
-                return true;
+        if(GameConfiguration.getGc().isActivateBuild())
+            for(CheckMonopoly c : monopolys){
+                if(c.isInMonopoly() && !c.wereAllHousesBuild()){
+                    return true;
+                }
             }
-                
-        }
         return false;
+    }
+
+    public boolean isSellActive(){
+        return wasAnyHouseBuild() && GameConfiguration.getGc().isActivateSell();
     }
 
     private boolean wasAnyHouseBuild(){
@@ -212,7 +216,7 @@ public class Player {
     }
 
     public void build(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, BuildException{
-
+        updateCommands();
         if(this.isBuiltActive()){
             Board board = Board.getBoard();
             Place p = board.getPlaceByPosition(propertyID);
@@ -236,7 +240,7 @@ public class Player {
 
     public void sell(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, SellException{
 
-        if(this.isBuiltActive()){
+        if(this.isSellActive()){
             Board board = Board.getBoard();
             Place p = board.getPlaceByPosition(propertyID);
 
