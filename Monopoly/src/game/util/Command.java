@@ -31,7 +31,7 @@ public class Command {
        // if(this.active && !active)
         //    System.out.println("comando: " + type + " foi ativado");
 
-       // this.active = active;
+       this.active = active;
     }
 
     public CommandType getType() {
