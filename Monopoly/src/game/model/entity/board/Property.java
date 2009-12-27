@@ -127,13 +127,12 @@ public class Property extends PurchasablePlace {
         owner.credit(housePrice/2);
 
         Bank bank = Bank.getBank();
-//        if(nHouses != 5){
+       if(nHouses != 5){
             bank.returnHouse();
-            nHouses--;
-//        }else{
-//            bank.returHotel();
-//            nHouses =0;
-//        }
+        }else{
+           bank.returHotel();
+        }
+          nHouses--;
 
     }
 
