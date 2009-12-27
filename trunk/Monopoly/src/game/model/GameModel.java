@@ -271,7 +271,7 @@ public class GameModel {
     }*/
 
     public List<Command> getPlayerCommands(){
-        return previous.getPlayerCommands();
+        return currentPlayer.getPlayerCommands();
     }
 
     /**
@@ -369,6 +369,7 @@ public class GameModel {
         while (!players.get(currentPlayerIndex).isPlaying())
             updateCurrentPlayerIndex();
         currentPlayer = players.get(currentPlayerIndex);
+        System.out.println("Agora é a vez de " + currentPlayer.getName());
     }
     
     private void updateCurrentPlayerIndex(){
