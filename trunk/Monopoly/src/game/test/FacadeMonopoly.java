@@ -60,7 +60,7 @@ public class FacadeMonopoly {
     public String getCommands() {
         StringBuilder strCommand = new StringBuilder();
         strCommand.append("{");
-        List<Command> commands = gameModel.getCurrentPlayer().getPlayerCommands();
+        List<Command> commands = gameModel.getPlayerCommands();
 
          ArrayList<String> commandNames = new ArrayList<String>();
 
