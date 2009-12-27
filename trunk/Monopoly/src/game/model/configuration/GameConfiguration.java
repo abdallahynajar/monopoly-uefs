@@ -51,6 +51,12 @@ public class GameConfiguration {
     /**Habilita cadeia**/
     private boolean activateJail;
 
+    /**ativa a construção*/
+    private boolean activateBuild;
+
+    /**ativa a venda*/
+    private boolean activateSell;
+
     private static GameConfiguration gc;
     
     /**Arquivo de configuração do jogo */
@@ -61,6 +67,22 @@ public class GameConfiguration {
             gc = new GameConfiguration();
         }
         return gc;
+    }
+
+    public boolean isActivateBuild() {
+        return activateBuild;
+    }
+
+    public void setActivateBuild(boolean activateBuild) {
+        this.activateBuild = activateBuild;
+    }
+
+    public boolean isActivateSell() {
+        return activateSell;
+    }
+
+    public void setActivateSell(boolean activateSell) {
+        this.activateSell = activateSell;
     }
 
     public GameConfiguration() {
@@ -84,6 +106,8 @@ public class GameConfiguration {
         this.cardShuffle = Boolean.parseBoolean( rc.getString("cardShuffle") );
         this.activateChestPlaces = Boolean.parseBoolean( rc.getString("activateChestPlaces") );
         this.activateJail = Boolean.parseBoolean( rc.getString("activateJailPlaces") );
+        this.activateBuild = Boolean.parseBoolean( rc.getString("activateBuild") );
+        this.activateSell = Boolean.parseBoolean( rc.getString("activateSell") );
     }
 
     public static void cleanUp(){
