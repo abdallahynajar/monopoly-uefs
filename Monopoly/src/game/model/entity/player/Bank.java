@@ -8,6 +8,7 @@
 package game.model.entity.player;
 
 import game.model.exceptions.BuildException;
+import game.model.exceptions.SellException;
 
 /**
  * Contabiliza o que o banco possui, quanto a casas e hoteis
@@ -57,8 +58,13 @@ public class Bank {
 
     }
 
-    public void returHotel(){
+    public void returHotel() throws SellException{
+
+        if(nHouses < 4)
+            throw new SellException("Not enough houses on the bank");
+        
         nHotels++;
+        nHouses-=4;
     }
 
 
