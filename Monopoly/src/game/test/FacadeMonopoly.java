@@ -206,7 +206,7 @@ public class FacadeMonopoly {
 
     //us8
     public void activateBuild(){
-
+        gameModel.getConfiguration().setActivateBuild(true);
     }
 
     public void build (int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, BuildException{
@@ -226,6 +226,7 @@ public class FacadeMonopoly {
     }
 
     public void activateSell(){
-        
+        gameModel.getConfiguration().setActivateSell(true);
+
     }
 }
