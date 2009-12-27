@@ -252,6 +252,7 @@ public class Player {
                 throw new SellException("Doesn't hold monopoly for this group");*/
             else{
                 property.sellHouse();
+                updateCommands();
             }
         }else
             throw new SellException("Unavailable command");

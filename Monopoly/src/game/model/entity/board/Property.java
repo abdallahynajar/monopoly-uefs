@@ -114,7 +114,7 @@ public class Property extends PurchasablePlace {
      */
     public void build() throws NotEnoughMoneyException, BuildException{
         verifyBuildingPossibility();
-        verifyDistributionOfHouses();
+        verifyDistributionOfHousesForBuilding();
         doesBankHaveHouse();
         this.owner.debit(this.housePrice);
         nHouses++;
@@ -122,6 +122,18 @@ public class Property extends PurchasablePlace {
 
     public void sellHouse() throws SellException{
         verifySellPossibility();
+        
+        verifyDistributionOfHousesForSelling();
+        owner.credit(housePrice/2);
+
+        Bank bank = Bank.getBank();
+//        if(nHouses != 5){
+            bank.returnHouse();
+            nHouses--;
+//        }else{
+//            bank.returHotel();
+//            nHouses =0;
+//        }
 
     }
 
@@ -140,12 +152,31 @@ public class Property extends PurchasablePlace {
      * verifica se a vizinhaça tem um número compatível de casas
      * @throws BuildException
      */
-    private void verifyDistributionOfHouses() throws BuildException{
+    private void verifyDistributionOfHousesForBuilding() throws BuildException{
         for(PurchasablePlace pp : neighbors){
             Property p = (Property)pp;
                 if((this.getnHouses() - p.getnHouses())> 0)
                     throw new BuildException("Uneven distribution of houses");
         }
+    }
+
+    private void verifyDistributionOfHousesForSelling() throws SellException{
+        for(PurchasablePlace pp : neighbors){
+            Property p = (Property)pp;
+                if(((this.getnHouses()-1) - p.getnHouses()) < -1)
+                    throw new SellException("Uneven distribution of houses");
+        }
+    }
+
+    private ArrayList<Property> getOnlyNeibors(){
+
+        ArrayList<Property> justNeibors =  new ArrayList<Property>(neighbors.size() - 1);
+
+        for(PurchasablePlace pp : neighbors)
+            if(pp != this)
+                justNeibors.add((Property) pp);
+        return justNeibors;
+
     }
 
     private void doesBankHaveHouse() throws BuildException{

@@ -52,5 +52,14 @@ public class Bank {
         throw new BuildException("No more hotels available for sale");
     }
 
+    public void returnHouse(){
+        nHouses++;
+
+    }
+
+    public void returHotel(){
+        nHotels++;
+    }
+
 
 }
