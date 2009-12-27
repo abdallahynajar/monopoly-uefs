@@ -369,7 +369,7 @@ public class GameModel {
         while (!players.get(currentPlayerIndex).isPlaying())
             updateCurrentPlayerIndex();
         currentPlayer = players.get(currentPlayerIndex);
-        System.out.println("Agora é a vez de " + currentPlayer.getName());
+        //System.out.println("Agora é a vez de " + currentPlayer.getName());
     }
     
     private void updateCurrentPlayerIndex(){
