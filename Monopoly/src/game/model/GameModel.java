@@ -261,17 +261,17 @@ public class GameModel {
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
-    //gancho
+   /* //gancho
     public Player getCurrentPlayerFacade(){
         if(!this.configuration.isAutoBuy())
             return previous;
         else{
             return currentPlayer;
         }
-    }
+    }*/
 
     public List<Command> getPlayerCommands(){
-        return currentPlayer.getPlayerCommands();
+        return previous.getPlayerCommands();
     }
 
     /**
