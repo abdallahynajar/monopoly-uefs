@@ -14,6 +14,7 @@ import game.model.entity.player.Player;
 import game.model.entity.card.CardStack;
 import game.model.entity.player.Bank;
 import game.model.exceptions.*;
+import game.util.Command;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,10 +62,11 @@ public class GameModel {
      * Índice do jogador atual
      */
     private int currentPlayerIndex = 0;
-    /** 
-     * Índice do proximo jogador
+    
+    /**
+     * Player anteror ao atual
      */
-    private int nextPlayerIndex = 0;
+    private Player previous = null;
     /**
      * Pilha de cartas
      */
@@ -164,7 +166,8 @@ public class GameModel {
             gameStarted = true;
             currentPlayerIndex = 0;
             currentPlayer = players.get(currentPlayerIndex);
-            currentPlayerIndex = -1;
+            previous = currentPlayer;
+            //currentPlayerIndex = -1;
            // loadCardBoard();
         }
     }
@@ -261,10 +264,14 @@ public class GameModel {
     //gancho
     public Player getCurrentPlayerFacade(){
         if(!this.configuration.isAutoBuy())
-            return getCurrentPlayer();
+            return previous;
         else{
-            return seeNextPlayer();
+            return currentPlayer;
         }
+    }
+
+    public List<Command> getPlayerCommands(){
+        return currentPlayer.getPlayerCommands();
     }
 
     /**
@@ -301,6 +308,7 @@ public class GameModel {
                 throw new InvalidCommandException("There's no game to quit");
             }
         }
+        
     }
 
     /**
@@ -314,11 +322,12 @@ public class GameModel {
         if (!validateRollDices(firstDieResult, secondDieResult)) {
             throw new InvalidDiceResultException("Invalid die result");
         } else {
-            updateCurrentPlayer();
             try {                
                 currentPlayer.walk(firstDieResult + secondDieResult);                    
             } catch (NotEnoughMoneyException ex) {
                 currentPlayer.leavesGame();
+            }finally{
+                updateCurrentPlayer();
             }
         }
     }
@@ -355,34 +364,22 @@ public class GameModel {
      * de "rolarem os dados"
      */
     private void updateCurrentPlayer() {
+        previous = currentPlayer;
+        updateCurrentPlayerIndex();
+        while (!players.get(currentPlayerIndex).isPlaying())
+            updateCurrentPlayerIndex();
+        currentPlayer = players.get(currentPlayerIndex);
+    }
+    
+    private void updateCurrentPlayerIndex(){
         int index = currentPlayerIndex;
         if (index + 1 >= numberOfPlayers) {
             currentPlayerIndex = 0;
         } else {
             currentPlayerIndex++;
         }
-        if (!players.get(currentPlayerIndex).isPlaying()) {
-            updateCurrentPlayer();
-        }
-
-        currentPlayer = players.get(currentPlayerIndex);
-        //System.out.println("======Player: " + currentPlayer.getName() + " está jogando agora =====");
-        nextPlayerIndex = currentPlayerIndex;
     }
 
-   //Cópia do método anterior para um gancho supremo
-    private Player seeNextPlayer(){
-        int index = nextPlayerIndex;
-        if (index + 1 >= numberOfPlayers) {
-            nextPlayerIndex = 0;
-        } else {
-            nextPlayerIndex++;
-        }
-        if (!players.get(nextPlayerIndex).isPlaying()) {
-            seeNextPlayer();
-        }
-        return players.get(nextPlayerIndex);
-    }
 
     /**
      * @return Retorna o número de jogadores que ainda estão jogando
@@ -405,7 +402,7 @@ public class GameModel {
      * @throws java.lang.Exception
      */
     public void buy() throws NotEnoughMoneyException, NotInSaleException, GamePlaceException, Exception {
-            currentPlayer.buyProperty();         
+            previous.buyProperty();
     }
 
     private void loadCardBoard() {
@@ -427,18 +424,13 @@ public class GameModel {
     }
 
     public void build(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, BuildException{
-        int a = this.nextPlayerIndex;
-        Player next = this.seeNextPlayer();
-        this.nextPlayerIndex = a;
-        next.build(propertyID);
-        //currentPlayer.build(propertyID);
+        currentPlayer.build(propertyID);
+
     }
 
     public void sell(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, SellException{
-        int a = this.nextPlayerIndex;
-        Player next = this.seeNextPlayer();
-        this.nextPlayerIndex = a;
-        next.sell(propertyID);
+
+        currentPlayer.sell(propertyID);
     }
 
 }
