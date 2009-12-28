@@ -475,10 +475,7 @@ public class Player {
             } else {
                 setAtualPlace(board.getPlaceByPosition(goTo - 40));
             }
-        }
-        //System.out.println("                        GoTo: "+this.getName()+" está indo p place.action() place: " + atualPlace.getPosition());
-        //System.out.println("                        GoTo: "+this.getName()+" player.getPlace() place: " + this.getAtualPlace().getPosition());
-
+        }       
         atualPlace.action(this);
         updateCommands();
 
@@ -539,8 +536,7 @@ public class Player {
         }
     }
 
-    public void useCard(String  cardType) throws IllegalPlayerStateException, NonExistentCardException{
-        
+    public void useCard(String  cardType) throws IllegalPlayerStateException, NonExistentCardException{        
         if( isInJail() ){
             if(hasCard(cardType)){
                 arrestedState.useCard(cardType);
@@ -561,7 +557,7 @@ public class Player {
     }
 
     public OutOfJail getCard(String  cardType){
-        for (OutOfJail outOfJail : playerCards) {
+        for (OutOfJail outOfJail : playerCards) {           
             if( outOfJail.getType().equalsIgnoreCase(cardType) ){
                 return outOfJail;
             }

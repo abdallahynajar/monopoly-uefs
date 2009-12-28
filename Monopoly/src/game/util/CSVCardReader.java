@@ -30,16 +30,16 @@ public class CSVCardReader {
      * @param csvFile o nome do arquivo com as cartas a serem lidas
      * @return a lista de cartas carregada do arquivo .csv
      */
-    public static ArrayList<Card> loadCards(String type) throws IOException {
+    public static ArrayList<Card> loadCards(String cardsFile, String cardsType) throws IOException {
 
-        InputStream in = ClassLoader.class.getResourceAsStream("/game/resources/cards/" + type+ ".csv");
+        InputStream in = ClassLoader.class.getResourceAsStream("/game/resources/cards/" + cardsFile);
         reader = new CsvReader(in, ';', Charset.forName("ISO-8859-1"));        
         ArrayList<Card> gameCards = new ArrayList<Card>();
         reader.readHeaders();
         int cardNumber = 0;        
         while (reader.readRecord()) {
             
-            loadCard(cardNumber, gameCards, type);
+            loadCard(cardNumber, gameCards, cardsType);
             cardNumber++;
         }         
         reader.close();

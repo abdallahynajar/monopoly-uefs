@@ -24,10 +24,14 @@ public class OutOfJail extends Card{
         super(cardNumber, description, type);
     }
 
+    public boolean hasOwner(){       
+        return owner != null;
+    }
+
 
     @Override
     public void action(Player p) throws GameException {
-        if(owner == null){
+        if(owner == null){            
             p.addCard(this);
             owner = p;
         }else{

@@ -33,7 +33,6 @@ public class Chance extends Place{
         if(isChanceActive){
             //System.out.println("    O jogo está configurado pra change funcionar");
             Card card = CardStack.getCardStack().getChanceCard();
-            //System.out.println("        Card da vez: " + card.getDescription() + " numero: " + card.getCardNumber());
             card.action(p);
         }
     }

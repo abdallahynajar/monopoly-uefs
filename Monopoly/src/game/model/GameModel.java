@@ -320,24 +320,26 @@ public class GameModel {
         dice.validateDicesResult();
         boolean playerHasAnotherTurn = false;
         boolean doubleTurnActive = getConfiguration().isActivateDoublesRule();
+
         try {
             if (dice.isDoubleResult()) {
                 if (currentPlayer.isInJail()) {
                     currentPlayer.leavesJail();
-                }else if (dice.getnDoublesDices() == 3) {
-                    arrestsPlayer();
-                    dice.setnDoublesDices(0);
-                } else if(doubleTurnActive) {
-                    playerHasAnotherTurn = true;
-                    dice.setnDoublesDices(0);
                 }
-
+                if (doubleTurnActive) {
+                    if (dice.getnDoublesDices() == 3) {
+                        arrestsPlayer();
+                    } else {
+                        playerHasAnotherTurn = true;
+                    }
+                }
             }
             currentPlayer.walk(firstDieResult + secondDieResult);
         } catch (NotEnoughMoneyException ex) {
             currentPlayer.leavesGame();
         } finally {
             if (!playerHasAnotherTurn) {
+                 dice.setnDoublesDices(0);
                 updateCurrentPlayer();
             }
         }
