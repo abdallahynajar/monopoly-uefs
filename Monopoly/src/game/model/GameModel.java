@@ -330,8 +330,7 @@ public class GameModel {
                     if (dice.getnDoublesDices() == 3) {
                         arrestsPlayer();
                     } else {
-                        playerHasAnotherTurn = true;
-                        dice.setAnotherTurn(true);
+                        playerHasAnotherTurn = true;                       
                     }
                 }
             }
