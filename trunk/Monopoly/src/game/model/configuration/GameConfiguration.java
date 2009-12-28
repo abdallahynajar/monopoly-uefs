@@ -12,17 +12,17 @@ import java.util.ResourceBundle;
  */
 public class GameConfiguration {
 
-    //habilita compra automática de propriedade;
+    //Ativa compra automática de propriedade;
     private boolean autoBuy;
     /** Valor em dinheiro para cada jogador no ínicio do jogo*/
     private float initialMoney;
     /** Bonus ao passar pelo Go*/
     private float salaryBonus;
-    /** Habilita construção igualitária*/
+    /** Ativa construção igualitária*/
     private boolean equalityBuilding;
-    /* Habilita dobro de bonus ao passar pelo Go*/
+    /* Ativa dobro de bonus ao passar pelo Go*/
     private boolean doubleBonusMoney;
-    /** HAbilita regra do freeParking*/
+    /** Ativa regra do freeParking*/
     private boolean freeParkingRule;
     /** Determina a quantidade de casas necessária para construir um hotel*/
     private int housesToHotel;
@@ -42,20 +42,26 @@ public class GameConfiguration {
     private int prisonBail;
     private int mortgageTax;
     private int distributedTitles;
-    /** Habilita os lugares do tipo Sorte/revés*/
+    /** Ativa os lugares do tipo Sorte/revés*/
     private boolean activateChancePlaces;
-    /**Habilita embaralhamento das cartas*/
+    /**Ativa embaralhamento das cartas*/
     private boolean cardShuffle;
-    /**Habilita lugares do tipo cofres comunitários*/
+    /**Ativa lugares do tipo cofres comunitários*/
     private boolean activateChestPlaces;
-    /**Habilita cadeia**/
+
+    /**Ativa cadeia**/
     private boolean activateJail;
 
-    /**ativa a construção*/
+    /**Ativa cadeia**/
+    private boolean activateDoublesRule;
+
+    /**Ativa a construção*/
     private boolean activateBuild;
 
-    /**ativa a venda*/
+    /**Ativa a venda*/
     private boolean activateSell;
+
+
 
     private static GameConfiguration gc;
     
@@ -108,6 +114,7 @@ public class GameConfiguration {
         this.activateJail = Boolean.parseBoolean( rc.getString("activateJailPlaces") );
         this.activateBuild = Boolean.parseBoolean( rc.getString("activateBuild") );
         this.activateSell = Boolean.parseBoolean( rc.getString("activateSell") );
+        this.activateDoublesRule = Boolean.parseBoolean( rc.getString("activateDoublesRule") );
     }
 
     public static void cleanUp(){
@@ -289,4 +296,14 @@ public class GameConfiguration {
     public void setActivateJail(boolean activateJail) {
         this.activateJail = activateJail;
     }
+
+    public boolean isActivateDoublesRule() {
+        return activateDoublesRule;
+    }
+
+    public void setActivateDoublesRule(boolean activateDoublesRule) {
+        this.activateDoublesRule = activateDoublesRule;
+    }
+
+
 }

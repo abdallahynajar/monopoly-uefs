@@ -73,5 +73,16 @@ public  class Dice {
 
     public void setSecondDiceResult(int secondDiceResult) {
         this.secondDiceResult = secondDiceResult;
-    }    
+    }
+
+    public int getnDoublesDices() {
+        return nDoublesDices;
+    }
+
+    public void setnDoublesDices(int nDoublesDices) {
+        this.nDoublesDices = nDoublesDices;
+    }
+
+
+
 }

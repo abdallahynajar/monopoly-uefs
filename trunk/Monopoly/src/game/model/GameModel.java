@@ -8,6 +8,7 @@ package game.model;
 
 import game.model.configuration.GameConfiguration;
 import game.model.entity.board.Board;
+import game.model.entity.board.Jail;
 import game.util.Colors;
 import game.util.CommandType;
 import game.model.entity.player.Player;
@@ -32,7 +33,6 @@ public class GameModel {
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
-
     /**
      * Quantidade de jogadores
      */
@@ -49,12 +49,10 @@ public class GameModel {
      * Tabuleiro do jogo
      */
     private Board board;
-
     /**
      * <b> true </b> se o jogo começou ou <b> false </b> se não começou ainda
      */
     private boolean gameStarted = false;
-
     /**
      * Para configurar os parâmetros de inicialização do jogo
      */
@@ -63,7 +61,6 @@ public class GameModel {
      * Índice do jogador atual
      */
     private int currentPlayerIndex = 0;
-    
     /**
      * Player anteror ao atual
      */
@@ -72,20 +69,17 @@ public class GameModel {
      * Pilha de cartas
      */
     private CardStack cardStack;
-
     private Dice dice;
-
     private static GameModel gameModel;
 
     public static GameModel getGameModel() {
 
-        if(gameModel == null){
+        if (gameModel == null) {
             gameModel = new GameModel();
         }
 
         return gameModel;
     }
-
 
     public GameConfiguration getConfiguration() {
         return configuration;
@@ -103,20 +97,20 @@ public class GameModel {
         configuration.setAutoBuy(false);
         board = Board.getBoard();
         this.cardStack = CardStack.getCardStack();
-        this.dice = Dice.getDice();      
+        this.dice = Dice.getDice();
         gameModel = this;
     }
 
     /**
      * limpar todos os singletons
      */
-    private static void clean(){
+    private static void clean() {
         Board.cleanUpBoard();
         Bank.cleanUp();
         GameConfiguration.cleanUp();
     }
 
-    public static void cleanUp(){
+    public static void cleanUp() {
         clean();
         GameModel.gameModel = null;
     }
@@ -171,7 +165,7 @@ public class GameModel {
             currentPlayer = players.get(currentPlayerIndex);
             previous = currentPlayer;
             //currentPlayerIndex = -1;
-           // loadCardBoard();
+            // loadCardBoard();
         }
     }
 
@@ -264,16 +258,16 @@ public class GameModel {
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
-   /* //gancho
+    /* //gancho
     public Player getCurrentPlayerFacade(){
-        if(!this.configuration.isAutoBuy())
-            return previous;
-        else{
-            return currentPlayer;
-        }
+    if(!this.configuration.isAutoBuy())
+    return previous;
+    else{
+    return currentPlayer;
+    }
     }*/
 
-    public List<Command> getPlayerCommands(){
+    public List<Command> getPlayerCommands() {
         return currentPlayer.getPlayerCommands();
     }
 
@@ -311,7 +305,7 @@ public class GameModel {
                 throw new InvalidCommandException("There's no game to quit");
             }
         }
-        
+
     }
 
     /**
@@ -323,35 +317,46 @@ public class GameModel {
      */
     public void rollDices(int firstDieResult, int secondDieResult) throws InvalidDiceResultException, NonExistentPlaceException, Exception {
         dice.setRolledDices(firstDieResult, secondDieResult);
-        dice.validateDicesResult();       
-            try {
-                if( dice.isDoubleResult() ){
-                    if( currentPlayer.isInJail() ){
-                        currentPlayer.leavesJail();
-                    }
+        dice.validateDicesResult();
+        boolean playerHasAnotherTurn = false;
+        boolean doubleTurnActive = getConfiguration().isActivateDoublesRule();
+        try {
+            if (dice.isDoubleResult()) {
+                if (currentPlayer.isInJail()) {
+                    currentPlayer.leavesJail();
+                }else if (dice.getnDoublesDices() == 3) {
+                    arrestsPlayer();
+                    dice.setnDoublesDices(0);
+                } else if(doubleTurnActive) {
+                    playerHasAnotherTurn = true;
+                    dice.setnDoublesDices(0);
                 }
-                currentPlayer.walk(firstDieResult + secondDieResult);                    
-            } catch (NotEnoughMoneyException ex) {
-                currentPlayer.leavesGame();
-            }finally{
+
+            }
+            currentPlayer.walk(firstDieResult + secondDieResult);
+        } catch (NotEnoughMoneyException ex) {
+            currentPlayer.leavesGame();
+        } finally {
+            if (!playerHasAnotherTurn) {
                 updateCurrentPlayer();
             }
-        
+        }
+
     }
 
-
     public boolean isGameOver() {
-        if( !gameStarted ){
+        if (!gameStarted) {
             return true;
-        }else{
-          int nPlaying = getNumberOfRealPlayers();
-           return ( nPlaying > 1 ) ? false : true;
-        }     
+        } else {
+            int nPlaying = getNumberOfRealPlayers();
+            return (nPlaying > 1) ? false : true;
+        }
     }
 
     private void exitGame() {
         currentPlayer.setPlaying(false);
     }
+
     /**
      * Passa a jogada para o proximo jogador. Deve ser usado imediatamente antes
      * de "rolarem os dados"
@@ -359,13 +364,14 @@ public class GameModel {
     private void updateCurrentPlayer() {
         previous = currentPlayer;
         updateCurrentPlayerIndex();
-        while (!players.get(currentPlayerIndex).isPlaying())
+        while (!players.get(currentPlayerIndex).isPlaying()) {
             updateCurrentPlayerIndex();
+        }
         currentPlayer = players.get(currentPlayerIndex);
         //System.out.println("Agora é a vez de " + currentPlayer.getName());
     }
-    
-    private void updateCurrentPlayerIndex(){
+
+    private void updateCurrentPlayerIndex() {
         int index = currentPlayerIndex;
         if (index + 1 >= numberOfPlayers) {
             currentPlayerIndex = 0;
@@ -373,7 +379,6 @@ public class GameModel {
             currentPlayerIndex++;
         }
     }
-
 
     /**
      * @return Retorna o número de jogadores que ainda estão jogando
@@ -396,19 +401,9 @@ public class GameModel {
      * @throws java.lang.Exception
      */
     public void buy() throws NotEnoughMoneyException, NotInSaleException, GamePlaceException, Exception {
-            previous.buyProperty();
+        previous.buyProperty();
     }
 
-    private void loadCardBoard() {
-         cardStack = CardStack.getCardStack();
-        if(this.configuration.isActivateChancePlaces() ){
-                cardStack.loadChanceCards();
-        }
-        if(this.configuration.isActivateChestPlaces() ){
-                cardStack.loadChestCards();
-        }
-    }
-    
     public CardStack getCardStack() {
         return cardStack;
     }
@@ -417,14 +412,23 @@ public class GameModel {
         this.cardStack = cardStack;
     }
 
-    public void build(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, BuildException{
+    public void build(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, BuildException {
         currentPlayer.build(propertyID);
 
     }
 
-    public void sell(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, SellException{
+    public void sell(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, SellException {
 
         currentPlayer.sell(propertyID);
     }
 
+    private void arrestsPlayer() throws NonExistentPlaceException, Exception {
+         boolean isJailActive =
+                GameConfiguration.getConfiguration().isActivateJail();
+        if (isJailActive) {
+            Jail jail = Board.getBoard().findJail();
+            jail.setJustVisiting(false);
+            currentPlayer.goTo(jail.getPosition(), false);
+        }
+    }
 }

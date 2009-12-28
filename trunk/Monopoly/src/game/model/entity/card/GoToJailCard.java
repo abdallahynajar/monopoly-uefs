@@ -12,7 +12,7 @@ import game.model.entity.player.Player;
 import game.model.exceptions.NonExistentPlaceException;
 
 /**
- *
+ * Carta que envia o jogador imediatamente para a cadeia, sem receber bônus
  * @author Lidiany
  */
 public class GoToJailCard extends Movement{
@@ -22,8 +22,7 @@ public class GoToJailCard extends Movement{
     }
 
      @Override
-    public void action(Player p) throws NonExistentPlaceException, Exception {            
-            //System.out.println("                action de Movment: place position: " +goTo+ " card: "+ this.getDescription() );
+    public void action(Player p) throws NonExistentPlaceException, Exception {
             ((Jail) (placeToGo)).setJustVisiting( false );
             p.goTo(placeToGo.getPosition(), collectBonus);            
 
