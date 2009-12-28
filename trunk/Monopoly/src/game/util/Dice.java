@@ -17,6 +17,8 @@ public  class Dice {
    private int firstDiceResult;
    private int secondDiceResult ;
    private int nDoublesDices;
+   private boolean anotherTurn;
+
    private static Dice dice;
     private Dice() {
         firstDiceResult = 0;
@@ -83,6 +85,13 @@ public  class Dice {
         this.nDoublesDices = nDoublesDices;
     }
 
+    public boolean hasAnotherTurn() {
+        return anotherTurn;
+    }
+
+    public void setAnotherTurn(boolean anotherTurn) {
+        this.anotherTurn = anotherTurn;
+    }
 
 
 }
