@@ -235,6 +235,18 @@ public class Board {
         places.add(new FreeParking(40, "Go", "corner")); // o go é a posição 40!
     }
 
+    public Jail findJail(){
+        for (Place place : places) {
+            if(place instanceof Jail){
+                Jail jail = (Jail) place;
+                if( jail.isJustVisiting() ){
+                    return jail;
+                }
+            }
+        }
+        return null;
+    }
+
     public static void cleanUpBoard(){
         board=null;        
     }

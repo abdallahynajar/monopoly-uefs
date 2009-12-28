@@ -98,6 +98,12 @@ public class CSVCardReader {
                 int cardValue = Integer.parseInt(reader.get("VALUE"));
                 CollectPlayersCard cpc = new CollectPlayersCard(cardNumber, description, cardValue, type);
                 gameCards.add(cpc);
+            }else if (cardType.equalsIgnoreCase( "MOVEJAIL")){
+               Board board = Board.getBoard();
+                Place place = board.getPlaceByName(reader.get("PLACE"));
+                GoToJail gtj = new GoToJail(cardNumber, description, place, false, 0, type);
+                gameCards.add(gtj);
+
             } else if (cardType.equalsIgnoreCase("REPAIR")){
 
                 int feePerHouse = Integer.parseInt(reader.get("FEEPERHOUSE"));
@@ -105,6 +111,7 @@ public class CSVCardReader {
                 Repair r = new Repair(cardNumber, description, type, feePerHouse,feePerHotel);
                 gameCards.add(r);
             }
+
     }
 }
 
