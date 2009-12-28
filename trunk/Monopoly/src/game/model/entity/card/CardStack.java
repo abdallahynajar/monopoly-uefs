@@ -107,8 +107,8 @@ public class CardStack {
     }
 
     private boolean cardAlreadyHasAnOwner(Card card) {
-        if (card instanceof OutOfJail) {
-            OutOfJail ooCard = (OutOfJail) (card);
+        if (card instanceof OutOfJailCard) {
+            OutOfJailCard ooCard = (OutOfJailCard) (card);
             return ooCard.hasOwner();
         }
         return false;

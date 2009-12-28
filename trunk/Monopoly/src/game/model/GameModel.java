@@ -322,9 +322,12 @@ public class GameModel {
                     if (dice.getnDoublesDices() == 3) {
                         arrestsPlayer();
                     } else {
-                        playerHasAnotherTurn = true;                       
+                        playerHasAnotherTurn = true;
+                        dice.setPlayAgain(true);
                     }
                 }
+            }else{
+                dice.setPlayAgain(false);
             }
             currentPlayer.walk(firstDieResult + secondDieResult);
         } catch (NotEnoughMoneyException ex) {
@@ -332,6 +335,7 @@ public class GameModel {
         } finally {
             if (!playerHasAnotherTurn) {
                  dice.setnDoublesDices(0);
+                 dice.setPlayAgain(false);
                 updateCurrentPlayer();
             }
         }
@@ -394,7 +398,12 @@ public class GameModel {
      * @throws java.lang.Exception
      */
     public void buy() throws NotEnoughMoneyException, NotInSaleException, GamePlaceException, Exception {      
+        if(dice.isPlayAgain()){
+           currentPlayer.buyProperty();
+        }   else{
             previous.buyProperty();        
+        }
+
     }
 
     public CardStack getCardStack() {

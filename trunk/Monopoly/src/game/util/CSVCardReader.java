@@ -57,7 +57,7 @@ public class CSVCardReader {
                 Place place = board.getPlaceByName(reader.get("PLACE"));
                 boolean paysBonus = Boolean.parseBoolean(reader.get("PAYSBONUS"));
                 int walk = Integer.parseInt(reader.get("WALK"));
-                Movement mv = new Movement(cardNumber, description, place, paysBonus, walk, type);
+                MovementCard mv = new MovementCard(cardNumber, description, place, paysBonus, walk, type);
                 gameCards.add(mv);
             } else if (cardType.equalsIgnoreCase("ASS")) {
                 //String description = reader.get("DESCRIPTION");
@@ -65,11 +65,11 @@ public class CSVCardReader {
                 int feePerHouse = Integer.parseInt(reader.get("FEEPERHOUSE"));
                 int feePerHotel = Integer.parseInt(reader.get("FEEPERHOTEL"));
                 int feePerPlayer = Integer.parseInt(reader.get("FEEPERPLAYER"));
-                Assessment ass = new Assessment(cardNumber, description, cardValue, feePerHotel, feePerHouse, feePerPlayer, type);
+                AssessmentCard ass = new AssessmentCard(cardNumber, description, cardValue, feePerHotel, feePerHouse, feePerPlayer, type);
                 gameCards.add(ass);
             } else if (cardType.equalsIgnoreCase("JAIL")) {
                 //String description = reader.get("DESCRIPTION");
-                OutOfJail ofJail = new OutOfJail(cardNumber, description, type);
+                OutOfJailCard ofJail = new OutOfJailCard(cardNumber, description, type);
                 gameCards.add(ofJail);
             } else if (cardType.equalsIgnoreCase("MOVEUTILITY")){
                 boolean collectSalary = Boolean.parseBoolean(reader.get("PAYSBONUS"));
@@ -97,7 +97,7 @@ public class CSVCardReader {
             } else if (cardType.equalsIgnoreCase("REPAIR")){
                 int feePerHouse = Integer.parseInt(reader.get("FEEPERHOUSE"));
                 int feePerHotel = Integer.parseInt(reader.get("FEEPERHOTEL"));
-                Repair r = new Repair(cardNumber, description, type, feePerHouse,feePerHotel);
+                RepairCard r = new RepairCard(cardNumber, description, type, feePerHouse,feePerHotel);
                 gameCards.add(r);
             }
 

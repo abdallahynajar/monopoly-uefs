@@ -14,7 +14,7 @@ import game.model.exceptions.NonExistentPlaceException;
  *
  * @author shaka
  */
-public class RailroadCard extends Movement{
+public class RailroadCard extends MovementCard{
     public RailroadCard(int cardNumber, String description, boolean collectBonus, String type) {
         super(cardNumber, description, null, collectBonus,0, type);
 
