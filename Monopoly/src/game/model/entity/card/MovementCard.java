@@ -17,14 +17,14 @@ import game.model.exceptions.NonExistentPlaceException;
  * Carta para movimentar o jogador pelo tabuleiro
  * 
  */
-public class Movement extends Card{
+public class MovementCard extends Card{
 
     protected Place placeToGo;
 
     protected boolean collectBonus;
     protected int walk;
 
-    public Movement(int cardNumber, String description, Place placeToGo, boolean collectBonus, int walk, String type) {
+    public MovementCard(int cardNumber, String description, Place placeToGo, boolean collectBonus, int walk, String type) {
         super(cardNumber, description, type);
         this.placeToGo = placeToGo;
         this.collectBonus = collectBonus;

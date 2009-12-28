@@ -17,14 +17,14 @@ import java.util.logging.Logger;
  * @author Lidiany
  * Carta para recebimento de bônus ou pagamento de multas
  */
-public class Assessment extends Card {
+public class AssessmentCard extends Card {
 
     private int cardValue;
     private int feePerHotel;
     private int feePerHouse;
     private int feePerPlayer;
 
-    public Assessment(int cardNumber, String description, int cardValue, int feePerHotel, int feePerHouse, int feePerPlayer, String type) {
+    public AssessmentCard(int cardNumber, String description, int cardValue, int feePerHotel, int feePerHouse, int feePerPlayer, String type) {
         super(cardNumber, description, type);
         this.cardValue = cardValue;
         this.feePerHotel = feePerHotel;

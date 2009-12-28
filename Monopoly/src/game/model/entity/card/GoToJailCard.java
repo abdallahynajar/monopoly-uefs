@@ -15,7 +15,7 @@ import game.model.exceptions.NonExistentPlaceException;
  * Carta que envia o jogador imediatamente para a cadeia, sem receber bônus
  * @author Lidiany
  */
-public class GoToJailCard extends Movement{
+public class GoToJailCard extends MovementCard{
 
     public GoToJailCard(int cardNumber, String description, Place placeToGo, boolean collectBonus, int walk, String type) {
         super(cardNumber, description, placeToGo, collectBonus, walk, type);

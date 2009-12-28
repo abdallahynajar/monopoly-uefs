@@ -15,13 +15,13 @@ import game.model.entity.player.Player;
  *
  * @author Luis Eduardo
  */
-public class Repair extends Card{
+public class RepairCard extends Card{
 
 
     private int feePerHouse;
     private int feePerHotel;
 
-    public Repair(int cardNumber, String description, String type, int feePerHouse, int feePerHotel) {
+    public RepairCard(int cardNumber, String description, String type, int feePerHouse, int feePerHotel) {
         super(cardNumber, description, type);
         this.feePerHouse = feePerHouse;
         this.feePerHotel = feePerHotel;

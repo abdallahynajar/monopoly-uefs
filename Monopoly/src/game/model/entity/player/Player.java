@@ -17,7 +17,7 @@ import game.model.entity.board.Utility;
 import game.model.entity.board.Property;
 import game.model.configuration.GameConfiguration;
 import game.model.entity.card.Card;
-import game.model.entity.card.OutOfJail;
+import game.model.entity.card.OutOfJailCard;
 import game.model.exceptions.BuildException;
 import game.model.exceptions.GameException;
 import game.model.exceptions.GamePlaceException;
@@ -59,7 +59,7 @@ public class Player {
      */
     private Place atualPlace;
     /** Cartas do jogador */
-    private ArrayList<OutOfJail> playerCards;
+    private ArrayList<OutOfJailCard> playerCards;
     /**
      * Posição do jogador no tabuleiro
      */
@@ -99,7 +99,7 @@ public class Player {
         this.startCommands();
         playing = true;
 
-        playerCards = new ArrayList<OutOfJail>();
+        playerCards = new ArrayList<OutOfJailCard>();
         arrestedState = new ArrestedState(this);
         playingState = new PlayingState(this);
         atualState = playingState;
@@ -538,7 +538,7 @@ public class Player {
      * Adiciona uma carta à lista de cartas do jogador
      * @param card a carta que o jogador pegou
      */
-    public void addCard(OutOfJail card) {
+    public void addCard(OutOfJailCard card) {
         this.playerCards.add(card);
         this.playerCommands.add(new Command(CommandType.USECARD, true));
     }
@@ -584,8 +584,8 @@ public class Player {
         return false;
     }
 
-    public OutOfJail getCard(String cardType) {
-        for (OutOfJail outOfJail : playerCards) {
+    public OutOfJailCard getCard(String cardType) {
+        for (OutOfJailCard outOfJail : playerCards) {
             if (outOfJail.getType().equalsIgnoreCase(cardType)) {
                 return outOfJail;
             }
@@ -593,7 +593,7 @@ public class Player {
         return null;
     }
 
-    public void releaseCard(OutOfJail outOfJail) {
+    public void releaseCard(OutOfJailCard outOfJail) {
         outOfJail.setOwner(null);
         playerCards.remove(outOfJail);
     }

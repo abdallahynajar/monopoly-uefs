@@ -13,14 +13,14 @@ import game.model.exceptions.GameException;
  *  Carta do tipo que permite ao jogador sair da prisão
  * @author Lidiany
  */
-public class OutOfJail extends Card{
+public class OutOfJailCard extends Card{
 
     /**
      * Jogador dono da Carta 
      */
     private Player owner;
 
-    public OutOfJail(int cardNumber, String description, String type) {
+    public OutOfJailCard(int cardNumber, String description, String type) {
         super(cardNumber, description, type);
     }
 

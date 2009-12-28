@@ -17,6 +17,8 @@ public  class Dice {
    private int firstDiceResult;
    private int secondDiceResult ;
    private int nDoublesDices;
+
+   private boolean playAgain = false;
    
 
    private static Dice dice;
@@ -83,6 +85,14 @@ public  class Dice {
 
     public void setnDoublesDices(int nDoublesDices) {
         this.nDoublesDices = nDoublesDices;
+    }
+
+    public boolean isPlayAgain() {
+        return playAgain;
+    }
+
+    public void setPlayAgain(boolean playAgain) {
+        this.playAgain = playAgain;
     }
 
 }
