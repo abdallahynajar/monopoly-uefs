@@ -97,19 +97,6 @@ public class CSVPlacesReader {
         }
     }
 
-    public static void main(String[] args) {
-        try {
-            ArrayList<Place> gamePlaces = CSVPlacesReader.loadPlaces();
-            for (Place place : gamePlaces) {
-                System.out.print( place.getName() + "  ");
-                System.out.print( place.getPosition() + "  ");
-                System.out.println( place.getPlaceGroup() );
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
     private static long loadPrice() throws IOException, NumberFormatException {
         long price = 0;
         try {
