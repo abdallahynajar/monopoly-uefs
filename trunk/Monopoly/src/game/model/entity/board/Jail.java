@@ -36,13 +36,10 @@ public class Jail extends Place{
     public void action(Player p) throws Exception {
         boolean isJailActive =
         GameConfiguration.getConfiguration().isActivateJail();
-        if(isJailActive && !justVisiting){
-            System.out.println("vai p cadeia");
+        if(isJailActive && !justVisiting){            
             p.goesToJail();
-        }
-        System.out.println("apenas visitando...");
-        // senao apenas visitando...
-        
+            justVisiting = true;
+        } 
     }
 
 }

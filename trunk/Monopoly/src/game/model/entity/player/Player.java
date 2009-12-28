@@ -435,25 +435,24 @@ public class Player {
      * @param board
      */
     public void walk(int nPositions) throws NonExistentPlaceException, Exception {
-
         int goTo = atualPosition + nPositions;
-
-        /*
-         * Adoraria poder refatorar esse método pra pegar o board do getBoard()
-         * mas, por mais ilogico q isso seja, não esta dando  certo!!
-         */
-        goTo(goTo, true);
+        if(!isInJail()){           
+            goTo(goTo, true);
+        }else{
+            arrestedState.addAtempt();
+            if( arrestedState.getAttemptsToLeaveJail() == 3){
+                  paysBail();
+                  goTo(goTo, true);
+          }
+        }
 
     }
 
     public void walk(int positionToGo, boolean salaryBonus) throws NonExistentPlaceException, Exception{
 
-        //caso precise arrudeiar o tabuleiro
-        if(positionToGo < atualPosition){
+       if(positionToGo < atualPosition){
             positionToGo = 40 + positionToGo;
         }
-
-        //System.out.println("                    positionToGo: " + positionToGo);
 
         goTo(positionToGo, salaryBonus);
     }
@@ -527,7 +526,7 @@ public class Player {
         this.atualState = playingState;
     }
 
-    public boolean isInJail(){
+    public boolean isInJail(){        
         return atualState.getPlayerStatus().equalsIgnoreCase("arrested");
     }
 

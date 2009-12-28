@@ -101,7 +101,7 @@ public class FacadeMonopoly {
     }
 
     public int getPlayerPosition(String playerName) throws NonExistentPlayerException, GamePlayerException {
-        return gameModel.getPlayerByName(playerName).getAtualPosition();
+        return gameModel.getPlayerByName(playerName).getAtualPlace().getPosition();
         //getPlayerPosition(playerName);
     }
 

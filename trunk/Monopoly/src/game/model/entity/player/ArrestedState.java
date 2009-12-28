@@ -19,6 +19,7 @@ import java.util.ArrayList;
  * @author Lidiany
  */
 public class ArrestedState extends PlayerState{
+    private int attemptsToLeaveJail = 0;
 
     public ArrestedState(Player aThis) {
         this.player = aThis;
@@ -29,10 +30,7 @@ public class ArrestedState extends PlayerState{
         //se estiver na cadeia, faz as ações da cadeia
         updateCommands();
         player.setPlayerCommands(playerCommands);
-
-        Board board = Board.getBoard();
-        Jail jail = board.findJail();
-
+       // System.out.println("Atual place" + player.getAtualPlace().getPosition() );
     }
 
     public void paysBail(){
@@ -40,6 +38,7 @@ public class ArrestedState extends PlayerState{
         try {
             player.debit( bail );
             player.leavesJail();
+            attemptsToLeaveJail =0;
            //
         } catch (NotEnoughMoneyException ex) {
             player.leavesGame();
@@ -74,6 +73,12 @@ public class ArrestedState extends PlayerState{
         player.leavesJail();
     }
 
-   
+   public void addAtempt() {
+          attemptsToLeaveJail ++;          
+    }
+
+    public int getAttemptsToLeaveJail() {
+        return attemptsToLeaveJail;
+    }
 
 }
