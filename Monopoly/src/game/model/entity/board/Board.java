@@ -8,6 +8,8 @@ package game.model.entity.board;
 
 import game.model.exceptions.NonExistentPlaceException;
 import game.model.exceptions.NonPurchasablePlaceException;
+import game.util.CSVPlacesReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -31,7 +33,12 @@ public class Board {
      * Construtor privado, só pode ser acessado dentro da classe
      */
     private Board() {
-        buildBoardPlaces();
+        try {
+            //  buildBoardPlaces();
+            places = CSVPlacesReader.loadPlaces();
+        } catch (IOException ex) {
+           
+        }
     }
 
     /**
@@ -188,53 +195,10 @@ public class Board {
 
     }
 
-      /**
-       * Constrói o tabuleiro com seus lugares
-       */
-    private void buildBoardPlaces() {      
-        places = new ArrayList<Place>();
-        places.add(new Property(1, "Mediterranean Avenue", 60, new float[]{2, 10, 30, 90, 160, 250}, 30, 50, "purple"));
-        places.add(new Chest(2, "Community Chest 1", "chest"));
-        places.add(new Property(3, "Baltic Avenue", 60, new float[]{4, 20, 60, 180, 320, 450}, 30, 50, "purple"));
-        places.add(new Tax(4, "Income Tax", 200));
-        places.add(new Railroad(5, "Reading Railroad", 200, 100));
-        places.add(new Property(6, "Oriental Avenue", 100, new float[]{6, 30, 90, 270, 400, 550}, 50, 50, "Light Blue"));
-        places.add(new Chance(7, "Chance 1", "chance"));
-        places.add(new Property(8, "Vermont Avenue", 100, new float[]{6, 30, 90, 270, 400, 550}, 50, 50, "Light Blue"));
-        places.add(new Property(9, "Connecticut Avenue", 120, new float[]{8, 40, 100, 300, 450, 600}, 60, 50, "Light Blue"));
-        places.add(new Jail(10, "Jail - Just Visiting", "corner", true));
-        places.add(new Property(11, "St. Charles Place", 140, new float[]{10, 50, 150, 450, 625, 750}, 70, 100, "pink"));
-        places.add(new Utility(12, "Electric Company", 150, 75));
-        places.add(new Property(13, "States Avenue", 140, new float[]{10, 50, 150, 450, 625, 750}, 70, 100, "pink"));
-        places.add(new Property(14, "Virginia Avenue", 160, new float[]{12, 60, 180, 500, 700, 900}, 80, 100, "pink"));
-        places.add(new Railroad(15, "Pennsylvania Railroad", 200, 100));
-        places.add(new Property(16, "St. James Place", 180, new float[]{14, 70, 200, 550, 750, 950}, 90, 100, "Orange"));
-        places.add(new Chest(17, "Community Chest 2", "chest"));
-        places.add(new Property(18, "Tennessee Avenue", 180, new float[]{14, 70, 200, 550, 750, 950}, 90, 100, "Orange"));
-        places.add(new Property(19, "New York Avenue", 200, new float[]{16, 80, 220, 600, 800, 1000}, 100, 100, "Orange"));
-        places.add(new FreeParking(20, "Free Parking", "corner"));
-        places.add(new Property(21, "Kentucky Avenue", 220, new float[]{18, 90, 250, 700, 875, 1050}, 110, 150, "Red"));
-        places.add(new Chance(22, "Chance 2", "chance"));
-        places.add(new Property(23, "Indiana Avenue", 220, new float[]{18, 90, 250, 700, 875, 1050}, 110, 150, "Red"));
-        places.add(new Property(24, "Illinois Avenue", 240, new float[]{20, 100, 300, 750, 925, 1100}, 110, 150, "Red"));
-        places.add(new Railroad(25, "B & O Railroad", 200, 100));
-        places.add(new Property(26, "Atlantic Avenue", 260, new float[]{22, 110, 330, 800, 975, 1150}, 130, 150, "Yellow"));
-        places.add(new Property(27, "Ventnor Avenue", 260, new float[]{22, 110, 330, 800, 975, 1150}, 130, 150, "Yellow"));
-        places.add(new Utility(28, "Water Works", 150, 75));
-        places.add(new Property(29, "Marvin Gardens", 280, new float[]{24, 120, 360, 850, 1025, 1200}, 140, 150, "Yellow"));
-        places.add(new GoToJail(30, "Go To Jail", "corner", true));
-        places.add(new Property(31, "Pacific Avenue", 300, new float[]{26, 130, 390, 900, 1100, 1275}, 150, 200, "Green"));
-        places.add(new Property(32, "North Carolina Avenue", 300, new float[]{26, 130, 390, 900, 1100, 1275}, 150, 200, "Green"));
-        places.add(new Chest(33, "Community Chest 3", "chest"));
-        places.add(new Property(34, "Pennsylvania Avenue", 320, new float[]{28, 150, 450, 1000, 1200, 1400}, 160, 200, "Green"));
-        places.add(new Railroad(35, "Short Line Railroad", 200, 100));
-        places.add(new Chance(36, "Chance 3", "chance"));
-        places.add(new Property(37, "Park Place", 350, new float[]{35, 175, 500, 1100, 1300, 1500}, 175, 200, "Indigo"));
-        places.add(new Tax(38, "Luxury Tax", 75));
-        places.add(new Property(39, "Boardwalk", 400, new float[]{50, 200, 600, 1400, 1700, 2000}, 200, 200, "Indigo"));
-        places.add(new FreeParking(40, "Go", "corner")); // o go é a posição 40!
-    }
-
+     /**
+      * retorna a prisão do tabuleiro
+      * @return a prisão
+      */
     public Jail findJail(){
         for (Place place : places) {
             if(place instanceof Jail){

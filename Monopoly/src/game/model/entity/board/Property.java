@@ -38,11 +38,11 @@ public class Property extends PurchasablePlace {
      */
     private float rent[];
 
-    public Property(int position, String name, long price, float rent[], long hipoteca, long housePrice, String placeGroup) {
+    public Property(int position, String name, long price, float rent[], long mortgage, long housePrice, String placeGroup) {
         super.name = name;
         this.price = price;
         this.rent = rent;
-        this.hipoteca = hipoteca;
+        this.mortgage = mortgage;
         this.housePrice = housePrice;
         this.placeGroup = placeGroup;
         this.position = position;
@@ -167,23 +167,17 @@ public class Property extends PurchasablePlace {
         }
     }
 
-    private ArrayList<Property> getOnlyNeibors(){
-
-        ArrayList<Property> justNeibors =  new ArrayList<Property>(neighbors.size() - 1);
-
-        for(PurchasablePlace pp : neighbors)
-            if(pp != this)
-                justNeibors.add((Property) pp);
-        return justNeibors;
-
-    }
-
     private void doesBankHaveHouse() throws BuildException{
         Bank bank = Bank.getBank();
         if(nHouses < 4)
             bank.getHouse();
         else
             bank.getHotels();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
   
 }

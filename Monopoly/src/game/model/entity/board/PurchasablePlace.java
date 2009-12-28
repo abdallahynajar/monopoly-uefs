@@ -28,7 +28,7 @@ public abstract class PurchasablePlace extends Place{
     /**
      * Hipoeca do lugar
      */
-    protected float hipoteca;
+    protected float mortgage;
     /**
      * Proprietário do lugar, no ínicio do jogo, todas a propriedades pertencem ao banco
      */
@@ -56,12 +56,12 @@ public abstract class PurchasablePlace extends Place{
         this.owner = owner;
     }
 
-    public float getHipoteca() {
-        return hipoteca;
+    public float getMortgage() {
+        return mortgage;
     }
 
-    public void setHipoteca(float hipoteca) {
-        this.hipoteca = hipoteca;
+    public void setMortgage(float mortgage) {
+        this.mortgage = mortgage;
     }
 
     public float getPrice() {
