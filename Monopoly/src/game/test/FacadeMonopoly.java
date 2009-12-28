@@ -189,6 +189,7 @@ public class FacadeMonopoly {
     }
 
     public void activateDoublesRule() {
+        gameModel.getConfiguration().setActivateDoublesRule(true);
     }
 
     public boolean playerIsOnJail (String playerName) throws NonExistentPlayerException, GamePlayerException{
