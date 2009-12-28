@@ -7,13 +7,12 @@
 package game.model.entity.player;
 
 import game.model.configuration.GameConfiguration;
-import game.model.exceptions.InvalidPlayerPositionException;
+import game.model.entity.board.Board;
+import game.model.entity.board.Jail;
 import game.model.exceptions.NotEnoughMoneyException;
 import game.util.Command;
 import game.util.CommandType;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -31,12 +30,16 @@ public class ArrestedState extends PlayerState{
         updateCommands();
         player.setPlayerCommands(playerCommands);
 
+        Board board = Board.getBoard();
+        Jail jail = board.findJail();
+
     }
 
     public void paysBail(){
         int bail = GameConfiguration.getConfiguration().getPrisonBail();
         try {
             player.debit( bail );
+            player.leavesJail();
            //
         } catch (NotEnoughMoneyException ex) {
             player.leavesGame();
@@ -66,12 +69,11 @@ public class ArrestedState extends PlayerState{
      * @throws InvalidPlayerPositionException caso o jogador não esteja na cadeia
      * @throws
      */
-    public void useCard(String cardType)throws InvalidPlayerPositionException{
-
+    public void useCard(String cardType){
+        player.releaseCard( player.getCard(cardType) );
+        player.leavesJail();
     }
 
-    public void useCard() {
-        
-    }
+   
 
 }

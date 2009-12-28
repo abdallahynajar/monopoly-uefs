@@ -5,7 +5,7 @@ ASS;Doctor's Fee - Pay $50;;;-50;0;0;0;
 COLLECT;Grand Opera Opening - Collect $50 from every player for opening night seats;;;50;0;0;0;
 ASS;From Sale Out Of Stock - You Get $45;;;45;0;0;0;
 JAIL;Get Out Of Jail, Free - This card may be kept until needed or sold;;;;;;;
-MOVE;Go To Jail - Go directly to jail - Do not pass go - Do not collect $200;false;Jail - Just Visiting;;;;;0
+MOVEJAIL;Go To Jail - Go directly to jail - Do not pass go - Do not collect $200;false;Jail - Just Visiting;;;;;0
 ASS;Income Tax Refund - Collect $20;;;20;0;0;0;
 ASS;Life Insurance Matures - Collect $100;;;100;0;0;0;
 ASS;Pay Hospital - $100;;;-100;0;0;0;

@@ -6,6 +6,7 @@
  */
 package game.model.entity.player;
 
+import game.model.exceptions.InvalidPlayerPositionException;
 import game.util.Command;
 import game.util.CommandType;
 import game.model.entity.board.Place;
@@ -531,7 +532,7 @@ public class Player {
     }
 
     public void paysBail() throws IllegalPlayerStateException{
-        System.out.println("" + isInJail());
+      
         if( isInJail() ){
             arrestedState.paysBail();
         }else{
@@ -543,7 +544,7 @@ public class Player {
         
         if( isInJail() ){
             if(hasCard(cardType)){
-                arrestedState.useCard();
+                arrestedState.useCard(cardType);
             }else{
               throw new NonExistentCardException("Player doesn't have this card to use");
             }
@@ -553,15 +554,25 @@ public class Player {
     }
 
     public boolean hasCard(String  cardType){
-        for (OutOfJail outOfJail : playerCards) {
-            if( outOfJail.getType().equalsIgnoreCase(cardType) ){
-                return true;
-            }
+        if(getCard( cardType ) != null)
+        {
+            return true;
         }
         return false;
     }
 
+    public OutOfJail getCard(String  cardType){
+        for (OutOfJail outOfJail : playerCards) {
+            if( outOfJail.getType().equalsIgnoreCase(cardType) ){
+                return outOfJail;
+            }
+        }
+        return null;
+    }
 
- 
+    public void releaseCard(OutOfJail outOfJail){
+        outOfJail.setOwner(null);
+        playerCards.remove(outOfJail);
+    }
 
 }

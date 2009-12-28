@@ -6,7 +6,7 @@ MOVEUTILITY;Advance Token To Nearest Utility - If unowned you may buy it from th
 MOVERAILROAD;Advance Token To The Nearest Railroad - Pay Owner Twice The Rental To Which He Is Otherwise entitled. If Railroad Is Unowned, You May Buy It From The Bank.;false;;0;;;;
 ASS;Bank Pays You Dividend Of - $50;;;50;0;0;0;
 MOVE;Go Back 3 Spaces;false;null;0;0;;;-3
-MOVE;Go Directly To Jail - Do Not Pass Go, Do Not Collect $200;false;Jail - Just Visiting;0;0;;;0
+MOVEJAIL;Go Directly To Jail - Do Not Pass Go, Do Not Collect $200;false;Jail - Just Visiting;0;0;;;0
 REPAIR;Make General Repairs On All Your Property - For Each House Pay $25, For Each Hotel $100;;;0;25;10;0;
 ASS;Pay Poor Tax Of - $15;;;-15;0;0;0;
 JAIL;This Card May Be Kept Until Needed Or Sold - Get Out Of Jail Free;false;;0;0;;;
