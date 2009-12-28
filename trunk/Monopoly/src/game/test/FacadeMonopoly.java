@@ -203,6 +203,11 @@ public class FacadeMonopoly {
     public void pay() throws IllegalPlayerStateException{
         gameModel.getCurrentPlayer().paysBail();
     }
+    //us7
+
+    public void activateUtilityPlaces(){
+        gameModel.getConfiguration().setActivateUtilityPlaces(true);
+    }
 
 
     //us8

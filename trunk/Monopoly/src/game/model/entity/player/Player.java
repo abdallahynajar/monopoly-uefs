@@ -54,15 +54,12 @@ public class Player {
      * Quantia em dinheiro que o jogador recebe
      */
     private float amountOfMoney;
-    
     /**
      * Lugar onde o jogador se encontra
      */
     private Place atualPlace;
-
     /** Cartas do jogador */
     private ArrayList<OutOfJail> playerCards;
-
     /**
      * Posição do jogador no tabuleiro
      */
@@ -71,30 +68,23 @@ public class Player {
      * Lista de proprieades que o jodador possui.
      */
     private ArrayList<PurchasablePlace> itsPropertys;
-
     /**
      * Comandos que o jogador pode executar
      */
     private List<Command> playerCommands = null;
-
     /**
      * <b>true</b> se o jogador está no jogo ou <b>false</b> se já perdeu
      */
     private boolean playing;
-
     private ArrayList<CheckMonopoly> monopolys;
-
     /**
      * Estado atual do jogador
      */
     private PlayerState atualState;
-
     /**
      * Jogador está na cadeia
      */
     private ArrestedState arrestedState;
-
-
     private PlayerState playingState;
 
     /** Cria uma nova instância de um jogador
@@ -108,7 +98,7 @@ public class Player {
         this.monopolys = new ArrayList<CheckMonopoly>();
         this.startCommands();
         playing = true;
-        
+
         playerCards = new ArrayList<OutOfJail>();
         arrestedState = new ArrestedState(this);
         playingState = new PlayingState(this);
@@ -119,7 +109,7 @@ public class Player {
         return playing;
     }
 
-    private void startCommands(){
+    private void startCommands() {
         //System.out.println("Se vc ver essa mensagem mais de uma vez vc realmetne tá fudido");
         this.playerCommands = new ArrayList<Command>();
         this.playerCommands.add(new Command(CommandType.ROLL, true));
@@ -130,39 +120,40 @@ public class Player {
 
     }
 
-    private void updateCommands(){
-        for (Command c : playerCommands){
-            if(c.getType() == CommandType.BUILD){
+    private void updateCommands() {
+        for (Command c : playerCommands) {
+            if (c.getType() == CommandType.BUILD) {
                 c.setActive(this.isBuiltActive());
 
             }
-            if(c.getType() == CommandType.SELL){
+            if (c.getType() == CommandType.SELL) {
                 c.setActive(isSellActive());
             }
         }
 
     }
 
-    private boolean isBuiltActive(){
-        if(GameConfiguration.getGc().isActivateBuild())
-            for(CheckMonopoly c : monopolys){
-                if(c.isInMonopoly() && !c.wereAllHousesBuild()){
+    private boolean isBuiltActive() {
+        if (GameConfiguration.getGc().isActivateBuild()) {
+            for (CheckMonopoly c : monopolys) {
+                if (c.isInMonopoly() && !c.wereAllHousesBuild()) {
                     return true;
                 }
             }
+        }
         return false;
     }
 
-    public boolean isSellActive(){
+    public boolean isSellActive() {
         return wasAnyHouseBuild() && GameConfiguration.getGc().isActivateSell();
     }
 
-    private boolean wasAnyHouseBuild(){
+    private boolean wasAnyHouseBuild() {
 
-        for(PurchasablePlace pp: itsPropertys){
-            if(pp instanceof Property){
-                Property p = (Property)pp;
-                if(p.getNHouses() > 0){
+        for (PurchasablePlace pp : itsPropertys) {
+            if (pp instanceof Property) {
+                Property p = (Property) pp;
+                if (p.getNHouses() > 0) {
                     return true;
                 }
             }
@@ -183,10 +174,10 @@ public class Player {
         }
     }
 
-    public void addMonopoly(PurchasablePlace p){
+    public void addMonopoly(PurchasablePlace p) {
         String monopoly = p.getPlaceGroup();
-        for(CheckMonopoly c : monopolys){
-            if(c.getMonopoly().equals(monopoly)){
+        for (CheckMonopoly c : monopolys) {
+            if (c.getMonopoly().equals(monopoly)) {
                 c.oneMore(p);
                 return;
             }
@@ -194,83 +185,89 @@ public class Player {
         monopolys.add(new CheckMonopoly(p));
     }
 
-
-    public boolean isMonopoly(PurchasablePlace p){
-         for(CheckMonopoly c : monopolys)
-            if(c.getMonopoly().equals(p.getPlaceGroup()) && c.isInMonopoly())
+    public boolean isMonopoly(PurchasablePlace p) {
+        for (CheckMonopoly c : monopolys) {
+            if (c.getMonopoly().equals(p.getPlaceGroup()) && c.isInMonopoly()) {
                 return true;
+            }
+        }
         return false;
     }
 
-    private boolean isBuildAvaliable(Place p){
-       /* updateCommands();
+    private boolean isBuildAvaliable(Place p) {
+        /* updateCommands();
         for(Command c : playerCommands){
-            if(c.getType() == CommandType.BUILD)
-                return c.isActive();
+        if(c.getType() == CommandType.BUILD)
+        return c.isActive();
         }*/
-        if (atualPlace.getPlaceGroup().equalsIgnoreCase(p.getPlaceGroup()))
+        if (atualPlace.getPlaceGroup().equalsIgnoreCase(p.getPlaceGroup())) {
             return true;
+        }
 
 
 
         return false;
     }
 
-    public void build(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, BuildException{
-        
-        if(this.isBuiltActive()){
+    public void build(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, BuildException {
+
+        if (this.isBuiltActive()) {
             Board board = Board.getBoard();
             Place p = board.getPlaceByPosition(propertyID);
 
-            if(!(p instanceof Property))
+            if (!(p instanceof Property)) {
                 throw new BuildException("Can only build on properties");
+            }
 
-            Property property = (Property)p;
+            Property property = (Property) p;
 
-            if(!has(property))
+            if (!has(property)) {
                 throw new BuildException("Player is not the owner of this property");
-            else if(!isMonopoly(property))
+            } else if (!isMonopoly(property)) {
                 throw new BuildException("Doesn't hold monopoly for this group");
-            else{
+            } else {
                 property.build();
                 updateCommands();
             }
-        }else
+        } else {
             throw new BuildException("Unavailable command");
-        
+        }
+
     }
 
-    public void sell(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, SellException{
+    public void sell(int propertyID) throws NonExistentPlaceException, NotEnoughMoneyException, SellException {
 
-        if(this.isSellActive()){
+        if (this.isSellActive()) {
             Board board = Board.getBoard();
             Place p = board.getPlaceByPosition(propertyID);
 
-            if(!(p instanceof Property))
+            if (!(p instanceof Property)) {
                 throw new SellException("Can only sell houses built on properties");
+            }
 
-            Property property = (Property)p;
+            Property property = (Property) p;
 
             /*if(property.getNHouses() == 0)
-                throw new SellException("No house is built on this property");*/
-            if(!has(property))
+            throw new SellException("No house is built on this property");*/
+            if (!has(property)) {
                 throw new SellException("Player is not the owner of this property");
-            /*else if(!isMonopoly(property))
-                throw new SellException("Doesn't hold monopoly for this group");*/
-            else{
+            } /*else if(!isMonopoly(property))
+            throw new SellException("Doesn't hold monopoly for this group");*/ else {
                 property.sellHouse();
                 updateCommands();
             }
-        }else
+        } else {
             throw new SellException("Unavailable command");
+        }
 
     }
 
-    private boolean has(Place p){
+    private boolean has(Place p) {
 
-        for(Place pCurrent : itsPropertys){
-            if(pCurrent == p)
+        for (Place pCurrent : itsPropertys) {
+            if (pCurrent == p) {
                 return true;
+            }
         }
 
         return false;
@@ -337,6 +334,7 @@ public class Player {
     public void credit(float money) {
         this.amountOfMoney += money;
     }
+
     /**
      * Faz o jogador pagar alguma coisa, caso tenha dinheiro.
      * @param money
@@ -350,7 +348,7 @@ public class Player {
         }
     }
 
-    private void addPropertys(PurchasablePlace p){
+    private void addPropertys(PurchasablePlace p) {
         this.itsPropertys.add(p);
         addMonopoly(p);
         this.updateCommands();
@@ -368,7 +366,7 @@ public class Player {
 
         if (!(atualPlace instanceof PurchasablePlace)) {
             throw new NotInSaleException("Place doesn't have a deed to be bought");
-        } else if ((atualPlace instanceof Utility)) {
+        } else if ((atualPlace instanceof Utility) && !GameConfiguration.getConfiguration().isActivateUtilityPlaces()) {
             throw new NotInSaleException("Deed for this place is not for sale");
         } else {
             PurchasablePlace p = (PurchasablePlace) atualPlace;
@@ -378,6 +376,8 @@ public class Player {
                 addPropertys(p);
                 if (p instanceof Railroad) {
                     updateRailroadsRunning();
+                } else if (p instanceof Utility) {
+                    updateUtilitiesFactor();
                 }
             } else {
                 throw new GamePlaceException("Deed for this place is not for sale");
@@ -436,35 +436,35 @@ public class Player {
      */
     public void walk(int nPositions) throws NonExistentPlaceException, Exception {
         int goTo = atualPosition + nPositions;
-        if(!isInJail()){           
+        if (!isInJail()) {
             goTo(goTo, true);
-        }else{
+        } else {
             arrestedState.addAtempt();
-            if( arrestedState.getAttemptsToLeaveJail() == 3){
-                  paysBail();
-                  goTo(goTo, true);
-          }
+            if (arrestedState.getAttemptsToLeaveJail() == 3) {
+                paysBail();
+                goTo(goTo, true);
+            }
         }
 
     }
 
-    public void walk(int positionToGo, boolean salaryBonus) throws NonExistentPlaceException, Exception{
+    public void walk(int positionToGo, boolean salaryBonus) throws NonExistentPlaceException, Exception {
 
-       if(positionToGo < atualPosition){
+        if (positionToGo < atualPosition) {
             positionToGo = 40 + positionToGo;
         }
 
         goTo(positionToGo, salaryBonus);
     }
 
-    public void goTo(int goTo, boolean salaryBonus) throws NonExistentPlaceException, Exception{
+    public void goTo(int goTo, boolean salaryBonus) throws NonExistentPlaceException, Exception {
         Board board = Board.getBoard();
 
         if (goTo < 40) {
             setAtualPlace(board.getPlaceByPosition(goTo));
         } else {
             //usado nas cartas, para credito ou nao do salaryBonus
-            if(salaryBonus){
+            if (salaryBonus) {
                 GameConfiguration gc = GameConfiguration.getConfiguration();
                 this.credit(gc.getSalaryBonus());
             }
@@ -475,7 +475,7 @@ public class Player {
             } else {
                 setAtualPlace(board.getPlaceByPosition(goTo - 40));
             }
-        }       
+        }
         atualPlace.action(this);
         updateCommands();
 
@@ -494,6 +494,35 @@ public class Player {
         }
         return n;
     }
+
+    /**
+     * Retorna o número de serviços públicos do jogador
+     * @return o número de serviços públicos do jogador     *
+     */
+    private int getNumberOfUtilities() {
+        int n = 0;
+        for (PurchasablePlace purchasablePlace : itsPropertys) {
+            if (purchasablePlace instanceof Utility) {
+                n++;
+            }
+        }
+        return n;
+    }
+
+    /**
+     * Atualiza o valor do fator de multiplicação para os serviços públicos do jogador
+     */
+    private void updateUtilitiesFactor() {
+        if (getNumberOfUtilities() == 2) {
+            for (PurchasablePlace purchasablePlace : itsPropertys) {
+                if (purchasablePlace instanceof Utility) {
+                    Utility ut = (Utility) purchasablePlace;
+                    ut.setRentFactor( 10 );
+                }
+            }
+        }
+    }
+
     /**
      * Atualiza o valor da corrida para as ferrovias do jogador
      */
@@ -509,65 +538,63 @@ public class Player {
      * Adiciona uma carta à lista de cartas do jogador
      * @param card a carta que o jogador pegou
      */
-    public void addCard(OutOfJail card){
+    public void addCard(OutOfJail card) {
         this.playerCards.add(card);
         this.playerCommands.add(new Command(CommandType.USECARD, true));
     }
 
-    public void goesToJail(){
-            this.atualState = arrestedState;
-            arrestedState.play();
+    public void goesToJail() {
+        this.atualState = arrestedState;
+        arrestedState.play();
     }
 
-    public void leavesJail(){
+    public void leavesJail() {
         this.atualState = playingState;
     }
 
-    public boolean isInJail(){        
+    public boolean isInJail() {
         return atualState.getPlayerStatus().equalsIgnoreCase("arrested");
     }
 
-    public void paysBail() throws IllegalPlayerStateException{
-      
-        if( isInJail() ){
+    public void paysBail() throws IllegalPlayerStateException {
+
+        if (isInJail()) {
             arrestedState.paysBail();
-        }else{
+        } else {
             throw new IllegalPlayerStateException("player is not on jail");
         }
     }
 
-    public void useCard(String  cardType) throws IllegalPlayerStateException, NonExistentCardException{        
-        if( isInJail() ){
-            if(hasCard(cardType)){
+    public void useCard(String cardType) throws IllegalPlayerStateException, NonExistentCardException {
+        if (isInJail()) {
+            if (hasCard(cardType)) {
                 arrestedState.useCard(cardType);
-            }else{
-              throw new NonExistentCardException("Player doesn't have this card to use");
+            } else {
+                throw new NonExistentCardException("Player doesn't have this card to use");
             }
-        }else{
+        } else {
             throw new IllegalPlayerStateException("player is not on jail");
         }
     }
 
-    public boolean hasCard(String  cardType){
-        if(getCard( cardType ) != null)
-        {
+    public boolean hasCard(String cardType) {
+        if (getCard(cardType) != null) {
             return true;
         }
         return false;
     }
 
-    public OutOfJail getCard(String  cardType){
-        for (OutOfJail outOfJail : playerCards) {           
-            if( outOfJail.getType().equalsIgnoreCase(cardType) ){
+    public OutOfJail getCard(String cardType) {
+        for (OutOfJail outOfJail : playerCards) {
+            if (outOfJail.getType().equalsIgnoreCase(cardType)) {
                 return outOfJail;
             }
         }
         return null;
     }
 
-    public void releaseCard(OutOfJail outOfJail){
+    public void releaseCard(OutOfJail outOfJail) {
         outOfJail.setOwner(null);
         playerCards.remove(outOfJail);
     }
-
 }
