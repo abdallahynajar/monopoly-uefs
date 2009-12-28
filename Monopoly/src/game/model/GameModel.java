@@ -331,6 +331,7 @@ public class GameModel {
                         arrestsPlayer();
                     } else {
                         playerHasAnotherTurn = true;
+                        dice.setAnotherTurn(true);
                     }
                 }
             }
@@ -343,7 +344,6 @@ public class GameModel {
                 updateCurrentPlayer();
             }
         }
-
     }
 
     public boolean isGameOver() {
@@ -402,8 +402,8 @@ public class GameModel {
      * @throws game.model.exceptions.ItAlreadyHasAnOnwerException
      * @throws java.lang.Exception
      */
-    public void buy() throws NotEnoughMoneyException, NotInSaleException, GamePlaceException, Exception {
-        previous.buyProperty();
+    public void buy() throws NotEnoughMoneyException, NotInSaleException, GamePlaceException, Exception {      
+            previous.buyProperty();        
     }
 
     public CardStack getCardStack() {
