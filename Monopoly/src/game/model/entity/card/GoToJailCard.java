@@ -15,19 +15,17 @@ import game.model.exceptions.NonExistentPlaceException;
  *
  * @author Lidiany
  */
-public class GoToJail extends Movement{
+public class GoToJailCard extends Movement{
 
-    public GoToJail(int cardNumber, String description, Place placeToGo, boolean collectBonus, int walk, String type) {
+    public GoToJailCard(int cardNumber, String description, Place placeToGo, boolean collectBonus, int walk, String type) {
         super(cardNumber, description, placeToGo, collectBonus, walk, type);
     }
 
      @Override
-    public void action(Player p) throws NonExistentPlaceException, Exception {
-            
+    public void action(Player p) throws NonExistentPlaceException, Exception {            
             //System.out.println("                action de Movment: place position: " +goTo+ " card: "+ this.getDescription() );
             ((Jail) (placeToGo)).setJustVisiting( false );
-            p.goTo(placeToGo.getPosition(), collectBonus);
-            ((Jail) (placeToGo)).setJustVisiting( true );
+            p.goTo(placeToGo.getPosition(), collectBonus);            
 
     }
     

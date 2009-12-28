@@ -15,6 +15,7 @@ import game.model.entity.card.CardStack;
 import game.model.entity.player.Bank;
 import game.model.exceptions.*;
 import game.util.Command;
+import game.util.Dice;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +73,8 @@ public class GameModel {
      */
     private CardStack cardStack;
 
+    private Dice dice;
+
     private static GameModel gameModel;
 
     public static GameModel getGameModel() {
@@ -100,7 +103,7 @@ public class GameModel {
         configuration.setAutoBuy(false);
         board = Board.getBoard();
         this.cardStack = CardStack.getCardStack();
-      
+        this.dice = Dice.getDice();      
         gameModel = this;
     }
 
@@ -316,36 +319,26 @@ public class GameModel {
      * @param firstDieResult -  valor do primeiro dado
      * @param secondDieResult -  valor do segundo dado
      * @throws InvalidDiceResultException - se não os valores dos dados estiverem incorretos
-     *  @throws NonExistentPlaceException - se o Place não for encontrado
+     *  @throws NonExistentPlaceException - se o lugar não for encontrado
      */
     public void rollDices(int firstDieResult, int secondDieResult) throws InvalidDiceResultException, NonExistentPlaceException, Exception {
-        if (!validateRollDices(firstDieResult, secondDieResult)) {
-            throw new InvalidDiceResultException("Invalid die result");
-        } else {
-            try {                
+        dice.setRolledDices(firstDieResult, secondDieResult);
+        dice.validateDicesResult();       
+            try {
+                if( dice.isDoubleResult() ){
+                    if( currentPlayer.isInJail() ){
+                        currentPlayer.leavesJail();
+                    }
+                }
                 currentPlayer.walk(firstDieResult + secondDieResult);                    
             } catch (NotEnoughMoneyException ex) {
                 currentPlayer.leavesGame();
             }finally{
                 updateCurrentPlayer();
             }
-        }
+        
     }
 
-    /**
-     * Valida os valores dos Dados
-     * @param firstDieResult -  valor do primeiro dado
-     * @param secondDieResult -  valor do segundo dado
-     * @return <b>true </b> se os valores forem corretos, senão <b>false </b>
-     */
-    private boolean validateRollDices(int firstDieResult, int secondDieResult) {
-        if (firstDieResult <= 0 || secondDieResult <= 0) {
-            return false;
-        } else if (firstDieResult > 6 || secondDieResult > 6) {
-            return false;
-        }
-        return true;
-    }
 
     public boolean isGameOver() {
         if( !gameStarted ){

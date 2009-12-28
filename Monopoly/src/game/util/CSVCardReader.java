@@ -101,7 +101,7 @@ public class CSVCardReader {
             }else if (cardType.equalsIgnoreCase( "MOVEJAIL")){
                Board board = Board.getBoard();
                 Place place = board.getPlaceByName(reader.get("PLACE"));
-                GoToJail gtj = new GoToJail(cardNumber, description, place, false, 0, type);
+                GoToJailCard gtj = new GoToJailCard(cardNumber, description, place, false, 0, type);
                 gameCards.add(gtj);
 
             } else if (cardType.equalsIgnoreCase("REPAIR")){
