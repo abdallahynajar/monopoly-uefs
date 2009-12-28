@@ -6,9 +6,13 @@
  */
 package game.model.entity.board;
 
+import game.model.configuration.GameConfiguration;
 import game.model.entity.player.Player;
 import game.model.entity.*;
+import game.model.exceptions.GamePlaceException;
 import game.model.exceptions.NotEnoughMoneyException;
+import game.model.exceptions.NotInSaleException;
+import game.util.Dice;
 
 /**
  *  Representa serviços públicos no tabuleiro do monopoly
@@ -16,32 +20,39 @@ import game.model.exceptions.NotEnoughMoneyException;
  */
 public class Utility extends PurchasablePlace {
 
+    private int rentFactor;
+
     public Utility(int position, String name, long price, long hipoteca) {
         this.position = position;
         this.name = name;
         this.price = price;
         this.hipoteca = hipoteca;
-        this.placeGroup = "utility";       
+        this.placeGroup = "utility";
+        rentFactor = 4;
     }
 
     /**
-     * Por enquanto não faz nada
-     * @param p
-     * @throws NotEnoughMoneyException
+     * O jogador compra o serviço ou paga o aluguel ao dono
+     * @param p o jogador que passou pelo lugar
+     * @throws NotEnoughMoneyException caso o jogador não tenha dinheiro para comprar ou pagar
+     * @throws NotInSaleException caso o lugar não esteja a venda
      */
-    public void action(Player p) throws NotEnoughMoneyException {
-//         if ( !(owner.getId() == p.getId()) ) {
-//            if ( owner.getName().equals("bank") ) {
-//                  System.out.println("-----------------");
-//               System.out.println("Comprando utility" + p.getName() + " : "+ p.getAmountOfMoney() +" valor " +price);
-//                buyProperty(p);
-//                System.out.println(" AMoney "+ p.getAmountOfMoney());
-//            } else {
-//                  System.out.println("-----------------");
-//                System.out.println(" Pagando aluguel "+ p.getName() + " : "+ p.getAmountOfMoney() +" valor " + price);
-//                p.debit( price );
-////                System.out.println(" AMoney "+ p.getAmountOfMoney());
-//            }
-//        }
+    public void action(Player p) throws NotEnoughMoneyException, NotInSaleException, GamePlaceException {
+        boolean isActivateUtilityPlaces = GameConfiguration.getConfiguration().isActivateUtilityPlaces();
+        if (isActivateUtilityPlaces) {
+            if (owner.getName().equals("bank")) {
+                buyProperty(p);
+            } else {
+                Dice dice = Dice.getDice();
+                int dicesResult = dice.getFirstDiceResult() + dice.getSecondDiceResult();
+                p.payRent(owner, dicesResult * rentFactor );
+            }
+        }
     }
+
+    public void setRentFactor(int rentFactor) {
+        this.rentFactor = rentFactor;
+    }
+
+    
 }

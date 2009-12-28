@@ -61,6 +61,9 @@ public class GameConfiguration {
     /**Ativa a venda*/
     private boolean activateSell;
 
+    /** Ativa os serviçõs públicos*/
+    private boolean activateUtilityPlaces;
+
 
 
     private static GameConfiguration gc;
@@ -115,6 +118,7 @@ public class GameConfiguration {
         this.activateBuild = Boolean.parseBoolean( rc.getString("activateBuild") );
         this.activateSell = Boolean.parseBoolean( rc.getString("activateSell") );
         this.activateDoublesRule = Boolean.parseBoolean( rc.getString("activateDoublesRule") );
+        this.activateUtilityPlaces = Boolean.parseBoolean( rc.getString("activateUtilityPlaces") );
     }
 
     public static void cleanUp(){
@@ -304,6 +308,15 @@ public class GameConfiguration {
     public void setActivateDoublesRule(boolean activateDoublesRule) {
         this.activateDoublesRule = activateDoublesRule;
     }
+
+    public boolean isActivateUtilityPlaces() {
+        return activateUtilityPlaces;
+    }
+
+    public void setActivateUtilityPlaces(boolean activateUtilityPlaces) {
+        this.activateUtilityPlaces = activateUtilityPlaces;
+    }
+
 
 
 }
