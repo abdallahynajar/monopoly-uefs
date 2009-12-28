@@ -29,8 +29,7 @@ public class ArrestedState extends PlayerState{
     public void play() {
         //se estiver na cadeia, faz as ações da cadeia
         updateCommands();
-        player.setPlayerCommands(playerCommands);
-       // System.out.println("Atual place" + player.getAtualPlace().getPosition() );
+        player.setPlayerCommands(playerCommands);      
     }
 
     public void paysBail(){

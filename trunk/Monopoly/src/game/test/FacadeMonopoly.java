@@ -175,11 +175,11 @@ public class FacadeMonopoly {
         gameModel.getCardStack().loadChanceCards();
     }
 
-    public void forceNextChanceCard(int cardId) throws NonExistentCardException {
+    public void forceNextChanceCard(int cardId) throws NonExistentCardException, GameException {
         gameModel.getCardStack().forceNextChanceCard(cardId);
     }
 
-    public void forceNextChestCard(int cardId) throws NonExistentCardException {
+    public void forceNextChestCard(int cardId) throws NonExistentCardException, GameException {
         gameModel.getCardStack().forceNextChestCard(cardId);
     }
 
@@ -197,7 +197,7 @@ public class FacadeMonopoly {
     }
 
     public void useCard(String  cardType) throws IllegalPlayerStateException, NonExistentCardException{
-        gameModel.getCurrentPlayer().useCard( cardType);
+        gameModel.getCurrentPlayer().useCard(cardType);
     }
 
     public void pay() throws IllegalPlayerStateException{
