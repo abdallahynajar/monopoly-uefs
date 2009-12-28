@@ -37,8 +37,7 @@ public class CSVCardReader {
         ArrayList<Card> gameCards = new ArrayList<Card>();
         reader.readHeaders();
         int cardNumber = 0;        
-        while (reader.readRecord()) {
-            
+        while (reader.readRecord()) {            
             loadCard(cardNumber, gameCards, cardsType);
             cardNumber++;
         }         
@@ -46,15 +45,6 @@ public class CSVCardReader {
         return gameCards;
     }
 
-/*   public static void main(String[] args) {
-        try {
-            System.out.println(" chances " + CSVCardReader.loadCards("chances.csv").size());
-            System.out.println( " chests " +CSVCardReader.loadCards("communityChests.csv").size());
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }*/
 
     private static void loadCard(int cardNumber, ArrayList<Card> gameCards, String type) throws IOException, NumberFormatException {
            
@@ -105,7 +95,6 @@ public class CSVCardReader {
                 gameCards.add(gtj);
 
             } else if (cardType.equalsIgnoreCase("REPAIR")){
-
                 int feePerHouse = Integer.parseInt(reader.get("FEEPERHOUSE"));
                 int feePerHotel = Integer.parseInt(reader.get("FEEPERHOTEL"));
                 Repair r = new Repair(cardNumber, description, type, feePerHouse,feePerHotel);

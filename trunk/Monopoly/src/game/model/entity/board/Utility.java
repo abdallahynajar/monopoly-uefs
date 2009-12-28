@@ -26,7 +26,7 @@ public class Utility extends PurchasablePlace {
         this.position = position;
         this.name = name;
         this.price = price;
-        this.hipoteca = hipoteca;
+        this.mortgage = hipoteca;
         this.placeGroup = "utility";
         rentFactor = 4;
     }
