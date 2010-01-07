@@ -602,4 +602,20 @@ public class Tabuleiro extends ArrayList<Lugar> {
             return false;
         }
     }
+
+    public boolean lugarExiste(int idPropriedade){
+        return (idPropriedade >= 1 && idPropriedade <= 40) ? true : false;
+    }
+
+     /**
+     * Retorna preco da hipoteca do lugar
+     * @param id
+     * @return o valor
+     */
+    public int getPrecoHipoteca(int id) {
+        return precos_lugares_aluguel_Hipoteca[id - 1];
+    }
+
+
+
 }

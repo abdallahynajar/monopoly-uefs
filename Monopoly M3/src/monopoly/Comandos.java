@@ -26,6 +26,11 @@ public class Comandos {
      * Flag de comando Sell incluido
      */
     private boolean comandoSellIncluido = false;
+
+     /**
+     * Flag de comando Mortgage incluido
+     */
+    private boolean comandoMortgageIncluido = false;
     /**
      * construtor de comandos
      */
@@ -94,6 +99,25 @@ public class Comandos {
         if (comandoBuildIncluido) {
             cmds.remove("build");
             this.comandoBuildIncluido = false;
+        }
+    }
+
+        /**
+     * Adiciona comando Hypothecate
+     */
+    public void addComandoMortgage() {
+        if (!comandoMortgageIncluido) {
+            cmds.add("mortgage");
+            this.comandoMortgageIncluido = true;
+        }
+    }
+    /**
+     * Remove comando Hypothecate
+     */
+    public void removerComandoMortgage() {
+        if (comandoMortgageIncluido) {
+            cmds.remove("mortgage");
+            this.comandoMortgageIncluido = false;
         }
     }
     /**

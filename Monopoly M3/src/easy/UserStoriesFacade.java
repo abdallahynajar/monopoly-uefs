@@ -40,12 +40,6 @@ public class UserStoriesFacade {
 
     }
 
-    /**
-     * Seta a compra automatica
-     */
-    public void setAutomaticBuying() {
-        this.jogo.setCompraAutomatica();
-    }
 
     /**
      * Consulta o total de jogadores
@@ -413,6 +407,17 @@ public class UserStoriesFacade {
      */
     public void sell(int propertyID) throws Exception {
         this.jogo.VenderCasasOuHoteis(propertyID);
-
     }
+    public void mortgage (int placeID) throws Exception{
+       this.jogo.hipotecarPropriedade(placeID);
+    }
+    
+    public void activateMortgage(){
+         this.jogo.ativarHipoteca();
+    }
+
+    public boolean isMortgaged(int placeID) throws Exception{
+       return this.jogo.propriedadeEstaHipotecada(placeID);
+    }
+
 }

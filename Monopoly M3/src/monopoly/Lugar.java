@@ -39,6 +39,8 @@ public class Lugar {
      */
     private int Posicao = 0;
 
+    private boolean estaHipotecada = false;
+
     /**
      * Instancia um novo lugar
      * @param Posicao a posicao
@@ -245,4 +247,19 @@ public class Lugar {
     public int getNivel() {
         return this.nivel;
     }
+
+    public void hipotecar() throws Exception{
+       if(this.getNumeroDeCasas() >0){
+           throw  new Exception("Can't mortgage a property with houses built");
+       }else if( this.getNumeroDeHoteis() >0){
+            throw  new Exception("Can't mortgage a property with hotels built");
+       }else{
+          this.estaHipotecada = true;
+       }
+    }
+
+    public boolean estaHipotecada() {
+        return estaHipotecada;
+    }
+
 }
