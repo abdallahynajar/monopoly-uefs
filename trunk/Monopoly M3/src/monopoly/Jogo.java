@@ -1,6 +1,5 @@
 package monopoly;
 
-
 import monopoly.cards.Card;
 import monopoly.cards.CardsGame;
 import java.util.ArrayList;
@@ -29,6 +28,7 @@ public class Jogo {
     private boolean WaterWorksComprada = false;
     private boolean build = false;
     private boolean sell = false;
+    private boolean hipotecaAtiva = false;
 
     public void AtivarVenda() {
         this.sell = true;
@@ -105,6 +105,7 @@ public class Jogo {
      * Objeto banco
      */
     private Banco banco = new Banco();
+
     /**
      * Construtor do Jogo
      * @param quantidade
@@ -143,54 +144,63 @@ public class Jogo {
         this.publicServices = false;
 
     }
+
     /**
      * ativa cartoes chance aleatorios
      */
     public void setChanceCardShuffle() {
         ChanceCardShuffle = true;
     }
+
     /**
      * Desativa cartoes chance aleatorios
      */
     public void unsetChanceCardShuffle() {
         ChanceCardShuffle = false;
     }
+
     /**
      * ativa cartoes chest aleatorios
      */
     public void setChestCardShuffle() {
         ChanceCardShuffle = true;
     }
+
     /**
      * desativa cartoes chest aleatorios
      */
     public void unsetChestCardShuffle() {
         ChanceCardShuffle = false;
     }
+
     /**
      * ativa regra jogada dupla
      */
     public void activeRegraJogadaDupla() {
         this.RegraJogadaDupla = true;
     }
+
     /**
      * desativa regra jogada dupla
      */
     public void desactiveRegraJogadaDupla() {
         this.RegraJogadaDupla = true;
     }
+
     /**
      * ativa cartoes
      */
     public void activeCards() {
         cards = true;
     }
+
     /**
      * desativa cartoes
      */
     public void desativeCards() {
         cards = false;
     }
+
     /**
      * Seta ponteiro dos cartoes Chance
      * @param indiceChance
@@ -205,6 +215,7 @@ public class Jogo {
             this.indiceChance = indiceChance;
         }
     }
+
     /**
      * Seta ponteiro dos cartoes Chest
      * @param indiceChest
@@ -219,12 +230,14 @@ public class Jogo {
             this.indiceChest = indiceChest;
         }
     }
+
     /**
      * Ativa prisao
      */
     public void ativarPrisao() {
         this.prisao = true;
     }
+
     /**
      * Retorna Cartao Chance Atual
      * @return o cartao
@@ -233,6 +246,7 @@ public class Jogo {
     public Card getCurrentChance() throws Exception {
         return cardsGame.getCardSorteReves(indiceChance);
     }
+
     /**
      * Retorna Cartao Chest Atual
      * @return o cartao
@@ -272,10 +286,10 @@ public class Jogo {
         Donos.put(2, "noOwner");
         Donos.put(4, "Income Tax");
         Donos.put(7, "noOwner");
-        Donos.put(10, "noOwner");       
+        Donos.put(10, "noOwner");
         Donos.put(17, "noOwner");
         Donos.put(20, "noOwner");
-        Donos.put(22, "noOwner");       
+        Donos.put(22, "noOwner");
         Donos.put(30, "noOwner");
         Donos.put(33, "noOwner");
         Donos.put(36, "noOwner");
@@ -290,14 +304,19 @@ public class Jogo {
      * @return true se a posicao esta disponivel, falso caso contrario
      */
     public boolean posicaoCompravel(int posicao) {
-
+        // System.out.println("posicao" + posicao);
         String dono = (String) this.Donos.get(posicao);
-        if (dono.equals("bank") && this.publicServices == false && posicao != 12 && posicao != 28) {
-            return true;
-        } else if (dono.equals("bank") && this.publicServices == true && (posicao == 12 || posicao == 28)) {
-            return true;
-        } else if (dono.equals("bank") && this.publicServices == false && (posicao == 12 || posicao == 28)) {
-            return false;
+        // System.out.println("DONO"+ dono);
+        if (dono.equals("bank")) {
+            if (this.publicServices == false && posicao != 12 && posicao != 28) {
+                return true;
+            } else if (this.publicServices == true && (posicao == 12 || posicao == 28)) {
+                return true;
+            } else if (this.publicServices == false && (posicao == 12 || posicao == 28)) {
+                return false;
+            } else {
+                return true;
+            }
         } else {
             return false;
         }
@@ -322,6 +341,7 @@ public class Jogo {
     public int getPlayerMoney(String playerName) throws Exception {
         return this.getJogadorByName(playerName).getDinheiro();
     }
+
     /**
      * Adiciona dinheiro ao jogador
      * @param playerName
@@ -810,6 +830,7 @@ public class Jogo {
 
 
     }
+
     /**
      * Desloca o jogador diretamente da posicao corrente a outra
      * @param jogador
@@ -830,7 +851,7 @@ public class Jogo {
 
 
         if (this.posicaoCompravel(this.posicoes[jogador])) {
-            this.print("\tO lugar " + lugar.getNome() + " está à venda!");          
+            this.print("\tO lugar " + lugar.getNome() + " está à venda!");
             this.print("\tAtual dinheiro:" + this.listaJogadores.get(jogador).getDinheiro());
             this.print("\tTenta realizar a compra");
             if (this.efetuarCompra(this.posicoes[jogador], this.listaJogadores.get(jogador))) {
@@ -913,6 +934,7 @@ public class Jogo {
 
         return false;
     }
+
     /**
      * Realiza o processamento do cartao chance
      * @throws Exception
@@ -1008,6 +1030,7 @@ public class Jogo {
             indiceChance = 1;
         }
     }
+
     /**
      * Realiza o processamento do cartao Chest
      * @throws Exception
@@ -1095,6 +1118,7 @@ public class Jogo {
      * @throws Exception
      */
     private void moverJogadorDaVez(int dado1, int dado2) throws Exception {
+        //    System.out.println("moverJogadorDaVez" +  dado1 + " , " + dado2);
 
         print("\ttirou nos dados: " + dado1 + " , " + dado2);
         int valorDados = dado1 + dado2;
@@ -1231,7 +1255,8 @@ public class Jogo {
 
         int jogador = this.jogadorAtual();
 
-
+        String lugar = this.tabuleiro.getPlaceName(posicoes[jogador]);
+        //    System.out.println("lugar[jogador]" +  lugar);
         boolean posicaoCompravel = this.posicaoCompravel(posicoes[jogador]);
         boolean isEstatal = this.isPosicaoEstatal(this.posicoes[jogador]);
 
@@ -1258,6 +1283,9 @@ public class Jogo {
                 }
                 this.print("\tVocê adquiriu " + nomeLugar + " por " + preco);
                 this.print("\tAtual dinheiro: " + j.getDinheiro());
+                if (j.temPropriedades() && hipotecaAtiva) {
+                    j.adicionarComandoHipotecar();
+                }
                 if (j.verificaSeTemGrupo(posicaoTabuleiro)) {
                     if (this.build == true) {
                         j.adicionarComandoBuild();
@@ -1359,6 +1387,7 @@ public class Jogo {
         }
 
     }
+
     /**
      * Adiciona jogador na prisao
      * @param jogador
@@ -1369,6 +1398,7 @@ public class Jogo {
 
         print("\tmas chegou prisioneiro e prisao agora tem " + listaJogadoresNaPrisao);
     }
+
     /**
      * Retira jogador da prisao
      * @param jogador
@@ -1390,6 +1420,7 @@ public class Jogo {
         return (this.isUmJogador(nomeDono));
 
     }
+
     /**
      * Verifica se jogador esta preso
      * @param Nome
@@ -1403,6 +1434,7 @@ public class Jogo {
         }
 
     }
+
     /**
      * Usar cartao de saida da prisao
      * @param tipoCartao
@@ -1424,6 +1456,7 @@ public class Jogo {
             throw new Exception("player is not on jail");
         }
     }
+
     /**
      * Pagar saida da prisao
      * @throws Exception
@@ -1441,12 +1474,14 @@ public class Jogo {
 
         this.pagouPrisaoRecentemente = false;
     }
+
     /**
      * Ativar servicos publicos
      */
     public void ativarServicosPublicos() {
         this.publicServices = true;
     }
+
     /**
      * Verifica se servico publico foi comprado
      * @param posicao
@@ -1464,12 +1499,14 @@ public class Jogo {
 
         }
     }
+
     /**
      * Ativar compra de casas e hoteis
      */
     public void ativarBuild() {
         this.build = true;
     }
+
     /**
      * Comprar casas e hoteis
      * @param idPropriedade
@@ -1489,6 +1526,9 @@ public class Jogo {
                 throw new Exception("Can only build on properties");
 
             }
+            if (this.hipotecaAtiva && this.tabuleiro.getLugarById(idPropriedade).estaHipotecada()) {
+                throw new Exception("Can't build on mortgaged properties");
+            }
 
             if (!this.tabuleiro.verificaSeGrupoAindaPodeTerConstrucoes(idPropriedade)) {
                 this.listaJogadores.get(jogadorAtual()).getComandos().remove("build");
@@ -1502,6 +1542,9 @@ public class Jogo {
                 }
                 //Procedimento para compra de casas e hoteis
                 if (this.tabuleiro.verificaSePodeConstruirNoTerreno(idPropriedade) == true) {
+                    if (hipotecaAtiva) {
+                        verificaSeGrupoTemHipoteca(idPropriedade);
+                    }
                     RealizarProtocoloDeCompraDeCasasEHoteis(idPropriedade);
 
                 } else {
@@ -1519,6 +1562,19 @@ public class Jogo {
             throw new Exception("Build nao esta ativo");
         }
 
+    }
+
+    public void verificaSeGrupoTemHipoteca(int idPropriedade) throws Exception{
+        String grupo = tabuleiro.getLugarGrupo(idPropriedade);
+        for(Lugar lugar: tabuleiro){
+            if( lugar.getGrupo(lugar.getPosicao()).equals(grupo) ){
+                if(lugar.estaHipotecada()){
+                    throw new Exception("Group has mortgaged properties");
+                }
+            }
+        }
+//                estaHipotecada() &&
+//                        throw new Exception("Group has mortgaged properties ");
     }
 
     /**
@@ -1586,6 +1642,7 @@ public class Jogo {
 
 
     }
+
     /**
      * Vender casas ou hoteis
      * @param idPropriedade
@@ -1629,6 +1686,7 @@ public class Jogo {
 
         }
     }
+
     /**
      * Realiza procedimento de venda de casas e hoteis
      * @param idLugar
@@ -1699,11 +1757,80 @@ public class Jogo {
 
         }
     }
+
     /**
      * retorna o tabuleiro
      * @return o tabuleiro
      */
     public Tabuleiro getTabuleiro() {
         return this.tabuleiro;
+    }
+
+    public void ativarHipoteca() {
+        hipotecaAtiva = true;
+    }
+
+    /**
+     * Vender casas ou hoteis
+     * @param idPropriedade
+     * @throws Exception
+     */
+    public void hipotecarPropriedade(int idPropriedade) throws Exception {
+        //System.out.println("jogadorAtual()" + this.listaJogadores.get(jogadorAtual()).getNome());
+        if (!this.tabuleiro.lugarExiste(idPropriedade)) {
+            throw new Exception("Place doesn't exist");
+        }
+        boolean hipotecaEstaLiberada = hipotecaEstaLiberada(idPropriedade);
+
+        if (hipotecaEstaLiberada) {
+            if (posicaoHipotecavel(idPropriedade)) {
+
+                boolean OJogadorDavezEhDono = this.listaJogadores.get(jogadorAtual()).getPropriedades().contains(this.tabuleiro.getLugarById(idPropriedade).getNome());
+                if (OJogadorDavezEhDono) {
+                    Lugar lugar = this.tabuleiro.getLugarById(idPropriedade);
+                    lugar.hipotecar();
+                    this.listaJogadores.get(jogadorAtual()).addDinheiro(tabuleiro.getPrecoHipoteca(idPropriedade));
+                } else {
+                    throw new Exception("Player doesn't hold the deed for this place");
+                }
+
+
+
+            } else {
+                throw new Exception("This place can't be mortgaged");
+            }
+        } else {
+            throw new Exception("Unavailable command");
+        }
+
+
+    }
+
+    private boolean hipotecaEstaLiberada(int idPropriedade) throws Exception {
+        boolean hipotecaEstaLiberada = (this.listaJogadores.get(jogadorAtual()).getComandos().contains("mortgage") && hipotecaAtiva && !this.listaJogadores.get(jogadorAtual()).getPropriedades().isEmpty() && !this.tabuleiro.getLugarById(idPropriedade).estaHipotecada()) ? true : false;
+        return hipotecaEstaLiberada;
+    }
+
+    /**
+     * Checa se uma posicao esta disponivel para hipoteca
+     * @param posicao a posicao do lugar
+     * @return true se a posicao esta disponivel, falso caso contrario
+     */
+    public boolean posicaoHipotecavel(int posicao) {
+
+        String dono = (String) this.Donos.get(posicao);
+        if (dono.equals("noOwner") || dono.equalsIgnoreCase("Income Tax") || dono.equalsIgnoreCase("Luxury Tax")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean propriedadeEstaHipotecada(int idPropriedade) throws Exception {
+        if (!posicaoHipotecavel(idPropriedade)) {
+            throw new Exception("This place can't be mortgaged");
+        } else {
+            return this.tabuleiro.getLugarById(idPropriedade).estaHipotecada();
+        }
     }
 }

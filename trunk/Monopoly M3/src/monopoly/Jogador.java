@@ -274,6 +274,15 @@ public class Jogador {
     public void adicionarComandoBuild() {
         this.comandos.addComandoBuild();
     }
+
+     /**
+     * Adiciona comando Hipotecar na lista de comandos do jogador
+     */
+    public void adicionarComandoHipotecar() {
+        this.comandos.addComandoMortgage();
+    }
+
+
     /**
      * Adiciona comando Sell na lista de comandos do jogador
      */
@@ -379,5 +388,9 @@ public class Jogador {
         } else {
             return false;
         }
+    }
+
+    public boolean temPropriedades(){
+        return this.getPropriedades().isEmpty() ? false : true;
     }
 }
