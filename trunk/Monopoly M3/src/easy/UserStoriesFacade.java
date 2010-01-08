@@ -356,6 +356,7 @@ public class UserStoriesFacade {
      * @throws Exception
      */
     public void pay() throws Exception {
+        //WTF?????
         this.jogo.processarJogada(2, 1, true);
 
     }
