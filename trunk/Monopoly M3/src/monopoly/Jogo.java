@@ -29,6 +29,7 @@ public class Jogo {
     private boolean build = false;
     private boolean sell = false;
     private boolean hipotecaAtiva = false;
+    private boolean desipotecarAtivo = false;
 
     public void AtivarVenda() {
         this.sell = true;
@@ -367,6 +368,32 @@ public class Jogo {
         int Id = this.getJogadorByName(playerName).getId();
         return posicoes[Id];
     }
+
+    private void verificaHipotecasDoJogadorAtual() {
+        Jogador jogadorAtual =this.listaJogadores.get(jogadorAtual());
+        Lugar lugar;
+        boolean temHipoteca = false;
+        boolean temPropriedadesSemHipoteca =  false;
+        for (String s : jogadorAtual.getPropriedadesDoJogador()) {
+            lugar  = tabuleiro.getLugarPeloNome(s);
+            if(lugar.estaHipotecada()){
+                temHipoteca = true;
+            }else{
+                temPropriedadesSemHipoteca = true;
+            }
+        }
+        if (temHipoteca) {
+            jogadorAtual.adicionarComandoDesipotecar();
+        }else{
+            jogadorAtual.removerComandoDesipotecar();
+        }
+        if(temPropriedadesSemHipoteca){
+            jogadorAtual.adicionarComandoHipotecar();
+        }else{
+            jogadorAtual.removerComandoHipotecar();
+        }
+    }
+
 
     /**
      * Obtem um jogador atraves de seu nome
@@ -1794,10 +1821,13 @@ public class Jogo {
             this.terminarAVez();
             if (posicaoHipotecavel(idPropriedade)) {
                 Lugar lugar = this.tabuleiro.getLugarById(idPropriedade);
-                boolean OJogadorDavezEhDono = this.listaJogadores.get(jogadorAtual()).getPropriedades().contains(lugar.getNome());
+                Jogador jogadorAtual =this.listaJogadores.get(jogadorAtual());
+                boolean OJogadorDavezEhDono = jogadorAtual.getPropriedades().contains(lugar.getNome());
                 if (OJogadorDavezEhDono) {
                     lugar.hipotecar();
-                    this.listaJogadores.get(jogadorAtual()).addDinheiro(tabuleiro.getPrecoHipoteca(idPropriedade));
+                 //   verificaHipotecasDoJogadorAtual();
+                    jogadorAtual.addDinheiro(tabuleiro.getPrecoHipoteca(idPropriedade));
+
                 } else {
                     throw new Exception("Player doesn't hold the deed for this place");
                 }
@@ -1838,5 +1868,35 @@ public class Jogo {
         } else {
             return this.tabuleiro.getLugarById(idPropriedade).estaHipotecada();
         }
+    }
+    public void desipotecarPropriedade(int idPropriedade) throws Exception{
+        if (!this.tabuleiro.lugarExiste(idPropriedade)) {
+            throw new Exception("Place doesn't exist");
+        }
+        if (hipotecaAtiva) {          
+                this.terminarAVez();
+                Lugar lugar = this.tabuleiro.getLugarById(idPropriedade);
+                boolean OJogadorDavezEhDono = this.listaJogadores.get(jogadorAtual()).getPropriedades().contains(lugar.getNome());
+                if (OJogadorDavezEhDono) {
+
+                    lugar.desipotecar();
+                    double preco = tabuleiro.getPrecoHipoteca(idPropriedade);
+                    int precoTotal = (int)(Math.ceil( (preco + (preco* 0.10))));
+                    this.listaJogadores.get(jogadorAtual()).retirarDinheiro(  precoTotal  );
+
+                //    verificaHipotecasDoJogadorAtual();
+
+
+                } else {
+                    throw new Exception("Unavailable command");
+                }
+        }else{
+            throw new Exception("Unavailable command");
+        }
+
+    }
+
+    public void ativarDesipoteca(){
+        hipotecaAtiva =  true;
     }
 }
