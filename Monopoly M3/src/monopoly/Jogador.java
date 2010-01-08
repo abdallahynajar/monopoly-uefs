@@ -393,4 +393,12 @@ public class Jogador {
     public boolean temPropriedades(){
         return this.getPropriedades().isEmpty() ? false : true;
     }
+
+    public ArrayList<String> getPropriedadesDoJogador() {
+        return propriedades;
+    }
+
+
+
+ 
 }
