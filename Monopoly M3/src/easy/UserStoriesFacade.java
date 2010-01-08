@@ -422,11 +422,11 @@ public class UserStoriesFacade {
     }
 
     public void activateUnMortgage(){
-        
+        jogo.ativarDesipoteca();
     }
 
-    public void unmortgage (int placeID){
-        
+    public void unmortgage (int placeID) throws Exception{
+        jogo.desipotecarPropriedade(placeID);
     }
 
 

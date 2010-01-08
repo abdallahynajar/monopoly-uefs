@@ -283,6 +283,21 @@ public class Jogador {
     }
 
 
+    public void removerComandoHipotecar() {
+        this.comandos.removerComandoMortgage();
+    }
+
+     public void removerComandoDesipotecar() {
+        this.comandos.removerComandoUnMortgage();
+    }
+
+     /**
+     * Adiciona comando Hipotecar na lista de comandos do jogador
+     */
+    public void adicionarComandoDesipotecar() {
+        this.comandos.addComandoUnMortgage();
+    }
+
     /**
      * Adiciona comando Sell na lista de comandos do jogador
      */

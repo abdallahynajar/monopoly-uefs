@@ -48,6 +48,7 @@ public class TestFacade {
 //              files.add("easyTests/us9.txt");
               files.add("easyTests/us10.txt");
               files.add("easyTests/us11.txt");
+            //  files.add("easyTests/us12.txt");
 
     }
 }

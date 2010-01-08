@@ -31,6 +31,8 @@ public class Comandos {
      * Flag de comando Mortgage incluido
      */
     private boolean comandoMortgageIncluido = false;
+
+    private boolean comandoUnmortgageIncluido = false;
     /**
      * construtor de comandos
      */
@@ -109,6 +111,25 @@ public class Comandos {
         if (!comandoMortgageIncluido) {
             cmds.add("mortgage");
             this.comandoMortgageIncluido = true;
+        }
+    }
+
+         /**
+     * Adiciona comando Desipotecar
+     */
+    public void addComandoUnMortgage() {
+        if (!comandoUnmortgageIncluido) {
+            cmds.add("unmortgage");
+            this.comandoUnmortgageIncluido = true;
+        }
+    }
+    /**
+     * Remove comando Hypothecate
+     */
+    public void removerComandoUnMortgage() {
+        if (comandoUnmortgageIncluido) {
+            cmds.remove("unmortgage");
+            this.comandoUnmortgageIncluido = false;
         }
     }
     /**
