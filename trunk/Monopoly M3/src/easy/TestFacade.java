@@ -37,16 +37,18 @@ public class TestFacade {
      * @param Lista de arquivos
      */
     static void addUsers(List<String> files) {
-          files.add("easyTests/us1.txt");
-              files.add("easyTests/us2.txt");
-              files.add("easyTests/us3.txt");
-              files.add("easyTests/us4.txt");
-              files.add("easyTests/us5.txt");
-              files.add("easyTests/us6.txt");
-              files.add("easyTests/us7.txt");
-              files.add("easyTests/us8.txt");
-              files.add("easyTests/us9.txt");
+//          files.add("easyTests/us1.txt");
+//              files.add("easyTests/us2.txt");
+//              files.add("easyTests/us3.txt");
+//              files.add("easyTests/us4.txt");
+//              files.add("easyTests/us5.txt");
+//              files.add("easyTests/us6.txt");
+//              files.add("easyTests/us7.txt");
+//              files.add("easyTests/us8.txt");
+//              files.add("easyTests/us9.txt");
               files.add("easyTests/us10.txt");
+              files.add("easyTests/us11.txt");
+
     }
 }
 

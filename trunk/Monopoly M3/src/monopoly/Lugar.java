@@ -262,4 +262,6 @@ public class Lugar {
         return estaHipotecada;
     }
 
+
+
 }

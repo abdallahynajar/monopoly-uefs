@@ -421,4 +421,13 @@ public class UserStoriesFacade {
        return this.jogo.propriedadeEstaHipotecada(placeID);
     }
 
+    public void activateUnMortgage(){
+        
+    }
+
+    public void unmortgage (int placeID){
+        
+    }
+
+
 }

@@ -107,14 +107,16 @@ public class Tabuleiro extends ArrayList<Lugar> {
     /**
      * Os precos de aluguel para uma hipoteca
      */
-    private int[] precos_lugares_aluguel_Hipoteca = {30, 0, 30, 0, 100, 50, 0, 50, 60, 0,
+    private int[] precos_lugares_aluguel_Hipoteca = {
+        30, 0, 30, 0, 100, 50, 0, 50, 60, 0,
         70, 75, 70, 80, 100, 90, 0, 90, 100, 0,
         110, 0, 110, 120, 100, 130, 130, 75, 140, 0,
         150, 130, 0, 160, 100, 0, 175, 0, 200, 0};
     /**
      * Os precos das casas
      */
-    private int[] precos_da_casa = {50, 0, 50, 0, 0, 50, 0, 50, 50, 50, 0,
+    private int[] precos_da_casa = {
+        50, 0, 50, 0, 0, 50, 0, 50, 50, 50, 0,
         100, 0, 100, 100, 0, 100, 0, 100, 100, 0,
         150, 0, 150, 150, 0, 150, 150, 0, 150, 0,
         200, 200, 0, 200, 0, 0, 200, 0, 200, 0};
@@ -550,6 +552,47 @@ public class Tabuleiro extends ArrayList<Lugar> {
      * @throws Exception
      */
     public boolean verificaSeGrupoAindaPodeTerConstrucoes(int idPlace) throws Exception {
+        if(aindaTemLugarParaConstruir(idPlace)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean lugarExiste(int idPropriedade){
+        return (idPropriedade >= 1 && idPropriedade <= 40) ? true : false;
+    }
+
+     /**
+     * Retorna preco da hipoteca do lugar
+     * @param id
+     * @return o valor
+     */
+    public int getPrecoHipoteca(int id) {
+        return precos_lugares_aluguel_Hipoteca[id - 1];
+    }
+
+    public Lugar getLugarPeloNome(String nome){
+        for (Lugar lugar : this) {
+            if(lugar.getNome().equalsIgnoreCase(nome)){
+                return lugar;
+            }
+        }
+        return null;
+    }
+
+     private boolean grupoTemHipoteca(int idPropriedade) throws Exception {
+        String grupo = getLugarGrupo(idPropriedade);
+        for (Lugar lugar : this) {
+            if (lugar.getGrupo(lugar.getPosicao()).equals(grupo)) {
+                if (lugar.estaHipotecada()) {
+                   return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean aindaTemLugarParaConstruir(int idPlace) throws Exception {
         if (idPlace == 1 || idPlace == 3) {
             if (this.getLugarById(1).getNivel() == 5 && this.getLugarById(3).getNivel() == 5) {
                 return false;
@@ -601,19 +644,6 @@ public class Tabuleiro extends ArrayList<Lugar> {
         } else {
             return false;
         }
-    }
-
-    public boolean lugarExiste(int idPropriedade){
-        return (idPropriedade >= 1 && idPropriedade <= 40) ? true : false;
-    }
-
-     /**
-     * Retorna preco da hipoteca do lugar
-     * @param id
-     * @return o valor
-     */
-    public int getPrecoHipoteca(int id) {
-        return precos_lugares_aluguel_Hipoteca[id - 1];
     }
 
 

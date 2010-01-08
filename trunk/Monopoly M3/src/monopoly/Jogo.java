@@ -1163,7 +1163,6 @@ public class Jogo {
             this.print("\t" + lugar.getNome() + " não está à venda!");
 
 
-
             String nomeDono = (String) Donos.get(this.posicoes[jogador]);
             //não cobrar aluguel de si mesmo
             if (!nomeDono.equals(this.listaJogadores.get(this.jogadorAtual()).getNome())) {
@@ -1173,7 +1172,9 @@ public class Jogo {
 
                     if (this.isPosicaoFerrovia(this.posicoes[jogador])) {
                         this.print("\tO dono eh " + possivelDono.getNome());
-                        this.pagarFerrovia(possivelDono.getId(), jogador, 25, lugar.getNome());
+                        if (!lugar.estaHipotecada()) {
+                            this.pagarFerrovia(possivelDono.getId(), jogador, 25, lugar.getNome());
+                        }
                     } else {
 
                         this.print("\tO dono eh " + possivelDono.getNome());
@@ -1191,8 +1192,9 @@ public class Jogo {
 
                             }
                         }
-
-                        this.pagarAluguel(possivelDono.getId(), jogador, valorAluguel, lugar.getNome());
+                        if (!lugar.estaHipotecada()) {
+                            this.pagarAluguel(possivelDono.getId(), jogador, valorAluguel, lugar.getNome());
+                        }
 
                     }
 
@@ -1518,6 +1520,10 @@ public class Jogo {
 
         if (this.build == true) {
 
+            if (this.hipotecaAtiva && this.tabuleiro.getLugarById(idPropriedade).estaHipotecada()) {
+                    throw new Exception("Can't build on mortgaged properties");
+            }
+            
             if (idPropriedade <= 0 || idPropriedade > 40) {
                 throw new Exception("Place doesn't exist");
 
@@ -1526,14 +1532,14 @@ public class Jogo {
                 throw new Exception("Can only build on properties");
 
             }
-            if (this.hipotecaAtiva && this.tabuleiro.getLugarById(idPropriedade).estaHipotecada()) {
-                throw new Exception("Can't build on mortgaged properties");
-            }
+            
 
             if (!this.tabuleiro.verificaSeGrupoAindaPodeTerConstrucoes(idPropriedade)) {
                 this.listaJogadores.get(jogadorAtual()).getComandos().remove("build");
             }
+           
             if (this.listaJogadores.get(jogadorAtual()).getComandos().contains("build")) {
+
                 if (!this.listaJogadores.get(jogadorAtual()).getPropriedades().contains(this.tabuleiro.getLugarById(idPropriedade).getNome())) {
                     throw new Exception("Player is not the owner of this property");
 
@@ -1561,20 +1567,24 @@ public class Jogo {
         } else {
             throw new Exception("Build nao esta ativo");
         }
-
     }
 
-    public void verificaSeGrupoTemHipoteca(int idPropriedade) throws Exception{
-        String grupo = tabuleiro.getLugarGrupo(idPropriedade);
-        for(Lugar lugar: tabuleiro){
-            if( lugar.getGrupo(lugar.getPosicao()).equals(grupo) ){
-                if(lugar.estaHipotecada()){
+    public void verificaSeGrupoTemHipoteca(int idPropriedade) throws Exception {      
+                if (grupoTemHipoteca(idPropriedade)) {
                     throw new Exception("Group has mortgaged properties");
+                }
+    }
+
+    private boolean grupoTemHipoteca(int idPropriedade) throws Exception {
+        String grupo = tabuleiro.getLugarGrupo(idPropriedade);
+        for (Lugar lugar : tabuleiro) {
+            if (lugar.getGrupo(lugar.getPosicao()).equals(grupo)) {
+                if (lugar.estaHipotecada()) {
+                   return true;
                 }
             }
         }
-//                estaHipotecada() &&
-//                        throw new Exception("Group has mortgaged properties ");
+        return false;
     }
 
     /**
@@ -1771,30 +1781,26 @@ public class Jogo {
     }
 
     /**
-     * Vender casas ou hoteis
+     * hipotecar uma Propriedade
      * @param idPropriedade
      * @throws Exception
      */
     public void hipotecarPropriedade(int idPropriedade) throws Exception {
-        //System.out.println("jogadorAtual()" + this.listaJogadores.get(jogadorAtual()).getNome());
         if (!this.tabuleiro.lugarExiste(idPropriedade)) {
             throw new Exception("Place doesn't exist");
         }
         boolean hipotecaEstaLiberada = hipotecaEstaLiberada(idPropriedade);
-
         if (hipotecaEstaLiberada) {
+            this.terminarAVez();
             if (posicaoHipotecavel(idPropriedade)) {
-
-                boolean OJogadorDavezEhDono = this.listaJogadores.get(jogadorAtual()).getPropriedades().contains(this.tabuleiro.getLugarById(idPropriedade).getNome());
+                Lugar lugar = this.tabuleiro.getLugarById(idPropriedade);
+                boolean OJogadorDavezEhDono = this.listaJogadores.get(jogadorAtual()).getPropriedades().contains(lugar.getNome());
                 if (OJogadorDavezEhDono) {
-                    Lugar lugar = this.tabuleiro.getLugarById(idPropriedade);
                     lugar.hipotecar();
                     this.listaJogadores.get(jogadorAtual()).addDinheiro(tabuleiro.getPrecoHipoteca(idPropriedade));
                 } else {
                     throw new Exception("Player doesn't hold the deed for this place");
                 }
-
-
 
             } else {
                 throw new Exception("This place can't be mortgaged");
