@@ -260,7 +260,7 @@ public class Lugar {
 
     public void desipotecar() throws Exception{
        if(estaHipotecada){
-          this.estaHipotecada = false;;
+          this.estaHipotecada = false;
        }else{
           throw  new Exception("Deed is not mortgaged");
        }

@@ -430,4 +430,19 @@ public class UserStoriesFacade {
     }
 
 
+    //expecterror "Place doesn't exist" giveDeedToPlayer playerName="player1" placeID=0
+
+    public void giveDeedToPlayer(String playerName, int placeId) throws Exception{
+        jogo.giveDeedToPlayer(playerName, placeId);
+    }
+
+    public void activateAvoidingBankruptcy(){
+
+    }
+
+    public void giveUp(){
+        
+    }
+
+
 }

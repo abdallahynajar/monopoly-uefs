@@ -323,6 +323,15 @@ public class Jogo {
         }
     }
 
+    public void giveDeedToPlayer(String playerName, int placeId) throws Exception{
+        if(placeId > 40 || placeId < 1)
+            throw new Exception("Place doesn't exist");
+
+        if(posicaoCompravel(placeId))
+            Donos.put(placeId, playerName);
+        throw new Exception("This place doesn't have a deed");
+    }
+
     /**
      * Obtem a cor do peao de um jogador
      * @param playerName o nome do jogador
