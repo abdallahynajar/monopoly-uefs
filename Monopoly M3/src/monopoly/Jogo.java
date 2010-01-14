@@ -327,8 +327,10 @@ public class Jogo {
         if(placeId > 40 || placeId < 1)
             throw new Exception("Place doesn't exist");
 
-        if(posicaoCompravel(placeId))
+        if(posicaoCompravel(placeId)){
             Donos.put(placeId, playerName);
+            return;
+        }
         throw new Exception("This place doesn't have a deed");
     }
 
