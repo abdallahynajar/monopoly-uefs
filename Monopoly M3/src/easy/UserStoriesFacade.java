@@ -443,7 +443,7 @@ public class UserStoriesFacade {
     }
 
     public void avoid() throws Exception{
-        throw new Exception("Unavailable command");
+        jogo.avoid();
     }
 
     public int getBankHouses(){

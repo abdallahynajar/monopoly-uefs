@@ -61,6 +61,10 @@ public class Jogador {
 
     private boolean bankruptcy;
 
+    public boolean isBankruptcy() {
+        return bankruptcy;
+    }
+
     public void setBankruptcy(boolean bankruptcy) {
         this.bankruptcy = bankruptcy;
     }
@@ -437,5 +441,16 @@ public class Jogador {
         return comandos.isComandoRollIncluido();
     }
 
+    public boolean isAvoidAvaliable(){
+        return comandos.isComandoAvoidIncluido();
+    }
+
+    public void adicionarComandoAvoid(){
+        comandos.addComandoAvoid();
+    }
+
+    public void removercomandoAvoid(){
+        comandos.removerComandoAvoid();
+    }
  
 }

@@ -35,6 +35,7 @@ public class Comandos {
     private boolean comandoUnmortgageIncluido = false;
     private boolean comandoGiveUpIncluido = false;
     private boolean comandoRollIncluido = false;
+    private boolean comandoAvoidIncluido;
 
     /**
      * construtor de comandos
@@ -117,12 +118,23 @@ public class Comandos {
         }
     }
 
-    /* public void removerComandoMortgage() {
-        if (comandoMortgageIncluido) {
-            cmds.remove("mortgage");
-            this.comandoMortgageIncluido = false;
+    public void addComandoAvoid() {
+        if (!comandoAvoidIncluido) {
+            cmds.add("avoid");
+            this.comandoAvoidIncluido = true;
         }
-    }*/
+    }
+
+    public boolean isComandoAvoidIncluido() {
+        return comandoAvoidIncluido;
+    }
+
+public void removerComandoAvoid() {
+        if (comandoAvoidIncluido) {
+            cmds.remove("avoid");
+            this.comandoAvoidIncluido = false;
+        }
+    }
 
          /**
      * Adiciona comando Desipotecar
@@ -153,9 +165,9 @@ public class Comandos {
     }
 
     public void removerComandoGiveUp() {
-        if (comandoRollIncluido) {
+        if (comandoGiveUpIncluido) {
             cmds.remove("giveup");
-            this.comandoRollIncluido = false;
+            this.comandoGiveUpIncluido = false;
         }
     }
 
