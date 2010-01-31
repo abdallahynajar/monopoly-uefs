@@ -655,7 +655,7 @@ public class Jogo {
         if(vez == 0)
             vez = listaJogadores.size() - 1;
         else
-            vez++;
+            vez--;
         return vez;
     }
 
@@ -774,7 +774,10 @@ public class Jogo {
                 int DinheiroRestante = listaJogadores.get(devedor).getDinheiro();
                 JogadorDevedor.retirarDinheiro(DinheiroRestante);
 
-                JogadorCredor.addDinheiro(DinheiroRestante);
+                if(bankruptcy);
+
+                else
+                    JogadorCredor.addDinheiro(DinheiroRestante);
                 this.removePlayer(devedor);
 
             }
@@ -800,9 +803,16 @@ public class Jogo {
             JogadorCredor.addDinheiro(valor);
 
         } else {
-            int DinheiroRestante = listaJogadores.get(devedor).getDinheiro();
-            JogadorDevedor.retirarDinheiro(DinheiroRestante);
-            JogadorCredor.addDinheiro(DinheiroRestante);
+            
+
+
+            if(bankruptcy){
+
+            }else{
+                int DinheiroRestante = listaJogadores.get(devedor).getDinheiro();
+                JogadorDevedor.retirarDinheiro(DinheiroRestante);
+                JogadorCredor.addDinheiro(DinheiroRestante);
+            }
             this.removePlayer(devedor);
 
         }
@@ -982,8 +992,16 @@ public class Jogo {
             if (listaJogadores.get(jogador).getDinheiro() >= valorImposto) {
                 listaJogadores.get(jogador).retirarDinheiro(valorImposto);
             } else {
-                int DinheiroRestante = listaJogadores.get(jogador).getDinheiro();
-                listaJogadores.get(jogador).retirarDinheiro(DinheiroRestante);
+
+
+                if(bankruptcy){
+                    listaJogadores.get(jogador).retirarDinheiro(valorImposto);
+                    listaJogadores.get(jogador).setBankruptcy(true);
+                }else{
+                    int DinheiroRestante = listaJogadores.get(jogador).getDinheiro();
+                    listaJogadores.get(jogador).retirarDinheiro(DinheiroRestante);
+                }
+
                 this.removePlayer(jogador);
 
             }
@@ -1322,7 +1340,7 @@ public class Jogo {
 
         Jogador j = this.listaJogadores.get(id);
 
-        if(bankruptcy && j.temPropriedades()){
+        if(bankruptcy && j.temPropriedades() && j.isBankruptcy()){
             //System.out.println("vez: " + vez + "id: " + id );
             jogoInterrompidoEm = vez = voltaVez(vez);
             j.addComandoGiveUp();
@@ -1897,7 +1915,8 @@ public class Jogo {
         }
         boolean hipotecaEstaLiberada = hipotecaEstaLiberada(idPropriedade);
         if (hipotecaEstaLiberada) {
-            this.terminarAVez();
+            if(!bankruptcy)
+                this.terminarAVez();
             if (posicaoHipotecavel(idPropriedade)) {
                 Lugar lugar = this.tabuleiro.getLugarById(idPropriedade);
                 Jogador jogadorAtual =this.listaJogadores.get(jogadorAtual());
@@ -1906,6 +1925,12 @@ public class Jogo {
                     lugar.hipotecar();
                  //   verificaHipotecasDoJogadorAtual();
                     jogadorAtual.addDinheiro(tabuleiro.getPrecoHipoteca(idPropriedade));
+                    if(bankruptcy && jogadorAtual.isBankruptcy())
+                        if(jogadorAtual.getDinheiro() >= 0){
+                            jogadorAtual.removeComandoGiveUp();
+                            jogadorAtual.adicionarComandoAvoid();
+                            jogadorAtual.setBankruptcy(false);
+                        }
                     /*if(!jogadorAtual.temPropriedades())
                         jogadorAtual.removerComandoMortgage();*/
 
@@ -1986,5 +2011,15 @@ public class Jogo {
             if(j.getNome().equals(nome))
                 return j.getId();
         return -1;
+    }
+
+    public void avoid() throws Exception{
+        Jogador jogadorAtual = listaJogadores.get(jogadorAtual());
+        if(jogadorAtual.isAvoidAvaliable()){
+            vez = voltaVez(jogoInterrompidoEm);
+            return;
+        }
+
+        throw new Exception("Unavailable command");
     }
 }
