@@ -152,6 +152,10 @@ public class Jogador {
         return id;
     }
 
+    public void removerComandoMortgage(){
+        comandos.removerComandoMortgage();
+    }
+
     /**
      * Adiciona dinheiro aa conta do jogador
      * @param dinheiro a ser adicionado
@@ -320,6 +324,18 @@ public class Jogador {
     public void removerComandoBuild() {
         this.comandos.removerComandoBuild();
     }
+
+    public void addComandoGiveUp(){
+        comandos.addComandoGiveUp();
+    }
+
+    public void removeComandoGiveUp(){
+        comandos.removerComandoGiveUp();
+    }
+
+    public void removeComandoRoll(){
+        comandos.removerComandoRoll();
+    }
     /**
      * Retorna Comandos do jogador
      * @return Lista de comandos
@@ -417,7 +433,9 @@ public class Jogador {
         return propriedades;
     }
 
-
+    public boolean ifRollAvaliable(){
+        return comandos.isComandoRollIncluido();
+    }
 
  
 }
