@@ -33,6 +33,9 @@ public class Comandos {
     private boolean comandoMortgageIncluido = false;
 
     private boolean comandoUnmortgageIncluido = false;
+    private boolean comandoGiveUpIncluido = false;
+    private boolean comandoRollIncluido = false;
+
     /**
      * construtor de comandos
      */
@@ -45,7 +48,7 @@ public class Comandos {
      * Inicializa a colecao de comandos
      */
     public void initComandos() {
-        cmds.add("roll");
+        addComandoRoll();
         cmds.add("status");
         cmds.add("quit");
     }
@@ -114,6 +117,13 @@ public class Comandos {
         }
     }
 
+    /* public void removerComandoMortgage() {
+        if (comandoMortgageIncluido) {
+            cmds.remove("mortgage");
+            this.comandoMortgageIncluido = false;
+        }
+    }*/
+
          /**
      * Adiciona comando Desipotecar
      */
@@ -123,6 +133,39 @@ public class Comandos {
             this.comandoUnmortgageIncluido = true;
         }
     }
+
+    public boolean isComandoRollIncluido() {
+        return comandoRollIncluido;
+    }
+
+    public void addComandoGiveUp() {
+        if (!comandoGiveUpIncluido) {
+            cmds.add("giveup");
+            this.comandoGiveUpIncluido = true;
+        }
+    }
+
+    public void addComandoRoll() {
+        if (!comandoRollIncluido) {
+            cmds.add("roll");
+            this.comandoRollIncluido = true;
+        }
+    }
+
+    public void removerComandoGiveUp() {
+        if (comandoRollIncluido) {
+            cmds.remove("giveup");
+            this.comandoRollIncluido = false;
+        }
+    }
+
+    public void removerComandoRoll() {
+        if (comandoRollIncluido) {
+            cmds.remove("roll");
+            this.comandoRollIncluido = false;
+        }
+    }
+
     /**
      * Remove comando Hypothecate
      */

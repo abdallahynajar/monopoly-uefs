@@ -150,9 +150,9 @@ public class Jogo {
 
     public void activateAvoidingBankruptcy(){
         bankruptcy = true;
-        for (Jogador j : listaJogadores){
+        /*for (Jogador j : listaJogadores){
             j.setBankruptcy(true);
-        }
+        }*/
     }
 
 
@@ -650,6 +650,15 @@ public class Jogo {
         }
     }
 
+
+    public int voltaVez(int vez){
+        if(vez == 0)
+            vez = listaJogadores.size() - 1;
+        else
+            vez++;
+        return vez;
+    }
+
     /**
      * Obtem a vez atual
      * @return a vez
@@ -684,6 +693,10 @@ public class Jogo {
 
         if ((isResultadoDadoValido(resultadoDado1)) && (isResultadoDadoValido(resultadoDado2))) {
 
+            if(bankruptcy && !listaJogadores.get(vez).ifRollAvaliable()){
+
+                throw new Exception("Player can't roll dice when trying to avoid bankruptcy");
+            }
 
             if (!this.jogadorTerminouAVez() == true) {
                 this.terminarAVez();// Prepara proxima jogada e coloca terminou vez para true
@@ -1310,11 +1323,20 @@ public class Jogo {
         Jogador j = this.listaJogadores.get(id);
 
         if(bankruptcy && j.temPropriedades()){
-            jogoInterrompidoEm = vez;
-            vez = id;
+            //System.out.println("vez: " + vez + "id: " + id );
+            jogoInterrompidoEm = vez = voltaVez(vez);
+            j.addComandoGiveUp();
+            j.removeComandoRoll();
+            j.setBankruptcy(true);
+            vez = voltaVez(id);
         }else{
+            falirJogador(id);
+        }
 
-            listaJogadoresFalidos.add(listaJogadores.get(id).getNome());
+    }
+
+    public void falirJogador(int id){
+        listaJogadoresFalidos.add(listaJogadores.get(id).getNome());
             //liberando os pertences
             String NomeFalido = listaJogadores.get(id).getNome();
             for (int i = 1; i <= Donos.size(); i++) {
@@ -1323,11 +1345,7 @@ public class Jogo {
                 }
 
             }
-        }
-
-
     }
-
     /**
      * Checa se a compra automatica foi ligada
      * @return true se a compra e automatica, false caso contrario
@@ -1888,6 +1906,8 @@ public class Jogo {
                     lugar.hipotecar();
                  //   verificaHipotecasDoJogadorAtual();
                     jogadorAtual.addDinheiro(tabuleiro.getPrecoHipoteca(idPropriedade));
+                    /*if(!jogadorAtual.temPropriedades())
+                        jogadorAtual.removerComandoMortgage();*/
 
                 } else {
                     throw new Exception("Player doesn't hold the deed for this place");

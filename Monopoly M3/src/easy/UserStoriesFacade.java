@@ -429,9 +429,6 @@ public class UserStoriesFacade {
         jogo.desipotecarPropriedade(placeID);
     }
 
-
-
-
     public void giveDeedToPlayer(String playerName, int placeId) throws Exception{
         jogo.giveDeedToPlayer(playerName, placeId);
     }
@@ -442,11 +439,11 @@ public class UserStoriesFacade {
     }
 
     public void giveUp(){
-        
+        jogo.falirJogador(jogo.jogadorAtual());
     }
 
-    public void avoid(){
-        
+    public void avoid() throws Exception{
+        throw new Exception("Unavailable command");
     }
 
     public int getBankHouses(){
