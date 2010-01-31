@@ -59,7 +59,11 @@ public class Jogador {
      */
     private int quantidadeDeHoteis = 0;
 
+    private boolean bankruptcy;
 
+    public void setBankruptcy(boolean bankruptcy) {
+        this.bankruptcy = bankruptcy;
+    }
     /**
      * Retorna a quantidade de casas do jogador
      * @return a quantidade de casas

@@ -30,6 +30,8 @@ public class Jogo {
     private boolean sell = false;
     private boolean hipotecaAtiva = false;
     private boolean desipotecarAtivo = false;
+    private boolean bankruptcy = false;
+    private int jogoInterrompidoEm = -1;
 
     public void AtivarVenda() {
         this.sell = true;
@@ -145,6 +147,14 @@ public class Jogo {
         this.publicServices = false;
 
     }
+
+    public void activateAvoidingBankruptcy(){
+        bankruptcy = true;
+        for (Jogador j : listaJogadores){
+            j.setBankruptcy(true);
+        }
+    }
+
 
     /**
      * ativa cartoes chance aleatorios
@@ -327,8 +337,38 @@ public class Jogo {
         if(placeId > 40 || placeId < 1)
             throw new Exception("Place doesn't exist");
 
-        if(posicaoCompravel(placeId)){
+        boolean posicaoCompravel = this.posicaoCompravel(placeId);
+        boolean isEstatal = this.isPosicaoEstatal(placeId);
+
+        String dono = Donos.get(placeId).toString();
+        if(dono.equals(playerName))
+            throw new Exception("Player is already owner of this deed");
+        else if(dono.equals("noOwner") || dono.equals("Income Tax") || dono.equals("Luxury Tax") )
+            throw new Exception("This place doesn't have a deed");
+        else if(!dono.equals("bank"))
+            throw new Exception("Deed is already owned by a player");
+
+        if (posicaoCompravel || (isEstatal && this.publicServices == true && verificaSeServicoPublicoFoiComprado(placeId))) {
             Donos.put(placeId, playerName);
+            Jogador j = listaJogadores.get(this.getIdJogador(playerName));
+            String nomeLugar = this.tabuleiro.getPlaceName(placeId);
+            j.addPropriedade(nomeLugar);
+            if (nomeLugar.equals("Reading Railroad") || nomeLugar.equals("Pennsylvania Railroad") ||
+                    nomeLugar.equals("B & O Railroad") || nomeLugar.equals("Short Line Railroad")) {
+                DonosFerrovias[j.getId()]++;
+            }
+
+            if (j.temPropriedades() && hipotecaAtiva) {
+                j.adicionarComandoHipotecar();
+            }
+            if (j.verificaSeTemGrupo(placeId)) {
+                if (this.build == true) {
+                    j.adicionarComandoBuild();
+                }
+
+                this.tabuleiro.duplicarAluguelGrupo(placeId);
+
+            }
             return;
         }
         throw new Exception("This place doesn't have a deed");
@@ -1266,15 +1306,25 @@ public class Jogo {
      * @param id o id do jogador
      */
     public void removePlayer(int id) {
-        listaJogadoresFalidos.add(listaJogadores.get(id).getNome());
-        //liberando os pertences
-        String NomeFalido = listaJogadores.get(id).getNome();
-        for (int i = 1; i <= Donos.size(); i++) {
-            if (Donos.get(i).equals(NomeFalido)) {
-                Donos.put(i, "bank");
-            }
 
+        Jogador j = this.listaJogadores.get(id);
+
+        if(bankruptcy && j.temPropriedades()){
+            jogoInterrompidoEm = vez;
+            vez = id;
+        }else{
+
+            listaJogadoresFalidos.add(listaJogadores.get(id).getNome());
+            //liberando os pertences
+            String NomeFalido = listaJogadores.get(id).getNome();
+            for (int i = 1; i <= Donos.size(); i++) {
+                if (Donos.get(i).equals(NomeFalido)) {
+                    Donos.put(i, "bank");
+                }
+
+            }
         }
+
 
     }
 
@@ -1909,5 +1959,12 @@ public class Jogo {
 
     public void ativarDesipoteca(){
         hipotecaAtiva =  true;
+    }
+
+    public int getIdJogador(String nome){
+        for(Jogador j: listaJogadores)
+            if(j.getNome().equals(nome))
+                return j.getId();
+        return -1;
     }
 }
