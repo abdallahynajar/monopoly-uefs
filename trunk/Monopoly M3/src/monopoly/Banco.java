@@ -50,6 +50,12 @@ public class Banco {
         return getPrecoDeUmaCasa(idPropriedade) / 2;
 
     }
+
+    public int getHoteis() {
+        return hoteis;
+    }
+    
+
     /**
      * Retorna o valor de um hotel na propriedade para compra
      * @param idPropriedade

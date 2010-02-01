@@ -1347,6 +1347,8 @@ public class Jogo {
             j.removeComandoRoll();
             j.setBankruptcy(true);
             vez = voltaVez(id);
+            if(build)
+                j.removerComandoBuild();
         }else{
             falirJogador(id);
         }
@@ -1363,6 +1365,7 @@ public class Jogo {
                 }
 
             }
+            terminarAVez();
     }
     /**
      * Checa se a compra automatica foi ligada
@@ -1808,6 +1811,10 @@ public class Jogo {
 
                 if (this.tabuleiro.verificaSePodeVenderImovelDoTerreno(idPropriedade) == true) {
                     RealizarProtocoloDeVendaDeCasasEHoteis(idPropriedade);
+                    if(bankruptcy && this.listaJogadores.get(jogadorAtual()).isBankruptcy()){
+                        adicionaGiveupQuandoPossivel(this.listaJogadores.get(jogadorAtual()));
+
+                    }
 
                 } else {
                     throw new Exception("Uneven distribution of houses");
@@ -1926,11 +1933,7 @@ public class Jogo {
                  //   verificaHipotecasDoJogadorAtual();
                     jogadorAtual.addDinheiro(tabuleiro.getPrecoHipoteca(idPropriedade));
                     if(bankruptcy && jogadorAtual.isBankruptcy())
-                        if(jogadorAtual.getDinheiro() >= 0){
-                            jogadorAtual.removeComandoGiveUp();
-                            jogadorAtual.adicionarComandoAvoid();
-                            jogadorAtual.setBankruptcy(false);
-                        }
+                        adicionaGiveupQuandoPossivel(jogadorAtual);
                     /*if(!jogadorAtual.temPropriedades())
                         jogadorAtual.removerComandoMortgage();*/
 
@@ -1946,6 +1949,14 @@ public class Jogo {
         }
 
 
+    }
+
+    private void adicionaGiveupQuandoPossivel(Jogador j){
+        if(j.getDinheiro() >= 0){
+            j.removeComandoGiveUp();
+            j.adicionarComandoAvoid();
+            j.setBankruptcy(false);
+        }
     }
 
     private boolean hipotecaEstaLiberada(int idPropriedade) throws Exception {
@@ -2016,10 +2027,20 @@ public class Jogo {
     public void avoid() throws Exception{
         Jogador jogadorAtual = listaJogadores.get(jogadorAtual());
         if(jogadorAtual.isAvoidAvaliable()){
+            terminarAVez();
             vez = voltaVez(jogoInterrompidoEm);
+            //vez = jogoInterrompidoEm;
             return;
         }
 
         throw new Exception("Unavailable command");
+    }
+
+    public int getBankHouses(){
+        return banco.getCasas();
+    }
+
+    public int getBankHoteis(){
+        return banco.getHoteis();
     }
 }

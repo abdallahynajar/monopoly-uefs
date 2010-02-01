@@ -447,12 +447,10 @@ public class UserStoriesFacade {
     }
 
     public int getBankHouses(){
-
-        return -1;
+        return jogo.getBankHouses();
     }
 
-    public int getBankHotels(){
-        
-        return -1;
+    public int getBankHotels(){  
+        return jogo.getBankHoteis();
     }
 }
