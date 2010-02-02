@@ -14,6 +14,7 @@ public class Comandos {
      * Lista dos comandos
      */
     private List<String> cmds = new ArrayList<String>();
+    private List<String> cmdsOrdenados = new ArrayList<String>();
     /**
      * Flag de comando Pay incluido
      */
@@ -52,6 +53,33 @@ public class Comandos {
         addComandoRoll();
         cmds.add("status");
         cmds.add("quit");
+
+        cmdsOrdenados.add("roll");
+        cmdsOrdenados.add("status");
+        cmdsOrdenados.add("quit");
+        cmdsOrdenados.add("pay");
+        cmdsOrdenados.add("build");
+        cmdsOrdenados.add("sell");
+        cmdsOrdenados.add("mortgage");
+        cmdsOrdenados.add("unmortgage");
+        cmdsOrdenados.add("avoid");
+        cmdsOrdenados.add("giveup");
+
+    }
+
+    public List<String> retornaComandosNaOrdem(){
+
+        List<String> comandosExistentesOrdenados = new ArrayList<String>();
+
+        for(String co: cmdsOrdenados)
+            for(String c: cmds)
+                if(co.equals(c)){
+                    comandosExistentesOrdenados.add(c);
+                    break;
+                }
+
+
+            return cmds;
     }
 
     /**

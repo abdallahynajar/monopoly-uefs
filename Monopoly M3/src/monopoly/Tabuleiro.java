@@ -132,6 +132,15 @@ public class Tabuleiro extends ArrayList<Lugar> {
 
     }
 
+    public Lugar getLugar(String name){
+        for(Lugar l : this){
+            if(l.getNome().equals(name))
+                return l;
+        }
+
+        return null;
+    }
+
     /**
      * Obtem o nome de um lugar
      * @param placeID o id do lugar

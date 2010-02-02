@@ -46,7 +46,7 @@ public class Banco {
      */
     public int VenderCasa(int idPropriedade) throws Exception {
 
-        casas++;
+        //casas++;
         return getPrecoDeUmaCasa(idPropriedade) / 2;
 
     }
