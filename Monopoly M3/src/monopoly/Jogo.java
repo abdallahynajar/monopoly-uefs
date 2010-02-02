@@ -1669,7 +1669,9 @@ public class Jogo {
         if (this.build == true) {
 
             if (this.hipotecaAtiva && this.tabuleiro.getLugarById(idPropriedade).estaHipotecada()) {
-                    throw new Exception("Can't build on mortgaged properties");
+                if(verificaSeTodosOsGruposTemHipoteca(listaJogadores.get(jogadorAtual())))
+                    throw new Exception("Unavailable command");
+                throw new Exception("Can't build on mortgaged properties");
             }
             
             if (idPropriedade <= 0 || idPropriedade > 40) {
@@ -1685,6 +1687,7 @@ public class Jogo {
             if (!this.tabuleiro.verificaSeGrupoAindaPodeTerConstrucoes(idPropriedade)) {
                 this.listaJogadores.get(jogadorAtual()).getComandos().remove("build");
             }
+
            
             if (this.listaJogadores.get(jogadorAtual()).getComandos().contains("build")) {
 
@@ -1698,8 +1701,12 @@ public class Jogo {
                 if (this.tabuleiro.verificaSePodeConstruirNoTerreno(idPropriedade) == true) {
                     if (hipotecaAtiva) {
                         verificaSeGrupoTemHipoteca(idPropriedade);
+                        
                     }
                     RealizarProtocoloDeCompraDeCasasEHoteis(idPropriedade);
+                    if(hipotecaAtiva && !verificaSeTemLugarSemConstrucao(listaJogadores.get(jogadorAtual())))
+                        listaJogadores.get(jogadorAtual()).removerComandoMortgage();
+
 
                 } else {
                     throw new Exception("Uneven distribution of houses");
@@ -1715,6 +1722,23 @@ public class Jogo {
         } else {
             throw new Exception("Build nao esta ativo");
         }
+    }
+
+    public boolean verificaSeTodosOsGruposTemHipoteca(Jogador j){
+
+        for(String nome:j.getPropriedadesDoJogador()){
+            Lugar l = tabuleiro.getLugarPeloNome(nome);
+            try {
+                if (!grupoTemHipoteca(l.getPosicao())) {
+                    return false;
+                }
+            } catch (Exception ex) {
+                
+            }
+        }
+
+        return true;
+
     }
 
     public void verificaSeGrupoTemHipoteca(int idPropriedade) throws Exception {      
@@ -1834,8 +1858,10 @@ public class Jogo {
                     RealizarProtocoloDeVendaDeCasasEHoteis(idPropriedade);
                     if(bankruptcy && this.listaJogadores.get(jogadorAtual()).isBankruptcy()){
                         adicionaGiveupQuandoPossivel(this.listaJogadores.get(jogadorAtual()));
-
                     }
+                    if(hipotecaAtiva && verificaSeTemLugarSemConstrucao(listaJogadores.get(jogadorAtual())))
+                        listaJogadores.get(jogadorAtual()).adicionarComandoHipotecar();
+
 
                 } else {
                     throw new Exception("Uneven distribution of houses");
@@ -2065,7 +2091,6 @@ public class Jogo {
         if(jogadorAtual.isAvoidAvaliable()){
             terminarAVez();
             vez = voltaVez(jogoInterrompidoEm);
-            //vez = jogoInterrompidoEm;
             return;
         }
 
@@ -2079,4 +2104,16 @@ public class Jogo {
     public int getBankHoteis(){
         return banco.getHoteis();
     }
+
+
+    public boolean verificaSeTemLugarSemConstrucao(Jogador j){
+
+        for(String nomeLugar: j.getPropriedadesDoJogador()){
+            Lugar l = tabuleiro.getLugarPeloNome(nomeLugar);
+            if(l.getNivel() == 0)
+                return true;
+        }
+        return false;
+    }
+
 }
