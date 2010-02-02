@@ -345,8 +345,14 @@ public class Jogador {
      * @return Lista de comandos
      */
     public List getComandos() {
-        return this.comandos.retornaComandosNaOrdem();
+        return this.comandos.getCmds();
     }
+
+    public List retornaComandosNaOrdem(){
+        return comandos.retornaComandosNaOrdem();
+    }
+
+    
 
     /**
      * Adquirir cartao de saida de prisao

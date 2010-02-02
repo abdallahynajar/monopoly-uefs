@@ -79,7 +79,7 @@ public class Comandos {
                 }
 
 
-            return cmds;
+            return comandosExistentesOrdenados;
     }
 
     /**

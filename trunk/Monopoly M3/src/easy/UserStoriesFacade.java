@@ -146,7 +146,7 @@ public class UserStoriesFacade {
      */
     public String getCommands() {
 
-        List a = this.jogo.getListaJogadores().get(this.jogo.jogadorAtual()).getComandos();
+        List a = this.jogo.getListaJogadores().get(this.jogo.jogadorAtual()).retornaComandosNaOrdem();
         Iterator<String> it = a.iterator();
         String b = "{";
         while (it.hasNext()) {
