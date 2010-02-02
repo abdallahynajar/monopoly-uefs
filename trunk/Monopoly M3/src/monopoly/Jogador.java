@@ -345,7 +345,7 @@ public class Jogador {
      * @return Lista de comandos
      */
     public List getComandos() {
-        return this.comandos.getCmds();
+        return this.comandos.retornaComandosNaOrdem();
     }
 
     /**

@@ -439,7 +439,7 @@ public class UserStoriesFacade {
     }
 
     public void giveUp(){
-        jogo.falirJogador(jogo.jogadorAtual());
+        jogo.givup();
     }
 
     public void avoid() throws Exception{

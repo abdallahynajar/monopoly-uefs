@@ -1,5 +1,7 @@
 package monopoly;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import monopoly.cards.Card;
 import monopoly.cards.CardsGame;
 import java.util.ArrayList;
@@ -438,11 +440,7 @@ public class Jogo {
         }else{
             jogadorAtual.removerComandoDesipotecar();
         }
-        if(temPropriedadesSemHipoteca){
-            jogadorAtual.adicionarComandoHipotecar();
-        }else{
-            jogadorAtual.removerComandoHipotecar();
-        }
+        
     }
 
 
@@ -1356,7 +1354,9 @@ public class Jogo {
     }
 
     public void falirJogador(int id){
-        listaJogadoresFalidos.add(listaJogadores.get(id).getNome());
+
+        Jogador jogadoratual= listaJogadores.get(id);
+        listaJogadoresFalidos.add(jogadoratual.getNome());
             //liberando os pertences
             String NomeFalido = listaJogadores.get(id).getNome();
             for (int i = 1; i <= Donos.size(); i++) {
@@ -1365,7 +1365,28 @@ public class Jogo {
                 }
 
             }
+            
             terminarAVez();
+            
+    }
+
+    public void givup(){
+        Jogador jogadorAtual = listaJogadores.get(jogadorAtual());
+        
+        for(String p :jogadorAtual.getPropriedadesDoJogador()){
+
+            Lugar l = tabuleiro.getLugar(p);
+            while(l.getNivel() != 0)
+                try {
+                    System.out.println("entrou");
+                    RealizarProtocoloDeVendaDeCasasEHoteis(l.getPosicao());
+                } catch (Exception ex) {
+
+                }
+        }
+        
+        falirJogador(jogadorAtual());
+        vez = voltaVez(jogoInterrompidoEm);
     }
     /**
      * Checa se a compra automatica foi ligada
@@ -1930,10 +1951,12 @@ public class Jogo {
                 boolean OJogadorDavezEhDono = jogadorAtual.getPropriedades().contains(lugar.getNome());
                 if (OJogadorDavezEhDono) {
                     lugar.hipotecar();
-                 //   verificaHipotecasDoJogadorAtual();
+                    //verificaHipotecasDoJogadorAtual();
                     jogadorAtual.addDinheiro(tabuleiro.getPrecoHipoteca(idPropriedade));
-                    if(bankruptcy && jogadorAtual.isBankruptcy())
+                    if(bankruptcy && jogadorAtual.isBankruptcy()){
+                        removeComandoMortgageQuandoPossivel(jogadorAtual);
                         adicionaGiveupQuandoPossivel(jogadorAtual);
+                    }
                     /*if(!jogadorAtual.temPropriedades())
                         jogadorAtual.removerComandoMortgage();*/
 
@@ -1948,6 +1971,19 @@ public class Jogo {
             throw new Exception("Unavailable command");
         }
 
+
+    }
+
+    public void removeComandoMortgageQuandoPossivel(Jogador j){
+
+        for (String s : j.getPropriedadesDoJogador()) {
+            Lugar lugar  = tabuleiro.getLugarPeloNome(s);
+            if(!lugar.estaHipotecada()){
+                return;
+            }
+        }
+
+        j.removerComandoHipotecar();
 
     }
 
