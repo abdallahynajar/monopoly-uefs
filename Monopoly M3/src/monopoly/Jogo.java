@@ -275,7 +275,7 @@ public class Jogo {
     public void showPosicoes() {
         this.print("\n");
         for (int i = 0; i < listaJogadores.size(); i++) {
-            System.out.print(posicoes[i] + "\t");
+           // System.out.print(posicoes[i] + "\t");
         }
     }
 
@@ -1378,7 +1378,7 @@ public class Jogo {
             Lugar l = tabuleiro.getLugar(p);
             while(l.getNivel() != 0)
                 try {
-                    System.out.println("entrou");
+                    //System.out.println("entrou");
                     RealizarProtocoloDeVendaDeCasasEHoteis(l.getPosicao());
                 } catch (Exception ex) {
 
@@ -1533,7 +1533,7 @@ public class Jogo {
      */
     public void print(String msg, boolean reallyPrint) {
         if (reallyPrint) {
-            System.out.println(msg);
+           // System.out.println(msg);
         }
 
     }
