@@ -11,3 +11,6 @@ set JAVA=java easyaccept.EasyAccept easy.UserStoriesFacade
 %JAVA% testes/us7.txt 
 %JAVA% testes/us8.txt 
 %JAVA% testes/us9.txt 
+%JAVA% testes/us10.txt 
+%JAVA% testes/us11.txt 
+%JAVA% testes/us12.txt 
